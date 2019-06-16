@@ -6,6 +6,11 @@
     public enum ExternalProgramStatus : byte
     {
         /// <summary>
+        ///     Статус не указан.
+        /// </summary>
+        None = 0x00,
+
+        /// <summary>
         ///     Сервис работает.
         /// </summary>
         Up = 0x01,

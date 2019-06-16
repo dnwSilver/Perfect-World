@@ -3,6 +3,7 @@
 using Sharpdev.SDK.Layers.Domain.Events;
 using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Layers.Responsibility;
 
 namespace Sharpdev.SDK.Layers.Domain.Entities
 {
@@ -26,7 +27,8 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
     ///     квартире позвонят и по отдельности закажут какие-то работы, фирме нужно знать,  что они
     ///     находятся в одном месте.  Здесь адрес  -  также СУЩНОСТЬ.
     /// </remarks>
-    public interface IEntity : IEncapsulated, IStored, IHasIdentifier<IEntity>, IHasDomainEvent
+    public interface IEntity<TEntity> : IEncapsulated, IStored, IHasIdentifier<TEntity>, IHasDomainEvent
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Набор условий-ограничение.

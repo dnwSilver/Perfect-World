@@ -1,10 +1,15 @@
 ﻿namespace Sharpdev.SDK.Layers.Application
 {
     /// <summary>
-    ///     Статус сервиса.
+    ///     Статус сервиса <see cref="IService"/>.
     /// </summary>
     public enum ServiceStatus : byte
     {
+        /// <summary>
+        ///     Статус не указан.
+        /// </summary>
+        None = 0x00,
+
         /// <summary>
         ///     Сервис работает.
         /// </summary>

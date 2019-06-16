@@ -8,6 +8,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
     /// </summary>
     /// <typeparam name="TOwner">Владелец идентификатора.</typeparam>
     public interface IIdentifier<TOwner> : IEquatable<IIdentifier<TOwner>>
+        where TOwner : IEntity<TOwner>
     {
         /// <summary>
         ///     Публичный идентификатор. Генерируется внутри сервиса.

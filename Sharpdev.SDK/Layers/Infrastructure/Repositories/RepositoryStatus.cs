@@ -1,10 +1,15 @@
 ﻿namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
 {
     /// <summary>
-    ///     Статус репозитория.
+    ///     Статус репозитория <see cref="IRepository{TAggregate,TSearchParameters}"/>.
     /// </summary>
     public enum RepositoryStatus : byte
     {
+        /// <summary>
+        ///     Статус не указан.
+        /// </summary>
+        None = 0x00,
+
         /// <summary>
         ///     Репозиторий работает.
         /// </summary>

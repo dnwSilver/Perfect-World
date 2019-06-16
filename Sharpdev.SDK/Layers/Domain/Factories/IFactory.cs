@@ -23,13 +23,13 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
         /// </summary>
         /// <param name="objectToCreate">Строитель нового объекта.</param>
         /// <returns>Созданный объект.</returns>
-        TStored Create(IBuilder<TStored> objectToCreate);
+        TStored Create(IEntityBuilder<TStored> objectToCreate);
 
         /// <summary>
         ///     Восстановление уже созданного объекта.
         /// </summary>
         /// <param name="objectToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        TStored Recovery(IBuilder<TStored> objectToRecovery);
+        TStored Recovery(IEntityBuilder<TStored> objectToRecovery);
     }
 }

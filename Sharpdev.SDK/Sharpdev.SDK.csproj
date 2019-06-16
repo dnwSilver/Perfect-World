@@ -4,4 +4,19 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="Types\EmailAddresses\EmailAddressMessage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmailAddressMessage.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Types\EmailAddresses\EmailAddressMessage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailAddressMessage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

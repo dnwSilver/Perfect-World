@@ -15,7 +15,8 @@ namespace Sharpdev.SDK.Layers.Domain
     ///     2.  Выбрать объект из коллекции ему подобных.
     ///     3.  Заказать создание нового объекта для определенных потребностей.
     /// </remarks>
-    public interface ISpecification<in TEntity> where TEntity : IEntity
+    public interface ISpecification<in TEntity>
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Проверка пригодности объекта для удовлетворения потребности или достижения цели.

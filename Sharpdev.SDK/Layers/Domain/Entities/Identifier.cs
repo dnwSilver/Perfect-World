@@ -17,7 +17,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
     ///     https://github.com/dnwSilver/Sharpdev.Services.Identity.API/issues/1
     /// </remarks>
     public class Identifier<TEntity> : IIdentifier<TEntity>
-        where TEntity : IEntity
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Уникальный идентификатор бизнес сущности.

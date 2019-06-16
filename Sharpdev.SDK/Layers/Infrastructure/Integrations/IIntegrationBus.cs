@@ -29,19 +29,19 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Integrations
         /// <summary>
         ///     Подписка на событие.
         /// </summary>
-        /// <typeparam name="T">Событие миграции данных.</typeparam>
-        /// <typeparam name="TH">Обработчик события.</typeparam>
-        Task SubscribeAsync<T, TH>()
-            where T : IIntegrationEvent
-            where TH : IIntegrationEventHandler<T>;
+        /// <typeparam name="TIntegrationEvent">Событие миграции данных.</typeparam>
+        /// <typeparam name="TIntegrationEventHandler">Обработчик события.</typeparam>
+        Task SubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>()
+            where TIntegrationEvent : IIntegrationEvent
+            where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>;
 
         /// <summary>
         ///     Отписка от получения событий.
         /// </summary>
-        /// <typeparam name="T">Событие миграции данных.</typeparam>
-        /// <typeparam name="TH">Обработчик события.</typeparam>
-        Task UnsubscribeAsync<T, TH>()
-            where TH : IIntegrationEventHandler<T>
-            where T : IIntegrationEvent;
+        /// <typeparam name="TIntegrationEvent">Событие миграции данных.</typeparam>
+        /// <typeparam name="TIntegrationEventHandler">Обработчик события.</typeparam>
+        Task UnsubscribeAsync<TIntegrationEvent, TIntegrationEventHandler>()
+            where TIntegrationEventHandler : IIntegrationEventHandler<TIntegrationEvent>
+            where TIntegrationEvent : IIntegrationEvent;
     }
 }
