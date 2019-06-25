@@ -182,7 +182,7 @@ namespace Sharpdev.SDK.Types.Reflection
 
             public static object CreateInstanceOf(Type type, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4)
             {
-                Func<TArg1, TArg2, TArg3, TArg4, object> ctor = Cache.GetOrAdd(type, CreateConstructor);
+                var ctor = Cache.GetOrAdd(type, CreateConstructor);
 
                 return ctor(arg1, arg2, arg3, arg4);
             }
@@ -199,7 +199,7 @@ namespace Sharpdev.SDK.Types.Reflection
 
                 // Формируем коллекцию аргументов конструктора, фильтруя те аргументы,
                 // которые имеют тип TypeToIgnore
-                Type[] constructorArgumentTypes = argumentTypes.Where(t => t != typeof(TypeToIgnore)).ToArray();
+                var constructorArgumentTypes = argumentTypes.Where(t => t != typeof(TypeToIgnore)).ToArray();
 
                 ParameterExpression[] lambdaParameterExpressions =
                 {
@@ -209,9 +209,8 @@ namespace Sharpdev.SDK.Types.Reflection
                     Expression.Parameter(typeof(TArg4), "param4")
                 };
 
-                ParameterExpression[] constructorParameterExpressions = lambdaParameterExpressions
-                                                                        .Take(constructorArgumentTypes.Length)
-                                                                        .ToArray();
+                var constructorParameterExpressions =
+                    lambdaParameterExpressions.Take(constructorArgumentTypes.Length).ToArray();
 
                 return constructorParameterExpressions.Length == 0
                     ? CreateConstructor(type, lambdaParameterExpressions)
@@ -225,7 +224,7 @@ namespace Sharpdev.SDK.Types.Reflection
                                                                                       ParameterExpression[]
                                                                                           lambdaParameterExpressions)
             {
-                Expression expr = type.IsValueType
+                var expr = type.IsValueType
                     ? Expression.Convert(Expression.Default(type), typeof(object))
                     : (Expression)Expression.New(type);
 
@@ -241,32 +240,31 @@ namespace Sharpdev.SDK.Types.Reflection
                                                                                           constructorParameterExpressions)
             {
                 // Ищем конструктор, удовлетворяющий данному набору аргументов
-                ConstructorInfo constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.Public,
-                                                                  null,
-                                                                  CallingConventions.HasThis,
-                                                                  constructorArgumentTypes,
-                                                                  new ParameterModifier[0]);
+                var constructor = type.GetConstructor(BindingFlags.Instance | BindingFlags.Public,
+                                                      null,
+                                                      CallingConventions.HasThis,
+                                                      constructorArgumentTypes,
+                                                      new ParameterModifier[0]);
 
                 if (constructor == null)
                 {
-                    string[] args = constructorArgumentTypes.Select(t => t.Name).ToArray();
+                    var args = constructorArgumentTypes.Select(t => t.Name).ToArray();
                     string method = $"ctor({string.Join(", ", args)})";
 
                     throw new MissingMethodException(type.Name, method);
                 }
 
-                NewExpression constructorCallExpression =
+                var constructorCallExpression =
                     Expression.New(constructor, constructorParameterExpressions.ToArray<Expression>());
-                Expression body = type.IsValueType
+                var body = type.IsValueType
                     ? Expression.Convert(constructorCallExpression, typeof(object))
                     : (Expression)constructorCallExpression;
 
-                Func<TArg1, TArg2, TArg3, TArg4, object> constructorCallingLambda = Expression
-                                                                                    .Lambda<Func<TArg1, TArg2, TArg3,
-                                                                                        TArg4, object>>(
-                                                                                        body,
-                                                                                        lambdaParameterExpressions)
-                                                                                    .Compile();
+                var constructorCallingLambda = Expression
+                                               .Lambda<Func<TArg1, TArg2, TArg3, TArg4, object>>(
+                                                   body,
+                                                   lambdaParameterExpressions)
+                                               .Compile();
 
                 return constructorCallingLambda;
             }

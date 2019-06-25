@@ -16,11 +16,11 @@ namespace Sharpdev.SDK.Layers.Application
     ///     обозначить это в сигнатуре с помощью типа <see cref="Result" />.
     ///     Основные  действия   должны   начинаться  с  глаголов,  для  общих  case'ов  необходимо
     ///     использовать следующие обозначения:
-    ///         - Поиск (find);
-    ///         - Добавление (add);
-    ///         - Изменение (edit);
-    ///         - Удаление (remove);
-    ///         - Блокировать (block).
+    ///     - Поиск (find);
+    ///     - Добавление (add);
+    ///     - Изменение (edit);
+    ///     - Удаление (remove);
+    ///     - Блокировать (block).
     /// </remarks>
     public interface IService : IHasStatus<ServiceStatus>
     {

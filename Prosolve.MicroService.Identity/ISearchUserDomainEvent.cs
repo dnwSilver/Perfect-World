@@ -7,6 +7,5 @@ namespace Prosolve.MicroService.Identity
     /// </summary>
     internal interface ISearchUserDomainEvent : IDomainEvent
     {
-
     }
 }

@@ -57,13 +57,11 @@
         /// </returns>
         public override bool Equals(object obj)
         {
-            switch (obj)
+            switch(obj)
             {
                 case null:
 
-                    return Surname is null &&
-                           FirstName is null &&
-                           Patronymic is null;
+                    return Surname is null && FirstName is null && Patronymic is null;
                 case FullName fullName:
 
                     return Surname.Equals(fullName.Surname) &&

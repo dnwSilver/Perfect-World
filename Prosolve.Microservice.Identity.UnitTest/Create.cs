@@ -1,4 +1,10 @@
-﻿namespace Prosolve.MicroService.Identity.UnitTest
+﻿using Moq;
+
+using Sharpdev.SDK.Layers.Domain.Entities;
+using Sharpdev.SDK.Layers.Kernel;
+using Sharpdev.SDK.Types.EmailAddresses;
+
+namespace Prosolve.MicroService.Identity.UnitTest
 {
     /// <summary>
     ///     Шаблон простой: создаём статический класс и собираем в него всех строителей.
@@ -29,10 +35,11 @@
         /// <summary>
         ///     Создание электронного адреса.
         /// </summary>
+        /// <param name="emailAddress">Адрес электронной почты.</param>
         /// <returns>Готовый для тестов адрес электронной почты.</returns>
         public static EmailAddressBuilder EmailAddress(string emailAddress)
         {
-            return new EmailAddressBuilder();
+            return new EmailAddressBuilder(emailAddress);
         }
 
         /// <summary>
@@ -51,6 +58,12 @@
         public static UserSearchParametersBuilder UserSearchParameters()
         {
             return new UserSearchParametersBuilder();
+        }
+
+        public static IdentifierBuilder<TEntity> Identifier<TEntity>()
+            where TEntity : IEntity<TEntity>
+        {
+            return new IdentifierBuilder<TEntity>();
         }
     }
 }

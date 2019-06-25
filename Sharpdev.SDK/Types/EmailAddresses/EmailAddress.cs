@@ -29,8 +29,8 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         /// </summary>
         /// <param name="obj">object для сравнения с данным экземпляром</param>
         /// <returns>
-        ///     <see langword="true" /> - <see cref="_value"/> не отличается от <paramref name="obj" />.
-        ///     <see langword="false" /> - <see cref="_value"/> отличается от <paramref name="obj" />.
+        ///     <see langword="true" /> - <see cref="_value" /> не отличается от <paramref name="obj" />.
+        ///     <see langword="false" /> - <see cref="_value" /> отличается от <paramref name="obj" />.
         /// </returns>
         public override bool Equals(object obj)
         {
@@ -40,7 +40,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
             if (_value is null)
                 return false;
 
-            switch (obj)
+            switch(obj)
             {
                 case EmailAddress email:
 
@@ -142,7 +142,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
             //const string emailPattern = emailName + "@" + domainName + "\\." + domainZone;
             const string EMAIL_PATTERN = @"\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3}";
 
-            Match emailFormat = Regex.Match(emailAddress, EMAIL_PATTERN, RegexOptions.IgnoreCase);
+            var emailFormat = Regex.Match(emailAddress, EMAIL_PATTERN, RegexOptions.IgnoreCase);
 
             return emailFormat.Success;
         }

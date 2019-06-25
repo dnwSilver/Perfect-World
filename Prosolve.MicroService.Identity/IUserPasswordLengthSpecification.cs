@@ -1,5 +1,4 @@
-﻿
-using Sharpdev.SDK.Layers.Domain;
+﻿using Sharpdev.SDK.Layers.Domain;
 
 namespace Prosolve.MicroService.Identity
 {
@@ -8,6 +7,5 @@ namespace Prosolve.MicroService.Identity
     /// </summary>
     public interface IUserPasswordLengthSpecification : ISpecification<IUser>
     {
-
     }
 }

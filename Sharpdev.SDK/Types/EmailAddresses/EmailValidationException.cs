@@ -12,7 +12,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
     public class EmailValidationException : Exception
     {
         /// <summary>
-        ///     Выполняет инициализацию нового экземпляра класса <see cref="Exception"/>, используя
+        ///     Выполняет инициализацию нового экземпляра класса <see cref="Exception" />, используя
         ///     базовое сообщение об ошибке.
         /// </summary>
         public EmailValidationException()
@@ -31,7 +31,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         }
 
         /// <summary>
-        ///     Инициализирует   новый   экземпляр   класса  <see cref="EmailValidationException"/>
+        ///     Инициализирует   новый   экземпляр   класса  <see cref="EmailValidationException" />
         ///     указанным  сообщением об ошибке  и  ссылкой на внутреннее исключение, которое стало
         ///     причиной данного исключения. Создание исключения с текстом сообщения.
         /// </summary>

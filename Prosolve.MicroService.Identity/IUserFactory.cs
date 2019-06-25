@@ -7,6 +7,5 @@ namespace Prosolve.MicroService.Identity
     /// </summary>
     public interface IUserFactory : IFactory<IUser>
     {
-
     }
 }

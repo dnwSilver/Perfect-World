@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Statuses;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
 {
@@ -34,14 +35,14 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        Task<bool> CreateAsync(IReadOnlyCollection<TEntity> objectsToCreate);
+        Result Create(IReadOnlyCollection<TEntity> objectsToCreate);
 
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Task<IReadOnlyCollection<TEntity>> ReadAsync(TSearchParameters searchParameters);
+        Result<IReadOnlyCollection<TEntity>> Read(TSearchParameters searchParameters);
 
         /// <summary>
         ///     Обновление объектов.
@@ -51,7 +52,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        Task<bool> UpdateAsync(IReadOnlyCollection<TEntity> objectsToUpdate);
+        Result Update(IReadOnlyCollection<TEntity> objectsToUpdate);
 
         /// <summary>
         ///     Удаление объектов.
@@ -61,6 +62,6 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        Task<bool> DeleteAsync(IReadOnlyCollection<TEntity> objectsToRemove);
+        Result Delete(IReadOnlyCollection<TEntity> objectsToRemove);
     }
 }

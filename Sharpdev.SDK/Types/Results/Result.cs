@@ -12,7 +12,7 @@ namespace Sharpdev.SDK.Types.Results
     /// <remarks>
     ///     <see href="https://habr.com/ru/post/347284/" />
     /// </remarks>
-    public readonly struct Result : IEquatable<Result>
+    public readonly partial struct Result : IEquatable<Result>
     {
         /// <summary>
         ///     Признак успешности выполнения метода.

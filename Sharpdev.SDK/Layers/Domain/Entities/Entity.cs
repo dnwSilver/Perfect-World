@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 using Sharpdev.SDK.Layers.Domain.Events;
-using Sharpdev.SDK.Layers.Responsibility;
 
 namespace Sharpdev.SDK.Layers.Domain.Entities
 {

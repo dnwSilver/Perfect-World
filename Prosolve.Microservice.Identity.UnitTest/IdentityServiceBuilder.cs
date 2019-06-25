@@ -1,4 +1,10 @@
-﻿using Sharpdev.SDK.Testing;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using Moq;
+
+using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Testing;
 
 namespace Prosolve.MicroService.Identity.UnitTest
 {
@@ -13,7 +19,25 @@ namespace Prosolve.MicroService.Identity.UnitTest
         /// <returns>Экземпляр объекта <see cref="IIdentityService" /></returns>
         public IIdentityService Please()
         {
-            return new IdentityServiceTestable();
+            var repositoryStub = new Mock<IUserRepository>();
+            repositoryStub.Setup(x => x.Status).Returns(RepositoryStatus.Up);
+
+            IReadOnlyCollection<IUser> users = new[]
+            {
+                Create.User().With(1).Please(),
+                Create.User().With(2).Please(),
+                Create.User().With(3).Please(),
+                Create.User().With(4).Please(),
+                Create.User().With(5).Please(),
+                Create.User().With(6).Please(),
+                Create.User().With(7).Please(),
+                Create.User().With(8).Please(),
+                Create.User().With(9).Please()
+            };
+
+            //repositoryStub.Setup(x => x.ReadAsync(It.IsAny<IUserSearchParameters>())).ReturnsAsync(users);
+
+            return new IdentityService(repositoryStub.Object);
         }
     }
 }

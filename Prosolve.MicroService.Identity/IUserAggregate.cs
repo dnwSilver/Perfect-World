@@ -8,6 +8,5 @@ namespace Prosolve.MicroService.Identity
     /// </summary>
     public interface IUserAggregate : IAggregate<IUser>
     {
-
     }
 }

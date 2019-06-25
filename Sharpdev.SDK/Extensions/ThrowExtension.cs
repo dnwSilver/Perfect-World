@@ -38,10 +38,10 @@ namespace Sharpdev.SDK.Extensions
         /// <returns></returns>
         public static string ToStringWithInnerExceptions(this Exception ex)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(ex);
 
-            Exception inner = ex.InnerException;
+            var inner = ex.InnerException;
 
             while(inner != null)
             {
@@ -66,7 +66,7 @@ namespace Sharpdev.SDK.Extensions
                 if (ex is T)
                     return (T)(object)ex;
 
-                Exception inner = ex?.InnerException;
+                var inner = ex?.InnerException;
 
                 switch(inner)
                 {

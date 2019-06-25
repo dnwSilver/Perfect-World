@@ -1,7 +1,7 @@
 ﻿namespace Sharpdev.SDK.Layers.Infrastructure.Integrations
 {
     /// <summary>
-    ///     Статус шины обмена сообщениями <see cref="IIntegrateBus"/>.
+    ///     Статус шины обмена сообщениями <see cref="IIntegrateBus" />.
     /// </summary>
     public enum IntegrationBusStatus : byte
     {

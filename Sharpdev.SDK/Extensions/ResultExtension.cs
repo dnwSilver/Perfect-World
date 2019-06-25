@@ -143,9 +143,9 @@ namespace Sharpdev.SDK.Extensions
             if (result.Errors == null || !result.Errors.Any())
                 return string.Empty;
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            foreach(IError error in result.Errors)
+            foreach(var error in result.Errors)
             {
                 sb.Append(error.ToString(string.Empty, formatProvider));
                 sb.Append(delimiter);

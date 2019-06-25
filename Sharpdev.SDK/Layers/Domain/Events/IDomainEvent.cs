@@ -12,6 +12,5 @@
     /// </remarks>
     public interface IDomainEvent
     {
-
     }
 }

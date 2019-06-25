@@ -9,9 +9,14 @@ namespace Prosolve.MicroService.Identity.UnitTest
 {
     public class UserSearchParametersBuilder : ITestBuilder<IUserSearchParameters>
     {
-        private IUserSearchParameters _userSearchParameters = new Mock<IUserSearchParameters>().Object;
+        private readonly IUserSearchParameters _userSearchParameters = new Mock<IUserSearchParameters>().Object;
 
-        public UserSearchParametersBuilder WithId(IIdentifier<IUser> userId)
+        public IUserSearchParameters Please()
+        {
+            return _userSearchParameters;
+        }
+
+        public UserSearchParametersBuilder With(IIdentifier<IUser> userId)
         {
             _userSearchParameters.ByIdentifiers(new List<IIdentifier<IUser>>
             {
@@ -19,11 +24,6 @@ namespace Prosolve.MicroService.Identity.UnitTest
             });
 
             return this;
-        }
-
-        public IUserSearchParameters Please()
-        {
-            return _userSearchParameters;
         }
     }
 }
