@@ -1,8 +1,7 @@
-﻿using Moq;
+﻿using Prosolve.MicroService.Identity.UnitTest.Users.Stubs;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Kernel;
-using Sharpdev.SDK.Types.EmailAddresses;
+using Sharpdev.SDK.Testing;
 
 namespace Prosolve.MicroService.Identity.UnitTest
 {
@@ -27,9 +26,27 @@ namespace Prosolve.MicroService.Identity.UnitTest
         ///     Создание пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
-        public static UserBuilder User()
+        public static UserStub User()
         {
-            return new UserBuilder();
+            return new UserStub();
+        }
+
+        /// <summary>
+        ///     Создание сервиса для работы с пользователем.
+        /// </summary>
+        /// <returns>Готовый для тестов сервис для работы с пользователем.</returns>
+        public static IdentityServiceStub IdentityService()
+        {
+            return new IdentityServiceStub();
+        }
+
+        /// <summary>
+        ///     Создание набор для поиска пользователя.
+        /// </summary>
+        /// <returns>Готовый для тестов набор параметров для поиска.</returns>
+        public static UserSearchParametersStub UserSearchParameters()
+        {
+            return new UserSearchParametersStub();
         }
 
         /// <summary>
@@ -37,33 +54,15 @@ namespace Prosolve.MicroService.Identity.UnitTest
         /// </summary>
         /// <param name="emailAddress">Адрес электронной почты.</param>
         /// <returns>Готовый для тестов адрес электронной почты.</returns>
-        public static EmailAddressBuilder EmailAddress(string emailAddress)
+        public static EmailAddressStub EmailAddress(string emailAddress)
         {
-            return new EmailAddressBuilder(emailAddress);
+            return new EmailAddressStub(emailAddress);
         }
 
-        /// <summary>
-        ///     Создание сервиса для работы с пользователем.
-        /// </summary>
-        /// <returns>Готовый для тестов сервис для работы с пользователем.</returns>
-        public static IdentityServiceBuilder IdentityService()
-        {
-            return new IdentityServiceBuilder();
-        }
-
-        /// <summary>
-        ///     Создание набор для поиска пользователя.
-        /// </summary>
-        /// <returns>Готовый для тестов набор параметров для поиска.</returns>
-        public static UserSearchParametersBuilder UserSearchParameters()
-        {
-            return new UserSearchParametersBuilder();
-        }
-
-        public static IdentifierBuilder<TEntity> Identifier<TEntity>()
+        public static IdentifierStub<TEntity> Identifier<TEntity>()
             where TEntity : IEntity<TEntity>
         {
-            return new IdentifierBuilder<TEntity>();
+            return new IdentifierStub<TEntity>();
         }
     }
 }

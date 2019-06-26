@@ -1,7 +1,7 @@
 ﻿namespace Sharpdev.SDK.Testing
 {
     /// <summary>
-    ///     Строитель для объектов используемых при тестировании.
+    ///     Строитель для заглушек используемых при тестировании.
     /// </summary>
     /// <typeparam name="TBuildingObjectType">Тип собираемого объекта.</typeparam>
     /// <remarks>
@@ -9,7 +9,7 @@
     ///     доменному эксперту. Особенно стоит использовать строитель для объектов, которые требуют
     ///     настройки перед началом работы.
     /// </remarks>
-    public interface ITestBuilder<out TBuildingObjectType>
+    public interface ITestStub<out TBuildingObjectType>
     {
         /// <summary>
         ///     Построение объекта <see cref="TBuildingObjectType" />.

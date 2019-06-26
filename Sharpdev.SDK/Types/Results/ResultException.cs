@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-using Sharpdev.SDK.Extensions;
-
 namespace Sharpdev.SDK.Types.Results
 {
     /// <summary>

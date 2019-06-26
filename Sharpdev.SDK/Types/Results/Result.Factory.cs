@@ -10,7 +10,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Удачный результат работы метода.</returns>
         public static Result Ok()
         {
-            return new Result(true, Enumerable.Empty<IError>());
+            return new Result(true, Enumerable.Empty<IResultError>());
         }
 
         /// <summary>
@@ -21,17 +21,17 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Удачный результат работы метода.</returns>
         public static Result<T> Ok<T>(T data)
         {
-            return new Result<T>(data, true, Enumerable.Empty<IError>());
+            return new Result<T>(data, true, Enumerable.Empty<IResultError>());
         }
 
         /// <summary>
         /// Создание неудачного результата работы метода, не возвращающего значение
         /// </summary>
-        /// <param name="error">Описание ошибки</param>
+        /// <param name="resultError">Описание ошибки</param>
         /// <returns>Неудачный результат работы метода</returns>
-        public static Result Fail(IError error)
+        public static Result Fail(IResultError resultError)
         {
-            return new Result(false, error);
+            return new Result(false, resultError);
         }
     }
 }

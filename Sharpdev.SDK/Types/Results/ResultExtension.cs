@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Sharpdev.SDK.Types.Results;
-
-namespace Sharpdev.SDK.Extensions
+namespace Sharpdev.SDK.Types.Results
 {
     /// <summary>
     ///     Набор расширений для интерфейса <see cref="Result" />.

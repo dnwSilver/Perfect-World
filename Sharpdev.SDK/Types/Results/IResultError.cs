@@ -11,7 +11,7 @@ namespace Sharpdev.SDK.Types.Results
     ///     Для реализации данного интерфейса будем использовать шаблон IHasState.
     /// </remarks>
     [HasState]
-    public interface IError : IFormattable
+    public interface IResultError : IFormattable
     {
     }
 }

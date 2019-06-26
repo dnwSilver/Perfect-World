@@ -5,9 +5,9 @@ using Moq;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Testing;
 
-namespace Prosolve.MicroService.Identity.UnitTest
+namespace Prosolve.MicroService.Identity.UnitTest.Users.Stubs
 {
-    public class UserSearchParametersBuilder : ITestBuilder<IUserSearchParameters>
+    public class UserSearchParametersStub : ITestStub<IUserSearchParameters>
     {
         private readonly IUserSearchParameters _userSearchParameters = new Mock<IUserSearchParameters>().Object;
 
@@ -16,7 +16,7 @@ namespace Prosolve.MicroService.Identity.UnitTest
             return _userSearchParameters;
         }
 
-        public UserSearchParametersBuilder With(IIdentifier<IUser> userId)
+        public UserSearchParametersStub With(IIdentifier<IUser> userId)
         {
             _userSearchParameters.ByIdentifiers(new List<IIdentifier<IUser>>
             {

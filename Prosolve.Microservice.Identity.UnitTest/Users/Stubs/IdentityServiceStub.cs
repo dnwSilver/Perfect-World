@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using Moq;
 
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Testing;
 
-namespace Prosolve.MicroService.Identity.UnitTest
+namespace Prosolve.MicroService.Identity.UnitTest.Users.Stubs
 {
     /// <summary>
     ///     Строитель для создания сервиса для работы с пользователями.
     /// </summary>
-    public class IdentityServiceBuilder : ITestBuilder<IIdentityService>
+    public class IdentityServiceStub : ITestStub<IIdentityService>
     {
         /// <summary>
         ///     Построение объекта <see cref="IIdentityService" />.

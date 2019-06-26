@@ -21,7 +21,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     Список описаний ошибок, возникших при выполнении метода.
         ///     Заполняется только в случае неудачи при выполнении метода.
         /// </summary>
-        public IEnumerable<IError> Errors { get; }
+        public IEnumerable<IResultError> Errors { get; }
 
         /// <summary>
         ///     Признак не выполнения метода.
@@ -40,7 +40,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="value">Данные-результат работы метода.</param>
         /// <param name="success">Признак успешности выполнения метода.</param>
         /// <param name="errors">Список описаний ошибок, возникших при выполнении метода.</param>
-        internal Result(T value, bool success, IEnumerable<IError> errors)
+        internal Result(T value, bool success, IEnumerable<IResultError> errors)
         {
             Success = success;
             Errors = errors;
@@ -52,11 +52,11 @@ namespace Sharpdev.SDK.Types.Results
         /// </summary>
         /// <param name="value">Данные-результат работы метода.</param>
         /// <param name="success">Признак успешности выполнения метода.</param>
-        /// <param name="error">Описание ошибки, возникшей при выполнении метода.</param>
-        internal Result(T value, bool success, IError error)
+        /// <param name="resultError">Описание ошибки, возникшей при выполнении метода.</param>
+        internal Result(T value, bool success, IResultError resultError)
         {
             Success = success;
-            Errors = error.Yield();
+            Errors = resultError.Yield();
             Value = value;
         }
 

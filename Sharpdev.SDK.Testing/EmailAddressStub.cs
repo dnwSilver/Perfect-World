@@ -3,22 +3,21 @@
 using Moq;
 
 using Sharpdev.SDK.Layers.Kernel;
-using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.EmailAddresses;
 
-namespace Prosolve.MicroService.Identity.UnitTest
+namespace Sharpdev.SDK.Testing
 {
     /// <summary>
     ///     Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.
     /// </summary>
-    public class EmailAddressBuilder : ITestBuilder<IConfirmed<EmailAddress>>
+    public class EmailAddressStub : ITestStub<IConfirmed<EmailAddress>>
     {
         /// <summary>
         ///     Адрес электронной почты.
         /// </summary>
         private readonly Mock<IConfirmed<EmailAddress>> _emailAddress = new Mock<IConfirmed<EmailAddress>>();
 
-        public EmailAddressBuilder(string emailAddress)
+        public EmailAddressStub(string emailAddress)
         {
             _emailAddress.Setup(x => x.Value).Returns(emailAddress);
         }
@@ -32,10 +31,11 @@ namespace Prosolve.MicroService.Identity.UnitTest
             return _emailAddress.Object;
         }
 
-        public EmailAddressBuilder Confirmed(DateTime confirmedDate)
+        public EmailAddressStub Confirmed(DateTime confirmedDate)
         {
             _emailAddress.Setup(x => x.ConfirmedDate).Returns(confirmedDate);
             _emailAddress.Setup(x => x.IsConfirmed).Returns(true);
+
             return this;
         }
     }

@@ -1,9 +1,8 @@
 ﻿using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Testing;
 
-namespace Prosolve.MicroService.Identity.UnitTest
+namespace Sharpdev.SDK.Testing
 {
-    public class IdentifierBuilder<TEntity> : ITestBuilder<Identifier<TEntity>>
+    public class IdentifierStub<TEntity> : ITestStub<Identifier<TEntity>>
         where TEntity : IEntity<TEntity>
     {
         private int _privateIdentifier;
@@ -13,7 +12,7 @@ namespace Prosolve.MicroService.Identity.UnitTest
             return new Identifier<TEntity>(_privateIdentifier);
         }
 
-        public IdentifierBuilder<TEntity> With(int privateIdentifier)
+        public IdentifierStub<TEntity> With(int privateIdentifier)
         {
             _privateIdentifier = privateIdentifier;
 

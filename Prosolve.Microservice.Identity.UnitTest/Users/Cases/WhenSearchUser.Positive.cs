@@ -2,15 +2,14 @@ using FluentAssertions;
 
 using NUnit.Framework;
 
-using Sharpdev.SDK.Layers.Domain.Entities;
-
-namespace Prosolve.MicroService.Identity.UnitTest
+namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
 {
     /// <summary>
     ///     Набор тестов для объекта <see cref="IIdentityService" />.
     ///     Тип тестов предназначенный для проверки бизнес логики.
     /// </summary>
-    [TestFixture, Parallelizable(ParallelScope.All)]
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class WhenSearchUser
     {
         [Test]
@@ -25,7 +24,7 @@ namespace Prosolve.MicroService.Identity.UnitTest
             var searchResult = identityService.FindUserAsync(searchParameters).Value;
 
             // Assert
-            searchResult.Should().HaveCountGreaterThan(0, "repository have some users");
+            searchResult.Should().HaveCountGreaterThan(0, " repository have some users");
         }
     }
 }
