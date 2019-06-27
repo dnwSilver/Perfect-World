@@ -1,6 +1,6 @@
 ﻿using Sharpdev.SDK.Layers.Domain.Factories;
 
-namespace Prosolve.MicroService.Identity
+namespace Prosolve.MicroService.Identity.Entities.Users
 {
     /// <summary>
     ///     Набор параметров для поиска пользователей <see cref="IUser" />.

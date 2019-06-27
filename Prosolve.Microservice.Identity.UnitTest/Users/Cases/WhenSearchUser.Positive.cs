@@ -2,6 +2,8 @@ using FluentAssertions;
 
 using NUnit.Framework;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
 namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
 {
     /// <summary>

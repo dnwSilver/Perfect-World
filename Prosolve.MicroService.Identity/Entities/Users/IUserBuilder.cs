@@ -4,7 +4,7 @@ using Sharpdev.SDK.Patterns;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 
-namespace Prosolve.MicroService.Identity
+namespace Prosolve.MicroService.Identity.Entities.Users
 {
     /// <summary>
     ///     Строитель для объекта <see cref="IUser" />.

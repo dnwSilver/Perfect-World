@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
 using Sharpdev.SDK.Layers.Kernel;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.EmailAddresses;

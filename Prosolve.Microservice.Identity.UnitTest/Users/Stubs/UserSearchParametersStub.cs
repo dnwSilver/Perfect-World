@@ -2,6 +2,8 @@
 
 using Moq;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Testing;
 

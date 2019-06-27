@@ -1,4 +1,4 @@
-﻿namespace Prosolve.MicroService.Identity
+﻿namespace Prosolve.MicroService.Identity.Entities.Users
 {
     /// <summary>
     ///     Статус репозитория <see cref="IUser" />.

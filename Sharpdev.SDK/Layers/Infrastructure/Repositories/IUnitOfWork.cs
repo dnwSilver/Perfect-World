@@ -3,13 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Domain.Factories;
 
 namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
 {
     /// <summary>
     ///     Шаблон  Unit  of  Work  позволяет   упростить   работу   с   различными   репозиториями
-    ///     (<seealso cref="IRepository{TEntity,TSearchParameters}" />)  и  дает  уверенность,
+    ///     (<seealso cref="IRepository{TEntity}" />)  и  дает  уверенность,
     ///     что все репозитории будут использовать один и тот же контекст данных.
     /// </summary>
     public interface IUnitOfWork : IDisposable
@@ -19,7 +18,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         /// </summary>
         /// <typeparam name="TEntity">Доменный объект.</typeparam>
         /// <param name="repository">Добавляемый репозиторий.</param>
-        void AddRepository<TEntity>(IRepository<TEntity, ISearchParameters<TEntity>> repository)
+        void AddRepository<TEntity>(IRepository<TEntity> repository)
             where TEntity : IEntity<TEntity>;
 
         /// <summary>

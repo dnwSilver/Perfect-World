@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
@@ -14,18 +13,16 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
     ///     непосредственно взаимодействующими с данными, и остальной программой.
     /// </summary>
     /// <typeparam name="TEntity">Корневой объект.</typeparam>
-    /// <typeparam name="TSearchParameters">Набор параметров для поиска объекта.</typeparam>
     /// <remarks>
     ///     Все репозитории должны соответствовать модели CRUD. CRUD — акроним, обозначающий четыре
     ///     базовые функции, используемые при работе с источниками данных:
-    ///     - создание (<see cref="CreateAsync" />);
-    ///     - чтение (<see cref="ReadAsync" />);
-    ///     - модификация (<see cref="UpdateAsync" />);
-    ///     - удаление (<see cref="DeleteAsync" />).
+    ///     - создание (<see cref="Create" />);
+    ///     - чтение (<see cref="Read" />);
+    ///     - модификация (<see cref="Update" />);
+    ///     - удаление (<see cref="Delete" />).
     /// </remarks>
-    public interface IRepository<TEntity, in TSearchParameters> : IHasStatus<RepositoryStatus>
+    public interface IRepository<TEntity> : IHasStatus<RepositoryStatus>
         where TEntity : IEntity<TEntity>
-        where TSearchParameters : ISearchParameters<TEntity>
     {
         /// <summary>
         ///     Создание набора бизнес объектов.
@@ -42,7 +39,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Result<IReadOnlyCollection<TEntity>> Read(TSearchParameters searchParameters);
+        Result<IReadOnlyCollection<TEntity>> Read(ISearchParameters<TEntity> searchParameters);
 
         /// <summary>
         ///     Обновление объектов.

@@ -59,6 +59,11 @@ namespace Prosolve.MicroService.Identity.UnitTest
             return new EmailAddressStub(emailAddress);
         }
 
+        /// <summary>
+        ///     Создание идентификатора <see cref="IIdentifier{TOwner}" />.
+        /// </summary>
+        /// <typeparam name="TEntity"> Доменная сущность. </typeparam>
+        /// <returns>Уникальный идентификатор.</returns>
         public static IdentifierStub<TEntity> Identifier<TEntity>()
             where TEntity : IEntity<TEntity>
         {

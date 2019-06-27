@@ -2,6 +2,8 @@
 
 using Moq;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Testing;
 
@@ -18,7 +20,7 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Stubs
         /// <returns>Экземпляр объекта <see cref="IIdentityService" /></returns>
         public IIdentityService Please()
         {
-            var repositoryStub = new Mock<IUserRepository>();
+            var repositoryStub = new Mock<IRepository<IUser>>();
             repositoryStub.Setup(x => x.Status).Returns(RepositoryStatus.Up);
 
             IReadOnlyCollection<IUser> users = new[]

@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
 using Sharpdev.SDK.Layers.Application;
+using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Identity
 {
     public class IdentityService : IIdentityService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IRepository<IUser> _userRepository;
 
-        public IdentityService(IUserRepository userRepository)
+        public IdentityService(IRepository<IUser> userRepository)
         {
             _userRepository = userRepository;
         }
@@ -51,7 +54,7 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="userSearchParameters">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        public Result<IReadOnlyCollection<IUser>> FindUserAsync(IUserSearchParameters userSearchParameters)
+        public Result<IReadOnlyCollection<IUser>> FindUser(IUserSearchParameters userSearchParameters)
         {
             return _userRepository.Read(userSearchParameters);
         }
