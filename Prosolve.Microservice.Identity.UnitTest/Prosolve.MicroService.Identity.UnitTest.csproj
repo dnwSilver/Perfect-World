@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\Mocks\" />
+  </ItemGroup>
+
 </Project>

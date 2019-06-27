@@ -8,7 +8,7 @@ namespace Sharpdev.SDK.Types.Results
     ///     Текстовая ошибка.
     /// </summary>
     [State]
-    public struct TextError : IError, IEquatable<TextError>
+    public struct TextResultError : IResultError, IEquatable<TextResultError>
     {
         /// <summary>
         ///     Текст ошибки.
@@ -16,10 +16,10 @@ namespace Sharpdev.SDK.Types.Results
         private string Text { get; }
 
         /// <summary>
-        ///     Конструктор для <see cref="TextError" />.
+        ///     Конструктор для <see cref="TextResultError" />.
         /// </summary>
         /// <param name="text">Текст ошибки.</param>
-        private TextError(string text)
+        private TextResultError(string text)
         {
             Text = text;
         }
@@ -40,7 +40,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="formatProvider">
         ///     Предоставляет механизм извлечения объекта для управления форматированием.
         /// </param>
-        /// <returns>Строковое представление объекта <see cref="TextError" />.</returns>
+        /// <returns>Строковое представление объекта <see cref="TextResultError" />.</returns>
         public string ToString(string format, IFormatProvider formatProvider)
         {
             return Text;
@@ -54,7 +54,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public bool Equals(TextError other)
+        public bool Equals(TextResultError other)
         {
             return string.Equals(Text, other.Text);
         }
@@ -69,7 +69,7 @@ namespace Sharpdev.SDK.Types.Results
         /// </returns>
         public override bool Equals(object obj)
         {
-            if (obj is TextError other)
+            if (obj is TextResultError other)
                 return Equals(other);
 
             return false;
@@ -90,9 +90,9 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="text">Текст ошибки.</param>
         /// <returns>Текстовая ошибка.</returns>
         /// <remarks> За счёт этого метода мы делаем объект иммутабельным.</remarks>
-        public static TextError Create(string text)
+        public static TextResultError Create(string text)
         {
-            return new TextError(text);
+            return new TextResultError(text);
         }
     }
 }
