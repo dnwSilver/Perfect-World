@@ -23,7 +23,7 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
             var searchParameters = Create.UserSearchParameters().With(userId).Please();
 
             // Arrange
-            var searchResult = identityService.FindUserAsync(searchParameters).Value;
+            var searchResult = identityService.FindUser(searchParameters).Value;
 
             // Assert
             searchResult.Should().HaveCountGreaterThan(0, " repository have some users");
