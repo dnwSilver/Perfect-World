@@ -34,7 +34,7 @@ namespace Sharpdev.SDK.Testing
         ///     Заполнение приватного идентификатора.
         /// </summary>
         /// <param name="privateIdentifier">Значение приватного идентификатора.</param>
-        /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity,TExternalType}" />.</returns>
         public IdentifierStub<TEntity, TExternalType> PrivateId(int privateIdentifier)
         {
             _identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
@@ -46,7 +46,7 @@ namespace Sharpdev.SDK.Testing
         ///     Заполнение внешнего идентификатора.
         /// </summary>
         /// <param name="externalIdentifier">Значение внешнего идентификатора.</param>
-        /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity,TExternalType}" />.</returns>
         public IdentifierStub<TEntity, TExternalType> ExternalId(TExternalType externalIdentifier)
         {
             _identifierMock.Setup(x => x.External).Returns(externalIdentifier);
@@ -58,7 +58,7 @@ namespace Sharpdev.SDK.Testing
         ///     Заполнение публичного идентификатора.
         /// </summary>
         /// <param name="publicIdentifier">Значение публичного идентификатора.</param>
-        /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity,TExternalType}" />.</returns>
         public IdentifierStub<TEntity, TExternalType> PublicId(Guid publicIdentifier)
         {
             _identifierMock.Setup(x => x.Public).Returns(publicIdentifier);

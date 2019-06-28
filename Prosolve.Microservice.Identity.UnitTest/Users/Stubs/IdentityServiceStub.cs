@@ -25,15 +25,15 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Stubs
 
             IReadOnlyCollection<IUser> users = new[]
             {
-                Create.User().With(1).Please(),
-                Create.User().With(2).Please(),
-                Create.User().With(3).Please(),
-                Create.User().With(4).Please(),
-                Create.User().With(5).Please(),
-                Create.User().With(6).Please(),
-                Create.User().With(7).Please(),
-                Create.User().With(8).Please(),
-                Create.User().With(9).Please()
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please(),
+                Create.User().Please()
             };
 
             //repositoryStub.Setup(x => x.ReadAsync(It.IsAny<IUserSearchParameters>())).ReturnsAsync(users);

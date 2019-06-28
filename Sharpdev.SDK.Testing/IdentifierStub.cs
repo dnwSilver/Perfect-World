@@ -31,7 +31,7 @@ namespace Sharpdev.SDK.Testing
         ///     Заполнение приватного идентификатора.
         /// </summary>
         /// <param name="privateIdentifier">Значение приватного идентификатора.</param>
-        /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IdentifierStub<TEntity> PrivateId(int privateIdentifier)
         {
             _identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
@@ -43,7 +43,7 @@ namespace Sharpdev.SDK.Testing
         ///     Заполнение публичного идентификатора.
         /// </summary>
         /// <param name="publicIdentifier">Значение публичного идентификатора.</param>
-        /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IdentifierStub<TEntity> PublicId(Guid publicIdentifier)
         {
             _identifierMock.Setup(x => x.Public).Returns(publicIdentifier);

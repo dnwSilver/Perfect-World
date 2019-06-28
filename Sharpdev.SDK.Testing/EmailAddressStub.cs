@@ -40,7 +40,7 @@ namespace Sharpdev.SDK.Testing
         ///     Заполнение признака подтверждения адреса электронной почты.
         /// </summary>
         /// <param name="confirmedDate">Дата подтверждения электронной почты.</param>
-        /// <returns>Заглушка для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
+        /// <returns>Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
         public EmailAddressStub Confirmed(DateTime confirmedDate)
         {
             _emailAddressMock.Setup(x => x.ConfirmedDate).Returns(confirmedDate);
