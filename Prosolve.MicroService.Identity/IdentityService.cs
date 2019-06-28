@@ -41,11 +41,7 @@ namespace Prosolve.MicroService.Identity
         /// <returns>Информация по процессу создания пользователей.</returns>
         public Result CreateUser(IReadOnlyCollection<IUser> newUsers)
         {
-            if (newUsers.Any(x => !x.Id.IsTransient()))
-                return Result.Fail(TextResultError.Create("Хотя бы один из пользователей уже создан."));
-
             var createResult = _userRepository.Create(newUsers);
-
             return createResult;
         }
 

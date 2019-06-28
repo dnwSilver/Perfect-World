@@ -17,15 +17,15 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
         [Test]
         public void WhenSearchUser_ShouldHaveSomeCount()
         {
-            // Act
+            // Act:
             var identityService = Create.IdentityService().Please();
-            var userId = Create.Identifier<IUser>().With(1).Please();
+            var userId = Create.Identifier<IUser>().PrivateId(1).Please();
             var searchParameters = Create.UserSearchParameters().With(userId).Please();
 
-            // Arrange
+            // Arrange:
             var searchResult = identityService.FindUser(searchParameters).Value;
 
-            // Assert
+            // Assert:
             searchResult.Should().HaveCountGreaterThan(0, " repository have some users");
         }
     }

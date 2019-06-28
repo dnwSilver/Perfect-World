@@ -13,18 +13,18 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
         [Test]
         public void WhenRegistrationUser_WithEmailAddress_ResultShouldBeTrue()
         {
-            // Act
+            // Act:
             var identityService = Create.IdentityService().Please();
             var emailAddress = Create.EmailAddress("test@test.ru").Please();
             var user = Create.User().With(emailAddress).Please();
 
-            // Arrange
+            // Arrange:
             var searchResult = identityService.CreateUser(new[]
             {
                 user
             });
 
-            // Assert
+            // Assert:
             searchResult.Success.Should().BeTrue(" we are create new user");
         }
 

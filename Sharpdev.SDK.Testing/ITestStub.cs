@@ -5,6 +5,9 @@
     /// </summary>
     /// <typeparam name="TBuildingObjectType">Тип собираемого объекта.</typeparam>
     /// <remarks>
+    ///     Заглушка  заменяет  класс  небольшим  заменителем,  реализующим  тот же  интерфейс. Для
+    ///     использования заглушек необходимо  разработать приложение таким образом,  чтобы  каждый
+    ///     компонент зависел только от интерфейса, а не от других компонентов.
     ///     По-хорошему строитель должен упрощать создание объекта настолько, чтобы код был понятен
     ///     доменному эксперту. Особенно стоит использовать строитель для объектов, которые требуют
     ///     настройки перед началом работы.
@@ -12,9 +15,9 @@
     public interface ITestStub<out TBuildingObjectType>
     {
         /// <summary>
-        ///     Построение объекта <see cref="TBuildingObjectType" />.
+        ///     Построение заглушки <see cref="TBuildingObjectType" />.
         /// </summary>
-        /// <returns>Экземпляр объекта <see cref="TBuildingObjectType" /></returns>
+        /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" /></returns>
         TBuildingObjectType Please();
     }
 }

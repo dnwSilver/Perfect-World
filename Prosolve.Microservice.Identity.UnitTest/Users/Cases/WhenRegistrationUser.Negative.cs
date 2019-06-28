@@ -24,7 +24,7 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
         [Test]
         public void WhenRegistrationUser_WithoutContactInformation_ResultShouldBeFailure()
         {
-            // Act
+            // Act:
             var identityService = Create.IdentityService().Please();
             var user = Create.User().Please();
             var users = new[]
@@ -32,10 +32,10 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
                 user
             };
 
-            // Arrange
+            // Arrange:
             var searchResult = identityService.CreateUser(users);
 
-            // Assert
+            // Assert:
             searchResult.Failure.Should().BeTrue(" we are create new user");
         }
 
