@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK", "Sharpdev.SD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity", "Prosolve.MicroService.Identity\Prosolve.MicroService.Identity.csproj", "{A18CC3B6-A25C-4140-9E52-93064FF94054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Identity.UnitTest", "Prosolve.Microservice.Identity.UnitTest\Prosolve.MicroService.Identity.UnitTest.csproj", "{8920289E-7E47-470A-AECD-7BDB2BCDA559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity.UnitTest", "Prosolve.Microservice.Identity.UnitTest\Prosolve.MicroService.Identity.UnitTest.csproj", "{8920289E-7E47-470A-AECD-7BDB2BCDA559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpdev.SDK.Testing", "Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj", "{B62E00B1-B1CE-410A-87BD-8E261D20DF08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.Testing", "Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj", "{B62E00B1-B1CE-410A-87BD-8E261D20DF08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpdev.SDK.UnitTest", "Sharpdev.SDK.UnitTest\Sharpdev.SDK.UnitTest.csproj", "{581202AE-9242-4D96-919F-FE95A3F2643F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B62E00B1-B1CE-410A-87BD-8E261D20DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B62E00B1-B1CE-410A-87BD-8E261D20DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B62E00B1-B1CE-410A-87BD-8E261D20DF08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{581202AE-9242-4D96-919F-FE95A3F2643F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{581202AE-9242-4D96-919F-FE95A3F2643F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{581202AE-9242-4D96-919F-FE95A3F2643F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{581202AE-9242-4D96-919F-FE95A3F2643F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

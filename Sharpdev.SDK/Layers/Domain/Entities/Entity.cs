@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -20,7 +21,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <summary>
         ///     Набор условий ограничений.
         /// </summary>
-        private readonly IReadOnlyCollection<IPolicy> _policies = new Collection<IPolicy>();
+        private readonly IEnumerable _policies = new Collection<IPolicy>();
 
         /// <summary>
         ///     Конструктор для объекта <see cref="TEntity" />.
@@ -60,7 +61,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         ///     Список всех событий предметной области.
         /// </summary>
         /// <returns>Список всех событий предметной области.</returns>
-        public IReadOnlyCollection<IDomainEvent> DomainEvents()
+        public IEnumerable DomainEvents()
         {
             return _domainEvents.ToArray();
         }
@@ -94,7 +95,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <summary>
         ///     Набор условий-ограничение.
         /// </summary>
-        public IReadOnlyCollection<IPolicy> Policies()
+        public IEnumerable Policies()
         {
             return _policies;
         }

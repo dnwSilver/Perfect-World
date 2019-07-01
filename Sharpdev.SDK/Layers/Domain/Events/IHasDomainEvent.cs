@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Sharpdev.SDK.Layers.Domain.Events
 {
@@ -11,7 +12,7 @@ namespace Sharpdev.SDK.Layers.Domain.Events
         ///     Список всех событий предметной области.
         /// </summary>
         /// <returns>Список всех событий предметной области.</returns>
-        IReadOnlyCollection<IDomainEvent> DomainEvents();
+        IEnumerable DomainEvents();
 
         /// <summary>
         ///     Добавление нового события предметной области.

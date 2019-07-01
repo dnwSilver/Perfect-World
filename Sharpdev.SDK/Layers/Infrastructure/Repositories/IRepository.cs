@@ -32,14 +32,14 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        Result Create(IReadOnlyCollection<TEntity> objectsToCreate);
+        Result Create(IEnumerable<TEntity> objectsToCreate);
 
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Result<IReadOnlyCollection<TEntity>> Read(ISearchParameters<TEntity> searchParameters);
+        Result<IEnumerable<TEntity>> Read(ISearchParameters<TEntity> searchParameters);
 
         /// <summary>
         ///     Обновление объектов.
@@ -49,7 +49,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        Result Update(IReadOnlyCollection<TEntity> objectsToUpdate);
+        Result Update(IEnumerable<TEntity> objectsToUpdate);
 
         /// <summary>
         ///     Удаление объектов.
@@ -59,6 +59,6 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        Result Delete(IReadOnlyCollection<TEntity> objectsToRemove);
+        Result Delete(IEnumerable<TEntity> objectsToRemove);
     }
 }

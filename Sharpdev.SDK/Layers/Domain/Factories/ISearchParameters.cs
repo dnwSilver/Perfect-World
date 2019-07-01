@@ -12,38 +12,23 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
-        ///     Набор параметров заданного типа.
-        /// </summary>
-        /// <typeparam name="TParameterType">Тип данных.</typeparam>
-        /// <returns>Коллекция параметров заданного типа.</returns>
-        IReadOnlyCollection<IScalarParameter<TParameterType>> GetParameters<TParameterType>();
-
-        /// <summary>
         ///     Набор идентификаторов для поиска.
         /// </summary>
-        /// <param name="identifiers">Набор идентификаторов.</param>
-        /// <returns></returns>
-        ISearchParameters<TEntity> ByIdentifiers(IReadOnlyCollection<IIdentifier<TEntity>> identifiers);
+        IScalarParameter<IEnumerable<IIdentifier<TEntity>>> ByIdentifiers { get; set; }
 
         /// <summary>
         ///     Пропуск определенного количества элементов.
         /// </summary>
-        /// <param name="countItemsToSkip">Количество пропущенных элементов.</param>
-        /// <returns>Набор параметров <see cref="ISearchParameters{T}" />.</returns>
-        ISearchParameters<TEntity> Skip(int countItemsToSkip);
+        IScalarParameter<int> Skip { get; set; }
 
         /// <summary>
         ///     Поле для сортировки.
         /// </summary>
-        /// <param name="fieldName">Имя поля для сортировки.</param>
-        /// <returns>Набор параметров <see cref="ISearchParameters{T}" />.</returns>
-        ISearchParameters<TEntity> OrderBy(string fieldName);
+        IScalarParameter<string> OrderBy { get; set; }
 
         /// <summary>
         ///     Извлечение определенного числа элементов.
         /// </summary>
-        /// <param name="countItemsToTake">Количество извлекаемых элементов.</param>
-        /// <returns>Набор параметров <see cref="ISearchParameters{T}" />.</returns>
-        ISearchParameters<TEntity> Take(int countItemsToTake);
+        IScalarParameter<int> Take { get; set; }
     }
 }

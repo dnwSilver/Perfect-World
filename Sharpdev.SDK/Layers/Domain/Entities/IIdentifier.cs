@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+
+using Sharpdev.SDK.Layers.Infrastructure.Integrations;
 
 namespace Sharpdev.SDK.Layers.Domain.Entities
 {
@@ -16,6 +19,14 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
     ///     систем.  С го помощью  мы скрываем  вторичную  информацию от злоумышленников.  Никто не
     ///     поймёт  сколько  у  нас  пользователей  или  не  сможет  использовать  Brute  Force для
     ///     стягивания данных (по крайней мере это будет почти невозможно).
+    ///     <see cref="Externals" />
+    ///     Идентификатор  пришедший в нашу систему извне.  Понятия не имеем какого он типа и что в
+    ///     себе содержит.  Фантазия у разработчиков  может  быть  абсолютно  разная. Идентификатор
+    ///     может быть в виде:
+    ///     - числа (524773)
+    ///     - строки (CU-332772)
+    ///     - набора байтов (0xBB489DF2A2905D504CF003FACADE621)
+    ///     - 128-битный идентификатор (6F9619FF-8B86-D011-B42D-00CF4FC964FF)
     /// </remarks>
     public interface IIdentifier<TOwner> : IEquatable<IIdentifier<TOwner>>
         where TOwner : IEntity<TOwner>
@@ -23,13 +34,16 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <summary>
         ///     Публичный идентификатор. Генерируется внутри сервиса.
         /// </summary>
-        /// <returns>Значение публичного идентификатор.</returns>
         Guid Public { get; }
 
         /// <summary>
         ///     Приватный идентификатор. Генерируется внутри сервиса.
         /// </summary>
-        /// <returns>Значение приватного идентификатор.</returns>
         int Private { get; }
+
+        /// <summary>
+        ///     Набор внешних идентификаторов. Генерируются во внешнем сервисе.
+        /// </summary>
+        ExternalIdentifiers Externals { get; }
     }
 }

@@ -17,11 +17,18 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// </summary>
         /// <param name="privateId">Приватный идентификатор.</param>
         /// <param name="publicId">Публичный идентификатор.</param>
-        public Identifier(int privateId, Guid publicId)
+        /// <param name="externalIds">Набор внешних идентификаторов.</param>
+        public Identifier(int privateId, Guid publicId, ExternalIdentifiers externalIds = null)
         {
             Public = publicId;
             Private = privateId;
+            Externals = externalIds ?? new ExternalIdentifiers();
         }
+
+        /// <summary>
+        ///     Набор внешних идентификаторов. Генерируются во внешнем сервисе.
+        /// </summary>
+        public ExternalIdentifiers Externals { get; }
 
         /// <summary>
         ///     Публичный идентификатор. Генерируется внутри сервиса.

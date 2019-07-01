@@ -20,11 +20,6 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Stubs
 
         public UserSearchParametersStub With(IIdentifier<IUser> userId)
         {
-            _userSearchParameters.ByIdentifiers(new List<IIdentifier<IUser>>
-            {
-                userId
-            });
-
             return this;
         }
     }

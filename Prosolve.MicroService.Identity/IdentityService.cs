@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,7 +40,7 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="newUsers">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        public Result CreateUser(IReadOnlyCollection<IUser> newUsers)
+        public Result CreateUser(IEnumerable<IUser> newUsers)
         {
             var createResult = _userRepository.Create(newUsers);
             return createResult;
@@ -50,7 +51,7 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="userSearchParameters">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        public Result<IReadOnlyCollection<IUser>> FindUser(IUserSearchParameters userSearchParameters)
+        public Result<IEnumerable<IUser>> FindUser(IUserSearchParameters userSearchParameters)
         {
             return _userRepository.Read(userSearchParameters);
         }

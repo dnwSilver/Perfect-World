@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 using Sharpdev.SDK.Layers.Domain.Events;
 using Sharpdev.SDK.Layers.Domain.Factories;
@@ -32,6 +33,6 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <summary>
         ///     Набор условий-ограничение.
         /// </summary>
-        IReadOnlyCollection<IPolicy> Policies();
+        IEnumerable Policies();
     }
 }

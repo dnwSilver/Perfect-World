@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 using Prosolve.MicroService.Identity.Entities.Users;
 
@@ -17,13 +18,13 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="userSearchParameters">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        Result<IReadOnlyCollection<IUser>> FindUser(IUserSearchParameters userSearchParameters);
+        Result<IEnumerable<IUser>> FindUser(IUserSearchParameters userSearchParameters);
 
         /// <summary>
         ///     Создание пользователей в информационной системе.
         /// </summary>
         /// <param name="newUsers">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        Result CreateUser(IReadOnlyCollection<IUser> newUsers);
+        Result CreateUser(IEnumerable<IUser> newUsers);
     }
 }
