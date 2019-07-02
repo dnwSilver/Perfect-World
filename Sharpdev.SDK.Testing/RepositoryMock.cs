@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
@@ -46,7 +43,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public Result Create(IEnumerable<TEntity> objectsToCreate)
+        public Result Create(TEntity[] objectsToCreate)
         {
             foreach(var entity in objectsToCreate)
             {
@@ -64,11 +61,9 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Result<IEnumerable<TEntity>> Read(ISearchParameters<TEntity> searchParameters)
+        public Result<TEntity[]> Read(ISearchParameters<TEntity> searchParameters)
         {
-            IEnumerable<TEntity> output = _memoryRepository
-                                          .Skip(searchParameters.Skip.Value)
-                                          .Take(searchParameters.Take.Value);
+            var output = _memoryRepository.Skip(searchParameters.Skip.Value).Take(searchParameters.Take.Value).ToArray();
 
             return Result.Ok(output);
         }
@@ -81,7 +76,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Result Update(IEnumerable<TEntity> objectsToUpdate)
+        public Result Update(TEntity[] objectsToUpdate)
         {
             foreach(var entity in objectsToUpdate)
             {
@@ -103,7 +98,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Result Delete(IEnumerable<TEntity> objectsToRemove)
+        public Result Delete(TEntity[] objectsToRemove)
         {
             foreach(var entity in objectsToRemove)
             {

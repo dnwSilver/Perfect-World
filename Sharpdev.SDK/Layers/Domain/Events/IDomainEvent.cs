@@ -1,4 +1,6 @@
-﻿namespace Sharpdev.SDK.Layers.Domain.Events
+﻿using Sharpdev.SDK.Layers.Infrastructure.Integrations;
+
+namespace Sharpdev.SDK.Layers.Domain.Events
 {
     /// <summary>
     ///     Событие предметной области, реакция на  событие.
@@ -10,7 +12,7 @@
     ///     Используем  механизм  отложенного выполнения <see cref="IEventHandler{TDomainEvent}" />.
     ///     Найти объекты с событиями можно при  помощи  интерфейса  <see cref="IHasDomainEvent" />.
     /// </remarks>
-    public interface IDomainEvent
+    public interface IDomainEvent : IIntegrationEvent
     {
     }
 }

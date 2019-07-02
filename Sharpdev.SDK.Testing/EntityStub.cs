@@ -5,7 +5,7 @@ namespace Sharpdev.SDK.Testing
     /// <summary>
     ///     Объект заглушка имитирует бизнес сущность.
     /// </summary>
-    public class StubEntity : Entity<StubEntity>, IEntity<StubEntity>
+    public class StubEntity : Entity<StubEntity>
     {
         /// <summary>
         ///     Конструктор для объекта <see cref="StubEntity" />.

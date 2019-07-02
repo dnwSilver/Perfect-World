@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories.SearchParameters;
@@ -6,29 +7,31 @@ using Sharpdev.SDK.Layers.Infrastructure.Repositories.SearchParameters;
 namespace Sharpdev.SDK.Layers.Domain.Factories
 {
     /// <summary>
-    ///     Набор параметров для поиска.
+    ///     Базовый класс для всех наборов параметров.
     /// </summary>
-    public interface ISearchParameters<TEntity>
+    public abstract class SearchParametersBase<TEntity> : ISearchParameters<TEntity>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Набор идентификаторов для поиска.
         /// </summary>
-        ISearchParameter<IEnumerable<IIdentifier<TEntity>>> ByIdentifiers { get; set; }
+        public ISearchParameter<IEnumerable<IIdentifier<TEntity>>> ByIdentifiers { get; set; } =
+            new SearchParameter<IEnumerable<IIdentifier<TEntity>>>(Enumerable.Empty<IIdentifier<TEntity>>());
 
         /// <summary>
         ///     Пропуск определенного количества элементов.
         /// </summary>
-        ISearchParameter<int> Skip { get; set; }
+        public ISearchParameter<int> Skip { get; set; } = new SearchParameter<int>(SearchParameterDefault.Skip);
 
         /// <summary>
         ///     Поле для сортировки.
         /// </summary>
-        ISearchParameter<string> OrderBy { get; set; }
+        public ISearchParameter<string> OrderBy { get; set; } =
+            new SearchParameter<string>(SearchParameterDefault.OrderBy);
 
         /// <summary>
         ///     Извлечение определенного числа элементов.
         /// </summary>
-        ISearchParameter<int> Take { get; set; }
+        public ISearchParameter<int> Take { get; set; } = new SearchParameter<int>(SearchParameterDefault.Take);
     }
 }

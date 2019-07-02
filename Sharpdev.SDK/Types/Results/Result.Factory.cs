@@ -25,13 +25,34 @@ namespace Sharpdev.SDK.Types.Results
         }
 
         /// <summary>
-        /// Создание неудачного результата работы метода, не возвращающего значение
+        ///     Создание неудачного результата работы метода, не возвращающего значение.
         /// </summary>
-        /// <param name="resultError">Описание ошибки</param>
-        /// <returns>Неудачный результат работы метода</returns>
+        /// <param name="resultError">Описание ошибки.</param>
+        /// <returns>Неудачный результат работы метода.</returns>
         public static Result Fail(IResultError resultError)
         {
             return new Result(false, resultError);
+        }
+
+        /// <summary>
+        ///     Создание неудачного результата работы метода, не возвращающего значение.
+        /// </summary>
+        /// <param name="resultError">Описание ошибки.</param>
+        /// <returns>Неудачный результат работы метода.</returns>
+        public static Result Fail(string resultError)
+        {
+            return new Result(false, TextResultError.Create(resultError));
+        }
+
+        /// <summary>
+        ///     Создание неудачного результата работы метода, возвращающего значение
+        /// </summary>
+        /// <param name="errorMessage">Описание ошибки.</param>
+        /// <typeparam name="T">Тип данных-результата работы метода.</typeparam>
+        /// <returns>Неудачный результат работы метода.</returns>
+        public static Result<T> Fail<T>(string errorMessage)
+        {
+            return new Result<T>(default, false, TextResultError.Create(errorMessage));
         }
     }
 }

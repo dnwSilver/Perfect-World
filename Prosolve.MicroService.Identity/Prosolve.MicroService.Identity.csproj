@@ -9,10 +9,4 @@
     <ProjectReference Include="..\Sharpdev.SDK\Sharpdev.SDK.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Users\DomainEvents\" />
-    <Folder Include="Entities\Users\IntegrationEvents\" />
-    <Folder Include="Entities\Users\Specifications\" />
-  </ItemGroup>
-
 </Project>

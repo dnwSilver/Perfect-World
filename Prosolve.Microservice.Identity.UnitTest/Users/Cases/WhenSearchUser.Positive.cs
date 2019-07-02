@@ -18,9 +18,11 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
         public void WhenSearchUser_ShouldHaveSomeCount()
         {
             // Act:
-            var identityService = Create.IdentityService().Please();
             var userId = Create.Identifier<IUser>().PrivateId(1).Please();
             var searchParameters = Create.UserSearchParameters().With(userId).Please();
+            var user = Create.User().With(userId).Please();
+            var userRepository = Create.UserRepository().With(user).Please();
+            var identityService = new IdentityService(userRepository);
 
             // Arrange:
             var searchResult = identityService.FindUser(searchParameters).Value;
