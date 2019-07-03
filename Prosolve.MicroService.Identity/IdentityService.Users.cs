@@ -5,8 +5,6 @@ using Prosolve.MicroService.Identity.Entities.Users.DomainEvents;
 using Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents;
 using Prosolve.MicroService.Identity.Entities.Users.Specifications;
 
-using Sharpdev.SDK.Layers.Application;
-using Sharpdev.SDK.Layers.Infrastructure.Integrations;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -15,49 +13,17 @@ namespace Prosolve.MicroService.Identity
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    public class IdentityService : IIdentityService
+    public partial class IdentityService : IIdentityService
     {
-        /// <summary>
-        ///     Шина для миграции данных.
-        /// </summary>
-        private readonly IIntegrateBus _integrateBus;
-
-        /// <summary>
-        ///     Репозиторий для работы с пользователями.
-        /// </summary>
-        private readonly IRepository<IUser> _userRepository;
-
-        /// <summary>
-        ///     Создание объекта <see cref="IdentityService" />.
-        /// </summary>
-        /// <param name="userRepository">Репозиторий для работы с пользователями.</param>
-        public IdentityService(IRepository<IUser> userRepository)
-        {
-            _userRepository = userRepository;
-        }
-
-        /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns>Статус объекта.</returns>
-        public ServiceStatus Status { get; private set; }
-
-        /// <summary>
-        ///     Смена статуса.
-        /// </summary>
-        /// <param name="newState">Новый статус.</param>
-        public void ChangeStatus(ServiceStatus newState)
-        {
-            Status = newState;
-        }
-
         /// <summary>
         ///     Создание пользователей в информационной системе.
         /// </summary>
         /// <param name="newUsers">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        public Result CreateUsers(IUser[] newUsers)
+        public Result CreateUsers(IUserBuilder[] userBuilders)
         {
+            var newUsers = new IUser[0];
+
             #region Проверяем занят ли адрес электронной почты
 
             var searchParameters = new UserSearchParameters();
@@ -89,6 +55,7 @@ namespace Prosolve.MicroService.Identity
             #region Фиксируем статус действия в BI системе
 
             var domainEvent = new UserRegisteredDomainEvent();
+            newUsers[0].AddDomainEvent(domainEvent);
             _integrateBus.PublishAsync(domainEvent);
 
             #endregion
@@ -97,9 +64,7 @@ namespace Prosolve.MicroService.Identity
 
             return createResult;
         }
-        public delegate void MethodContainer();
 
-        public event MethodContainer onRegistered;
         /// <summary>
         ///     Поиск пользователей в информационной системе.
         /// </summary>
@@ -112,5 +77,9 @@ namespace Prosolve.MicroService.Identity
 
             return _userRepository.Read(userSearchParameters);
         }
+
+        private event MethodContainer onRegistered;
+
+        private delegate void MethodContainer();
     }
 }

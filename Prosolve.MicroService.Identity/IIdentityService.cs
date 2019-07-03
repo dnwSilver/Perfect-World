@@ -22,6 +22,6 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="newUsers">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        Result CreateUsers(IUser[] newUsers);
+        Result CreateUsers(IUserBuilder[] newUsers);
     }
 }

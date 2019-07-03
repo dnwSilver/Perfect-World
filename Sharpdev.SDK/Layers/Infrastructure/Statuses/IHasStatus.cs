@@ -17,7 +17,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Statuses
         /// <summary>
         ///     Смена статуса.
         /// </summary>
-        /// <param name="newState">Новый статус.</param>
-        void ChangeStatus(TStatusEnum newState);
+        /// <param name="newStatus">Новый статус.</param>
+        void ChangeStatus(TStatusEnum newStatus);
     }
 }

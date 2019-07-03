@@ -1,24 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
-namespace Sharpdev.SDK.Testing
+namespace Prosolve.MicroService.Identity.Entities.Users
 {
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    /// <typeparam name="TEntity">Тип хранимого объекта.</typeparam>
-    public class RepositoryMock<TEntity> : IRepository<TEntity>
-        where TEntity : IEntity<TEntity>
+    internal class UserRepository : IRepository<IUser>
     {
         /// <summary>
         ///     Хранилище объектов в оперативной памяти.
         /// </summary>
-        private readonly IList<TEntity> _memoryRepository = new List<TEntity>();
+        private readonly IList<IUser> _memoryRepository = new List<IUser>();
 
         /// <summary>
         ///     Текущий статус объекта.
@@ -43,7 +40,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public Result Create(TEntity[] objectsToCreate)
+        public Result Create(IUser[] objectsToCreate)
         {
             foreach(var entity in objectsToCreate)
             {
@@ -61,9 +58,10 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Result<TEntity[]> Read(ISearchParameters<TEntity> searchParameters)
+        public Result<IUser[]> Read(ISearchParameters<IUser> searchParameters)
         {
-            var output = _memoryRepository.Skip(searchParameters.Skip.Value).Take(searchParameters.Take.Value).ToArray();
+            var output =
+                _memoryRepository.Skip(searchParameters.Skip.Value).Take(searchParameters.Take.Value).ToArray();
 
             return Result.Ok(output);
         }
@@ -76,7 +74,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Result Update(TEntity[] objectsToUpdate)
+        public Result Update(IUser[] objectsToUpdate)
         {
             foreach(var entity in objectsToUpdate)
             {
@@ -98,7 +96,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Result Delete(TEntity[] objectsToRemove)
+        public Result Delete(IUser[] objectsToRemove)
         {
             foreach(var entity in objectsToRemove)
             {

@@ -1,4 +1,4 @@
-﻿using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+﻿using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Patterns;
 
 namespace Sharpdev.SDK.Layers.Domain.Factories
@@ -7,7 +7,7 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
     ///     Порождающий  шаблон  проектирования,  предоставляет  интерфейс  для  создания  семейств
     ///     взаимосвязанных или взаимозависимых объектов, не специфицируя их конкретных классов.
     /// </summary>
-    /// <typeparam name="TStored">Тип создаваемого объекта.</typeparam>
+    /// <typeparam name="TEntity">Тип создаваемого объекта.</typeparam>
     /// <remarks>
     ///     Работа ФАБРИКИ  -  создать объект  любой требуемой сложности  на  основе  данных.  Если
     ///     в результате получается новый объект,  об этом должен знать клиент, который при желании
@@ -15,21 +15,21 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
     ///     в базе данных.
     /// </remarks>
     [Factory]
-    public interface IFactory<TStored>
-        where TStored : IStored
+    public interface IFactory<TEntity>
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Создание нового объекта.
         /// </summary>
         /// <param name="objectToCreate">Строитель нового объекта.</param>
         /// <returns>Созданный объект.</returns>
-        TStored Create(IEntityBuilder<TStored> objectToCreate);
+        TEntity Create(IEntityBuilder<TEntity> objectToCreate);
 
         /// <summary>
         ///     Восстановление уже созданного объекта.
         /// </summary>
         /// <param name="objectToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        TStored Recovery(IEntityBuilder<TStored> objectToRecovery);
+        TEntity Recovery(IEntityBuilder<TEntity> objectToRecovery);
     }
 }

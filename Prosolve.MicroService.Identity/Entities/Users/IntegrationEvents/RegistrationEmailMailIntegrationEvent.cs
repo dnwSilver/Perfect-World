@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Sharpdev.SDK.Layers.Domain.Events;
+using Sharpdev.SDK.Layers.Infrastructure.Integrations;
 
-namespace Prosolve.MicroService.Identity.Entities.Users.DomainEvents
+namespace Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents
 {
-    public class UserRegisteredDomainEvent : IDomainEvent
+    public class ToSendMailIntegrationEvent : IIntegrationEvent
     {
         /// <summary>
         ///     Уникальный идентификатор события.
