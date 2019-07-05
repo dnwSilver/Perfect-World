@@ -1,4 +1,7 @@
-﻿using Sharpdev.SDK.Layers.Domain.Entities;
+﻿using System;
+using System.Linq.Expressions;
+
+using Sharpdev.SDK.Layers.Domain.Entities;
 
 namespace Sharpdev.SDK.Layers.Domain
 {
@@ -11,11 +14,11 @@ namespace Sharpdev.SDK.Layers.Domain
     ///     прикладные  функции,  которые  могут  показаться   совершенно  различными.   Нам  может
     ///     понадобиться определить состояние некоторого объекта для одной или нескольких следующих
     ///     целей.
-    ///     1.  Проверить пригодность объекта дл  удовлетворения потребности или достижения цели.
+    ///     1.  Проверить пригодность объекта для   удовлетворения потребности или достижения цели.
     ///     2.  Выбрать объект из коллекции ему подобных.
     ///     3.  Заказать создание нового объекта для определенных потребностей.
     /// </remarks>
-    public interface ISpecification<in TEntity>
+    public interface ISpecification<TEntity>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
@@ -24,5 +27,7 @@ namespace Sharpdev.SDK.Layers.Domain
         /// <param name="candidate"></param>
         /// <returns></returns>
         bool IsSatisfiedBy(TEntity candidate);
+
+        Expression<Func<TEntity, bool>> ToExpression();
     }
 }
