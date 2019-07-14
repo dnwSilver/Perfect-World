@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.UnitTest", "Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity.API", "Prosolve.MicroService.Identity.API\Prosolve.MicroService.Identity.API.csproj", "{7F23BED2-ABDF-4EA9-8315-CA6030826C65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Etalon", "Etalon\Etalon.csproj", "{E9FD23EB-6C1B-4AF4-BEB5-68AAE96E0044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.API", "Prosolve.SDK.API\Sharpdev.SDK.API.csproj", "{DE3FBFDF-D864-44CE-B778-824B7D9E536E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{7F23BED2-ABDF-4EA9-8315-CA6030826C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F23BED2-ABDF-4EA9-8315-CA6030826C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F23BED2-ABDF-4EA9-8315-CA6030826C65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9FD23EB-6C1B-4AF4-BEB5-68AAE96E0044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9FD23EB-6C1B-4AF4-BEB5-68AAE96E0044}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9FD23EB-6C1B-4AF4-BEB5-68AAE96E0044}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9FD23EB-6C1B-4AF4-BEB5-68AAE96E0044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3FBFDF-D864-44CE-B778-824B7D9E536E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3FBFDF-D864-44CE-B778-824B7D9E536E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3FBFDF-D864-44CE-B778-824B7D9E536E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3FBFDF-D864-44CE-B778-824B7D9E536E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using Prosolve.MicroService.Identity.UnitTest.Users.Mocks;
+﻿using System;
+using Prosolve.MicroService.Identity.UnitTest.Users.Mocks;
 using Prosolve.MicroService.Identity.UnitTest.Users.Stubs;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
@@ -33,15 +34,6 @@ namespace Prosolve.MicroService.Identity.UnitTest
         }
 
         /// <summary>
-        ///     Создание набор для поиска пользователя.
-        /// </summary>
-        /// <returns>Готовый для тестов набор параметров для поиска.</returns>
-        internal static UserSearchParametersStub UserSearchParameters()
-        {
-            return new UserSearchParametersStub();
-        }
-
-        /// <summary>
         ///     Создание электронного адреса.
         /// </summary>
         /// <param name="emailAddress">Адрес электронной почты.</param>
@@ -69,6 +61,11 @@ namespace Prosolve.MicroService.Identity.UnitTest
         internal static UserRepositoryMock UserRepository()
         {
             return new UserRepositoryMock();
+        }
+
+        internal static VirtualIntegrateBusMock IntegrateBus()
+        {
+            return new VirtualIntegrateBusMock();
         }
     }
 }

@@ -5,6 +5,7 @@ using Prosolve.MicroService.Identity.Entities.Users.DomainEvents;
 using Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents;
 using Prosolve.MicroService.Identity.Entities.Users.Specifications;
 
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -26,16 +27,10 @@ namespace Prosolve.MicroService.Identity
 
             #region Проверяем занят ли адрес электронной почты
 
-            var searchParameters = new UserSearchParameters();
-            searchParameters.EmailAddresses.Use(newUsers.Select(x => x.ContactEmail.Value));
-            var result = _userRepository.Read(searchParameters);
 
-            var specification = new EmailAlreadyInUseSpecification(result.Value);
 
-            foreach(var newUser in newUsers)
-                if (!specification.IsSatisfiedBy(newUser))
-                    return Result.Fail(
-                        $"Электронный адрес {newUser.ContactEmail.Value} уже используется другим пользователем.");
+
+
 
             #endregion
 
@@ -70,12 +65,12 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="userSearchParameters">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        public Result<IUser[]> FindUser(IUserSearchParameters userSearchParameters)
+        public Result<IUser[]> FindUser(ISpecification<IUser> userSpecification)
         {
             if (_userRepository.Status != RepositoryStatus.Up)
                 return Result.Fail<IUser[]>("Источник данных для пользователей недоступен.");
 
-            return _userRepository.Read(userSearchParameters);
+            return _userRepository.Read(userSpecification);
         }
 
         private event MethodContainer onRegistered;

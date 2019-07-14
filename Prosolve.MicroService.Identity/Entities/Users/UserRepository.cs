@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using Sharpdev.SDK.Layers.Domain.Factories;
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -10,7 +10,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    internal class UserRepository : IRepository<IUser>
+    public class UserRepository : IRepository<IUser>
     {
         /// <summary>
         ///     Хранилище объектов в оперативной памяти.
@@ -54,19 +54,6 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         }
 
         /// <summary>
-        ///     Поиск и получение необходимых бизнес объектов в источнике данных.
-        /// </summary>
-        /// <param name="searchParameters">Набор параметров для поиска.</param>
-        /// <returns>Набор бизнес объектов.</returns>
-        public Result<IUser[]> Read(ISearchParameters<IUser> searchParameters)
-        {
-            var output =
-                _memoryRepository.Skip(searchParameters.Skip.Value).Take(searchParameters.Take.Value).ToArray();
-
-            return Result.Ok(output);
-        }
-
-        /// <summary>
         ///     Обновление объектов.
         /// </summary>
         /// <param name="objectsToUpdate">Список бизнес объектов.</param>
@@ -107,6 +94,19 @@ namespace Prosolve.MicroService.Identity.Entities.Users
             }
 
             return Result.Ok();
+        }
+
+        /// <summary>
+        ///     Поиск и получение необходимых бизнес объектов в источнике данных.
+        /// </summary>
+        /// <param name="searchParameters">Набор параметров для поиска.</param>
+        /// <returns>Набор бизнес объектов.</returns>
+        public Result<IUser[]> Read(ISpecification<IUser> searchParameters)
+        {
+            var output =
+                _memoryRepository.ToArray();
+
+            return Result.Ok(output);
         }
     }
 }

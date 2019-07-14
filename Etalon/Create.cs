@@ -3,10 +3,11 @@
     partial class API
     {
         // Presentation
-        IResponse Create(IRequest request)
+        // Idempotent
+        IResponse Post(IRequest request)
         {
             // Presentation
-            IBuilder[] builders = request.MapToBuilder();
+            IBuilder[] builders = request.MapToBuilders();
             Service someService = null;
             Result result = someService.Create(builders);
             return result.MapToResponse();

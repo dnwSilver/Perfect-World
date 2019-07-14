@@ -9,6 +9,7 @@ namespace Sharpdev.SDK.Layers.Domain
     ///     Спецификация  -  это  предикат,  который  определяет,  удовлетворяет  объект  некоторым
     ///     критериям или нет.
     /// </summary>
+    /// <typeparam name="TEntity">Тип объекта для которого предназначена проверка.</typeparam>
     /// <remarks>
     ///     Ценность спецификаций в значительной мере состоит в том,  что они сводят воедино  такие
     ///     прикладные  функции,  которые  могут  показаться   совершенно  различными.   Нам  может
@@ -24,10 +25,18 @@ namespace Sharpdev.SDK.Layers.Domain
         /// <summary>
         ///     Проверка пригодности объекта для удовлетворения потребности или достижения цели.
         /// </summary>
-        /// <param name="candidate"></param>
-        /// <returns></returns>
+        /// <param name="candidate">Проверяемый объект.</param>
+        /// <returns>
+        ///     <see langword="true" /> - Объект <see cref="TEntity"/> прошёл проверку.
+        ///     <see langword="false" /> - Объект <see cref="TEntity"/> не прошёл проверку.
+        /// </returns>
         bool IsSatisfiedBy(TEntity candidate);
 
+        /// <summary>
+        ///     Формирование функции для проведения проверки пригодности объекта для удовлетворения
+        ///     потребности или достижения цели.
+        /// </summary>
+        /// <returns>Функция для проверки.</returns>
         Expression<Func<TEntity, bool>> ToExpression();
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -61,9 +61,9 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Result<TEntity[]> Read(ISearchParameters<TEntity> searchParameters)
+        public Result<TEntity[]> Read(ISpecification<TEntity> searchParameters)
         {
-            var output = _memoryRepository.Skip(searchParameters.Skip.Value).Take(searchParameters.Take.Value).ToArray();
+            var output = _memoryRepository.ToArray();
 
             return Result.Ok(output);
         }

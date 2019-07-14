@@ -55,13 +55,28 @@ namespace Sharpdev.SDK.Extensions
         /// <typeparam name="TInput">Входное значение.</typeparam>
         /// <param name="o">Проверяемый объект.</param>
         /// <returns>
-        ///     True - если объект существует.
-        ///     False - если объект не существует.
+        ///     <see langword="true" /> - если объект существует.
+        ///     <see langword="false" /> - если объект не существует.
         /// </returns>
         public static bool ReturnSuccess<TInput>(this TInput o)
             where TInput : class
         {
             return o != null;
+        }
+
+        /// <summary>
+        ///     Проверка существования объекта.
+        /// </summary>
+        /// <typeparam name="TInput">Входное значение.</typeparam>
+        /// <param name="o">Проверяемый объект.</param>
+        /// <returns>
+        ///     <see langword="true" /> - если объект не существует.
+        ///     <see langword="false" /> - если объект существует.
+        /// </returns>
+        public static bool ReturnFailure<TInput>(this TInput o)
+            where TInput : class
+        {
+            return o == null;
         }
 
         /// <summary>

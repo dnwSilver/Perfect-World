@@ -1,6 +1,9 @@
-﻿using Prosolve.MicroService.Identity.Entities.Users;
+﻿using System.Security.Claims;
+
+using Prosolve.MicroService.Identity.Entities.Users;
 
 using Sharpdev.SDK.Layers.Application;
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Identity
@@ -15,7 +18,7 @@ namespace Prosolve.MicroService.Identity
         /// </summary>
         /// <param name="userSearchParameters">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        Result<IUser[]> FindUser(IUserSearchParameters userSearchParameters);
+        Result<IUser[]> FindUser(ISpecification<IUser> userSearchParameters);
 
         /// <summary>
         ///     Создание пользователей в информационной системе.
@@ -23,5 +26,15 @@ namespace Prosolve.MicroService.Identity
         /// <param name="newUsers">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
         Result CreateUsers(IUserBuilder[] newUsers);
+
+        /// <summary>
+        ///     Авторизация пользователя.
+        /// </summary>
+        /// <param name="login">Логин пользователя.</param>
+        /// <param name="password">Пароль пользователя.</param>
+        /// <returns>
+        ///     Коллекция объектов <see cref="Claim" />, описывающих утверждения для пользователя.
+        /// </returns>
+        Result<ClaimsIdentity> Authorize(string login, string password);
     }
 }

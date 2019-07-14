@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Input;
 
 namespace Etalon
 {
@@ -32,6 +33,19 @@ namespace Etalon
             return null;
         }
 
+        internal Result DisposalPermit(IEntity entity)
+        {
+            ISpecification spec = null;
+            spec.IsSatisfiedBy();
+            return new Result();
+        }
+
+        internal Result DisposalPermit(IValueObject entity)
+        {
+            ISpecification spec = null;
+            spec.IsSatisfiedBy();
+            return new Result();
+        }
     }
 
     public interface ISpecification
@@ -56,8 +70,10 @@ namespace Etalon
 
     public interface IRequest
     {
-        IBuilder[] MapToBuilder();
+        IBuilder[] MapToBuilders();
+        IBuilder MapToBuilder();
         ISpecification[] MapToSpecs();
+        Command MapToCommand();
     }
 
     public interface IDataTransferObjectIn { }
@@ -70,21 +86,28 @@ namespace Etalon
     {
         IDataTransferObjectOut Search(IDataTransferObjectIn input);
         IDataTransferObjectOut Create(IDataTransferObjectIn dataTransferObjectIn);
+        IDataTransferObjectOut Delete(IDataTransferObjectIn dataTransferObjectIn);
     }
 
     public interface IBuilder
     {
-
+        int SomeField();
     }
 
+    public enum Command
+    {
+        Register
+    }
     public interface IEntity
     {
         IDataTransferObjectIn MapToDTOIn();
+        Result SomeMethod(int v);
     }
 
     public interface IValueObject
     {
         IDataTransferObjectIn MapToDTOIn();
+        Result SomeMethod(int v);
     }
 
     public interface IAggregate
@@ -99,6 +122,8 @@ namespace Etalon
 
     public struct Result
     {
+        internal bool Success { get; }
+        internal bool Failure { get; }
         internal static Result Combine(Result resultSave1, Result resultSave2)
         {
             throw new NotImplementedException();

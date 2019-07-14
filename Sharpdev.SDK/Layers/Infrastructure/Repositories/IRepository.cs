@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Statuses;
@@ -37,9 +38,9 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
-        /// <param name="searchParameters">Набор параметров для поиска.</param>
+        /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Result<TEntity[]> Read(ISearchParameters<TEntity> searchParameters);
+        Result<TEntity[]> Read(ISpecification<TEntity> specification);
 
         /// <summary>
         ///     Обновление объектов.

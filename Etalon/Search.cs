@@ -3,13 +3,23 @@
     partial class API
     {
         // Presentation
-        IResponse Search(IRequest request)
+        IResponse Get(IRequest request)
         {
             // Presentation
             ISpecification[] specs = request.MapToSpecs();
             Service someService = null;
             IAggregate aggregate = someService.Search(specs);
             return aggregate.MapToResponse();
+        }
+
+        // Presentation
+        IResponse Head(IRequest request)
+        {
+            // Presentation
+            ISpecification[] specs = request.MapToSpecs();
+            Service someService = null;
+            IAggregate aggregate = someService.Search(specs);
+            return new Result().MapToResponse();
         }
     }
 
@@ -34,7 +44,6 @@
 
             return aggregate;
         }
-
     }
 
     partial class Repository

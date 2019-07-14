@@ -19,13 +19,13 @@ namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
         {
             // Act:
             var userId = Create.Identifier<IUser>().PrivateId(1).Please();
-            var searchParameters = Create.UserSearchParameters().With(userId).Please();
             var user = Create.User().With(userId).Please();
             var userRepository = Create.UserRepository().With(user).Please();
-            var identityService = new IdentityService(userRepository);
+            var integrateBus = Create.IntegrateBus().Please();
+            var identityService = new IdentityService(userRepository, integrateBus);
 
             // Arrange:
-            var searchResult = identityService.FindUser(searchParameters).Value;
+            var searchResult = identityService.FindUser(null).Value;
 
             // Assert:
             searchResult.Should().HaveCountGreaterThan(0, " repository have some users");
