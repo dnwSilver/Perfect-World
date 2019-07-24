@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview6.19304.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview6.19304.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0-preview6.19304.10" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.0-preview5" />
       <ProjectReference Include="..\Prosolve.MicroService.Watcher.DataAccess\Prosolve.MicroService.Watcher.DataAccess.csproj" />
       <ProjectReference Include="..\Sharpdev.SDK\Sharpdev.SDK.csproj" />
     </ItemGroup>

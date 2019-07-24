@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Prosolve.MicroService.Watcher.DataAccess
 {
     /// <summary>
-    ///     Модель отображающая таблицу в базе данных для объекта <see cref="IProcessEntity" />.
+    ///     Модель отображающая таблицу в базе данных для процесса.
     /// </summary>
     [Table("process")]
     public class ProcessDataModel
     {
         /// <summary>
-        ///     Внутренний идентификатор объекта <see cref="IProcessEntity" />.
+        ///     Внутренний идентификатор процесса.
         /// </summary>
         [Key]
         [Column("id")]
@@ -19,7 +19,7 @@ namespace Prosolve.MicroService.Watcher.DataAccess
 
 
         /// <summary>
-        ///     Внешний идентификатор объекта <see cref="IProcessEntity" />.
+        ///     Внешний идентификатор процесса.
         /// </summary>
         [Required]
         [Column("guid")]

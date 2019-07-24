@@ -18,15 +18,14 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <returns>Созданный объект.</returns>
         public Result<IProcessEntity> Create(IEntityBuilder<IProcessEntity> processBuilder)
         {
-            Identifier<IProcessEntity> processIdentifier = new Identifier<IProcessEntity>(
-                Identifier<IProcessEntity>.Undefined,
-                Guid.NewGuid(),
-                processBuilder.Identifier.Externals);
+            var processIdentifier = new Identifier<IProcessEntity>(Identifier<IProcessEntity>.Undefined,
+                                                                   Guid.NewGuid(),
+                                                                   processBuilder.Identifier.Externals);
             processBuilder.SetIdentifier(processIdentifier);
 
-            IProcessEntity process = this.AllocateProcess(processBuilder);
+            var process = AllocateProcess(processBuilder);
 
-            this.CheckSpecification(process);
+            CheckSpecification(process);
 
             return Result.Ok(process);
         }
@@ -38,13 +37,13 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <returns>Восстановленный объект.</returns>
         public Result<IProcessEntity> Recovery(IEntityBuilder<IProcessEntity> processBuilder)
         {
-            IProcessEntity process = this.AllocateProcess(processBuilder);
+            var process = AllocateProcess(processBuilder);
 
-            Result specificationResult = this.CheckSpecification(process);
+            var specificationResult = CheckSpecification(process);
 
             if (specificationResult.Failure)
                 return Result.Fail<IProcessEntity>(specificationResult.Errors);
-            
+
             return Result.Ok(process);
         }
 
@@ -53,11 +52,11 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// </summary>
         /// <param name="processBuilder">Строитель для объекта <see cref="IProcessEntity" />.</param>
         /// <returns>Ссылка на созданный в куче объект.</returns>
-        private IProcessEntity AllocateProcess(IEntityBuilder<IProcessEntity> processBuilder)
+        private static IProcessEntity AllocateProcess(IEntityBuilder<IProcessEntity> processBuilder)
         {
-            ProcessEntity process = new ProcessEntity(processBuilder as IProcessBuilder);
+            var process = new ProcessEntity(processBuilder as IProcessBuilder);
 
-            this.CheckSpecification(process);
+            CheckSpecification(process);
 
             return process;
         }
@@ -66,10 +65,10 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         ///     Проверяем объект на соответствие всем спецификациям.
         /// </summary>
         /// <param name="process">Проверяемый объект.</param>
-        /// <returns></returns>
-        private Result CheckSpecification(IProcessEntity process)
+        /// <returns>Результат проверок всех спецификаций.</returns>
+        private static Result CheckSpecification(IProcessEntity process)
         {
-            ProcessNameLengthSpecification spec = new ProcessNameLengthSpecification();
+            var spec = new ProcessNameLengthSpecification();
 
             return spec.IsSatisfiedBy(process);
         }

@@ -39,7 +39,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         /// </summary>
         /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Result<TEntity[]> Read(ISpecification<TEntity> specification);
+        Task<Result<TEntity[]>> Read(ISpecification<TEntity> specification);
 
         /// <summary>
         ///     Обновление объектов.
@@ -49,7 +49,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        Result Update(TEntity[] objectsToUpdate);
+        Task<Result> Update(TEntity[] objectsToUpdate);
 
         /// <summary>
         ///     Удаление объектов.
@@ -59,6 +59,6 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        Result Delete(TEntity[] objectsToRemove);
+        Task<Result> Delete(TEntity[] objectsToRemove);
     }
 }

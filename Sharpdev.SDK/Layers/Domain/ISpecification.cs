@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
@@ -38,6 +39,6 @@ namespace Sharpdev.SDK.Layers.Domain
         ///     потребности или достижения цели.
         /// </summary>
         /// <returns>Функция для проверки.</returns>
-        Expression<Func<TEntity, bool>> ToExpression();
+        Expression<Func<TEntity, bool>> Expression { get; }
     }
 }

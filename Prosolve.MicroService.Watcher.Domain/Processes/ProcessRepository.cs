@@ -1,5 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
@@ -10,7 +14,7 @@ using Sharpdev.SDK.Types.Results;
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {
     /// <summary>
-    ///     Репозиторий для сущности <see cref="IProcessEntity"/>.
+    ///     Репозиторий для сущности <see cref="IProcessEntity" />.
     /// </summary>
     public class ProcessRepository : IRepository<IProcessEntity>
     {
@@ -26,7 +30,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(RepositoryStatus newStatus)
         {
-            Status = newStatus;
+            this.Status = newStatus;
         }
 
         /// <summary>
@@ -42,31 +46,28 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             var processesSql = new List<ProcessDataModel>();
 
             foreach(var process in processes)
-            {  
+            {
                 var processSql = new ProcessDataModel();
                 processSql.PrivateId = process.Id.Private;
-                processSql.PublicId = process.Id.Public;
-                processSql.Name = process.Name;
-                processSql.Type = process.Type.Id.Private;
+                processSql.PublicId  = process.Id.Public;
+                processSql.Name      = process.Name;
+                processSql.Type      = process.Type.Id.Private;
                 processesSql.Add(processSql);
             }
-          
-            using(var db = new WatcherContext())
-            {
-                using(var dbTransaction = db.Database.BeginTransaction())
-                {
-                    await db.Processes.AddRangeAsync(processesSql);
-                    var countEntriesWritten = db.SaveChanges();
 
-                    if (countEntriesWritten == processes.Length)
-                    {
-                        dbTransaction.Commit();
-                        return Result.Ok();
-                    }
-                }
-            }
+            using var watcherContext = new WatcherContext();
 
-            return Result.Fail("Что-то пошло не так.");
+            using var contextTransaction = watcherContext.Database.BeginTransaction();
+
+            await watcherContext.Processes.AddRangeAsync(processesSql);
+            var countEntriesWritten = await watcherContext.SaveChangesAsync();
+
+            if (countEntriesWritten != processes.Length)
+                return Result.Fail("Что-то пошло не так.");
+
+            contextTransaction.Commit();
+
+            return Result.Ok();
         }
 
         /// <summary>
@@ -74,22 +75,51 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// </summary>
         /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Result<IProcessEntity[]> Read(ISpecification<IProcessEntity> specification)
+        public async Task<Result<IProcessEntity[]>> Read(ISpecification<IProcessEntity> specification)
         {
-            throw new System.NotImplementedException();
+            var watcherContext   = new WatcherContext();
+            var processesFromSql = await watcherContext.Processes.Where(specification.Expression).ToListAsync();
+
+            var process = new List<IProcessEntity>();
+
+            return Result.Ok(process.ToArray());
         }
 
         /// <summary>
-        ///     Обновление объектов.
+        ///     Обновление набора процессов.
         /// </summary>
-        /// <param name="objectsToUpdate">Список бизнес объектов.</param>
+        /// <param name="processes">Список процессов.</param>
         /// <returns>
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Result Update(IProcessEntity[] objectsToUpdate)
+        public async Task<Result> Update(IProcessEntity[] processes)
         {
-            throw new System.NotImplementedException();
+            var processesSql = new List<ProcessDataModel>();
+
+            foreach(var process in processes)
+            {
+                var processSql = new ProcessDataModel();
+                processSql.PrivateId = process.Id.Private;
+                processSql.PublicId  = process.Id.Public;
+                processSql.Name      = process.Name;
+                processSql.Type      = process.Type.Id.Private;
+                processesSql.Add(processSql);
+            }
+
+            using var watcherContext = new WatcherContext();
+
+            using var contextTransaction = watcherContext.Database.BeginTransaction();
+
+            await watcherContext.Processes.AddRangeAsync(processesSql);
+            var countEntriesWritten = watcherContext.SaveChanges();
+
+            if (countEntriesWritten != processes.Length)
+                return Result.Fail("Что-то пошло не так.");
+
+            contextTransaction.Commit();
+
+            return Result.Ok();
         }
 
         /// <summary>
@@ -100,9 +130,9 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Result Delete(IProcessEntity[] objectsToRemove)
+        public async Task<Result> Delete(IProcessEntity[] objectsToRemove)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

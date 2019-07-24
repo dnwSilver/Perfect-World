@@ -6,7 +6,7 @@ using Sharpdev.SDK.Layers.Domain;
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {
     /// <summary>
-    ///     Спецификация на ограничение длины наименованпия процесса.
+    ///     Спецификация на ограничение длины наименования процесса.
     /// </summary>
     public sealed class ProcessNameLengthSpecification : SpecificationBase<IProcessEntity>
     {
@@ -24,7 +24,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
-        /// <param name="criteria">Функция для проведения проверки.</param>
         public ProcessNameLengthSpecification()
             : base(Criteria, FailureMessage)
         {
@@ -33,7 +32,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IProcessEntity, bool>> Criteria => x =>
-            x.Name.Length < MaxLength;
+        private static Expression<Func<IProcessEntity, bool>> Criteria => x => x.Name.Length < MaxLength;
     }
 }
