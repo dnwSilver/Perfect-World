@@ -1,7 +1,5 @@
 using System;
 
-using FluentAssertions;
-
 using NUnit.Framework;
 
 namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases

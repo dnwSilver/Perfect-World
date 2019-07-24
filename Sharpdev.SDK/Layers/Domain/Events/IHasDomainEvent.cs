@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 
 namespace Sharpdev.SDK.Layers.Domain.Events
 {

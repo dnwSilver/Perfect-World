@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Layers.Domain.Entities;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Layers.Domain
 {
@@ -21,15 +22,22 @@ namespace Sharpdev.SDK.Layers.Domain
         private readonly Expression<Func<TEntity, bool>> _criteria;
 
         /// <summary>
+        ///     Сообщение в случае не соответствия спецификации.
+        /// </summary>
+        private readonly string _failureMessage;
+
+        /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
         /// <param name="criteria">Функция для проведения проверки.</param>
-        protected SpecificationBase(Expression<Func<TEntity, bool>> criteria)
+        /// <param name="failureMessage">Сообщение в случае не соответствия спецификации.</param>
+        protected SpecificationBase(Expression<Func<TEntity, bool>> criteria, string failureMessage)
         {
             if (criteria.ReturnFailure())
                 throw new ArgumentNullException(nameof(criteria));
 
-            _criteria = criteria;
+            this._criteria = criteria;
+            this._failureMessage = failureMessage;
         }
 
         /// <summary>
@@ -40,14 +48,17 @@ namespace Sharpdev.SDK.Layers.Domain
         ///     <see langword="true" /> - Объект <see cref="TEntity" /> прошёл проверку.
         ///     <see langword="false" /> - Объект <see cref="TEntity" /> не прошёл проверку.
         /// </returns>
-        public bool IsSatisfiedBy(TEntity candidate)
+        public Result IsSatisfiedBy(TEntity candidate)
         {
             if (candidate == null)
                 throw new ArgumentNullException(nameof(candidate));
 
-            TEntity[] candidates = { candidate };
+            TEntity[] candidates =
+            {
+                candidate
+            };
 
-            return candidates.AsQueryable().Any();
+            return candidates.AsQueryable().Any() ? Result.Ok() : Result.Fail(this._failureMessage);
         }
 
         /// <summary>
@@ -57,7 +68,7 @@ namespace Sharpdev.SDK.Layers.Domain
         /// <returns>Функция для проверки.</returns>
         public Expression<Func<TEntity, bool>> ToExpression()
         {
-            return _criteria;
+            return this._criteria;
         }
     }
 }

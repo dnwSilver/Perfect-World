@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using Sharpdev.SDK.Layers.Infrastructure.Integrations;
 
 namespace Sharpdev.SDK.Layers.Domain.Entities
 {

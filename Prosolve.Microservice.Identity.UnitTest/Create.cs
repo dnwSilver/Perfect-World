@@ -1,5 +1,4 @@
-﻿using System;
-using Prosolve.MicroService.Identity.UnitTest.Users.Mocks;
+﻿using Prosolve.MicroService.Identity.UnitTest.Users.Mocks;
 using Prosolve.MicroService.Identity.UnitTest.Users.Stubs;
 
 using Sharpdev.SDK.Layers.Domain.Entities;

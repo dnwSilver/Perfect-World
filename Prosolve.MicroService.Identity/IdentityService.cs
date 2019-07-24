@@ -12,7 +12,7 @@ namespace Prosolve.MicroService.Identity
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    public partial class IdentityService : IIdentityService
+    public partial class IdentityService
     {
         /// <summary>
         ///     Шина для миграции данных.
@@ -61,7 +61,7 @@ namespace Prosolve.MicroService.Identity
         /// </returns>
         public Result<ClaimsIdentity> Authorize(string login, string password)
         {
-            var claims = new Claim[]
+            var claims = new []
                          {
                              new Claim(ClaimsIdentity.DefaultNameClaimType, login),
                              new Claim(ClaimsIdentity.DefaultRoleClaimType, "Member")

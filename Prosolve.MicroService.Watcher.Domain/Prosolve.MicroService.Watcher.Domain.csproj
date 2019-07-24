@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Prosolve.MicroService.Watcher.DataAccess\Prosolve.MicroService.Watcher.DataAccess.csproj" />
+      <ProjectReference Include="..\Sharpdev.SDK\Sharpdev.SDK.csproj" />
+    </ItemGroup>
+
+</Project>

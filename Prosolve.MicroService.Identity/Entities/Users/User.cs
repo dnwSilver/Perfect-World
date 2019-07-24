@@ -1,6 +1,4 @@
-﻿using System;
-
-using Sharpdev.SDK.Layers.Domain.Entities;
+﻿using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;

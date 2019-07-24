@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Prosolve.MicroService.Identity.Entities.Users;
+﻿using Prosolve.MicroService.Identity.Entities.Users;
 
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Testing;

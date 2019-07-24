@@ -21,7 +21,7 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             // Act:
             const int PRIVATE_IDENTIFIER = 1;
             const string EXTERNAL_IDENTIFIER = "Some identifier";
-            const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.Sharpdev_Testing;
+            const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.SharpdevTesting;
             var publicIdentifier = Guid.NewGuid();
             var externalIdentifiers = new ExternalIdentifiers
             {
@@ -46,7 +46,7 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             // Act:
             const int PRIVATE_IDENTIFIER = 1;
             const string EXTERNAL_IDENTIFIER = "Some identifier";
-            const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.Sharpdev_Testing;
+            const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.SharpdevTesting;
             var publicIdentifier = Guid.NewGuid();
             var externalIdentifiers = new ExternalIdentifiers
             {

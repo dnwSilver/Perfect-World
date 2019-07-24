@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Statuses;
 using Sharpdev.SDK.Types.Results;
 
@@ -33,7 +32,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        Result Create(TEntity[] objectsToCreate);
+        Task<Result> Create(TEntity[] objectsToCreate);
 
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Layers.Domain
 {
@@ -30,7 +31,7 @@ namespace Sharpdev.SDK.Layers.Domain
         ///     <see langword="true" /> - Объект <see cref="TEntity"/> прошёл проверку.
         ///     <see langword="false" /> - Объект <see cref="TEntity"/> не прошёл проверку.
         /// </returns>
-        bool IsSatisfiedBy(TEntity candidate);
+        Result IsSatisfiedBy(TEntity candidate);
 
         /// <summary>
         ///     Формирование функции для проведения проверки пригодности объекта для удовлетворения

@@ -1,9 +1,6 @@
-﻿using System.Linq;
-
-using Prosolve.MicroService.Identity.Entities.Users;
+﻿using Prosolve.MicroService.Identity.Entities.Users;
 using Prosolve.MicroService.Identity.Entities.Users.DomainEvents;
 using Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents;
-using Prosolve.MicroService.Identity.Entities.Users.Specifications;
 
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
@@ -19,7 +16,7 @@ namespace Prosolve.MicroService.Identity
         /// <summary>
         ///     Создание пользователей в информационной системе.
         /// </summary>
-        /// <param name="newUsers">Список новых пользователей.</param>
+        /// <param name="userBuilders">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
         public Result CreateUsers(IUserBuilder[] userBuilders)
         {
@@ -55,15 +52,13 @@ namespace Prosolve.MicroService.Identity
 
             #endregion
 
-            onRegistered();
-
             return createResult;
         }
 
         /// <summary>
         ///     Поиск пользователей в информационной системе.
         /// </summary>
-        /// <param name="userSearchParameters">Набор параметров для поиска.</param>
+        /// <param name="userSpecification">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
         public Result<IUser[]> FindUser(ISpecification<IUser> userSpecification)
         {
@@ -73,8 +68,5 @@ namespace Prosolve.MicroService.Identity
             return _userRepository.Read(userSpecification);
         }
 
-        private event MethodContainer onRegistered;
-
-        private delegate void MethodContainer();
     }
 }

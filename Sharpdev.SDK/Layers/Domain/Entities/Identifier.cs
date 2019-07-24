@@ -41,6 +41,11 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         public int Private { get; }
 
         /// <summary>
+        /// Значение неопределённого приавтного иденификатора.
+        /// </summary>
+        public static int Undefined = 0;
+        
+        /// <summary>
         ///     Указывает, равен ли текущий объект другому объекту того же типа.
         /// </summary>
         /// <param name="other">Объект для сравнения с этим объектом.</param>
@@ -50,7 +55,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// </returns>
         public bool Equals(IIdentifier<TEntity> other)
         {
-            return other.If(x => x.Private == Private).ReturnSuccess();
+            return other.If(x => x.Public == Public).ReturnSuccess();
         }
     }
 }

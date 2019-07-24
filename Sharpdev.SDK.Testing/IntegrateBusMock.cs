@@ -13,7 +13,7 @@ namespace Sharpdev.SDK.Testing
         ///     Текущий статус объекта.
         /// </summary>
         /// <returns>Статус объекта.</returns>
-        public IntegrationBusStatus Status { get; }
+        public IntegrationBusStatus Status { get; private set; }
 
         /// <summary>
         ///     Смена статуса.
@@ -21,6 +21,7 @@ namespace Sharpdev.SDK.Testing
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(IntegrationBusStatus newStatus)
         {
+            Status = newStatus;
             throw new NotImplementedException();
         }
 

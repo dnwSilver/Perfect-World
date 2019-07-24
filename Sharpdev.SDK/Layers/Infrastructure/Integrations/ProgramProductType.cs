@@ -13,6 +13,6 @@
         /// <summary>
         ///     Программный продукт для проведения тестирования.
         /// </summary>
-        Sharpdev_Testing = 0x01
+        SharpdevTesting = 0x01
     }
 }

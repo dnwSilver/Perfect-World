@@ -1,5 +1,6 @@
 ﻿using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Patterns;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Layers.Domain.Factories
 {
@@ -23,13 +24,13 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
         /// </summary>
         /// <param name="objectToCreate">Строитель нового объекта.</param>
         /// <returns>Созданный объект.</returns>
-        TEntity Create(IEntityBuilder<TEntity> objectToCreate);
+        Result<TEntity> Create(IEntityBuilder<TEntity> objectToCreate);
 
         /// <summary>
         ///     Восстановление уже созданного объекта.
         /// </summary>
         /// <param name="objectToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        TEntity Recovery(IEntityBuilder<TEntity> objectToRecovery);
+        Result<TEntity> Recovery(IEntityBuilder<TEntity> objectToRecovery);
     }
 }
