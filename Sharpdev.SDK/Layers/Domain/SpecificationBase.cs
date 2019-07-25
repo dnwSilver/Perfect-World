@@ -17,11 +17,6 @@ namespace Sharpdev.SDK.Layers.Domain
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
-        ///     Функция для проведения проверки.
-        /// </summary>
-        private readonly Expression<Func<TEntity, bool>> _criteria;
-
-        /// <summary>
         ///     Сообщение в случае не соответствия спецификации.
         /// </summary>
         private readonly string _failureMessage;
@@ -36,7 +31,7 @@ namespace Sharpdev.SDK.Layers.Domain
             if (criteria.ReturnFailure())
                 throw new ArgumentNullException(nameof(criteria));
 
-            this._criteria = criteria;
+            this.Expression = criteria;
             this._failureMessage = failureMessage;
         }
 
@@ -66,9 +61,6 @@ namespace Sharpdev.SDK.Layers.Domain
         ///     потребности или достижения цели.
         /// </summary>
         /// <returns>Функция для проверки.</returns>
-        public Expression<Func<TEntity, bool>> ToExpression()
-        {
-            return this._criteria;
-        }
+        public Expression<Func<TEntity, bool>> Expression { get; }
     }
 }

@@ -8,7 +8,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users.Specifications
     internal class EmailAlreadyInUse : SpecificationBase<IUser>
     {
         public EmailAlreadyInUse(IUser candidate)
-            : base(x => x.ContactEmail.Value == candidate.ContactEmail)
+            : base(x => x.ContactEmail.Value == candidate.ContactEmail,"Что-то не так")
         {
         }
     }

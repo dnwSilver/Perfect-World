@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
@@ -43,7 +44,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public Result Create(TEntity[] objectsToCreate)
+        public async Task<Result> Create(TEntity[] objectsToCreate)
         {
             foreach(var entity in objectsToCreate)
             {
@@ -61,7 +62,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Result<TEntity[]> Read(ISpecification<TEntity> searchParameters)
+        public async Task<Result<TEntity[]>> Read(ISpecification<TEntity> searchParameters)
         {
             var output = _memoryRepository.ToArray();
 
@@ -76,7 +77,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Result Update(TEntity[] objectsToUpdate)
+        public async Task<Result> Update(TEntity[] objectsToUpdate)
         {
             foreach(var entity in objectsToUpdate)
             {
@@ -98,7 +99,7 @@ namespace Sharpdev.SDK.Testing
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Result Delete(TEntity[] objectsToRemove)
+        public async Task<Result> Delete(TEntity[] objectsToRemove)
         {
             foreach(var entity in objectsToRemove)
             {

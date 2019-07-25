@@ -52,7 +52,7 @@ namespace Prosolve.MicroService.Identity
 
             #endregion
 
-            return createResult;
+            return createResult.Result;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Prosolve.MicroService.Identity
             if (_userRepository.Status != RepositoryStatus.Up)
                 return Result.Fail<IUser[]>("Источник данных для пользователей недоступен.");
 
-            return _userRepository.Read(userSpecification);
+            return _userRepository.Read(userSpecification).Result;
         }
 
     }

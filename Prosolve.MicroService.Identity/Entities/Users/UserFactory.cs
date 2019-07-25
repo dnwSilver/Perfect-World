@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Sharpdev.SDK.Layers.Domain.Factories;
+using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Identity.Entities.Users
 {
@@ -11,7 +12,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// </summary>
         /// <param name="IUser">Строитель нового объекта.</param>
         /// <returns>Созданный объект.</returns>
-        public IUser Create(IEntityBuilder<IUser> objectToCreate)
+        public Result<IUser> Create(IEntityBuilder<IUser> objectToCreate)
         {
             throw new NotImplementedException();
         }
@@ -21,7 +22,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// </summary>
         /// <param name="objectToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        public IUser Recovery(IEntityBuilder<IUser> objectToRecovery)
+        public Result<IUser> Recovery(IEntityBuilder<IUser> objectToRecovery)
         {
             throw new NotImplementedException();
         }

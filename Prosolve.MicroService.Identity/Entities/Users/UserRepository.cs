@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
@@ -40,7 +41,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public Result Create(IUser[] objectsToCreate)
+        public async Task<Result> Create(IUser[] objectsToCreate)
         {
             foreach(var entity in objectsToCreate)
             {
@@ -61,7 +62,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Result Update(IUser[] objectsToUpdate)
+        public async  Task<Result> Update(IUser[] objectsToUpdate)
         {
             foreach(var entity in objectsToUpdate)
             {
@@ -83,7 +84,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Result Delete(IUser[] objectsToRemove)
+        public async Task<Result> Delete(IUser[] objectsToRemove)
         {
             foreach(var entity in objectsToRemove)
             {
@@ -101,7 +102,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Result<IUser[]> Read(ISpecification<IUser> searchParameters)
+        public async Task<Result<IUser[]>> Read(ISpecification<IUser> searchParameters)
         {
             var output =
                 _memoryRepository.ToArray();
