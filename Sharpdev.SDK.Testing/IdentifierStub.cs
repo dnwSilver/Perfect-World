@@ -16,7 +16,8 @@ namespace Sharpdev.SDK.Testing
         /// <summary>
         ///     Заглушка для идентификатора.
         /// </summary>
-        private readonly Mock<IIdentifier<TEntity>> _identifierMock = new Mock<IIdentifier<TEntity>>();
+        private readonly Mock<IIdentifier<TEntity>> _identifierMock =
+            new Mock<IIdentifier<TEntity>>();
 
         /// <summary>
         ///     Построение заглушки для объекта <see cref="IIdentifier{TEntity}" />.
@@ -24,7 +25,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IIdentifier<TEntity> Please()
         {
-            return _identifierMock.Object;
+            return this._identifierMock.Object;
         }
 
         /// <summary>
@@ -34,7 +35,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IdentifierStub<TEntity> PrivateId(int privateIdentifier)
         {
-            _identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
+            this._identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
 
             return this;
         }
@@ -46,7 +47,8 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IdentifierStub<TEntity> PublicId(Guid publicIdentifier)
         {
-            _identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
+            this._identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
+
             return this;
         }
     }

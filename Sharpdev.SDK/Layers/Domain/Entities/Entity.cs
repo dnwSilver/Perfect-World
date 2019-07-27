@@ -30,9 +30,9 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <param name="currentVersion">Версия объекта.</param>
         protected Entity(IIdentifier<TEntity> identifier, int currentVersion)
         {
-            Id = identifier;
-            CurrentVersion = currentVersion;
-            IsSoftDelete = true;
+            this.Id = identifier;
+            this.CurrentVersion = currentVersion;
+            this.IsSoftDelete = true;
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <returns>Список всех событий предметной области.</returns>
         public IEnumerable DomainEvents()
         {
-            return _domainEvents.ToArray();
+            return this._domainEvents.ToArray();
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <param name="domainEvent">Событие предметной области.</param>
         public void AddDomainEvent(IDomainEvent domainEvent)
         {
-            _domainEvents.Add(domainEvent);
+            this._domainEvents.Add(domainEvent);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <param name="domainEvent">Событие предметной области.</param>
         public void RemoveDomainEvent(IDomainEvent domainEvent)
         {
-            _domainEvents.Remove(domainEvent);
+            this._domainEvents.Remove(domainEvent);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// </summary>
         public void ClearDomainEvents()
         {
-            _domainEvents.Clear();
+            this._domainEvents.Clear();
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// </summary>
         public IEnumerable Policies()
         {
-            return _policies;
+            return this._policies;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Sharpdev.SDK.Types.Results
@@ -54,5 +55,27 @@ namespace Sharpdev.SDK.Types.Results
         {
             return new Result<T>(default, false, TextResultError.Create(errorMessage));
         }
+
+        /// <summary>
+        ///     Создание неудачного результата работы метода, не возвращающего значение.
+        /// </summary>
+        /// <param name="errors">Список описаний ошибок.</param>
+        /// <returns>Неудачный результат работы метода.</returns>
+        public static Result Fail(IEnumerable<IResultError> errors)
+        {
+            return new Result(false, errors);
+        }
+
+        /// <summary>
+        /// Создание неудачного результата работы метода, возвращающего значение.
+        /// </summary>
+        /// <param name="errors">Список описаний ошибок.</param>
+        /// <typeparam name="T">Тип данных-результата работы метода.</typeparam>
+        /// <returns>Неудачный результат работы метода.</returns>
+        public static Result<T> Fail<T>(IEnumerable<IResultError> errors)
+        {
+            return new Result<T>(default(T), false, errors);
+        }
+
     }
 }

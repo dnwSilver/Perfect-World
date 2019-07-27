@@ -42,7 +42,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             var specificationResult = CheckSpecification(process);
 
             if (specificationResult.Failure)
-                return Result.Fail(specificationResult.Errors);
+                return Result.Fail<IProcessEntity>(specificationResult.Errors);
 
             return Result.Ok(process);
         }

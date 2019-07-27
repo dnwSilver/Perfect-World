@@ -18,7 +18,7 @@ namespace Sharpdev.SDK.Types.Results
         public ResultException(Result result, string delimiter = "\n")
             : base(result.ToString(delimiter))
         {
-            Errors = result.Errors;
+            this.Errors = result.Errors;
         }
 
         /// <summary>
@@ -26,10 +26,11 @@ namespace Sharpdev.SDK.Types.Results
         /// </summary>
         /// <param name="result">Результат работы метода.</param>
         /// <param name="errorsToString">Делегат преобразования списка ошибок в одну строку.</param>
-        public ResultException(Result result, Func<IEnumerable<IFormattable>, string> errorsToString)
+        public ResultException(Result result,
+                               Func<IEnumerable<IFormattable>, string> errorsToString)
             : base(result.ToString(errorsToString))
         {
-            Errors = result.Errors;
+            this.Errors = result.Errors;
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <summary>
         ///     Признак не выполнения метода.
         /// </summary>
-        public bool Failure => !Success;
+        public bool Failure => !this.Success;
 
         /// <summary>
         ///     Данные-результат работы метода
@@ -42,9 +42,9 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="errors">Список описаний ошибок, возникших при выполнении метода.</param>
         internal Result(T value, bool success, IEnumerable<IResultError> errors)
         {
-            Success = success;
-            Errors = errors;
-            Value = value;
+            this.Success = success;
+            this.Errors = errors;
+            this.Value = value;
         }
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="resultError">Описание ошибки, возникшей при выполнении метода.</param>
         internal Result(T value, bool success, IResultError resultError)
         {
-            Success = success;
-            Errors = resultError.Yield();
-            Value = value;
+            this.Success = success;
+            this.Errors = resultError.Yield();
+            this.Value = value;
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace Sharpdev.SDK.Types.Results
         /// </returns>
         public bool Equals(Result<T> other)
         {
-            return Success == other.Success &&
-                   Errors.SequenceEqual(other.Errors) &&
-                   EqualityComparer<T>.Default.Equals(Value, other.Value);
+            return this.Success == other.Success &&
+                   this.Errors.SequenceEqual(other.Errors) &&
+                   EqualityComparer<T>.Default.Equals(this.Value, other.Value);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Sharpdev.SDK.Types.Results
             if (obj is null)
                 return false;
 
-            return obj is Result<T> result && Equals(result);
+            return obj is Result<T> result && this.Equals(result);
         }
 
         /// <summary>
@@ -127,9 +127,9 @@ namespace Sharpdev.SDK.Types.Results
         {
             unchecked
             {
-                int hashCode = Success.GetHashCode();
-                hashCode = (hashCode * 397) ^ (Errors?.GetHashCode() ?? 0);
-                hashCode = (hashCode * 397) ^ EqualityComparer<T>.Default.GetHashCode(Value);
+                var hashCode = this.Success.GetHashCode();
+                hashCode = (hashCode * 397) ^ (this.Errors?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ EqualityComparer<T>.Default.GetHashCode(this.Value);
 
                 return hashCode;
             }
@@ -141,7 +141,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public override string ToString()
         {
-            return Success ? Value.ToString() : this.Format(new ResultFormatProvider());
+            return this.Success ? this.Value.ToString() : this.Format(new ResultFormatProvider());
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="identifier">Уникальный идентификатор объекта.</param>
         /// <param name="currentVersion">Версия объекта.</param>
-        public StubEntity(IIdentifier<StubEntity> identifier, int currentVersion)
+        protected StubEntity(IIdentifier<StubEntity> identifier, int currentVersion)
             : base(identifier, currentVersion)
         {
         }
