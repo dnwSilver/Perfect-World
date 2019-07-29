@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sharpdev.SDK.Types.EmailAddresses {
+namespace Sharpdev.SDK.Types {
     using System;
     
     
@@ -19,17 +19,17 @@ namespace Sharpdev.SDK.Types.EmailAddresses {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class EmailAddressMessage {
+    public class TextResultErrorResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EmailAddressMessage() {
+        internal TextResultErrorResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sharpdev.SDK.Types.EmailAddresses.EmailAddressMessage", typeof(EmailAddressMessage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sharpdev.SDK.Types.TextResultErrorResources", typeof(TextResultErrorResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace Sharpdev.SDK.Types.EmailAddresses {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Адрес электронной почты не соответствует образцу xxxxx@xxxxxx.xxx..
+        ///   Looks up a localized string similar to {0} ({1}) имеет значение null в классе {2} в методе {3}..
         /// </summary>
-        public static string EmailValidationException {
+        public static string NullReferenceError {
             get {
-                return ResourceManager.GetString("EmailValidationException", resourceCulture);
+                return ResourceManager.GetString("NullReferenceError", resourceCulture);
             }
         }
     }

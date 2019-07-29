@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-using AutoMapper.QueryableExtensions;
+using AutoMapper;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +21,8 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// </summary>
     public class ProcessRepository : IRepository<IProcessEntity>
     {
+        private bool _disposed;
+
         public ProcessRepository(WatcherContext watcherContext)
         {
             this.WatcherContext = watcherContext;
@@ -65,19 +67,21 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                 processesSql.Add(processSql);
             }
 
-            using var watcherContext = this.WatcherContext;
+            using(var watcherContext = this.WatcherContext)
+            {
+                using(var contextTransaction = watcherContext.Database.BeginTransaction())
+                {
+                    await watcherContext.Processes.AddRangeAsync(processesSql);
+                    var countEntriesWritten = await watcherContext.SaveChangesAsync();
 
-            using var contextTransaction = watcherContext.Database.BeginTransaction();
+                    if (countEntriesWritten != processes.Length)
+                        return Result.Fail("Что-то пошло не так.");
 
-            await watcherContext.Processes.AddRangeAsync(processesSql);
-            var countEntriesWritten = await watcherContext.SaveChangesAsync();
+                    contextTransaction.Commit();
+                }
 
-            if (countEntriesWritten != processes.Length)
-                return Result.Fail("Что-то пошло не так.");
-
-            contextTransaction.Commit();
-
-            return Result.Ok();
+                return Result.Ok();
+            }
         }
 
         /// <summary>
@@ -88,13 +92,39 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         public async Task<Result<IProcessEntity[]>> Read(
             ISpecification<IProcessEntity> specification)
         {
-            using var watcherContext = this.WatcherContext;
-            var processes = await watcherContext.Set<IProcessEntity>()
-                                                .Where(specification.Expression)
-                                                .ProjectTo<IProcessEntity>()
-                                                .ToListAsync();
+            var resultErrors = new List<IResultError>();
 
-            return Result.Ok(processes.ToArray());
+            if (resultErrors.Any())
+                return Result.Fail<IProcessEntity[]>(resultErrors);
+            
+            //or
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<IProcessEntity, ProcessDataModel>()
+                                                           .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name)));
+            var mapper = config.CreateMapper();
+            /*
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<IProcessEntity, ProcessDataModel>()
+                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
+                cfg.CreateMap<ProcessEntity, ProcessDataModel>()
+                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
+                cfg.CreateMap<ProcessDataModel, IProcessEntity>()
+                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
+                cfg.CreateMap<ProcessDataModel, ProcessEntity>()
+                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
+            });
+            */
+
+            using(var watcherContext = this.WatcherContext)
+            {
+                var expression =
+                    mapper.Map<Expression<Func<ProcessDataModel, bool>>>(specification.Expression);
+                var processes1 = await watcherContext.Processes.Where(expression).ToListAsync();
+                processes1.Clear();
+                var processes = new List<IProcessEntity>();
+
+                return Result.Ok(processes.ToArray());
+            }
         }
 
         /// <summary>
@@ -119,19 +149,21 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                 processesSql.Add(processSql);
             }
 
-            using var watcherContext = this.WatcherContext;
+            using(var watcherContext = this.WatcherContext)
+            {
+                using(var contextTransaction = watcherContext.Database.BeginTransaction())
+                {
+                    await watcherContext.Processes.AddRangeAsync(processesSql);
+                    var countEntriesWritten = watcherContext.SaveChanges();
 
-            using var contextTransaction = watcherContext.Database.BeginTransaction();
+                    if (countEntriesWritten != processes.Length)
+                        return Result.Fail("Что-то пошло не так.");
 
-            await watcherContext.Processes.AddRangeAsync(processesSql);
-            var countEntriesWritten = watcherContext.SaveChanges();
+                    contextTransaction.Commit();
 
-            if (countEntriesWritten != processes.Length)
-                return Result.Fail("Что-то пошло не так.");
-
-            contextTransaction.Commit();
-
-            return Result.Ok();
+                    return Result.Ok();
+                }
+            }
         }
 
         /// <summary>
@@ -145,18 +177,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         public async Task<Result> Delete(IProcessEntity[] objectsToRemove)
         {
             throw new NotImplementedException();
-        }
-
-        private static Expression<Func<TTarget, object>> MapMemberLambda<TSource, TTarget>(
-            Expression<Func<TSource, object>> includePropertyVM)
-        {
-            var objectParam = Expression.Parameter(typeof(TTarget), "x");
-
-            Expression memberAccess =
-                Expression.PropertyOrField(objectParam,
-                                           ((MemberExpression)includePropertyVM.Body).Member.Name);
-
-            return Expression.Lambda<Func<TTarget, object>>(memberAccess, objectParam);
         }
     }
 }

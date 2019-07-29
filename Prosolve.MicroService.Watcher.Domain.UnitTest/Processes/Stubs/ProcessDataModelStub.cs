@@ -17,8 +17,8 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs
         /// <summary>
         ///     Заглушка для идентификатора.
         /// </summary>
-        private readonly Mock<ProcessDataModel> _processDataModelMock =
-            new Mock<ProcessDataModel>();
+        private readonly ProcessDataModel _processDataModel =
+            new ProcessDataModel();
 
         /// <summary>
         ///     Построение объекта <see cref="ProcessDataModel" />.
@@ -26,15 +26,11 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs
         /// <returns>Экземпляр объекта <see cref="ProcessDataModel" /></returns>
         public ProcessDataModel Please()
         {
-            var processDataModel = new ProcessDataModel()
-            {
-                
-            };
-            this._processDataModelMock.Setup(x => x.PrivateId).Returns(1);
-            this._processDataModelMock.Setup(x => x.PublicId).Returns(Guid.Empty);
-            this._processDataModelMock.Setup(x => x.Name).Returns("Мой первый процесс.");
+            this._processDataModel.PrivateId = 1;
+            this._processDataModel.PublicId = Guid.Empty;
+            this._processDataModel.Name = "Мой первый процесс.";
 
-            return this._processDataModelMock.Object;
+            return this._processDataModel;
         }
     }
 }

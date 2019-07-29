@@ -1,7 +1,7 @@
 ﻿using Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Mocks;
 using Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs;
 
-namespace Prosolve.MicroService.Identity.UnitTest
+namespace Prosolve.MicroService.Watcher.Domain.UnitTest
 {
     /// <summary>
     ///     Шаблон простой: создаём статический класс и собираем в него всех строителей.
@@ -17,31 +17,30 @@ namespace Prosolve.MicroService.Identity.UnitTest
     ///     - Сделать тестовые объекты супер-легкодоступными, побуждая разработчиков писать тесты.
     ///     - Каждый тест работает со свежими данными.
     ///     - Тесты всегда очищаются после себя.
-    /// </remarks>
+    /// </remarks>>
     internal static class Create
     {
         /// <summary>
         ///     Создание процесса.
         /// </summary>
-        /// <returns>Готовый для тестов процесс.</returns>
+        /// <returns>Готовый для тестов процесс.</returns>>
         internal static ProcessEntityStub ProcessEntity => new ProcessEntityStub();
-        
+
         /// <summary>
         ///     Создание модели для процесса.
         /// </summary>
-        /// <returns>Готовый для тестов процесс.</returns>
+        /// <returns>Готовый для тестов процесс.</returns>>
         internal static ProcessDataModelStub ProcessDataModel => new ProcessDataModelStub();
 
         /// <summary>
         ///     Создание спецификации для длины наименования процесса.
         /// </summary>
-        /// <returns>Готовый для тестов процесс.</returns>
-        internal static ProcessNameLengthSpecificationStub ProcessNameLengthSpecification =>
-            new ProcessNameLengthSpecificationStub();
+        /// <returns>Готовый для тестов процесс.</returns>>
+        internal static ProcessNameLengthSpecificationStub ProcessNameLengthSpecification =>             new ProcessNameLengthSpecificationStub();
 
         /// <summary>
         ///     Создание контекста для смотрящего.
-        /// </summary>
+        /// </summary>>
         internal static VirtualWatcherContextMock WatcherContext => new VirtualWatcherContextMock();
     }
 }
