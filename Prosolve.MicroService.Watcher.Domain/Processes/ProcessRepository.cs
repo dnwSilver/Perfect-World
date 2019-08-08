@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-
-using AutoMapper;
 
 using Microsoft.EntityFrameworkCore;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
+using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -96,31 +94,15 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
 
             if (resultErrors.Any())
                 return Result.Fail<IProcessEntity[]>(resultErrors);
-            
-            //or
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<IProcessEntity, ProcessDataModel>()
-                                                           .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name)));
-            var mapper = config.CreateMapper();
-            /*
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<IProcessEntity, ProcessDataModel>()
-                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
-                cfg.CreateMap<ProcessEntity, ProcessDataModel>()
-                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
-                cfg.CreateMap<ProcessDataModel, IProcessEntity>()
-                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
-                cfg.CreateMap<ProcessDataModel, ProcessEntity>()
-                   .ForMember(dto => dto.Name, conf => conf.MapFrom(ol => ol.Name));
-            });
-            */
 
             using(var watcherContext = this.WatcherContext)
             {
-                var expression =
-                    mapper.Map<Expression<Func<ProcessDataModel, bool>>>(specification.Expression);
-                var processes1 = await watcherContext.Processes.Where(expression).ToListAsync();
-                processes1.Clear();
+                var processQuery = specification
+                                   .Expression
+                                   .Map<IProcessEntity, ProcessDataModel, ProcessPropertyMapper>();
+                var processModels =
+                    await watcherContext.Processes.Where(processQuery).ToListAsync();
+                processModels.Clear();
                 var processes = new List<IProcessEntity>();
 
                 return Result.Ok(processes.ToArray());

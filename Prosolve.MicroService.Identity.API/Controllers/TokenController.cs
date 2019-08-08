@@ -43,7 +43,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
             var authorizeResult = _identityService.Authorize(request.Login, request.Password);
 
             if (authorizeResult.Failure)
-                return BadRequest(new { ErrorMessage = "Неправильная пара пользователь-пароль." });
+                return this.BadRequest(new { ErrorMessage = "Неправильная пара пользователь-пароль." });
 
             var identity = authorizeResult.Value;
             var now = DateTime.UtcNow;
