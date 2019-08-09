@@ -11,30 +11,30 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     public class ProcessIdSpecification : SpecificationBase<IProcessEntity>
     {
         /// <summary>
-        ///     Сообщение в случае не соответствия спецификации.
-        /// </summary>
-        private static readonly string FailureMessage =
-            string.Format(ProcessResources.IdSpecification, _publicIdentifier);
-
-        /// <summary>
-        ///     Публичный идентификатор.
-        /// </summary>
-        private readonly Guid _publicIdentifier;
-
-        /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
         /// <param name="publicIdentifier">Публичный идентификатор.</param>
         public ProcessIdSpecification(Guid publicIdentifier)
-            : base(Criteria(publicIdentifier), FailureMessage)
+            : base(Criteria(publicIdentifier), FailureMessage(publicIdentifier))
         {
-            this._publicIdentifier = publicIdentifier;
+        }
+
+        /// <summary>
+        ///     Сообщение в случае не соответствия спецификации.
+        /// </summary>
+        private static string FailureMessage(Guid publicIdentifier)
+        {
+            return string.Format(ProcessResources.IdSpecification,
+                                 nameof(IProcessEntity),
+                                 publicIdentifier);
         }
 
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IProcessEntity, bool>> Criteria(Guid publicIdentifier) => x =>
-            x.Id.Public == publicIdentifier;
+        private static Expression<Func<IProcessEntity, bool>> Criteria(Guid publicIdentifier)
+        {
+            return x => x.Id.Public == publicIdentifier;
+        }
     }
 }

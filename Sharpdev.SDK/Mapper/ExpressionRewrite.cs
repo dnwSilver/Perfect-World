@@ -46,6 +46,11 @@ namespace Sharpdev.SDK.Mapper
                                                        typeof(TSource).GetProperty(propertyName));
             }
 
+            if (typeof(TDestination) == memberExpression.Member.DeclaringType)
+            {
+                propertyName = this._mapper.GetPropertyModelName(nameof(memberExpression.Expression.Type));
+            }
+            
             return memberExpression;
         }
 

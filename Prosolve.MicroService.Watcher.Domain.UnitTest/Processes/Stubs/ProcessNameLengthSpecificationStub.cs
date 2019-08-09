@@ -27,10 +27,10 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs
             return this._processNameLengthSpecification.Object;
         }
 
-        public ProcessNameLengthSpecificationStub WithCriteria(int privateIdentifier)
+        public ProcessNameLengthSpecificationStub WithCriteria(int nameLength)
         {
             this._processNameLengthSpecification.Setup(x => x.Expression)
-                .Returns(x => x.Name.Length < privateIdentifier);
+                .Returns(x => x.Name.Length < nameLength);
 
             return this;
         }

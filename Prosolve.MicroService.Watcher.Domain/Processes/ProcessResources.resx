@@ -62,4 +62,7 @@
     <data name="NameLengthSpecification" xml:space="preserve">
         <value>Наименование процесса превышает максимальное значение длины ({0} символов).</value>
     </data>
+    <data name="IdSpecification" xml:space="preserve">
+        <value>Объект {0} с идентификатором {0} не найден.</value>
+    </data>
 </root>

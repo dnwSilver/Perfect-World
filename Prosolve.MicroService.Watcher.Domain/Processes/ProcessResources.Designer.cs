@@ -61,6 +61,15 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Объект {0} с идентификатором {0} не найден..
+        /// </summary>
+        public static string IdSpecification {
+            get {
+                return ResourceManager.GetString("IdSpecification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Наименование процесса превышает максимальное значение длины ({0} символов)..
         /// </summary>
         public static string NameLengthSpecification {
