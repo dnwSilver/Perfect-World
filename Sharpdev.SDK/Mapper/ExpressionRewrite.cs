@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
+using Sharpdev.SDK.Layers.Domain.Entities;
+
 namespace Sharpdev.SDK.Mapper
 {
     /// <summary>
@@ -38,6 +40,7 @@ namespace Sharpdev.SDK.Mapper
             var declaringType    = memberExpression.Member.DeclaringType;
             var propertyName     = memberExpression.Member.Name;
 
+            var declaringType1= node.Member.DeclaringType.GenericTypeArguments[0];
             if(typeof(TDestination) == declaringType)
             {
                 propertyName = this._mapper.GetPropertyModelName(propertyName);
@@ -46,11 +49,6 @@ namespace Sharpdev.SDK.Mapper
                                                        typeof(TSource).GetProperty(propertyName));
             }
 
-            if (typeof(TDestination) == memberExpression.Member.DeclaringType)
-            {
-                propertyName = this._mapper.GetPropertyModelName(nameof(memberExpression.Expression.Type));
-            }
-            
             return memberExpression;
         }
 

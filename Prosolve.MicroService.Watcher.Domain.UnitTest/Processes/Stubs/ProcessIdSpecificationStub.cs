@@ -1,4 +1,4 @@
-using Moq;
+using System;
 
 using Prosolve.MicroService.Watcher.Domain.Processes;
 
@@ -10,14 +10,26 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs
     /// <summary>
     ///     Заглушка для процесса <see cref="ProcessNameLengthSpecification" />.
     /// </summary>
-    public class ProcessNameLengthSpecificationStub : ITestStub<ISpecification<IProcessEntity>>
+    public class ProcessIdSpecificationStub : ITestStub<ISpecification<IProcessEntity>>
     {
         /// <summary>
         ///     Заглушка для идентификатора.
         /// </summary>
-        private readonly ISpecification<IProcessEntity> _processNameLengthSpecification =
-            new ProcessNameLengthSpecification();
+        private ISpecification<IProcessEntity> _processNameLengthSpecification =
+            new ProcessIdSpecification(Guid.Empty);
 
+        /// <summary>
+        /// Создание спецификации с конкретным идентификатором.
+        /// </summary>
+        /// <param name="publicId">Публичный идентификатор объекта.</param>
+        /// <returns>Строитель для спецификации.</returns>
+        public ProcessIdSpecificationStub WithId(Guid publicId)
+        {
+            _processNameLengthSpecification = new ProcessIdSpecification(publicId);
+
+            return this;
+        }
+        
         /// <summary>
         ///     Построение объекта <see cref="IProcessEntity" />.
         /// </summary>

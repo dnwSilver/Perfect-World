@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
@@ -26,12 +27,19 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                     destinationPropertyName = nameof(ProcessDataModel.PrivateId);
 
                     break;
+                
+                case nameof(IProcessEntity.Id.Public):
+                    destinationPropertyName = nameof(ProcessDataModel.PublicId);
+
+                    break;
+                
                 case nameof(IProcessEntity.Name):
                     destinationPropertyName = nameof(ProcessDataModel.Name);
 
                     break;
 
                 default:
+                    Debugger.Break();
                     throw new Exception("Маппинг для классов настроен некорректно.");
             }
 

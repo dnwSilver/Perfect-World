@@ -100,6 +100,11 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                 var processQuery = specification
                                    .Expression
                                    .Map<IProcessEntity, ProcessDataModel, ProcessPropertyMapper>();
+                
+                
+                var processModels1 =
+                    await watcherContext.Processes.Where(processQuery).ToListAsync();
+                
                 var processModels =
                     await watcherContext.Processes.Where(processQuery).ToListAsync();
                 processModels.Clear();

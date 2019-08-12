@@ -19,7 +19,7 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
             var processDataModel = Create.ProcessDataModel.Please();
             var watcherContext = Create.WatcherContext.With(processDataModel).Please();
             var processRepository = new ProcessRepository(watcherContext);
-            var specification = Create.ProcessNameLengthSpecification.WithCriteria(50).Please();
+            var specification = Create.ProcessIdSpecification.WithId(processDataModel.PublicId).Please();
             var processService = new ProcessService(processRepository);
             
             // Arrange:

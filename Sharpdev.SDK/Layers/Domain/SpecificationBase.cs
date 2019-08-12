@@ -13,7 +13,7 @@ namespace Sharpdev.SDK.Layers.Domain
     ///     критериям или нет.
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта для которого предназначена проверка.</typeparam>
-    public abstract class SpecificationBase<TEntity> : ISpecification<TEntity>
+    public class SpecificationBase<TEntity> : ISpecification<TEntity>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
