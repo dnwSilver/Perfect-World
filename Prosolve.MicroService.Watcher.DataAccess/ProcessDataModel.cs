@@ -17,7 +17,6 @@ namespace Prosolve.MicroService.Watcher.DataAccess
         [Column("id")]
         public int PrivateId { get; set; }
 
-
         /// <summary>
         ///     Внешний идентификатор процесса.
         /// </summary>
@@ -37,6 +36,13 @@ namespace Prosolve.MicroService.Watcher.DataAccess
         /// </summary>
         [Required]
         [Column("type")]
-        public int Type { get; set; }
+        public string TypeName { get; set; }
+        
+        /// <summary>
+        /// Версия объекта.
+        /// </summary>
+        [Required]
+        [Column("version")]
+        public int Version { get; set; }
     }
 }

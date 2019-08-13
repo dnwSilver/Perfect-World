@@ -36,22 +36,6 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest
         internal static ProcessDataModelStub ProcessDataModel => new ProcessDataModelStub();
 
         /// <summary>
-        ///     Создание спецификации для длины наименования процесса.
-        /// </summary>
-        /// <returns>Готовый для тестов процесс.</returns>
-        /// >
-        internal static ProcessIdSpecificationStub ProcessIdSpecification =>
-            new ProcessIdSpecificationStub();
-        
-        /// <summary>
-        ///     Создание спецификации для уникального идентификатора процесса.
-        /// </summary>
-        /// <returns>Готовый для тестов процесс.</returns>
-        /// >
-        internal static ProcessNameLengthSpecificationStub ProcessNameLengthSpecification =>
-            new ProcessNameLengthSpecificationStub();
-
-        /// <summary>
         ///     Создание контекста для смотрящего.
         /// </summary>
         /// >

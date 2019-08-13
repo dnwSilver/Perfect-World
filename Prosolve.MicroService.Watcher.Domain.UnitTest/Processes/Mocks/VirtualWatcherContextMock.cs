@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -40,15 +41,28 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Mocks
         /// <summary>
         ///     Добавление нового процесса в контекст источника данных.
         /// </summary>
-        /// <param name="process">Новый процесс.</param>
+        /// <param name="processDataModel">Новый процесс.</param>
         /// <returns>Строитель для контекста данных.</returns>
-        public VirtualWatcherContextMock With(ProcessDataModel process)
+        public VirtualWatcherContextMock With(ProcessDataModel processDataModel)
         {
             using(var watcherContext = new WatcherContext(this._options))
             {
-                watcherContext.Processes.Add(process);
+                watcherContext.Processes.Add(processDataModel);
                 watcherContext.SaveChanges();
             }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Добавление новых процессов в контекст источника данных.
+        /// </summary>
+        /// <param name="processDataModels">Список новых процессов.</param>
+        /// <returns>Строитель для контекста данных.</returns>
+        public VirtualWatcherContextMock With(IEnumerable<ProcessDataModel> processDataModels)
+        {
+            foreach(var processDataModel in processDataModels)
+                this.With(processDataModel);
 
             return this;
         }

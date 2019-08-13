@@ -29,25 +29,6 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        ///     Фиксация версии объекта <see cref="IUser" />.
-        /// </summary>
-        /// <param name="entityVersion">Версия объекта.</param>
-        /// <returns>Строитель для объекта <see cref="IUser" />.</returns>
-        public new IUserBuilder SetVersion(int entityVersion)
-        {
-            return base.SetVersion(entityVersion) as IUserBuilder;
-        }
-
-        /// <summary>
-        ///     Фиксация значения идентификатора объекта <see cref="IUser" />.
-        /// </summary>
-        /// <param name="userIdentifier">Значение идентификатора.</param>
-        /// <returns>Строитель для объекта <see cref="IUser" />.</returns>
-        public new IUserBuilder SetIdentifier(IIdentifier<IUser> userIdentifier)
-        {
-            return base.SetIdentifier(userIdentifier) as IUserBuilder;
-        }
+      
     }
 }

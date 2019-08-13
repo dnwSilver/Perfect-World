@@ -19,25 +19,11 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
         /// <summary>
         ///     Идентификатор объекта <see cref="TEntity" />.
         /// </summary>
-        IIdentifier<TEntity> Identifier { get; }
+        IIdentifier<TEntity> Identifier { get; set; }
 
         /// <summary>
         ///     Идентификатор объекта <see cref="TEntity" />.
         /// </summary>
-        int Version { get; }
-
-        /// <summary>
-        ///     Фиксация значения идентификатора объекта <see cref="TEntity" />.
-        /// </summary>
-        /// <param name="entityIdentifier">Значение идентификатора.</param>
-        /// <returns>Строитель для заглушки объекта <see cref="TEntity" />.</returns>
-        IEntityBuilder<TEntity> SetIdentifier(IIdentifier<TEntity> entityIdentifier);
-
-        /// <summary>
-        ///     Фиксация версии объекта <see cref="TEntity" />.
-        /// </summary>
-        /// <param name="entityVersion">Версия объекта.</param>
-        /// <returns>Строитель для заглушки объекта <see cref="TEntity" />.</returns>
-        IEntityBuilder<TEntity> SetVersion(int entityVersion);
+        int Version { get; set; }
     }
 }

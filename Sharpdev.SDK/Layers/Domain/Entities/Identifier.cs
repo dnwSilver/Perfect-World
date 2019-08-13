@@ -13,16 +13,32 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
+        ///     Значение неопределённого приавтного иденификатора.
+        /// </summary>
+        public static int Undefined = 0;
+
+        /// <summary>
+        ///     Уникальный идентификатор бизнес сущности.
+        /// </summary>
+        /// <param name="privateId">Приватный идентификатор.</param>
+        /// <param name="publicId">Публичный идентификатор.</param>
+        public Identifier(int privateId, Guid publicId)
+        {
+            this.Public = publicId;
+            this.Private = privateId;
+        }
+
+        /// <summary>
         ///     Уникальный идентификатор бизнес сущности.
         /// </summary>
         /// <param name="privateId">Приватный идентификатор.</param>
         /// <param name="publicId">Публичный идентификатор.</param>
         /// <param name="externalIds">Набор внешних идентификаторов.</param>
-        public Identifier(int privateId, Guid publicId, ExternalIdentifiers externalIds = null)
+        public Identifier(int privateId, Guid publicId, ExternalIdentifiers externalIds)
         {
-            Public = publicId;
-            Private = privateId;
-            Externals = externalIds ?? new ExternalIdentifiers();
+            this.Public = publicId;
+            this.Private = privateId;
+            this.Externals = externalIds ?? new ExternalIdentifiers();
         }
 
         /// <summary>
@@ -41,11 +57,6 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         public int Private { get; }
 
         /// <summary>
-        /// Значение неопределённого приавтного иденификатора.
-        /// </summary>
-        public static int Undefined = 0;
-        
-        /// <summary>
         ///     Указывает, равен ли текущий объект другому объекту того же типа.
         /// </summary>
         /// <param name="other">Объект для сравнения с этим объектом.</param>
@@ -55,7 +66,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// </returns>
         public bool Equals(IIdentifier<TEntity> other)
         {
-            return other.If(x => x.Public == Public).ReturnSuccess();
+            return other.If(x => x.Public == this.Public).ReturnSuccess();
         }
     }
 }

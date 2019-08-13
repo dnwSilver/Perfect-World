@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+
+using AutoMapper;
 
 using Microsoft.EntityFrameworkCore;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
-using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -19,14 +21,15 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// </summary>
     public class ProcessRepository : IRepository<IProcessEntity>
     {
-        private bool _disposed;
-
-        public ProcessRepository(WatcherContext watcherContext)
+        public ProcessRepository(WatcherContext watcherContext, IMapper mapper)
         {
             this.WatcherContext = watcherContext;
+            this.Mapper = mapper;
         }
 
         private WatcherContext WatcherContext { get; }
+
+        private IMapper Mapper { get; }
 
         /// <summary>
         ///     Текущий статус объекта.
@@ -61,7 +64,8 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                 processSql.PrivateId = process.Id.Private;
                 processSql.PublicId = process.Id.Public;
                 processSql.Name = process.Name;
-                processSql.Type = process.Type.Id.Private;
+                processSql.TypeName = process.TypeName;
+                processSql.Version = process.CurrentVersion;
                 processesSql.Add(processSql);
             }
 
@@ -97,18 +101,27 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
 
             using(var watcherContext = this.WatcherContext)
             {
-                var processQuery = specification
-                                   .Expression
-                                   .Map<IProcessEntity, ProcessDataModel, ProcessPropertyMapper>();
-                
-                
-                var processModels1 =
-                    await watcherContext.Processes.Where(processQuery).ToListAsync();
-                
+                var processExpression =
+                    this.Mapper.Map<Expression<Func<ProcessDataModel, bool>>>(
+                        specification.Expression);
+
                 var processModels =
-                    await watcherContext.Processes.Where(processQuery).ToListAsync();
-                processModels.Clear();
+                    await watcherContext.Processes.Where(processExpression).ToListAsync();
+
                 var processes = new List<IProcessEntity>();
+
+                if (processModels.Any())
+                {
+                    var processBuilders =
+                        this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(
+                            processModels);
+
+                    processes.AddRange(from processBuilder in processBuilders
+                                       let processFactory = new ProcessFactory()
+                                       select processFactory.Recovery(processBuilder)
+                                       into processEntity
+                                       select processEntity.Value);
+                }
 
                 return Result.Ok(processes.ToArray());
             }
@@ -132,7 +145,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                 processSql.PrivateId = process.Id.Private;
                 processSql.PublicId = process.Id.Public;
                 processSql.Name = process.Name;
-                processSql.Type = process.Type.Id.Private;
+                processSql.TypeName = process.TypeName;
                 processesSql.Add(processSql);
             }
 

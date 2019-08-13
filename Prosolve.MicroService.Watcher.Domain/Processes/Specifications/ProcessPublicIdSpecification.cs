@@ -8,13 +8,13 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// <summary>
     ///     Спецификация на соответствие идентификатору процесса.
     /// </summary>
-    public class ProcessIdSpecification : SpecificationBase<IProcessEntity>
+    public class ProcessPublicIdSpecification : SpecificationBase<IProcessEntity>
     {
         /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
         /// <param name="publicIdentifier">Публичный идентификатор.</param>
-        public ProcessIdSpecification(Guid publicIdentifier)
+        public ProcessPublicIdSpecification(Guid publicIdentifier)
             : base(Criteria(publicIdentifier), FailureMessage(publicIdentifier))
         {
         }

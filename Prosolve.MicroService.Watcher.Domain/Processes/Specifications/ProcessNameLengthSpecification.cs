@@ -32,6 +32,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IProcessEntity, bool>> Criteria => x => x.Name =="";
+        private static Expression<Func<IProcessEntity, bool>> Criteria => x =>
+            x.Name.Length <= MaxLength;
     }
 }

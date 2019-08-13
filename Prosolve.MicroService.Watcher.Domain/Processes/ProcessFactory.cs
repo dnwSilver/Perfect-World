@@ -21,7 +21,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             var processIdentifier = new Identifier<IProcessEntity>(Identifier<IProcessEntity>.Undefined,
                                                                    Guid.NewGuid(),
                                                                    processBuilder.Identifier.Externals);
-            processBuilder.SetIdentifier(processIdentifier);
+            processBuilder.Identifier = processIdentifier;
 
             var process = AllocateProcess(processBuilder);
 

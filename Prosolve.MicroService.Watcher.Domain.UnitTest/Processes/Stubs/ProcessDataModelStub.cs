@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Moq;
 
@@ -12,25 +14,41 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs
     /// <summary>
     ///     Заглушка для процесса <see cref="ProcessDataModel" />.
     /// </summary>
-    public class ProcessDataModelStub : ITestStub<ProcessDataModel>
+    public class ProcessDataModelStub : ITestStub<IList<ProcessDataModel>>
     {
         /// <summary>
         ///     Заглушка для идентификатора.
         /// </summary>
-        private readonly ProcessDataModel _processDataModel =
-            new ProcessDataModel();
+        private readonly IList<ProcessDataModel> _processDataModels =
+            new List<ProcessDataModel>();
 
         /// <summary>
         ///     Построение объекта <see cref="ProcessDataModel" />.
         /// </summary>
         /// <returns>Экземпляр объекта <see cref="ProcessDataModel" /></returns>
-        public ProcessDataModel Please()
+        public IList<ProcessDataModel> Please()
         {
-            this._processDataModel.PrivateId = 1;
-            this._processDataModel.PublicId = Guid.Empty;
-            this._processDataModel.Name = "Мой первый процесс.";
-
-            return this._processDataModel;
+            if (!this._processDataModels.Any())
+                this.CountOf(1);
+            return this._processDataModels;
+        }
+        
+        /// <summary>
+        /// Создание набора процессов.
+        /// </summary>
+        /// <param name="countProcess"></param>
+        /// <returns></returns>
+        public ProcessDataModelStub CountOf(int countProcess)
+        {
+            for(var id = 1; id <= countProcess; id++)
+            {
+                var processDataModel = new ProcessDataModel();
+                processDataModel.PrivateId = id;
+                processDataModel.PublicId = Guid.NewGuid();
+                processDataModel.Name = $"Процесс №{id}.";
+                this._processDataModels.Add(processDataModel);
+            }
+            return this;
         }
     }
 }

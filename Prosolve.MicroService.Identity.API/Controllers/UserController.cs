@@ -138,7 +138,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
         [ProducesResponseType(StatusCodes.Status504GatewayTimeout)] // Какой-то из смежных серверов выдал тайм аут
         public ActionResult Post([FromBody]string value)
         {
-            var userBuilder = new UserBuilder().SetVersion(1);
+            var userBuilder = new UserBuilder{Version = 1};
             _identityService.CreateUsers(new[] { userBuilder });
 
             return Created(new Uri("https://ya.ru/"), value);

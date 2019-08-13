@@ -17,7 +17,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             : base(processBuilder.Identifier, processBuilder.Version)
         {
             this.Name = processBuilder.Name;
-            this.Type = processBuilder.Type;
         }
 
         /// <summary>
@@ -28,6 +27,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <summary>
         ///     Тип процесса: бизнес процесс или технологический процесс.
         /// </summary>
-        public IProcessType Type { get; }
+        public string TypeName { get; }
     }
 }

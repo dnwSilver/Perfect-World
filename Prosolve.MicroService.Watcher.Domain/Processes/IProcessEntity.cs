@@ -18,6 +18,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <summary>
         ///     Тип процесса: бизнес процесс или технологический процесс.
         /// </summary>
-        IProcessType Type { get; }
+        string TypeName { get; }
     }
 }
