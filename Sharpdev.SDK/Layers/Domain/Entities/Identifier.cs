@@ -15,7 +15,7 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         /// <summary>
         ///     Значение неопределённого приватного идентификатора.
         /// </summary>
-        public const int Undefined = 0;
+        private const int Undefined = 0;
 
         /// <summary>
         ///     Уникальный идентификатор бизнес сущности.
@@ -67,6 +67,23 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         public bool Equals(IIdentifier<TEntity> other)
         {
             return other.If(x => x.Public == this.Public).ReturnSuccess();
+        }
+
+        /// <summary>
+        ///     Создание нового уникального идентификатора.
+        /// </summary>
+        /// <param name="externalIds">Набор внешних идентификаторов.</param>
+        /// <returns>Уникальный идентификатор с пустым приватным идентификатором.</returns>
+        /// <remarks>
+        ///     Приватный идентификатор нам должен выдать источник данных.   Публичный идентификатор
+        ///     делаем прямо тут.
+        /// </remarks>
+        public static Identifier<TEntity> New(ExternalIdentifiers externalIds)
+        {
+            var privateId = Undefined;
+            var publicId = Guid.NewGuid();
+
+            return new Identifier<TEntity>(privateId, publicId, externalIds);
         }
     }
 }

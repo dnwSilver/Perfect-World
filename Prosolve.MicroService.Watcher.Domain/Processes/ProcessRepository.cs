@@ -113,7 +113,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
                         processModels);
 
                 processes.AddRange(from processBuilder in processBuilders
-                                   let processFactory = new ProcessFactory()
+                                   let processFactory = new Process()
                                    select processFactory.Recovery(processBuilder)
                                    into processEntity
                                    select processEntity.Value);

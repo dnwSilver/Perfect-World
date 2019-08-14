@@ -16,7 +16,7 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
     ///     в базе данных.
     /// </remarks>
     [Factory]
-    public interface IFactory<TEntity>
+    public interface IEntityFactory<TEntity>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
