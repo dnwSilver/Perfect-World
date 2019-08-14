@@ -1,22 +1,21 @@
-using Prosolve.MicroService.Watcher.Domain.ProcessTypes;
-
 using Sharpdev.SDK.Layers.Domain.Entities;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {
     /// <summary>
-    ///     Процесс протекащий в информационной системе.
+    ///     Процесс протекающий в информационной системе.
     /// </summary>
     public sealed class ProcessEntity : Entity<IProcessEntity>, IProcessEntity
     {
         /// <summary>
         ///     Инициализация процесса.
         /// </summary>
-        /// <param name="processBuilder">Сторитель для объекта <see cref="ProcessEntity" />.</param>
+        /// <param name="processBuilder">Строитель для объекта <see cref="ProcessEntity" />.</param>
         internal ProcessEntity(IProcessBuilder processBuilder)
             : base(processBuilder.Identifier, processBuilder.Version)
         {
             this.Name = processBuilder.Name;
+            this.TypeName = processBuilder.TypeName;
         }
 
         /// <summary>

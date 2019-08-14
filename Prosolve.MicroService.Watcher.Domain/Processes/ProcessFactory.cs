@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
+using Prosolve.MicroService.Watcher.Domain.Processes.Specifications;
+
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Types.Results;
@@ -9,68 +14,85 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// <summary>
     ///     Фабрика для объекта <see cref="IProcessEntity" />.
     /// </summary>
-    public class ProcessFactory : IFactory<IProcessEntity>
+    public sealed class ProcessFactory : BaseFactory<IProcessEntity>
     {
-        /// <summary>
-        ///     Создание нового объекта.
-        /// </summary>
-        /// <param name="processBuilder">Строитель нового объекта.</param>
-        /// <returns>Созданный объект.</returns>
-        public Result<IProcessEntity> Create(IEntityBuilder<IProcessEntity> processBuilder)
+        protected override void SetSpecifications(IProcessEntity processEntity)
         {
-            var processIdentifier = new Identifier<IProcessEntity>(Identifier<IProcessEntity>.Undefined,
-                                                                   Guid.NewGuid(),
-                                                                   processBuilder.Identifier.Externals);
-            processBuilder.Identifier = processIdentifier;
-
-            var process = AllocateProcess(processBuilder);
-
-            CheckSpecification(process);
-
-            return Result.Ok(process);
-        }
-
-        /// <summary>
-        ///     Восстановление уже созданного объекта.
-        /// </summary>
-        /// <param name="processBuilder">Строитель восстанавливаемого объекта.</param>
-        /// <returns>Восстановленный объект.</returns>
-        public Result<IProcessEntity> Recovery(IEntityBuilder<IProcessEntity> processBuilder)
-        {
-            var process = AllocateProcess(processBuilder);
-
-            var specificationResult = CheckSpecification(process);
-
-            if (specificationResult.Failure)
-                return Result.Fail<IProcessEntity>(specificationResult.Errors);
-
-            return Result.Ok(process);
+            var specifications = new Collection<ISpecification<IProcessEntity>>
+            {
+                new ProcessNameLengthSpecification(),
+                new ProcessPublicIdSpecification(processEntity.Id.Public)
+            };
+            this.Specifications = specifications;
         }
 
         /// <summary>
         ///     Создание объекта и размещение его в памяти.
         /// </summary>
-        /// <param name="processBuilder">Строитель для объекта <see cref="IProcessEntity" />.</param>
+        /// <param name="entityBuilder">Строитель для объекта <see cref="Entity{TEntity}" />.</param>
         /// <returns>Ссылка на созданный в куче объект.</returns>
-        private static IProcessEntity AllocateProcess(IEntityBuilder<IProcessEntity> processBuilder)
+        protected override IProcessEntity AllocateEntity(
+            IEntityBuilder<IProcessEntity> entityBuilder)
         {
-            var process = new ProcessEntity(processBuilder as IProcessBuilder);
+            return new ProcessEntity(entityBuilder as IProcessBuilder);
+        }
+    }
 
-            CheckSpecification(process);
+    /// <summary>
+    ///     Базовый класс для фабрики объектов.
+    /// </summary>
+    /// <typeparam name="TEntity">Тип объекта, который будем собирать.</typeparam>
+    public abstract class BaseFactory<TEntity> : IFactory<TEntity>
+        where TEntity : IEntity<TEntity>
+    {
+        /// <summary>
+        ///     Набор проверок для создания и восстановления объекта.
+        /// </summary>
+        protected IEnumerable<ISpecification<TEntity>> Specifications { private get; set; } =
+            new List<ISpecification<TEntity>>();
 
-            return process;
+        /// <summary>
+        ///     Создание нового объекта.
+        /// </summary>
+        /// <param name="entityToCreate">Строитель нового объекта.</param>
+        /// <returns>Созданный объект.</returns>
+        public Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate)
+        {
+            var processIdentifier = new Identifier<TEntity>(Identifier<TEntity>.Undefined,
+                                                            Guid.NewGuid(),
+                                                            entityToCreate.Identifier.Externals);
+            entityToCreate.Identifier = processIdentifier;
+
+            var entity = this.AllocateEntity(entityToCreate);
+
+            foreach(var specification in this.Specifications)
+                specification.IsSatisfiedBy(entity);
+
+            return Result.Ok(entity);
         }
 
         /// <summary>
-        ///     Проверяем объект на соответствие всем спецификациям.
+        ///     Восстановление уже созданного объекта.
         /// </summary>
-        /// <param name="process">Проверяемый объект.</param>
-        /// <returns>Результат проверок всех спецификаций.</returns>
-        private static Result CheckSpecification(IProcessEntity process)
+        /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
+        /// <returns>Восстановленный объект.</returns>
+        public Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery)
         {
-            var spec = new ProcessNameLengthSpecification();
+            var entity = this.AllocateEntity(entityToRecovery);
+            this.SetSpecifications(entity);
+            foreach(var specification in this.Specifications)
+                specification.IsSatisfiedBy(entity);
 
-            return spec.IsSatisfiedBy(process);
+            return Result.Ok(entity);
         }
+
+        /// <summary>
+        ///     Создание объекта и размещение его в памяти.
+        /// </summary>
+        /// <param name="entityBuilder">Строитель для объекта.</param>
+        /// <returns>Ссылка на созданный в куче объект.</returns>
+        protected abstract TEntity AllocateEntity(IEntityBuilder<TEntity> entityBuilder);
+
+        protected abstract void SetSpecifications(TEntity entity);
     }
 }

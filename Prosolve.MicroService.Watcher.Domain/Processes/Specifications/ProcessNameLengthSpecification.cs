@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 using Sharpdev.SDK.Layers.Domain;
 
-namespace Prosolve.MicroService.Watcher.Domain.Processes
+namespace Prosolve.MicroService.Watcher.Domain.Processes.Specifications
 {
     /// <summary>
     ///     Спецификация на ограничение длины наименования процесса.

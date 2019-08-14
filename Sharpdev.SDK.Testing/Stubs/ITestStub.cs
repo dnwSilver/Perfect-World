@@ -1,4 +1,4 @@
-﻿namespace Sharpdev.SDK.Testing
+﻿namespace Sharpdev.SDK.Testing.Stubs
 {
     /// <summary>
     ///     Строитель для заглушек используемых при тестировании.
@@ -17,7 +17,7 @@
         /// <summary>
         ///     Построение заглушки <see cref="TBuildingObjectType" />.
         /// </summary>
-        /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" /></returns>
+        /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" />.</returns>
         TBuildingObjectType Please();
     }
 }

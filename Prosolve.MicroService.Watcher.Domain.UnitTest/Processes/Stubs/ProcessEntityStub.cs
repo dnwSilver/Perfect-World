@@ -2,7 +2,7 @@ using Moq;
 
 using Prosolve.MicroService.Watcher.Domain.Processes;
 
-using Sharpdev.SDK.Testing;
+using Sharpdev.SDK.Testing.Stubs;
 
 namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs
 {

@@ -1,11 +1,9 @@
-using Prosolve.MicroService.Watcher.Domain.ProcessTypes;
-
 using Sharpdev.SDK.Layers.Domain.Entities;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {
     /// <summary>
-    ///     Процесс протекащий в информационной системе.
+    ///     Процесс протекающий в информационной системе.
     /// </summary>
     public interface IProcessEntity : IEntity<IProcessEntity>
     {

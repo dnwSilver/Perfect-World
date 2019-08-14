@@ -35,16 +35,11 @@ namespace Prosolve.MicroService.Identity.API
             services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
             services.AddLogging();
 
-            //настройки версионирования
+            //настройки поддержки разных версий API функций
             services.AddApiVersioning(options =>
             {
                 options.ReportApiVersions = true;
                 options.AssumeDefaultVersionWhenUnspecified = true;
-            });
-
-            services.AddVersionedApiExplorer(options =>
-            {
-                options.GroupNameFormat = "'v'VVV";
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -58,7 +53,6 @@ namespace Prosolve.MicroService.Identity.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
 
             app.UseAuthentication();

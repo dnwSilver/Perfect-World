@@ -1,8 +1,9 @@
-﻿using Sharpdev.SDK.Layers.Infrastructure.Integrations;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
-namespace Sharpdev.SDK.Testing
+using Sharpdev.SDK.Layers.Infrastructure.Integrations;
+
+namespace Sharpdev.SDK.Testing.Mocks
 {
     /// <summary>
     ///     Виртуальная шина для тестов.
@@ -21,7 +22,8 @@ namespace Sharpdev.SDK.Testing
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(IntegrationBusStatus newStatus)
         {
-            Status = newStatus;
+            this.Status = newStatus;
+
             throw new NotImplementedException();
         }
 

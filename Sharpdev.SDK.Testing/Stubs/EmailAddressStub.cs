@@ -5,7 +5,7 @@ using Moq;
 using Sharpdev.SDK.Layers.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 
-namespace Sharpdev.SDK.Testing
+namespace Sharpdev.SDK.Testing.Stubs
 {
     /// <summary>
     ///     Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.
@@ -15,16 +15,18 @@ namespace Sharpdev.SDK.Testing
         /// <summary>
         ///     Заглушка для адреса электронной почты.
         /// </summary>
-        private readonly Mock<IConfirmed<EmailAddress>> _emailAddressMock = new Mock<IConfirmed<EmailAddress>>();
+        private readonly Mock<IConfirmed<EmailAddress>> _emailAddressMock =
+            new Mock<IConfirmed<EmailAddress>>();
 
         /// <summary>
         ///     Заполнение адреса электронной почты.
         /// </summary>
-        /// <param name="emailAddress">Адрес электронной почты <see cref="EmailAddress"/>.</param>
+        /// <param name="emailAddress">Адрес электронной почты <see cref="EmailAddress" />.</param>
         /// <returns>Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
         public EmailAddressStub(EmailAddress emailAddress)
         {
-            _emailAddressMock.Setup(x => x.Value).Returns(emailAddress);
+            this._emailAddressMock.Setup(x => x.Value).Returns(emailAddress);
+            this._emailAddressMock.Setup(x => x.IsConfirmed).Returns(false);
         }
 
         /// <summary>
@@ -33,7 +35,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Заглушка для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
         public IConfirmed<EmailAddress> Please()
         {
-            return _emailAddressMock.Object;
+            return this._emailAddressMock.Object;
         }
 
         /// <summary>
@@ -43,8 +45,9 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
         public EmailAddressStub Confirmed(DateTime confirmedDate)
         {
-            _emailAddressMock.Setup(x => x.ConfirmedDate).Returns(confirmedDate);
-            _emailAddressMock.Setup(x => x.IsConfirmed).Returns(true);
+            this._emailAddressMock.Setup(x => x.ConfirmedDate).Returns(confirmedDate);
+            this._emailAddressMock.Setup(x => x.IsConfirmed).Returns(true);
+
             return this;
         }
     }

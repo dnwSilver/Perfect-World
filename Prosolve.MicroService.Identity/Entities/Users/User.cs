@@ -5,6 +5,9 @@ using Sharpdev.SDK.Types.FullNames;
 
 namespace Prosolve.MicroService.Identity.Entities.Users
 {
+    /// <summary>
+    ///     Пользователь информационной системы.
+    /// </summary>
     internal class User : Entity<IUser>, IUser
     {
         /// <summary>
@@ -12,9 +15,16 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// </summary>
         /// <param name="identifier">Уникальный идентификатор объекта.</param>
         /// <param name="currentVersion">Версия объекта.</param>
-        public User(IIdentifier<IUser> identifier, int currentVersion)
+        /// <param name="fullName">Фамилия имя и отчество пользователя.</param>
+        /// <param name="contactEmail">Контактный адрес электронной почты.</param>
+        public User(IIdentifier<IUser> identifier,
+                    int currentVersion,
+                    FullName fullName,
+                    IConfirmed<EmailAddress> contactEmail)
             : base(identifier, currentVersion)
         {
+            this.FullName = fullName;
+            this.ContactEmail = contactEmail;
         }
 
         /// <summary>
@@ -29,7 +39,7 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(UserStatus newStatus)
         {
-            Status = newStatus;
+            this.Status = newStatus;
         }
 
         /// <summary>

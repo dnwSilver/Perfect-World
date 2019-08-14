@@ -11,23 +11,23 @@ namespace Sharpdev.SDK.Extensions
     /// </remarks>
     public static class MayBy
     {
-        ///// <summary>
-        /////     Проверка объекта на null.
-        ///// </summary>
-        ///// <typeparam name="TInput">Входное значение.</typeparam>
-        ///// <typeparam name="TResult">Выходное значение.</typeparam>
-        ///// <param name="o">Проверяемый объект.</param>
-        ///// <param name="evaluator">Функция для вычисления выходного значения.</param>
-        ///// <returns>
-        /////     В случае если объект не существует вернётся null. В противном случае будет
-        /////     вычислено выходное значение при помощи функции evaluator.
-        ///// </returns>
-        //public static TResult With<TInput, TResult>(this TInput o, Func<TInput, TResult> evaluator)
-        //    where TInput : class
-        //    where TResult : class
-        //{
-        //    return o == null ? null : evaluator(o);
-        //}
+        /// <summary>
+        ///     Проверка объекта на null.
+        /// </summary>
+        /// <typeparam name="TInput">Входное значение.</typeparam>
+        /// <typeparam name="TResult">Выходное значение.</typeparam>
+        /// <param name="o">Проверяемый объект.</param>
+        /// <param name="evaluator">Функция для вычисления выходного значения.</param>
+        /// <returns>
+        ///     В случае если объект не существует вернётся null. В противном случае будет
+        ///     вычислено выходное значение при помощи функции evaluator.
+        /// </returns>
+        public static TResult With<TInput, TResult>(this TInput o, Func<TInput, TResult> evaluator)
+            where TInput : class
+            where TResult : class
+        {
+            return o == null ? null : evaluator(o);
+        }
 
         /// <summary>
         ///     Проверка объекта на null, в случае отсутствия объекта заменяем его на другое

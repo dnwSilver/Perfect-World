@@ -130,11 +130,16 @@
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/InstalledDictionaries/InstalledDictionaries/=C_003A_005CUsers_005CdnwSi_005CDocuments_005CVisual_0020Studio_00202019_005Cru_005FRU_002Edic/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=case_0027_043E_0432/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Prosolve/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0420_0435_043F_043E_0437_0438_0442_043E_0440_0438_0439/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0430_0434_0430_043F_0442_0430_043D_0442_0443/@EntryIndexedValue">True</s:Boolean>
+	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0438_043C_043C_0443_0442_0430_0431_0435_043B_044C_043D_044B_043C/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0438_043D_043A_0430_043F_0441_0443_043B_0438_0440_043E_0432_0430_043D/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0438_043D_043A_0430_043F_0441_0443_043B_0438_0440_0443_0435_0442/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=_043B_043E_0433_0435_0440_0430/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=_043B_043E_0433_0438_0440_043E_0432_0430_043D_0438_044F/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_043C_0438_043A_0440_043E_0441_043B_0443_0436_0431_0430/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_043C_0438_043A_0440_043E_0441_043B_0443_0436_0431_0430_043C/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_043C_0438_043A_0440_043E_0441_043B_0443_0436_0431_043E_0439/@EntryIndexedValue">True</s:Boolean>
@@ -143,4 +148,5 @@
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0440_0435_043F_043E_0437_0438_0442_043E_0440_0438_044F_043C_0438/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Sharpdev/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0441_0435_0440_0438_0430_043B_0438_0437_043E_0432_0430_043D_043D_044B_0435/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0441_0435_0440_0438_0430_043B_0438_0437_043E_0432_0430_043D_043D_044B_043C_0438/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0441_0435_0440_0438_0430_043B_0438_0437_043E_0432_0430_043D_043D_044B_043C_0438/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=_0441_043E_0431_044B_0442_0438_0439_043D_043E/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

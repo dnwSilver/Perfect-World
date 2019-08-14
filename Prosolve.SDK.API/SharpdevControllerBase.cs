@@ -5,7 +5,7 @@ namespace Sharpdev.SDK.API
 {
     [ApiController]
     [Authorize]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/[controller]")]
     [TypeFilter(typeof(LoggerAttribute))]
     public abstract class SharpdevControllerBase : ControllerBase
     {

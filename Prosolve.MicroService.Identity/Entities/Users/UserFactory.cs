@@ -10,9 +10,8 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// <summary>
         ///     Создание нового объекта.
         /// </summary>
-        /// <param name="IUser">Строитель нового объекта.</param>
         /// <returns>Созданный объект.</returns>
-        public Result<IUser> Create(IEntityBuilder<IUser> objectToCreate)
+        public Result<IUser> Create(IEntityBuilder<IUser> entityToCreate)
         {
             throw new NotImplementedException();
         }
@@ -20,9 +19,9 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         /// <summary>
         ///     Восстановление уже созданного объекта.
         /// </summary>
-        /// <param name="objectToRecovery">Строитель восстанавливаемого объекта.</param>
+        /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        public Result<IUser> Recovery(IEntityBuilder<IUser> objectToRecovery)
+        public Result<IUser> Recovery(IEntityBuilder<IUser> entityToRecovery)
         {
             throw new NotImplementedException();
         }

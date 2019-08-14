@@ -3,17 +3,17 @@
 namespace Sharpdev.SDK.API
 {
     /// <summary>
-    ///     Набор параметров для настройки сервиса авторизации для микросервиса.
+    ///     Набор параметров для настройки сервиса авторизации для сервиса.
     /// </summary>
     public interface IAuthorizationOptions
     {
         /// <summary>
-        ///     Издатель токена.
+        ///     Издатель ключа.
         /// </summary>
         string Issuer { get; }
 
         /// <summary>
-        ///     Потребитель токена.
+        ///     Потребитель ключа.
         /// </summary>
         string Audience { get; }
 
@@ -23,7 +23,7 @@ namespace Sharpdev.SDK.API
         string Key { get; }
 
         /// <summary>
-        ///     Время жизни токена в минутах.
+        ///     Время жизни ключа в минутах.
         /// </summary>
         int LifeTime { get; }
 

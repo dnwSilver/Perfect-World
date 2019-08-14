@@ -8,10 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sharpdev.SDK.Types {
-    using System;
-    
-    
+namespace Sharpdev.SDK.Types.Results {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

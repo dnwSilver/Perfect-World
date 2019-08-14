@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Sharpdev.SDK.API
 {
     /// <summary>
-    ///     Набор настроек для микросервисов.
+    ///     Набор настроек для сервиса.
     /// </summary>
     public static partial class Configuration
     {

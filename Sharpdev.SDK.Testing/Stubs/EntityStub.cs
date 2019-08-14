@@ -1,11 +1,11 @@
 ﻿using Sharpdev.SDK.Layers.Domain.Entities;
 
-namespace Sharpdev.SDK.Testing
+namespace Sharpdev.SDK.Testing.Stubs
 {
     /// <summary>
     ///     Объект заглушка имитирует бизнес сущность.
     /// </summary>
-    public class StubEntity : Entity<StubEntity>
+    public abstract class StubEntity : Entity<StubEntity>
     {
         /// <summary>
         ///     Конструктор для объекта <see cref="StubEntity" />.

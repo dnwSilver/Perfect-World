@@ -5,6 +5,7 @@ using FluentAssertions;
 using NUnit.Framework;
 
 using Prosolve.MicroService.Watcher.Domain.Processes;
+using Prosolve.MicroService.Watcher.Domain.Processes.Specifications;
 
 using Sharpdev.SDK.Testing;
 
@@ -14,7 +15,7 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
     [Category(nameof(Processes))]
     [Category(Constant.Positive)]
     [Parallelizable(ParallelScope.All)]
-    public class WhenSearchProcess_Positive
+    public class WhenSearchProcessPositive
     {
         [Test]
         public void WhenFindProcess_ByPublicId_CountShouldBeOne()

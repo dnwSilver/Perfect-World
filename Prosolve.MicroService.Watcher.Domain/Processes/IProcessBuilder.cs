@@ -1,5 +1,3 @@
-using Prosolve.MicroService.Watcher.Domain.ProcessTypes;
-
 using Sharpdev.SDK.Layers.Domain.Factories;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes

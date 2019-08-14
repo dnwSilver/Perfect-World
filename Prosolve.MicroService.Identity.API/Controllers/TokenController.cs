@@ -34,7 +34,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
         }
 
         /// <summary>
-        ///     Возвращает токен авторизованного пользователя.
+        ///     Возвращает ключ авторизованного пользователя.
         /// </summary>
         /// <param name="request">Запрос, содержащий логин и пароль.</param>
         [HttpPost]
@@ -49,7 +49,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
             var now = DateTime.UtcNow;
             var authorizationOptions = new AuthorizationOptions();
 
-            // создаем JWT-токен
+            // создаем JWT-ключ
             var jwt = new JwtSecurityToken(authorizationOptions.Issuer,
                                            authorizationOptions.Audience,
                                            notBefore: now,

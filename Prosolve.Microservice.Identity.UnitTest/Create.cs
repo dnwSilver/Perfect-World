@@ -1,8 +1,9 @@
-﻿using Prosolve.MicroService.Identity.UnitTest.Users.Mocks;
-using Prosolve.MicroService.Identity.UnitTest.Users.Stubs;
+﻿using Prosolve.MicroService.Identity.UnitTest.Users.Stubs;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Testing;
+using Sharpdev.SDK.Layers.Infrastructure.Integrations;
+using Sharpdev.SDK.Testing.Mocks;
+using Sharpdev.SDK.Testing.Stubs;
 
 namespace Prosolve.MicroService.Identity.UnitTest
 {
@@ -54,14 +55,9 @@ namespace Prosolve.MicroService.Identity.UnitTest
         }
 
         /// <summary>
-        ///     Создание репозитория с пользователями.
+        ///     Создание эмуляции интеграционной шины<see cref="IIntegrateBus" />.
         /// </summary>
-        /// <returns>Репозиторий пользователей.</returns>
-        internal static UserRepositoryMock UserRepository()
-        {
-            return new UserRepositoryMock();
-        }
-
+        /// <returns>Интеграционная шина.</returns>
         internal static VirtualIntegrateBusMock IntegrateBus()
         {
             return new VirtualIntegrateBusMock();

@@ -4,7 +4,7 @@ using Moq;
 
 using Sharpdev.SDK.Layers.Domain.Entities;
 
-namespace Sharpdev.SDK.Testing
+namespace Sharpdev.SDK.Testing.Stubs
 {
     /// <summary>
     ///     Заглушка для идентификатора <see cref="IIdentifier{TOwner}" />.

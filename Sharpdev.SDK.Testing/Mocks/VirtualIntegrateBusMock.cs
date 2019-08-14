@@ -1,6 +1,7 @@
 ﻿using Sharpdev.SDK.Layers.Infrastructure.Integrations;
+using Sharpdev.SDK.Testing.Stubs;
 
-namespace Sharpdev.SDK.Testing
+namespace Sharpdev.SDK.Testing.Mocks
 {
     /// <summary>
     ///     Фальшивка для интеграционной шины. Данные будем хранить в памяти.
@@ -15,10 +16,10 @@ namespace Sharpdev.SDK.Testing
         /// <summary>
         ///     Построение заглушки <see cref="IIntegrateBus" />.
         /// </summary>
-        /// <returns>Экземпляр заглушки объекта <see cref="IIntegrateBus" /></returns>
+        /// <returns>Экземпляр заглушки объекта <see cref="IIntegrateBus" />.</returns>
         public IIntegrateBus Please()
         {
-            return _integrateBus;
+            return this._integrateBus;
         }
     }
 }

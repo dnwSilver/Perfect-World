@@ -2,10 +2,17 @@ using System;
 
 using NUnit.Framework;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
+using Sharpdev.SDK.Testing;
+
 namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
 {
     [TestFixture]
-    public partial class WhenRegistrationUser
+    [Category(nameof(IUser))]
+    [Category(Constant.Negative)]
+    [Parallelizable(ParallelScope.All)]
+    public class WhenRegistrationUserNegative
     {
         [Test]
         public void WhenRegistrationUser_WithExistsEmailAddress_ResultShouldBeFailure()

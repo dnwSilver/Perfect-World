@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
-using Sharpdev.SDK.Testing;
+using Sharpdev.SDK.Testing.Stubs;
 
 namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Mocks
 {

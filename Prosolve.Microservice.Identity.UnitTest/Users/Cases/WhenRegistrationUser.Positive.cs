@@ -2,11 +2,17 @@ using System;
 
 using NUnit.Framework;
 
+using Prosolve.MicroService.Identity.Entities.Users;
+
+using Sharpdev.SDK.Testing;
+
 namespace Prosolve.MicroService.Identity.UnitTest.Users.Cases
 {
     [TestFixture]
+    [Category(nameof(IUser))]
+    [Category(Constant.Positive)]
     [Parallelizable(ParallelScope.All)]
-    public partial class WhenRegistrationUser
+    public class WhenRegistrationUserPositive
     {
         [Test]
         public void WhenRegistrationUser_WithEmailAddress_ResultShouldBeTrue()

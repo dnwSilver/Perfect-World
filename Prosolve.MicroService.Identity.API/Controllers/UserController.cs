@@ -21,7 +21,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(UserReadResponse), StatusCodes.Status200OK)] // Всё гуд
-        [ProducesResponseType(StatusCodes.Status203NonAuthoritative)]             // Всё гуд данные из кэша.
+        [ProducesResponseType(StatusCodes.Status203NonAuthoritative)]             // Всё гуд данные из cache.
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]                 // Не авторизован
         [ProducesResponseType(StatusCodes.Status400BadRequest)]                   // Некорректные значения для Request
         [ProducesResponseType(StatusCodes
@@ -45,7 +45,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
 
         [HttpHead]
         [ProducesResponseType(typeof(UserReadResponse), StatusCodes.Status200OK)] // Всё гуд
-        [ProducesResponseType(StatusCodes.Status203NonAuthoritative)]             // Всё гуд данные из кэша.
+        [ProducesResponseType(StatusCodes.Status203NonAuthoritative)]             // Всё гуд данные из cache.
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]                 // Не авторизован
         [ProducesResponseType(StatusCodes.Status400BadRequest)]                   // Некорректные значения для Request
         [ProducesResponseType(StatusCodes
@@ -71,7 +71,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
 
         [HttpGet("{userPublicId}")]
         [ProducesResponseType(typeof(UserReadResponse), StatusCodes.Status200OK)] // 200 Всё гуд
-        [ProducesResponseType(StatusCodes.Status203NonAuthoritative)]             // 203 Всё гуд данные из кэша.
+        [ProducesResponseType(StatusCodes.Status203NonAuthoritative)]             // 203 Всё гуд данные из cache.
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]                 // 401 Не авторизован
         [ProducesResponseType(StatusCodes
             .Status400BadRequest)] // 400 Некорректные значения для Request
@@ -107,7 +107,7 @@ namespace Prosolve.MicroService.Identity.API.Controllers
 
             // 403 Не хватает прав доступа у конкретного пользователя
 
-            // 200 Всё гуд // 203 Всё гуд данные из кэша. // 404 Ресурс не найден // 410 Ресурс был удалён
+            // 200 Всё гуд // 203 Всё гуд данные из cache. // 404 Ресурс не найден // 410 Ресурс был удалён
 
             // 408 Превышен лимит по времени выполнения
             // 500 Внезапная ошибка при работе сервиса
@@ -139,9 +139,9 @@ namespace Prosolve.MicroService.Identity.API.Controllers
         public ActionResult Post([FromBody]string value)
         {
             var userBuilder = new UserBuilder{Version = 1};
-            _identityService.CreateUsers(new[] { userBuilder });
+            this._identityService.CreateUsers(new IUserBuilder[] { userBuilder });
 
-            return Created(new Uri("https://ya.ru/"), value);
+            return this.Created(new Uri("https://ya.ru/"), value);
         }
 
         // PUT api/values/5

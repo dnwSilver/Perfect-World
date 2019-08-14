@@ -17,9 +17,9 @@ namespace Sharpdev.SDK.API
         /// <summary>
         /// </summary>
         /// <param name="logger"></param>
-        public LoggerAttribute(ILogger<SharpdevControllerBase> logger)
+        public LoggerAttribute(ILogger logger)
         {
-            _logger = logger;
+            this._logger = logger;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Sharpdev.SDK.API
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var request = context.HttpContext.Request;
-            _logger.LogDebug(
+            this._logger.LogDebug(
                 $"{request.Method,-6} {context.HttpContext.Response.StatusCode} {request.GetDisplayUrl()} {request.ContentType}");
         }
 
@@ -40,7 +40,7 @@ namespace Sharpdev.SDK.API
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var request = filterContext.HttpContext.Request;
-            _logger.LogDebug(
+            this._logger.LogDebug(
                 $"{request.Method,-6} {filterContext.HttpContext.Response.StatusCode} {request.GetDisplayUrl()} {request.ContentType}");
         }
     }

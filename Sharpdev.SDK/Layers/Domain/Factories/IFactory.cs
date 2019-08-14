@@ -22,15 +22,15 @@ namespace Sharpdev.SDK.Layers.Domain.Factories
         /// <summary>
         ///     Создание нового объекта.
         /// </summary>
-        /// <param name="objectToCreate">Строитель нового объекта.</param>
+        /// <param name="entityToCreate">Строитель нового объекта.</param>
         /// <returns>Созданный объект.</returns>
-        Result<TEntity> Create(IEntityBuilder<TEntity> objectToCreate);
+        Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate);
 
         /// <summary>
         ///     Восстановление уже созданного объекта.
         /// </summary>
-        /// <param name="objectToRecovery">Строитель восстанавливаемого объекта.</param>
+        /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        Result<TEntity> Recovery(IEntityBuilder<TEntity> objectToRecovery);
+        Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery);
     }
 }

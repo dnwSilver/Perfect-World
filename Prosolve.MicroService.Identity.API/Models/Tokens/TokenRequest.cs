@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Prosolve.MicroService.Identity.API.Models.Tokens
 {
     /// <summary>
-    /// Запрос на получение токена.
+    /// Запрос на получение ключа авторизации.
     /// </summary>
     public class TokenRequest
     {

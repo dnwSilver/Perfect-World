@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 using Sharpdev.SDK.Layers.Domain;
 
-namespace Prosolve.MicroService.Watcher.Domain.Processes
+namespace Prosolve.MicroService.Watcher.Domain.Processes.Specifications
 {
     /// <summary>
     ///     Спецификация на соответствие идентификатору процесса.
@@ -30,7 +30,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         }
 
         /// <summary>
-        ///     Проверка наименования на длину.
+        ///     Проверка соответствия идентификатору.
         /// </summary>
         private static Expression<Func<IProcessEntity, bool>> Criteria(Guid publicIdentifier)
         {

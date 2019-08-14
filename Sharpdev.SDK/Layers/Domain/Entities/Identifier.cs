@@ -13,9 +13,9 @@ namespace Sharpdev.SDK.Layers.Domain.Entities
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
-        ///     Значение неопределённого приавтного иденификатора.
+        ///     Значение неопределённого приватного идентификатора.
         /// </summary>
-        public static int Undefined = 0;
+        public const int Undefined = 0;
 
         /// <summary>
         ///     Уникальный идентификатор бизнес сущности.

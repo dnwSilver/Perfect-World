@@ -1,4 +1,6 @@
-﻿using Prosolve.MicroService.Identity.Entities.Users;
+﻿using System;
+
+using Prosolve.MicroService.Identity.Entities.Users;
 using Prosolve.MicroService.Identity.Entities.Users.DomainEvents;
 using Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents;
 
@@ -24,31 +26,26 @@ namespace Prosolve.MicroService.Identity
 
             #region Проверяем занят ли адрес электронной почты
 
-
-
-
-
-
             #endregion
 
             #region Создаём пользователей
 
-            var createResult = _userRepository.Create(newUsers);
+            var createResult = this._userRepository.Create(newUsers);
 
             #endregion
 
             #region Отправляем заявки на отправку письма с подтверждением
 
-            var registrationEvent = new ToSendMailIntegrationEvent();
-            _integrateBus.PublishAsync(registrationEvent);
+            var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
+            this._integrateBus.PublishAsync(registrationEvent);
 
             #endregion
 
             #region Фиксируем статус действия в BI системе
 
-            var domainEvent = new UserRegisteredDomainEvent();
+            var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
             newUsers[0].AddDomainEvent(domainEvent);
-            _integrateBus.PublishAsync(domainEvent);
+            this._integrateBus.PublishAsync(domainEvent);
 
             #endregion
 
@@ -62,11 +59,10 @@ namespace Prosolve.MicroService.Identity
         /// <returns>Список пользователям по заданным параметрам.</returns>
         public Result<IUser[]> FindUser(ISpecification<IUser> userSpecification)
         {
-            if (_userRepository.Status != RepositoryStatus.Up)
+            if (this._userRepository.Status != RepositoryStatus.Up)
                 return Result.Fail<IUser[]>("Источник данных для пользователей недоступен.");
 
-            return _userRepository.Read(userSpecification).Result;
+            return this._userRepository.Read(userSpecification).Result;
         }
-
     }
 }

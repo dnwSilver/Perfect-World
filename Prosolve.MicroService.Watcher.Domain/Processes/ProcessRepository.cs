@@ -94,11 +94,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         public async Task<Result<IProcessEntity[]>> Read(
             ISpecification<IProcessEntity> specification)
         {
-            var resultErrors = new List<IResultError>();
-
-            if (resultErrors.Any())
-                return Result.Fail<IProcessEntity[]>(resultErrors);
-
             using(var watcherContext = this.WatcherContext)
             {
                 var processExpression =
@@ -110,18 +105,18 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
 
                 var processes = new List<IProcessEntity>();
 
-                if (processModels.Any())
-                {
-                    var processBuilders =
-                        this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(
-                            processModels);
+                if (!processModels.Any())
+                    return Result.Ok(processes.ToArray());
+                
+                var processBuilders =
+                    this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(
+                        processModels);
 
-                    processes.AddRange(from processBuilder in processBuilders
-                                       let processFactory = new ProcessFactory()
-                                       select processFactory.Recovery(processBuilder)
-                                       into processEntity
-                                       select processEntity.Value);
-                }
+                processes.AddRange(from processBuilder in processBuilders
+                                   let processFactory = new ProcessFactory()
+                                   select processFactory.Recovery(processBuilder)
+                                   into processEntity
+                                   select processEntity.Value);
 
                 return Result.Ok(processes.ToArray());
             }
@@ -174,7 +169,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public async Task<Result> Delete(IProcessEntity[] objectsToRemove)
+        public Task<Result> Delete(IProcessEntity[] objectsToRemove)
         {
             throw new NotImplementedException();
         }

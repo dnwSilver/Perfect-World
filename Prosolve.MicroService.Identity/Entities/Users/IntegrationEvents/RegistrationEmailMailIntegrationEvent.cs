@@ -6,6 +6,12 @@ namespace Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents
 {
     public class ToSendMailIntegrationEvent : IIntegrationEvent
     {
+        public ToSendMailIntegrationEvent(Guid id, DateTime creationDate)
+        {
+            this.Id = id;
+            this.CreationDate = creationDate;
+        }
+
         /// <summary>
         ///     Уникальный идентификатор события.
         /// </summary>

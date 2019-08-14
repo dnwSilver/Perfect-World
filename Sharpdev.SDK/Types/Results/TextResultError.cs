@@ -8,7 +8,7 @@ namespace Sharpdev.SDK.Types.Results
     ///     Текстовая ошибка.
     /// </summary>
     [State]
-    public partial struct TextResultError : IResultError, IEquatable<TextResultError>
+    public struct TextResultError : IResultError, IEquatable<TextResultError>
     {
         /// <summary>
         ///     Текст ошибки.

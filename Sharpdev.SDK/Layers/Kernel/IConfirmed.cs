@@ -23,6 +23,6 @@ namespace Sharpdev.SDK.Layers.Kernel
         /// <summary>
         ///     Дата подтверждения объект бизнес логики (<see cref="TConfirmedObject" />).
         /// </summary>
-        DateTime ConfirmedDate { get; }
+        DateTime? ConfirmedDate { get; }
     }
 }

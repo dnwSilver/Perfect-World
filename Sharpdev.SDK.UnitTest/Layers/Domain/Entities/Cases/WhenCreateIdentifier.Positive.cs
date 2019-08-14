@@ -7,11 +7,13 @@ using NUnit.Framework;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Infrastructure.Integrations;
 using Sharpdev.SDK.Testing;
+using Sharpdev.SDK.Testing.Stubs;
 
 namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
 {
     [TestFixture]
     [Category(nameof(SDK))]
+    [Category(Constant.Positive)]
     [Parallelizable(ParallelScope.All)]
     public class WhenCreateIdentifier
     {
@@ -22,8 +24,8 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             const int PRIVATE_IDENTIFIER = 1;
             const string EXTERNAL_IDENTIFIER = "Some identifier";
             const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.SharpdevTesting;
-            var publicIdentifier = Guid.NewGuid();
-            var externalIdentifiers = new ExternalIdentifiers
+            var publicId = Guid.NewGuid();
+            var externalIds = new ExternalIdentifiers
             {
                 {
                     PROGRAM_PRODUCT, EXTERNAL_IDENTIFIER
@@ -31,13 +33,10 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             };
 
             // Arrange:
-            var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicIdentifier, externalIdentifiers);
+            var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicId, externalIds);
 
             // Assert:
-            identifier.Externals[PROGRAM_PRODUCT]
-                      .Should()
-                      .Be(EXTERNAL_IDENTIFIER,
-                          $" we are create new {nameof(Identifier<StubEntity>)} with external id");
+            identifier.Externals[PROGRAM_PRODUCT].Should().Be(EXTERNAL_IDENTIFIER);
         }
 
         [Test]
@@ -47,8 +46,8 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             const int PRIVATE_IDENTIFIER = 1;
             const string EXTERNAL_IDENTIFIER = "Some identifier";
             const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.SharpdevTesting;
-            var publicIdentifier = Guid.NewGuid();
-            var externalIdentifiers = new ExternalIdentifiers
+            var publicId = Guid.NewGuid();
+            var externalIds = new ExternalIdentifiers
             {
                 {
                     PROGRAM_PRODUCT, EXTERNAL_IDENTIFIER
@@ -56,12 +55,10 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             };
 
             // Arrange:
-            var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicIdentifier, externalIdentifiers);
+            var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicId, externalIds);
 
             // Assert:
-            identifier.Externals[PROGRAM_PRODUCT]
-                      .Should()
-                      .NotBeNull($" we are create new {nameof(Identifier<StubEntity>)} with external id");
+            identifier.Externals[PROGRAM_PRODUCT].Should().NotBeNull();
         }
 
         [Test]
@@ -75,9 +72,7 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicIdentifier);
 
             // Assert:
-            identifier.Private.Should()
-                      .Be(PRIVATE_IDENTIFIER,
-                          $" we are create new {nameof(Identifier<StubEntity>)} with private id = 1");
+            identifier.Private.Should().Be(PRIVATE_IDENTIFIER);
         }
 
         [Test]
@@ -85,15 +80,13 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
         {
             // Act:
             const int PRIVATE_IDENTIFIER = 1;
-            var publicIdentifier = Guid.NewGuid();
+            var publicId = Guid.NewGuid();
 
             // Arrange:
-            var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicIdentifier);
+            var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicId);
 
             // Assert:
-            identifier.Public.Should()
-                      .Be(publicIdentifier,
-                          $" we are create new {nameof(Identifier<StubEntity>)} with public id = new");
+            identifier.Public.Should().Be(publicId);
         }
 
         [Test]
@@ -107,7 +100,7 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicIdentifier);
 
             // Assert:
-            identifier.Should().NotBeNull($" we are create new {nameof(Identifier<StubEntity>)}");
+            identifier.Should().NotBeNull();
         }
     }
 }
