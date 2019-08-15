@@ -17,13 +17,15 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
     [Parallelizable(ParallelScope.All)]
     public class WhenSearchProcessPositive
     {
+        //todo Во всех тестах повторяются одинаковые Act, надо эту проблему устранить.
         [Test]
         public void WhenFindProcess_ByPublicId_CountShouldBeOne()
         {
             // Act:
             var processDataModels = Create.ProcessDataModel.CountOf(10).Please();
             var watcherContext = Create.WatcherContext.With(processDataModels).Please();
-            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper);
+            var processFactory = new ProcessFactory();
+            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper,processFactory);
             var processService = new ProcessService(processRepository);
             var specification = new ProcessPublicIdSpecification(processDataModels[0].PublicId);
 
@@ -40,7 +42,8 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
             // Act:
             var processDataModel = Create.ProcessDataModel.CountOf(10).Please();
             var watcherContext = Create.WatcherContext.With(processDataModel).Please();
-            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper);
+            var processFactory = new ProcessFactory();
+            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper, processFactory);
             var specification = new ProcessPublicIdSpecification(processDataModel[0].PublicId);
             var processService = new ProcessService(processRepository);
 
@@ -57,7 +60,8 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
             // Act:
             var processDataModels = Create.ProcessDataModel.CountOf(10).Please();
             var watcherContext = Create.WatcherContext.With(processDataModels).Please();
-            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper);
+            var processFactory = new ProcessFactory();
+            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper,processFactory);
             var specification = new ProcessPublicIdSpecification(Guid.NewGuid());
             var processService = new ProcessService(processRepository);
 

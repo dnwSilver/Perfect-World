@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Prosolve.MicroService.Watcher.DataAccess;
 
 using Sharpdev.SDK.Layers.Domain;
+using Sharpdev.SDK.Layers.Domain.Entities;
+using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -19,43 +21,26 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// <summary>
     ///     Репозиторий для сущности <see cref="IProcessEntity" />.
     /// </summary>
-    public class ProcessRepository : IRepository<IProcessEntity>
+    public class ProcessRepository : RepositoryBase<IProcessEntity>, IRepository<IProcessEntity>
     {
         /// <summary>
         ///     Инициализация репозитория <see cref="ProcessRepository" />.
         /// </summary>
         /// <param name="watcherContext">Контекст источника данных.</param>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
-        public ProcessRepository(WatcherContext watcherContext, IMapper mapper)
+        /// <param name="processFactory">Фабрика для создания объектов.</param>
+        public ProcessRepository(WatcherContext watcherContext,
+                                 IMapper mapper,
+                                 IEntityFactory<IProcessEntity> processFactory)
+            : base(mapper, processFactory)
         {
             this.WatcherContext = watcherContext;
-            this.Mapper = mapper;
         }
 
         /// <summary>
         ///     Контекст источника данных.
         /// </summary>
         private WatcherContext WatcherContext { get; }
-
-        /// <summary>
-        ///     Механизм для трансформации объектов.
-        /// </summary>
-        private IMapper Mapper { get; }
-
-        /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns>Статус объекта.</returns>
-        public RepositoryStatus Status { get; private set; }
-
-        /// <summary>
-        ///     Смена статуса.
-        /// </summary>
-        /// <param name="newStatus">Новый статус.</param>
-        public void ChangeStatus(RepositoryStatus newStatus)
-        {
-            this.Status = newStatus;
-        }
 
         /// <summary>
         ///     Создание набора бизнес объектов.
@@ -78,6 +63,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         public async Task<Result<IProcessEntity[]>> Read(
             ISpecification<IProcessEntity> specification)
         {
+            // todo Я точно уверен что всё это можно вынести в базовый абстрактный класс. Нужно потратить на это часок другой. 
             using(var watcherContext = this.WatcherContext)
             {
                 var processExpression =
@@ -95,7 +81,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
 
                 var processes = new List<IProcessEntity>();
                 processes.AddRange(from processBuilder in processBuilders
-                                   let processFactory = new ProcessFactory()
+                                   let processFactory = this.EntityFactory
                                    select processFactory.Recovery(processBuilder)
                                    into processEntity
                                    select processEntity.Value);
@@ -130,4 +116,5 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             throw new NotImplementedException();
         }
     }
+
 }
