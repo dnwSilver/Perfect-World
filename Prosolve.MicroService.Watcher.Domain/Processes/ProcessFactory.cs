@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Prosolve.MicroService.Watcher.Domain.Processes.Specifications;
@@ -7,15 +5,19 @@ using Prosolve.MicroService.Watcher.Domain.Processes.Specifications;
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
-using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {
     /// <summary>
     ///     Фабрика для объекта <see cref="IProcessEntity" />.
     /// </summary>
-    public sealed class Process : EntityFactoryBase<IProcessEntity>
+    public sealed class ProcessFactory : EntityFactoryBase<IProcessEntity>
     {
+
+        /// <summary>
+        ///     Фиксация набора спецификаций.
+        /// </summary>
+        /// <param name="processEntity">Сущность к которой будут применяться спецификации.</param>
         protected override void SetSpecifications(IProcessEntity processEntity)
         {
             var specifications = new Collection<ISpecification<IProcessEntity>>
