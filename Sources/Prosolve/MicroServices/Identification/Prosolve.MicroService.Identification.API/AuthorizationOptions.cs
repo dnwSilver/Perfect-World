@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 
 using Sharpdev.SDK.API;
 
-namespace Prosolve.MicroService.Identity.API
+namespace Prosolve.MicroService.Identification.API
 {
     /// <summary>
     ///     Набор параметров для настройки сервиса авторизации для сервиса <see cref="IdentityService"/>.

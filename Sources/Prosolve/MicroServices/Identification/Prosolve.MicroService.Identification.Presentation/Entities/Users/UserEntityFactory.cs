@@ -3,7 +3,7 @@
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Types.Results;
 
-namespace Prosolve.MicroService.Identity.Entities.Users
+namespace Prosolve.MicroService.Identification.Entities.Users
 {
     internal class UserEntityFactory : IEntityFactory<IUser>
     {

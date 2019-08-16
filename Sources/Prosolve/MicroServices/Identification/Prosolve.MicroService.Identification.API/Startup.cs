@@ -5,13 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using Prosolve.MicroService.Identity.Entities.Users;
+using Prosolve.MicroService.Identification.Entities.Users;
 
 using Sharpdev.SDK.API;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
-namespace Prosolve.MicroService.Identity.API
+namespace Prosolve.MicroService.Identification.API
 {
     public class Startup
     {

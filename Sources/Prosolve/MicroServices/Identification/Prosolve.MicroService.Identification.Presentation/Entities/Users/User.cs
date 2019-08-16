@@ -3,7 +3,7 @@ using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 
-namespace Prosolve.MicroService.Identity.Entities.Users
+namespace Prosolve.MicroService.Identification.Entities.Users
 {
     /// <summary>
     ///     Пользователь информационной системы.

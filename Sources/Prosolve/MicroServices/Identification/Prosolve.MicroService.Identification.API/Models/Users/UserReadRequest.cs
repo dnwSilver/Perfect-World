@@ -1,4 +1,4 @@
-﻿namespace Prosolve.MicroService.Identity.API.Models.Users
+﻿namespace Prosolve.MicroService.Identification.API.Models.Users
 {
     public class UserReadRequest
     {

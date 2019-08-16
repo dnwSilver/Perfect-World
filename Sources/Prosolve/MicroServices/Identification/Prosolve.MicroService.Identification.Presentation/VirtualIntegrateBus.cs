@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using Sharpdev.SDK.Infrastructure.Integrations;
 
-namespace Prosolve.MicroService.Identity
+namespace Prosolve.MicroService.Identification
 {
     public class VirtualIntegrateBus : IIntegrateBus
     {
@@ -25,7 +25,7 @@ namespace Prosolve.MicroService.Identity
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(IntegrationBusStatus newStatus)
         {
-            Status = newStatus;
+            this.Status = newStatus;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Prosolve.MicroService.Identity
         /// </remarks>
         public Task PublishAsync(IIntegrationEvent @event)
         {
-            _integrationEvents.Add(@event);
+            this._integrationEvents.Add(@event);
             return Task.CompletedTask;
         }
 

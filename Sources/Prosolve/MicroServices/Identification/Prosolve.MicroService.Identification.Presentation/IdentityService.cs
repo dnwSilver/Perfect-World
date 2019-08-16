@@ -1,13 +1,13 @@
 ﻿using System.Security.Claims;
 
-using Prosolve.MicroService.Identity.Entities.Users;
+using Prosolve.MicroService.Identification.Entities.Users;
 
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Presentation;
 using Sharpdev.SDK.Types.Results;
 
-namespace Prosolve.MicroService.Identity
+namespace Prosolve.MicroService.Identification
 {
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
@@ -33,7 +33,7 @@ namespace Prosolve.MicroService.Identity
                                IIntegrateBus integrateBus)
         {
             this._userEntityRepository = userEntityRepository;
-            _integrateBus = integrateBus;
+            this._integrateBus = integrateBus;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Prosolve.MicroService.Identity
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(ServiceStatus newStatus)
         {
-            Status = newStatus;
+            this.Status = newStatus;
         }
 
         /// <summary>

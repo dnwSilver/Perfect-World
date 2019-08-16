@@ -5,7 +5,7 @@ using NLog.Web;
 
 using Sharpdev.SDK.API;
 
-namespace Prosolve.MicroService.Identity.API
+namespace Prosolve.MicroService.Identification.API
 {
     public class Program
     {

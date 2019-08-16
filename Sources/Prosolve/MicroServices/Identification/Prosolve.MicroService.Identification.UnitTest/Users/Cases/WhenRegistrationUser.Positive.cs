@@ -2,7 +2,7 @@ using System;
 
 using NUnit.Framework;
 
-using Prosolve.MicroService.Identity.Entities.Users;
+using Prosolve.MicroService.Identification.Entities.Users;
 
 using Sharpdev.SDK.Testing;
 

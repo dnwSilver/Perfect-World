@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 
@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-using Prosolve.MicroService.Identity.API.Models.Tokens;
+using Prosolve.MicroService.Identification.API.Models.Tokens;
 
 using Sharpdev.SDK.API;
 
-namespace Prosolve.MicroService.Identity.API.Controllers
+namespace Prosolve.MicroService.Identification.API.Controllers
 {
     /// <summary>
     ///     Контроллер для работы объектов учетных записей пользователей.

@@ -1,14 +1,14 @@
 ﻿using System;
 
-using Prosolve.MicroService.Identity.Entities.Users;
-using Prosolve.MicroService.Identity.Entities.Users.DomainEvents;
-using Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents;
+using Prosolve.MicroService.Identification.Entities.Users;
+using Prosolve.MicroService.Identification.Entities.Users.DomainEvents;
+using Prosolve.MicroService.Identification.Entities.Users.IntegrationEvents;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
-namespace Prosolve.MicroService.Identity
+namespace Prosolve.MicroService.Identification
 {
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.

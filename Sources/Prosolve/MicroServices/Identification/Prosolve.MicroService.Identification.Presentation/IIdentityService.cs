@@ -1,12 +1,12 @@
 ﻿using System.Security.Claims;
 
-using Prosolve.MicroService.Identity.Entities.Users;
+using Prosolve.MicroService.Identification.Entities.Users;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Presentation;
 using Sharpdev.SDK.Types.Results;
 
-namespace Prosolve.MicroService.Identity
+namespace Prosolve.MicroService.Identification
 {
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.

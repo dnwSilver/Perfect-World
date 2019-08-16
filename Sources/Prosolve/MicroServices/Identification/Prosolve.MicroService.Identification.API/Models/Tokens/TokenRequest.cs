@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Prosolve.MicroService.Identity.API.Models.Tokens
+namespace Prosolve.MicroService.Identification.API.Models.Tokens
 {
     /// <summary>
     /// Запрос на получение ключа авторизации.

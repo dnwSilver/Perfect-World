@@ -3,12 +3,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using Prosolve.MicroService.Identity.API.Models.Users;
-using Prosolve.MicroService.Identity.Entities.Users;
+using Prosolve.MicroService.Identification.API.Models.Users;
+using Prosolve.MicroService.Identification.Entities.Users;
 
 using Sharpdev.SDK.API;
 
-namespace Prosolve.MicroService.Identity.API.Controllers
+namespace Prosolve.MicroService.Identification.API.Controllers
 {
     public class UserController : SharpdevControllerBase
     {

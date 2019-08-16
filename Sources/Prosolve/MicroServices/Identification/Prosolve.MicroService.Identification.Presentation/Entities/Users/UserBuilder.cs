@@ -5,7 +5,7 @@ using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 
-namespace Prosolve.MicroService.Identity.Entities.Users
+namespace Prosolve.MicroService.Identification.Entities.Users
 {
     public class UserBuilder : EntityBuilderBase<IUser>, IUserBuilder
     {
