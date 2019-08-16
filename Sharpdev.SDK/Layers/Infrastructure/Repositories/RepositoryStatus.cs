@@ -1,7 +1,7 @@
 ﻿namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
 {
     /// <summary>
-    ///     Статус репозитория <see cref="IRepository{TAggregate}" />.
+    ///     Статус репозитория <see cref="IEntityRepository{TEntity}" />.
     /// </summary>
     public enum RepositoryStatus : byte
     {

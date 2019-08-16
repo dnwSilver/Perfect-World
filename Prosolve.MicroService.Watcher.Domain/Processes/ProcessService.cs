@@ -1,5 +1,7 @@
 using System.Threading.Tasks;
 
+using Prosolve.MicroService.Watcher.DataAccess;
+
 using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -11,18 +13,15 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// </summary>
     public class ProcessService
     {
-        /// <summary>
-        ///     Репозиторий для работы с процессами <see cref="IProcessEntity" />.
-        /// </summary>
-        private readonly IRepository<IProcessEntity> _processRepository;
+        private readonly IEntityRepository<IProcessEntity> _processRepository;
 
-        /// <summary>
-        ///     Инициализация сервиса для работы с процессами.
-        /// </summary>
-        /// <param name="processRepository"></param>
-        public ProcessService(IRepository<IProcessEntity> processRepository)
+        private readonly IUnitOfWork<WatcherContext> _unitOfWork;
+
+        public ProcessService(IUnitOfWork<WatcherContext> unitOfWork,
+                              IEntityRepository<IProcessEntity> processRepository)
         {
             this._processRepository = processRepository;
+            this._unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -33,9 +32,15 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         public async Task<Result<IProcessEntity[]>> Find(
             ISpecification<IProcessEntity> processSpecification)
         {
-            var foundProcess = await this._processRepository.Read(processSpecification);
+            using(var uow = this._unitOfWork)
+            {
+                this._processRepository.SetBoundedContext(uow.BoundedContext);
 
-            return Result.Ok<IProcessEntity[]>(foundProcess);
+                var foundProcess = await this._processRepository.Read(processSpecification);
+
+                return Result.Ok<IProcessEntity[]>(foundProcess);
+            }
         }
     }
+
 }

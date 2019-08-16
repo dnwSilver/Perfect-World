@@ -21,7 +21,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
     ///     - модификация (<see cref="Update" />);
     ///     - удаление (<see cref="Delete" />).
     /// </remarks>
-    public interface IRepository<TEntity> : IHasStatus<RepositoryStatus>
+    public interface IEntityRepository<TEntity> : IHasStatus<RepositoryStatus>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
@@ -60,5 +60,7 @@ namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
         ///     False - удаление не выполнено.
         /// </returns>
         Task<Result> Delete(TEntity[] objectsToRemove);
+
+        void SetBoundedContext(IBoundedContext boundedContext);
     }
 }

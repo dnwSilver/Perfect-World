@@ -13,7 +13,7 @@ namespace Sharpdev.SDK.Patterns
         /// <returns></returns>
         public string PatternName()
         {
-            return GetType().Name;
+            return this.GetType().Name;
         }
     }
 }

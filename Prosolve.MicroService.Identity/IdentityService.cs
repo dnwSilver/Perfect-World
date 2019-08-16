@@ -22,17 +22,17 @@ namespace Prosolve.MicroService.Identity
         /// <summary>
         ///     Репозиторий для работы с пользователями.
         /// </summary>
-        private readonly IRepository<IUser> _userRepository;
+        private readonly IEntityRepository<IUser> _userEntityRepository;
 
         /// <summary>
         ///     Создание объекта <see cref="IdentityService" />.
         /// </summary>
-        /// <param name="userRepository">Репозиторий для работы с пользователями.</param>
+        /// <param name="userEntityRepository">Репозиторий для работы с пользователями.</param>
         /// <param name="integrateBus">Интеграционная шина.</param>
-        public IdentityService(IRepository<IUser> userRepository,
+        public IdentityService(IEntityRepository<IUser> userEntityRepository,
                                IIntegrateBus integrateBus)
         {
-            _userRepository = userRepository;
+            this._userEntityRepository = userEntityRepository;
             _integrateBus = integrateBus;
         }
 

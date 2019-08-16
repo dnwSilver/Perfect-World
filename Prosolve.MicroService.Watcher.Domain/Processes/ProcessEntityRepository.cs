@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Prosolve.MicroService.Watcher.DataAccess;
 
 using Sharpdev.SDK.Layers.Domain;
-using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -21,26 +20,23 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// <summary>
     ///     Репозиторий для сущности <see cref="IProcessEntity" />.
     /// </summary>
-    public class ProcessRepository : RepositoryBase<IProcessEntity>, IRepository<IProcessEntity>
+    public class ProcessEntityRepository : RepositoryBase<IProcessEntity>, IEntityRepository<IProcessEntity>
     {
         /// <summary>
-        ///     Инициализация репозитория <see cref="ProcessRepository" />.
+        ///     Инициализация репозитория <see cref="ProcessEntityRepository" />.
         /// </summary>
-        /// <param name="watcherContext">Контекст источника данных.</param>
+        /// <param name="processFactory">Фабрика для создания объектов..</param>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
-        /// <param name="processFactory">Фабрика для создания объектов.</param>
-        public ProcessRepository(WatcherContext watcherContext,
-                                 IMapper mapper,
-                                 IEntityFactory<IProcessEntity> processFactory)
+        public ProcessEntityRepository(IEntityFactory<IProcessEntity> processFactory,
+                                 IMapper mapper)
             : base(mapper, processFactory)
         {
-            this.WatcherContext = watcherContext;
         }
 
         /// <summary>
         ///     Контекст источника данных.
         /// </summary>
-        private WatcherContext WatcherContext { get; }
+        private WatcherContext WatcherContext => this.BoundedContext as WatcherContext;
 
         /// <summary>
         ///     Создание набора бизнес объектов.
@@ -64,30 +60,26 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             ISpecification<IProcessEntity> specification)
         {
             // todo Я точно уверен что всё это можно вынести в базовый абстрактный класс. Нужно потратить на это часок другой. 
-            using(var watcherContext = this.WatcherContext)
-            {
-                var processExpression =
-                    this.Mapper.Map<Expression<Func<ProcessDataModel, bool>>>(
-                        specification.Expression);
+            var processExpression =
+                this.Mapper.Map<Expression<Func<ProcessDataModel, bool>>>(specification.Expression);
 
-                var processModels =
-                    await watcherContext.Processes.Where(processExpression).ToListAsync();
+            var processModels =
+                await this.WatcherContext.Processes.Where(processExpression).ToListAsync();
 
-                if (!processModels.Any())
-                    return Result.Ok(Array.Empty<IProcessEntity>());
+            if (!processModels.Any())
+                return Result.Ok(Array.Empty<IProcessEntity>());
 
-                var processBuilders =
-                    this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(processModels);
+            var processBuilders =
+                this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(processModels);
 
-                var processes = new List<IProcessEntity>();
-                processes.AddRange(from processBuilder in processBuilders
-                                   let processFactory = this.EntityFactory
-                                   select processFactory.Recovery(processBuilder)
-                                   into processEntity
-                                   select processEntity.Value);
+            var processes = new List<IProcessEntity>();
+            processes.AddRange(from processBuilder in processBuilders
+                               let processFactory = this.EntityFactory
+                               select processFactory.Recovery(processBuilder)
+                               into processEntity
+                               select processEntity.Value);
 
-                return Result.Ok(processes.ToArray());
-            }
+            return Result.Ok(processes.ToArray());
         }
 
         /// <summary>
@@ -116,5 +108,4 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             throw new NotImplementedException();
         }
     }
-
 }

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using AutoMapper;
+
 using Sharpdev.SDK.Layers.Domain;
+using Sharpdev.SDK.Layers.Domain.Factories;
 using Sharpdev.SDK.Layers.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -10,23 +13,8 @@ namespace Prosolve.MicroService.Identity.Entities.Users
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    public class UserRepository : IRepository<IUser>
+    public class UserEntityRepository : RepositoryBase<IUser>, IEntityRepository<IUser>
     {
-        /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns>Статус объекта.</returns>
-        public RepositoryStatus Status { get; private set; } = RepositoryStatus.Up;
-
-        /// <summary>
-        ///     Смена статуса.
-        /// </summary>
-        /// <param name="newStatus">Новый статус.</param>
-        public void ChangeStatus(RepositoryStatus newStatus)
-        {
-            this.Status = newStatus;
-        }
-
         /// <summary>
         ///     Создание набора бизнес объектов.
         /// </summary>
@@ -74,6 +62,16 @@ namespace Prosolve.MicroService.Identity.Entities.Users
         public Task<Result<IUser[]>> Read(ISpecification<IUser> searchParameters)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
+        /// </summary>
+        /// <param name="mapper">Механизм для трансформации объектов.</param>
+        /// <param name="entityFactory">Фабрика для создания объектов.</param>
+        public UserEntityRepository(IMapper mapper, IEntityFactory<IUser> entityFactory)
+            : base(mapper, entityFactory)
+        {
         }
     }
 }

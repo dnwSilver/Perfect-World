@@ -30,7 +30,7 @@ namespace Prosolve.MicroService.Identity
 
             #region Создаём пользователей
 
-            var createResult = this._userRepository.Create(newUsers);
+            var createResult = this._userEntityRepository.Create(newUsers);
 
             #endregion
 
@@ -59,10 +59,10 @@ namespace Prosolve.MicroService.Identity
         /// <returns>Список пользователям по заданным параметрам.</returns>
         public Result<IUser[]> FindUser(ISpecification<IUser> userSpecification)
         {
-            if (this._userRepository.Status != RepositoryStatus.Up)
+            if (this._userEntityRepository.Status != RepositoryStatus.Up)
                 return Result.Fail<IUser[]>("Источник данных для пользователей недоступен.");
 
-            return this._userRepository.Read(userSpecification).Result;
+            return this._userEntityRepository.Read(userSpecification).Result;
         }
     }
 }

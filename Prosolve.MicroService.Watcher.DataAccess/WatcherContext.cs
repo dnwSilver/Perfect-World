@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Sharpdev.SDK.Layers.Domain;
+
 namespace Prosolve.MicroService.Watcher.DataAccess
 {
-    public class WatcherContext : DbContext
+    public class WatcherContext : DbContext, IBoundedContext
     {
         public WatcherContext(DbContextOptions<WatcherContext> options)
             : base(options)

@@ -10,11 +10,11 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         /// <summary>
         ///     Наименование процесса.
         /// </summary>
-        string Name { get; set; }
+        string Name { get; }
 
         /// <summary>
         ///     Тип процесса.
         /// </summary>
-        string TypeName { get; set; }
+        string TypeName { get; }
     }
 }

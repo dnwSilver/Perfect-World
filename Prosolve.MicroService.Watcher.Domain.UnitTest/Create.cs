@@ -18,7 +18,6 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest
     ///     - Каждый тест работает со свежими данными.
     ///     - Тесты всегда очищаются после себя.
     /// </remarks>
-    /// >
     internal static class Create
     {
         /// <summary>

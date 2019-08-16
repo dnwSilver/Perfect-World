@@ -1,17 +1,32 @@
 using AutoMapper;
 
+using Sharpdev.SDK.Layers.Domain;
 using Sharpdev.SDK.Layers.Domain.Entities;
 using Sharpdev.SDK.Layers.Domain.Factories;
 
 namespace Sharpdev.SDK.Layers.Infrastructure.Repositories
 {
     /// <summary>
-    ///     Базовая реализация для любых потомков интерфейса <see cref="IRepository{TEntity}" />.
+    ///     Базовая реализация для любых потомков интерфейса <see cref="IEntityRepository{TEntity}" />.
     /// </summary>
     /// <typeparam name="TEntity">Сущность для которой предназначено хранилище.</typeparam>
     public abstract class RepositoryBase<TEntity>
         where TEntity : IEntity<TEntity>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        protected IBoundedContext BoundedContext;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="boundedContext"></param>
+        public void SetBoundedContext(IBoundedContext boundedContext)
+        {
+            this.BoundedContext = boundedContext;
+        }
+        
         /// <summary>
         ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
         /// </summary>

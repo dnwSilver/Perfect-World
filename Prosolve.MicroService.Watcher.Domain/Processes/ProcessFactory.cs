@@ -13,7 +13,6 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// </summary>
     public sealed class ProcessFactory : EntityFactoryBase<IProcessEntity>
     {
-
         /// <summary>
         ///     Фиксация набора спецификаций.
         /// </summary>
@@ -39,6 +38,4 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             return new ProcessEntity(entityBuilder as IProcessBuilder);
         }
     }
-
-    
 }

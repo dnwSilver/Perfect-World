@@ -28,7 +28,7 @@ namespace Prosolve.MicroService.Identity.API
             services.ConfigurationAuthorization(new AuthorizationOptions());
 
             services.AddSingleton<IIdentityService, IdentityService>();
-            services.AddSingleton<IRepository<IUser>, UserRepository>();
+            services.AddSingleton<IEntityRepository<IUser>, UserEntityRepository>();
             services.AddSingleton<IIntegrateBus, VirtualIntegrateBus>();
             services.AddSingleton<IIdentityService, IdentityService>();
 

@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using FluentAssertions;
 
 using NUnit.Framework;
 
+using Prosolve.MicroService.Watcher.DataAccess;
 using Prosolve.MicroService.Watcher.Domain.Processes;
 using Prosolve.MicroService.Watcher.Domain.Processes.Specifications;
 
@@ -17,17 +20,32 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
     [Parallelizable(ParallelScope.All)]
     public class WhenSearchProcessPositive
     {
-        //todo Во всех тестах повторяются одинаковые Act, надо эту проблему устранить.
+        /// <summary>
+        ///     Подготовка сервиса для тестирования. Создание всех необходимых объектов и заполнение
+        ///     данными виртуальное хранилище.
+        /// </summary>
+        /// <param name="processDataModels">Данные находящиеся в виртуальном хранилище.</param>
+        /// <returns>Сервис готовый для тестов.</returns>
+        private ProcessService AllocateProcessService(out IList<ProcessDataModel> processDataModels)
+        {
+            processDataModels = Create.ProcessDataModel.CountOf(10).Please();
+            var watcherContext = Create.WatcherContext.With(processDataModels).Please();
+            var unitOfWork = new WatcherUnitOfWork(watcherContext);
+            var processFactory = new ProcessFactory();
+            var processRepository =
+                new ProcessEntityRepository(processFactory, WatcherConfiguration.Mapper);
+            var processService = new ProcessService(unitOfWork, processRepository);
+
+            return processService;
+        }
+
         [Test]
         public void WhenFindProcess_ByPublicId_CountShouldBeOne()
         {
             // Act:
-            var processDataModels = Create.ProcessDataModel.CountOf(10).Please();
-            var watcherContext = Create.WatcherContext.With(processDataModels).Please();
-            var processFactory = new ProcessFactory();
-            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper,processFactory);
-            var processService = new ProcessService(processRepository);
-            var specification = new ProcessPublicIdSpecification(processDataModels[0].PublicId);
+            var processService = this.AllocateProcessService(out var processDataModels);
+            var specification =
+                new ProcessPublicIdSpecification(processDataModels.First().PublicId);
 
             // Arrange:
             var result = processService.Find(specification);
@@ -37,39 +55,32 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
         }
 
         [Test]
-        public void WhenFindProcess_ByPublicId_ResultShouldBeTrue()
-        {
-            // Act:
-            var processDataModel = Create.ProcessDataModel.CountOf(10).Please();
-            var watcherContext = Create.WatcherContext.With(processDataModel).Please();
-            var processFactory = new ProcessFactory();
-            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper, processFactory);
-            var specification = new ProcessPublicIdSpecification(processDataModel[0].PublicId);
-            var processService = new ProcessService(processRepository);
-
-            // Arrange:
-            var result = processService.Find(specification);
-
-            // Assert:
-            result.Result.Success.Should().BeTrue();
-        }
-        
-        [Test]
         public void WhenFindProcess_ByPublicId_CountShouldBeZero()
         {
             // Act:
-            var processDataModels = Create.ProcessDataModel.CountOf(10).Please();
-            var watcherContext = Create.WatcherContext.With(processDataModels).Please();
-            var processFactory = new ProcessFactory();
-            var processRepository = new ProcessRepository(watcherContext, WatcherConfiguration.Mapper,processFactory);
+            var processService = this.AllocateProcessService(out var _);
             var specification = new ProcessPublicIdSpecification(Guid.NewGuid());
-            var processService = new ProcessService(processRepository);
 
             // Arrange:
             var result = processService.Find(specification);
 
             // Assert:
             result.Result.Value.Should().HaveCount(0);
+        }
+
+        [Test]
+        public void WhenFindProcess_ByPublicId_ResultShouldBeTrue()
+        {
+            // Act:
+            var processService = this.AllocateProcessService(out var processDataModels);
+            var specification =
+                new ProcessPublicIdSpecification(processDataModels.First().PublicId);
+
+            // Arrange:
+            var result = processService.Find(specification);
+
+            // Assert:
+            result.Result.Success.Should().BeTrue();
         }
     }
 }
