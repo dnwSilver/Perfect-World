@@ -13,10 +13,21 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// </summary>
     public class ProcessService
     {
+        /// <summary>
+        ///     Репозиторий для работы с <see cref="IProcessEntity" />.
+        /// </summary>
         private readonly IEntityRepository<IProcessEntity> _processRepository;
 
+        /// <summary>
+        ///     Механизм для работы с репозиториями.
+        /// </summary>
         private readonly IUnitOfWork<WatcherContext> _unitOfWork;
 
+        /// <summary>
+        ///     Инициализация объекта <see cref="ProcessService" />.
+        /// </summary>
+        /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
+        /// <param name="processRepository">Репозиторий для работы с <see cref="IProcessEntity" />.</param>
         public ProcessService(IUnitOfWork<WatcherContext> unitOfWork,
                               IEntityRepository<IProcessEntity> processRepository)
         {
@@ -42,5 +53,4 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
             }
         }
     }
-
 }
