@@ -6,6 +6,8 @@
         <IsPackable>false</IsPackable>
 
         <LangVersion>7.3</LangVersion>
+
+        <RootNamespace>Prosolve.MicroService.Watcher.Domain.UnitTest</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,8 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
       <ProjectReference Include="..\Prosolve.MicroService.Watcher.Domain\Prosolve.MicroService.Watcher.Domain.csproj" />
-      <ProjectReference Include="..\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj" />
     </ItemGroup>
 
 </Project>

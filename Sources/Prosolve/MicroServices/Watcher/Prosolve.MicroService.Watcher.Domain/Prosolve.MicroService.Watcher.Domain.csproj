@@ -12,8 +12,7 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
-        <ProjectReference Include="..\Prosolve.MicroService.Watcher.DataAccess\Prosolve.MicroService.Watcher.DataAccess.csproj" />
-        <ProjectReference Include="..\Sharpdev.SDK\Sharpdev.SDK.csproj" />
+        <ProjectReference Include="..\Prosolve.MicroService.Watcher.Infrustructure\Prosolve.MicroService.Watcher.Infrustructure.csproj" />
     </ItemGroup>
 
 </Project>

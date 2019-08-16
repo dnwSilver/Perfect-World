@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <LangVersion>7.3</LangVersion>
+
+    <RootNamespace>Prosolve.MicroService.Identity.UnitTest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Prosolve.MicroService.Identity\Prosolve.MicroService.Identity.csproj" />
-    <ProjectReference Include="..\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj" />
+    <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
+    <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Stubs\Sharpdev.SDK.Testing.Stubs.csproj" />
+    <ProjectReference Include="..\Prosolve.MicroService.Identification.Presentation\Prosolve.MicroService.Identification.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

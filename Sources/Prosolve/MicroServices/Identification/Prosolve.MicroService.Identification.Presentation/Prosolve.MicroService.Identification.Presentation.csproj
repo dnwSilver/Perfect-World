@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>7.3</LangVersion>
+    <RootNamespace>Prosolve.MicroService.Identity</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sharpdev.SDK\Sharpdev.SDK\Sharpdev.SDK.csproj" />
+    <ProjectReference Include="..\..\..\..\Sharpdev\SDK\SDK\Sharpdev.SDK\Sharpdev.SDK.csproj" />
   </ItemGroup>
 
 </Project>
