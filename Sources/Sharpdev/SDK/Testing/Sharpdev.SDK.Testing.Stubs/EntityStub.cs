@@ -1,6 +1,6 @@
-﻿using Sharpdev.SDK.Layers.Domain.Entities;
+﻿using Sharpdev.SDK.Domain.Entities;
 
-namespace Sharpdev.SDK.Testing.Stubs
+namespace Sharpdev.SDK.Testing
 {
     /// <summary>
     ///     Объект заглушка имитирует бизнес сущность.

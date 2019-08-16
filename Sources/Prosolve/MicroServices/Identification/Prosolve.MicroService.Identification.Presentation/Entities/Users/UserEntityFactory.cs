@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Sharpdev.SDK.Layers.Domain.Factories;
+using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Identity.Entities.Users

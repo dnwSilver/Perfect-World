@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
-using Sharpdev.SDK.Layers.Domain;
-using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes

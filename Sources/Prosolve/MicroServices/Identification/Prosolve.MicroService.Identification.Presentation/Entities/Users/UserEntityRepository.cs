@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
-using Sharpdev.SDK.Layers.Domain;
-using Sharpdev.SDK.Layers.Domain.Factories;
-using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Identity.Entities.Users

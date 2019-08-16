@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SDK\Sharpdev.SDK\Sharpdev.SDK.csproj" />
-    <ProjectReference Include="..\Sharpdev.SDK.Testing.Engine\Sharpdev.SDK.Testing.Engine.csproj" />
+    <ProjectReference Include="..\..\SDK\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
+    <ProjectReference Include="..\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj" />
   </ItemGroup>
 
 </Project>

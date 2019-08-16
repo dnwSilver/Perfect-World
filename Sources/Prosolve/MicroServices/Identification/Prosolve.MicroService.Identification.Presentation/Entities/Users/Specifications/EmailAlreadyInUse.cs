@@ -1,4 +1,4 @@
-﻿using Sharpdev.SDK.Layers.Domain;
+﻿using Sharpdev.SDK.Domain;
 
 namespace Prosolve.MicroService.Identity.Entities.Users.Specifications
 {

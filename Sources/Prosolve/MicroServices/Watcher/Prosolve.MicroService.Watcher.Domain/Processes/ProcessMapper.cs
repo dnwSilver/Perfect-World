@@ -4,7 +4,7 @@ using AutoMapper;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
-using Sharpdev.SDK.Layers.Domain.Entities;
+using Sharpdev.SDK.Domain.Entities;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {

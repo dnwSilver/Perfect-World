@@ -8,8 +8,8 @@ using Microsoft.Extensions.Logging;
 using Prosolve.MicroService.Identity.Entities.Users;
 
 using Sharpdev.SDK.API;
-using Sharpdev.SDK.Layers.Infrastructure.Integrations;
-using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Infrastructure.Integrations;
+using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Prosolve.MicroService.Identity.API
 {

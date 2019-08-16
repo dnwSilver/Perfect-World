@@ -1,9 +1,8 @@
 ﻿using Prosolve.MicroService.Identity.UnitTest.Users.Stubs;
 
-using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Infrastructure.Integrations;
-using Sharpdev.SDK.Testing.Mocks;
-using Sharpdev.SDK.Testing.Stubs;
+using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Infrastructure.Integrations;
+using Sharpdev.SDK.Testing;
 
 namespace Prosolve.MicroService.Identity.UnitTest
 {

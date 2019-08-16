@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Sharpdev.SDK.Layers.Infrastructure.Integrations;
+using Sharpdev.SDK.Infrastructure.Integrations;
 
 namespace Prosolve.MicroService.Identity.Entities.Users.IntegrationEvents
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using Sharpdev.SDK.Layers.Domain;
+using Sharpdev.SDK.Domain;
 
 namespace Prosolve.MicroService.Watcher.DataAccess
 {

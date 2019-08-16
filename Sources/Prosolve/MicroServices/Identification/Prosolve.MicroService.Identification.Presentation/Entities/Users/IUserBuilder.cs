@@ -1,6 +1,5 @@
-﻿using Sharpdev.SDK.Layers.Domain.Factories;
-using Sharpdev.SDK.Layers.Kernel;
-using Sharpdev.SDK.Patterns;
+﻿using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 
@@ -9,7 +8,6 @@ namespace Prosolve.MicroService.Identity.Entities.Users
     /// <summary>
     ///     Строитель для объекта <see cref="IUser" />.
     /// </summary>
-    [Builder]
     public interface IUserBuilder : IEntityBuilder<IUser>
     {
         /// <summary>

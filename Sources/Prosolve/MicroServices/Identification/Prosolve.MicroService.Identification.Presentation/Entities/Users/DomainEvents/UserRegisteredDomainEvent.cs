@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Sharpdev.SDK.Layers.Domain.Events;
+using Sharpdev.SDK.Domain.Events;
 
 namespace Prosolve.MicroService.Identity.Entities.Users.DomainEvents
 {

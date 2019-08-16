@@ -2,10 +2,10 @@
 
 using Moq;
 
-using Sharpdev.SDK.Layers.Kernel;
+using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 
-namespace Sharpdev.SDK.Testing.Stubs
+namespace Sharpdev.SDK.Testing
 {
     /// <summary>
     ///     Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.

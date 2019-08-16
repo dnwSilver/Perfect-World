@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-using Sharpdev.SDK.Layers.Domain;
+using Sharpdev.SDK.Domain;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes.Specifications
 {

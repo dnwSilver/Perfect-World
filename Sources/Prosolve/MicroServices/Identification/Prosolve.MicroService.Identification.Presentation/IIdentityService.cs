@@ -2,8 +2,8 @@
 
 using Prosolve.MicroService.Identity.Entities.Users;
 
-using Sharpdev.SDK.Layers.Application;
-using Sharpdev.SDK.Layers.Domain;
+using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Presentation;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Identity

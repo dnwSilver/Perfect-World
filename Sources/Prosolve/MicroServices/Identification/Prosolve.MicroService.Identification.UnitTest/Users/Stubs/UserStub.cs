@@ -2,9 +2,9 @@
 
 using Prosolve.MicroService.Identity.Entities.Users;
 
-using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Kernel;
-using Sharpdev.SDK.Testing.Stubs;
+using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Kernel;
+using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.EmailAddresses;
 
 namespace Prosolve.MicroService.Identity.UnitTest.Users.Stubs

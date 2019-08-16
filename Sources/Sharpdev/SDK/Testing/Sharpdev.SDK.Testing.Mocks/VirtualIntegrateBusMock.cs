@@ -1,7 +1,6 @@
-﻿using Sharpdev.SDK.Layers.Infrastructure.Integrations;
-using Sharpdev.SDK.Testing.Stubs;
+﻿using Sharpdev.SDK.Infrastructure.Integrations;
 
-namespace Sharpdev.SDK.Testing.Mocks
+namespace Sharpdev.SDK.Testing
 {
     /// <summary>
     ///     Фальшивка для интеграционной шины. Данные будем хранить в памяти.

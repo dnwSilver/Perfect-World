@@ -1,6 +1,6 @@
 using Prosolve.MicroService.Watcher.DataAccess;
 
-using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Prosolve.MicroService.Watcher.Domain
 {

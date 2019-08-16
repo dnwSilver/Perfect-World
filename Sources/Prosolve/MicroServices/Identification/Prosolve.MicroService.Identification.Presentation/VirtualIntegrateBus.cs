@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Sharpdev.SDK.Layers.Infrastructure.Integrations;
+using Sharpdev.SDK.Infrastructure.Integrations;
 
 namespace Prosolve.MicroService.Identity
 {

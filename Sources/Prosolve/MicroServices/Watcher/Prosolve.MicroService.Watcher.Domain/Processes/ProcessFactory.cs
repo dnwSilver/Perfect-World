@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 
 using Prosolve.MicroService.Watcher.Domain.Processes.Specifications;
 
-using Sharpdev.SDK.Layers.Domain;
-using Sharpdev.SDK.Layers.Domain.Entities;
-using Sharpdev.SDK.Layers.Domain.Factories;
+using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Domain.Factories;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes
 {

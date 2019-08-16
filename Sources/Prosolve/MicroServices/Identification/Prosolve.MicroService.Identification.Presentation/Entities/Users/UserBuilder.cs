@@ -1,7 +1,7 @@
 ﻿using System;
 
-using Sharpdev.SDK.Layers.Domain.Factories;
-using Sharpdev.SDK.Layers.Kernel;
+using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 

@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 using Prosolve.MicroService.Watcher.DataAccess;
 
-using Sharpdev.SDK.Layers.Domain;
-using Sharpdev.SDK.Layers.Domain.Factories;
-using Sharpdev.SDK.Layers.Infrastructure.Repositories;
+using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.MicroService.Watcher.Domain.Processes
