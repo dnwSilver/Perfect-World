@@ -3,25 +3,45 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK", "Sharpdev.SDK\Sharpdev.SDK.csproj", "{949D1B52-1972-4DE0-A60F-1202CEB02087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK", "Sources\Sharpdev\SDK\SDK\Sharpdev.SDK\Sharpdev.SDK.csproj", "{949D1B52-1972-4DE0-A60F-1202CEB02087}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity", "Prosolve.MicroService.Identity\Prosolve.MicroService.Identity.csproj", "{A18CC3B6-A25C-4140-9E52-93064FF94054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.UnitTest", "Sources\Sharpdev\SDK\SDK\Sharpdev.SDK.UnitTest\Sharpdev.SDK.UnitTest.csproj", "{581202AE-9242-4D96-919F-FE95A3F2643F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity.UnitTest", "Prosolve.Microservice.Identity.UnitTest\Prosolve.MicroService.Identity.UnitTest.csproj", "{8920289E-7E47-470A-AECD-7BDB2BCDA559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.Testing", "Sources\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj", "{B62E00B1-B1CE-410A-87BD-8E261D20DF08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.Testing", "Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj", "{B62E00B1-B1CE-410A-87BD-8E261D20DF08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity", "Sources\Prosolve\MicroServices\Identification\Prosolve.MicroService.Identity\Prosolve.MicroService.Identity.csproj", "{A18CC3B6-A25C-4140-9E52-93064FF94054}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.UnitTest", "Sharpdev.SDK.UnitTest\Sharpdev.SDK.UnitTest.csproj", "{581202AE-9242-4D96-919F-FE95A3F2643F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity.UnitTest", "Sources\Prosolve\MicroServices\Identification\Prosolve.MicroService.Identity.UnitTest\Prosolve.MicroService.Identity.UnitTest.csproj", "{8920289E-7E47-470A-AECD-7BDB2BCDA559}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity.API", "Prosolve.MicroService.Identity.API\Prosolve.MicroService.Identity.API.csproj", "{7F23BED2-ABDF-4EA9-8315-CA6030826C65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identity.API", "Sources\Prosolve\MicroServices\Identification\Prosolve.MicroService.Identity.API\Prosolve.MicroService.Identity.API.csproj", "{7F23BED2-ABDF-4EA9-8315-CA6030826C65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.API", "Prosolve.SDK.API\Sharpdev.SDK.API.csproj", "{DE3FBFDF-D864-44CE-B778-824B7D9E536E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.API", "Sources\Sharpdev\SDK\API\Sharpdev.SDK.API\Sharpdev.SDK.API.csproj", "{DE3FBFDF-D864-44CE-B778-824B7D9E536E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.Domain", "Prosolve.MicroService.Watcher.Domain\Prosolve.MicroService.Watcher.Domain.csproj", "{268C2D19-C5C3-4E3F-BA61-D661180E5E9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.Domain", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.Domain\Prosolve.MicroService.Watcher.Domain.csproj", "{268C2D19-C5C3-4E3F-BA61-D661180E5E9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.DataAccess", "Prosolve.MicroService.Watcher.DataAccess\Prosolve.MicroService.Watcher.DataAccess.csproj", "{E1842FBA-8F62-4E7B-B438-B818598AA226}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.DataAccess", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.DataAccess\Prosolve.MicroService.Watcher.DataAccess.csproj", "{E1842FBA-8F62-4E7B-B438-B818598AA226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.Domain.UnitTest", "Prosolve.MicroService.Watcher.Domain.UnitTest\Prosolve.MicroService.Watcher.Domain.UnitTest.csproj", "{6A98F24A-C14D-4757-A872-D55BCD75FFA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.Domain.UnitTest", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.Domain.UnitTest\Prosolve.MicroService.Watcher.Domain.UnitTest.csproj", "{6A98F24A-C14D-4757-A872-D55BCD75FFA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prosolve", "Prosolve", "{9FA37AD6-C917-427E-91CE-2B61A9234A9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sharpdev", "Sharpdev", "{F78F6C48-8586-4151-91BE-0DC2AF48009A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroServices", "MicroServices", "{C62D8828-2BC0-4D7F-8464-0927CF53CE56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identification", "Identification", "{B53B6CF1-780D-40BA-A9F0-2061D6C93FF5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Watcher", "Watcher", "{92E57A10-E734-4345-94D9-4DBD65B2EDFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{593FBDA6-816F-479E-BB89-906C02313337}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{9A238DFC-2C50-4402-A052-A87F2D9C84E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{DEA71B6D-2018-4411-9420-8396FD81731A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{60F01B73-69D7-43A5-876F-3E448A6CA103}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{05E3C675-E1B2-42F4-B00A-AD141C72A65C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,5 +95,26 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5DD0CCAF-B54B-4607-8E24-F6643B3BF1D7}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C62D8828-2BC0-4D7F-8464-0927CF53CE56} = {9FA37AD6-C917-427E-91CE-2B61A9234A9B}
+		{B53B6CF1-780D-40BA-A9F0-2061D6C93FF5} = {C62D8828-2BC0-4D7F-8464-0927CF53CE56}
+		{92E57A10-E734-4345-94D9-4DBD65B2EDFA} = {C62D8828-2BC0-4D7F-8464-0927CF53CE56}
+		{E1842FBA-8F62-4E7B-B438-B818598AA226} = {92E57A10-E734-4345-94D9-4DBD65B2EDFA}
+		{268C2D19-C5C3-4E3F-BA61-D661180E5E9A} = {92E57A10-E734-4345-94D9-4DBD65B2EDFA}
+		{6A98F24A-C14D-4757-A872-D55BCD75FFA8} = {92E57A10-E734-4345-94D9-4DBD65B2EDFA}
+		{A18CC3B6-A25C-4140-9E52-93064FF94054} = {B53B6CF1-780D-40BA-A9F0-2061D6C93FF5}
+		{7F23BED2-ABDF-4EA9-8315-CA6030826C65} = {B53B6CF1-780D-40BA-A9F0-2061D6C93FF5}
+		{8920289E-7E47-470A-AECD-7BDB2BCDA559} = {B53B6CF1-780D-40BA-A9F0-2061D6C93FF5}
+		{593FBDA6-816F-479E-BB89-906C02313337} = {F78F6C48-8586-4151-91BE-0DC2AF48009A}
+		{949D1B52-1972-4DE0-A60F-1202CEB02087} = {05E3C675-E1B2-42F4-B00A-AD141C72A65C}
+		{581202AE-9242-4D96-919F-FE95A3F2643F} = {05E3C675-E1B2-42F4-B00A-AD141C72A65C}
+		{9A238DFC-2C50-4402-A052-A87F2D9C84E6} = {593FBDA6-816F-479E-BB89-906C02313337}
+		{DEA71B6D-2018-4411-9420-8396FD81731A} = {593FBDA6-816F-479E-BB89-906C02313337}
+		{DE3FBFDF-D864-44CE-B778-824B7D9E536E} = {9A238DFC-2C50-4402-A052-A87F2D9C84E6}
+		{B62E00B1-B1CE-410A-87BD-8E261D20DF08} = {DEA71B6D-2018-4411-9420-8396FD81731A}
+		{9FA37AD6-C917-427E-91CE-2B61A9234A9B} = {60F01B73-69D7-43A5-876F-3E448A6CA103}
+		{F78F6C48-8586-4151-91BE-0DC2AF48009A} = {60F01B73-69D7-43A5-876F-3E448A6CA103}
+		{05E3C675-E1B2-42F4-B00A-AD141C72A65C} = {593FBDA6-816F-479E-BB89-906C02313337}
 	EndGlobalSection
 EndGlobal
