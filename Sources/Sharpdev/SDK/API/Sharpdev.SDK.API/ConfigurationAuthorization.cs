@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Sharpdev.SDK.API
 {
@@ -18,7 +15,8 @@ namespace Sharpdev.SDK.API
         /// <returns></returns>
         public static IServiceCollection ConfigurationAuthorization(this IServiceCollection services,
                                                                     IAuthorizationOptions authorizationOptions)
-        {
+        { 
+            /*
             var tokenValidationParameters = new TokenValidationParameters
                                             {
                                                 ValidateIssuerSigningKey = true,
@@ -48,7 +46,7 @@ namespace Sharpdev.SDK.API
                                        }
                                    };
                     });
-
+*/
             return services;
         }
     }
