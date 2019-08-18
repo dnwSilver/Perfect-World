@@ -16,7 +16,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         ///     На вход принимается только email адреса.
         /// </summary>
         /// <param name="emailAddress">Электронный адрес.</param>
-        public EmailAddress(string emailAddress)
+        private EmailAddress(string emailAddress)
         {
             if (TryParse(emailAddress))
                 this._value = emailAddress;

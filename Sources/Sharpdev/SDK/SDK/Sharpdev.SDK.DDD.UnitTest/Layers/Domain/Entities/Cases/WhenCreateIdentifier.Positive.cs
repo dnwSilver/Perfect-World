@@ -17,17 +17,19 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
     public class WhenCreateIdentifier
     {
         [Test]
-        public void WhenCreateIdentifier_WithExternalId_ExternalIdShouldBeValue()
+        [TestCase("Some identifier")]
+        [TestCase("1")]
+        [TestCase("adasdsa dsa -ds das -")]
+        public void WhenCreateIdentifier_WithExternalId_ExternalIdShouldBeValue(string externalIdentifier)
         {
             // Act:
             const int PRIVATE_IDENTIFIER = 1;
-            const string EXTERNAL_IDENTIFIER = "Some identifier";
             const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.SharpdevTesting;
             var publicId = Guid.NewGuid();
             var externalIds = new ExternalIdentifiers
             {
                 {
-                    PROGRAM_PRODUCT, EXTERNAL_IDENTIFIER
+                    PROGRAM_PRODUCT, externalIdentifier
                 }
             };
 
@@ -35,21 +37,21 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
             var identifier = new Identifier<StubEntity>(PRIVATE_IDENTIFIER, publicId, externalIds);
 
             // Assert:
-            identifier.Externals[PROGRAM_PRODUCT].Should().Be(EXTERNAL_IDENTIFIER);
+            identifier.Externals[PROGRAM_PRODUCT].Should().Be(externalIdentifier);
         }
 
         [Test]
-        public void WhenCreateIdentifier_WithExternalId_ExternalIdShouldNotBeNull()
+        [TestCase("Some identifier")]
+        public void WhenCreateIdentifier_WithExternalId_ExternalIdShouldNotBeNull(string externalIdentifier)
         {
             // Act:
             const int PRIVATE_IDENTIFIER = 1;
-            const string EXTERNAL_IDENTIFIER = "Some identifier";
             const ProgramProductType PROGRAM_PRODUCT = ProgramProductType.SharpdevTesting;
             var publicId = Guid.NewGuid();
             var externalIds = new ExternalIdentifiers
             {
                 {
-                    PROGRAM_PRODUCT, EXTERNAL_IDENTIFIER
+                    PROGRAM_PRODUCT, externalIdentifier
                 }
             };
 
@@ -62,7 +64,7 @@ namespace Sharpdev.SDK.UnitTest.Layers.Domain.Entities.Cases
 
         [Test]
         public void WhenCreateIdentifier_WithPrivateAndPublicId_PrivateIdShouldBeOne()
-        {
+                 {
             // Act:
             const int PRIVATE_IDENTIFIER = 1;
             var publicIdentifier = Guid.NewGuid();

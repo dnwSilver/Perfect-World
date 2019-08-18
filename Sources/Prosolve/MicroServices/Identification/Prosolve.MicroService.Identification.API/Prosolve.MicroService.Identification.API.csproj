@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <UserSecretsId>fe722666-ba43-44e3-a7ff-078c304c6a93</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>8</LangVersion>
     <RootNamespace>Prosolve.MicroService.Identification.API</RootNamespace>
   </PropertyGroup>
 
