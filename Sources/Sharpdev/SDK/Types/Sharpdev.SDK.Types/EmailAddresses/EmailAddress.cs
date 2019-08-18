@@ -19,7 +19,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         public EmailAddress(string emailAddress)
         {
             if (TryParse(emailAddress))
-                _value = emailAddress;
+                this._value = emailAddress;
             else
                 throw new EmailValidationException();
         }
@@ -35,19 +35,19 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         public override bool Equals(object obj)
         {
             if (obj is null)
-                return _value is null;
+                return this._value is null;
 
-            if (_value is null)
+            if (this._value is null)
                 return false;
 
             switch(obj)
             {
                 case EmailAddress email:
 
-                    return _value.Equals(email._value);
+                    return this._value.Equals(email._value);
                 case string strEmail:
 
-                    return _value.Equals(strEmail);
+                    return this._value.Equals(strEmail);
             }
 
             return false;
@@ -61,7 +61,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         {
             unchecked
             {
-                return _value.GetHashCode() * 397;
+                return this._value.GetHashCode() * 397;
             }
         }
 
@@ -71,7 +71,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         /// <returns>Значение в типе строка.</returns>
         public override string ToString()
         {
-            return _value;
+            return this._value;
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         /// </returns>
         public bool IsValid()
         {
-            return TryParse(_value);
+            return TryParse(this._value);
         }
     }
 }

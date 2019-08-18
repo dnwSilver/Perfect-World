@@ -36,6 +36,6 @@ namespace Prosolve.MicroService.Identification.API
         /// <summary>
         ///     Ключ после шифрования.
         /// </summary>
-        public SymmetricSecurityKey GetSymmetricSecurityKey => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
+        public SymmetricSecurityKey GetSymmetricSecurityKey => new SymmetricSecurityKey(Encoding.ASCII.GetBytes(this.Key));
     }
 }

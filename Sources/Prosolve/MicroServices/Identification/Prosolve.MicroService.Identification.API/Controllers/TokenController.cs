@@ -30,7 +30,7 @@ namespace Prosolve.MicroService.Identification.API.Controllers
         /// <param name="identityService">Сервис для управления пользователями.</param>
         public TokenController(IIdentityService identityService)
         {
-            _identityService = identityService;
+            this._identityService = identityService;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Prosolve.MicroService.Identification.API.Controllers
         [HttpPost]
         public IActionResult PostToken([FromBody][Required]TokenRequest request)
         {
-            var authorizeResult = _identityService.Authorize(request.Login, request.Password);
+            var authorizeResult = this._identityService.Authorize(request.Login, request.Password);
 
             if (authorizeResult.Failure)
                 return this.BadRequest(new { ErrorMessage = "Неправильная пара пользователь-пароль." });
@@ -62,7 +62,7 @@ namespace Prosolve.MicroService.Identification.API.Controllers
 
             var response = new { accessToken = encodedJwt, login = identity.Name };
 
-            return Ok(response);
+            return this.Ok(response);
         }
     }
 }

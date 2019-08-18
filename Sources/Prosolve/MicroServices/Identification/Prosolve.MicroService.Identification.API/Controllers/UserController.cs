@@ -16,7 +16,7 @@ namespace Prosolve.MicroService.Identification.API.Controllers
 
         public UserController(IIdentityService identityService)
         {
-            _identityService = identityService;
+            this._identityService = identityService;
         }
 
         [HttpGet]
@@ -216,7 +216,7 @@ namespace Prosolve.MicroService.Identification.API.Controllers
         [ProducesResponseType(StatusCodes.Status504GatewayTimeout)] // Какой-то из смежных серверов выдал тайм аут
         public ActionResult Delete(int id)
         {
-            return NoContent();
+            return this.NoContent();
         }
     }
 }
