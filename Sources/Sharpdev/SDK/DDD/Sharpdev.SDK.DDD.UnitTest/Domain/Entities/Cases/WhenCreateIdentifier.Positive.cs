@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using FluentAssertions;
 
@@ -105,8 +105,8 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
             // Assert:
             identifier.Should().NotBeNull();
         }
-        
-        
+
+
         [Test]
         [TestCase("Some identifier")]
         public void WhenCreateIdentifier_WithExternalId_PrivateIdShouldBeUndefined(
@@ -120,7 +120,7 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
                     programProduct, externalIdentifier
                 }
             };
-            
+
             // Arrange:
             var identifier = Identifier<StubEntity>.New(externalIds);
 

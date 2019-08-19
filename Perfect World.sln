@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.DDD", "Sources\Sharpdev\SDK\SDK\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj", "{949D1B52-1972-4DE0-A60F-1202CEB02087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.DDD", "Sources\Sharpdev\SDK\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj", "{949D1B52-1972-4DE0-A60F-1202CEB02087}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.DDD.UnitTest", "Sources\Sharpdev\SDK\SDK\Sharpdev.SDK.DDD.UnitTest\Sharpdev.SDK.DDD.UnitTest.csproj", "{581202AE-9242-4D96-919F-FE95A3F2643F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.DDD.UnitTest", "Sources\Sharpdev\SDK\DDD\Sharpdev.SDK.DDD.UnitTest\Sharpdev.SDK.DDD.UnitTest.csproj", "{581202AE-9242-4D96-919F-FE95A3F2643F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.Testing.Mocks", "Sources\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj", "{B62E00B1-B1CE-410A-87BD-8E261D20DF08}"
 EndProject

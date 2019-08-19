@@ -9,7 +9,7 @@ using Sharpdev.SDK.Testing;
 
 namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
 {
-    
+
     [TestFixture]
     [Category(nameof(Domain))]
     [Category(Constant.Negative)]
@@ -26,11 +26,11 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
 
             // Arrange:
             var equalsResult = firstIdentifier.Equals(secondIdentifier);
-            
+
             // Assert:
             equalsResult.Should().BeFalse();
         }
-        
+
         [Test]
         public void WhenEqualsIdentifier_WithEqualOperator_ResultShouldBeFalse()
         {
@@ -41,11 +41,11 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
 
             // Arrange:
             var equalsResult = firstIdentifier == secondIdentifier;
-            
+
             // Assert:
             equalsResult.Should().BeFalse();
         }
-        
+
         [Test]
         public void WhenUnequalsIdentifier_WithEqualsMethod_ResultShouldBeFalse()
         {
@@ -56,11 +56,11 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
 
             // Arrange:
             var equalsResult = firstIdentifier.Equals(secondIdentifier);
-            
+
             // Assert:
             equalsResult.Should().BeFalse();
         }
-        
+
         [Test]
         public void WhenUnequalsIdentifier_WithEqualOperator_ResultShouldBeFalse()
         {
@@ -71,7 +71,7 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
 
             // Arrange:
             var equalsResult = firstIdentifier == secondIdentifier;
-            
+
             // Assert:
             equalsResult.Should().BeFalse();
         }
