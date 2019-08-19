@@ -22,7 +22,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
-      <ProjectReference Include="..\Prosolve.MicroService.Watcher.Domain\Prosolve.MicroService.Watcher.Domain.csproj" />
+      <ProjectReference Include="..\Prosolve.Service.Watcher.Domain\Prosolve.Service.Watcher.Domain.csproj" />
     </ItemGroup>
 
 </Project>

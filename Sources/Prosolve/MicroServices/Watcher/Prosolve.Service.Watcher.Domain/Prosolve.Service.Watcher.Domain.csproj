@@ -3,18 +3,20 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <LangVersion>8</LangVersion>
-        <RootNamespace>Prosolve.MicroService.Watcher.DataAccess</RootNamespace>
+        <RootNamespace>Prosolve.MicroService.Watcher.Domain</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="3.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview8.19405.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Sharpdev\SDK\SDK\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
+      <ProjectReference Include="..\Prosolve.Service.Watcher.Infrastructure\Prosolve.Service.Watcher.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

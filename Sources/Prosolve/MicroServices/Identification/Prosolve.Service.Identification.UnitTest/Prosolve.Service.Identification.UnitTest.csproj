@@ -20,7 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
     <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Stubs\Sharpdev.SDK.Testing.Stubs.csproj" />
-    <ProjectReference Include="..\Prosolve.MicroService.Identification.Presentation\Prosolve.MicroService.Identification.Presentation.csproj" />
+    <ProjectReference Include="..\Prosolve.Service.Identification.Presententation\Prosolve.Service.Identification.Presententation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.DDD.UnitTest",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.Testing.Mocks", "Sources\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj", "{B62E00B1-B1CE-410A-87BD-8E261D20DF08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identification.Presentation", "Sources\Prosolve\MicroServices\Identification\Prosolve.MicroService.Identification.Presentation\Prosolve.MicroService.Identification.Presentation.csproj", "{A18CC3B6-A25C-4140-9E52-93064FF94054}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.Service.Identification.Presententation", "Sources\Prosolve\MicroServices\Identification\Prosolve.Service.Identification.Presententation\Prosolve.Service.Identification.Presententation.csproj", "{A18CC3B6-A25C-4140-9E52-93064FF94054}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identification.UnitTest", "Sources\Prosolve\MicroServices\Identification\Prosolve.MicroService.Identification.UnitTest\Prosolve.MicroService.Identification.UnitTest.csproj", "{8920289E-7E47-470A-AECD-7BDB2BCDA559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.Service.Identification.UnitTest", "Sources\Prosolve\MicroServices\Identification\Prosolve.Service.Identification.UnitTest\Prosolve.Service.Identification.UnitTest.csproj", "{8920289E-7E47-470A-AECD-7BDB2BCDA559}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.MicroService.Identification.API", "Sources\Prosolve\MicroServices\Identification\Prosolve.MicroService.Identification.API\Prosolve.MicroService.Identification.API.csproj", "{7F23BED2-ABDF-4EA9-8315-CA6030826C65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosolve.Service.Identification.API", "Sources\Prosolve\MicroServices\Identification\Prosolve.Service.Identification.API\Prosolve.Service.Identification.API.csproj", "{7F23BED2-ABDF-4EA9-8315-CA6030826C65}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sharpdev.SDK.API", "Sources\Sharpdev\SDK\API\Sharpdev.SDK.API\Sharpdev.SDK.API.csproj", "{DE3FBFDF-D864-44CE-B778-824B7D9E536E}"
 EndProject
@@ -21,9 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpdev.SDK.Testing.Stubs"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpdev.SDK.Testing", "Sources\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj", "{CE0EE130-0E3F-415A-9744-AAD0E88F20ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.Domain", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.Domain\Prosolve.MicroService.Watcher.Domain.csproj", "{268C2D19-C5C3-4E3F-BA61-D661180E5E9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Service.Watcher.Domain", "Sources\Prosolve\MicroServices\Watcher\Prosolve.Service.Watcher.Domain\Prosolve.Service.Watcher.Domain.csproj", "{268C2D19-C5C3-4E3F-BA61-D661180E5E9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.Infrustructure", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.Infrustructure\Prosolve.MicroService.Watcher.Infrustructure.csproj", "{E1842FBA-8F62-4E7B-B438-B818598AA226}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Service.Watcher.Infrastructure", "Sources\Prosolve\MicroServices\Watcher\Prosolve.Service.Watcher.Infrastructure\Prosolve.Service.Watcher.Infrastructure.csproj", "{E1842FBA-8F62-4E7B-B438-B818598AA226}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.UnitTest", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.UnitTest\Prosolve.MicroService.Watcher.UnitTest.csproj", "{6A98F24A-C14D-4757-A872-D55BCD75FFA8}"
 EndProject
