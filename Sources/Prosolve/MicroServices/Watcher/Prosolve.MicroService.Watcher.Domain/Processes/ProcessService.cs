@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Prosolve.MicroService.Watcher.DataAccess;
 
 using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -13,6 +14,11 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     /// </summary>
     public class ProcessService
     {
+        /// <summary>
+        ///     Шина для обмена сообщениями.
+        /// </summary>
+        private readonly IIntegrateBus _integrateBus;
+
         /// <summary>
         ///     Репозиторий для работы с <see cref="IProcessEntity" />.
         /// </summary>
@@ -27,11 +33,14 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         ///     Инициализация объекта <see cref="ProcessService" />.
         /// </summary>
         /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
+        /// <param name="integrateBus">Шина для обмена сообщениями.</param>
         /// <param name="processRepository">Репозиторий для работы с <see cref="IProcessEntity" />.</param>
         public ProcessService(IUnitOfWork<WatcherContext> unitOfWork,
+                              IIntegrateBus integrateBus,
                               IEntityRepository<IProcessEntity> processRepository)
         {
             this._processRepository = processRepository;
+            this._integrateBus = integrateBus;
             this._unitOfWork = unitOfWork;
         }
 
@@ -43,14 +52,17 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
         public async Task<Result<IProcessEntity[]>> Find(
             ISpecification<IProcessEntity> processSpecification)
         {
-            using(var uow = this._unitOfWork)
-            {
-                this._processRepository.SetBoundedContext(uow.BoundedContext);
+            using var uow = this._unitOfWork;
 
-                var foundProcess = await this._processRepository.Read(processSpecification);
+            this._processRepository.SetBoundedContext(uow.BoundedContext);
 
-                return Result.Ok<IProcessEntity[]>(foundProcess);
-            }
+            var foundProcess = await this._processRepository.Read(processSpecification);
+
+            var domainEvent = new ProcessFindDomainEvent();
+
+            await this._integrateBus.PublishAsync(domainEvent);
+
+            return Result.Ok<IProcessEntity[]>(foundProcess);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// <summary>
         ///     Значение неопределённого приватного идентификатора.
         /// </summary>
-        private const int Undefined = 0;
+        public const int Undefined = 0;
 
         /// <summary>
         ///     Уникальный идентификатор бизнес сущности.
@@ -70,6 +70,34 @@ namespace Sharpdev.SDK.Domain.Entities
         }
 
         /// <summary>
+        ///     Указывает, равен ли один объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="left">Объект для сравнения.</param>
+        /// <param name="right">Объект для сравнения.</param>
+        /// <returns>
+        ///     <see langword="true" /> если <paramref name="left" /> объект не равен <paramref name="right" />
+        ///     параметр; иначе, <see langword="false" />.
+        /// </returns>
+        public static bool operator !=(Identifier<TEntity> left, IIdentifier<TEntity> right)
+        {
+            return left.If(x=>x.Equals(right)).ReturnFailure();
+        }
+
+        /// <summary>
+        ///     Указывает, равен ли один объект другому объекту того же типа.
+        /// </summary>
+        /// <param name="left">Объект для сравнения.</param>
+        /// <param name="right">Объект для сравнения.</param>
+        /// <returns>
+        ///     <see langword="true" /> если <paramref name="left" /> объект равен <paramref name="right" />
+        ///     параметр; иначе, <see langword="false" />.
+        /// </returns>
+        public static bool operator ==(Identifier<TEntity> left, IIdentifier<TEntity> right)
+        {
+            return left.If(x=>!x.Equals(right)).ReturnFailure();
+        }
+
+        /// <summary>
         ///     Создание нового уникального идентификатора.
         /// </summary>
         /// <param name="externalIds">Набор внешних идентификаторов.</param>
@@ -80,7 +108,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// </remarks>
         public static Identifier<TEntity> New(ExternalIdentifiers externalIds)
         {
-            var privateId = Undefined;
+            const int privateId = Undefined;
             var publicId = Guid.NewGuid();
 
             return new Identifier<TEntity>(privateId, publicId, externalIds);

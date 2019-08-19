@@ -140,9 +140,9 @@ namespace Sharpdev.SDK.Types.EmailAddresses
             //const string domainName = @"\w+([-.]\w+)*";
             //const string domainZone = @"\w+([-.]\w+)*$";
             //const string emailPattern = emailName + "@" + domainName + "\\." + domainZone;
-            const string EMAIL_PATTERN = @"\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3}";
+            const string emailPattern = @"\w[-._\w]*\w@\w[-._\w]*\w\.\w{2,3}";
 
-            var emailFormat = Regex.Match(emailAddress, EMAIL_PATTERN, RegexOptions.IgnoreCase);
+            var emailFormat = Regex.Match(emailAddress, emailPattern, RegexOptions.IgnoreCase);
 
             return emailFormat.Success;
         }

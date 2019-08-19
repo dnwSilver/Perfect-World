@@ -1,6 +1,8 @@
 ﻿using Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Mocks;
 using Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Stubs;
 
+using Sharpdev.SDK.Testing;
+
 namespace Prosolve.MicroService.Watcher.Domain.UnitTest
 {
     /// <summary>
@@ -39,5 +41,10 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest
         /// </summary>
         /// >
         internal static VirtualWatcherContextMock WatcherContext => new VirtualWatcherContextMock();
+
+        /// <summary>
+        ///     Создание эмуляции интеграционной шины.
+        /// </summary>
+        internal static VirtualIntegrateBusMock IntegrationBus => new VirtualIntegrateBusMock();
     }
 }

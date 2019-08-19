@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Sharpdev.SDK.Infrastructure.Integrations;
@@ -8,8 +9,13 @@ namespace Sharpdev.SDK.Testing
     /// <summary>
     ///     Виртуальная шина для тестов.
     /// </summary>
-    public class IntegrateBusMock : IIntegrateBus
+    internal class IntegrateBusMock : IIntegrateBus
     {
+        /// <summary>
+        /// Список события для отправки в шину данных.
+        /// </summary>
+        private readonly IList<IIntegrationEvent> _events = new List<IIntegrationEvent>();
+
         /// <summary>
         ///     Текущий статус объекта.
         /// </summary>
@@ -23,8 +29,6 @@ namespace Sharpdev.SDK.Testing
         public void ChangeStatus(IntegrationBusStatus newStatus)
         {
             this.Status = newStatus;
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -38,7 +42,9 @@ namespace Sharpdev.SDK.Testing
         /// </remarks>
         public Task PublishAsync(IIntegrationEvent @event)
         {
-            throw new NotImplementedException();
+            this._events.Add(@event);
+
+            return Task.CompletedTask;
         }
 
         /// <summary>

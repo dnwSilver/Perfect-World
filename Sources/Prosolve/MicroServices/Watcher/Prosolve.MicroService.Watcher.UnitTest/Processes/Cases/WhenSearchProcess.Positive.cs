@@ -30,10 +30,11 @@ namespace Prosolve.MicroService.Watcher.Domain.UnitTest.Processes.Cases
         {
             processDataModels = Create.ProcessDataModel.CountOf(10).Please();
             var watcherContext = Create.WatcherContext.With(processDataModels).Please();
+            var integrationBus = Create.IntegrationBus.Please();
             var unitOfWork = new WatcherUnitOfWork(watcherContext);
             var processFactory = new ProcessFactory();
             var processRepository = new ProcessEntityRepository(processFactory, WatcherConfiguration.Mapper);
-            var processService = new ProcessService(unitOfWork, processRepository);
+            var processService = new ProcessService(unitOfWork, integrationBus, processRepository);
 
             return processService;
         }

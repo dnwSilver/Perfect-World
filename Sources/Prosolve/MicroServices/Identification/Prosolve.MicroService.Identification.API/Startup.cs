@@ -30,7 +30,6 @@ namespace Prosolve.MicroService.Identification.API
 
             services.AddSingleton<IIdentityService, IdentityService>();
             services.AddSingleton<IEntityRepository<IUser>, UserEntityRepository>();
-            services.AddSingleton<IIntegrateBus, VirtualIntegrateBus>();
             services.AddSingleton<IIdentityService, IdentityService>();
 
             services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
