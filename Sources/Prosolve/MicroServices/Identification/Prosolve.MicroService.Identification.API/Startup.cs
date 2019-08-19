@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using Prosolve.MicroService.Identification.Entities.Users;
 
 using Sharpdev.SDK.API;
-using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Prosolve.MicroService.Identification.API

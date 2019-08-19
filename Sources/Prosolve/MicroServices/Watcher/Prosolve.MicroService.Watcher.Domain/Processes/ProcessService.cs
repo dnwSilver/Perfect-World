@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 using Prosolve.MicroService.Watcher.DataAccess;
@@ -58,7 +59,7 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
 
             var foundProcess = await this._processRepository.Read(processSpecification);
 
-            var domainEvent = new ProcessFindDomainEvent();
+            var domainEvent = new ProcessFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
 
             await this._integrateBus.PublishAsync(domainEvent);
 

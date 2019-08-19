@@ -10,6 +10,17 @@ namespace Prosolve.MicroService.Watcher.Domain.Processes
     public class ProcessFindDomainEvent : IDomainEvent
     {
         /// <summary>
+        ///     Инициализация объекта <see cref="ProcessFindDomainEvent" />.
+        /// </summary>
+        /// <param name="id">Уникальный идентификатор события.</param>
+        /// <param name="creationDate">Дата события (UTC+0).</param>
+        public ProcessFindDomainEvent(Guid id, DateTime creationDate)
+        {
+            this.Id = id;
+            this.CreationDate = creationDate;
+        }
+
+        /// <summary>
         ///     Уникальный идентификатор события.
         /// </summary>
         public Guid Id { get; }
