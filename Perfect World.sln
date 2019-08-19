@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Service.Watcher.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Service.Watcher.Infrastructure", "Sources\Prosolve\MicroServices\Watcher\Prosolve.Service.Watcher.Infrastructure\Prosolve.Service.Watcher.Infrastructure.csproj", "{E1842FBA-8F62-4E7B-B438-B818598AA226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.MicroService.Watcher.UnitTest", "Sources\Prosolve\MicroServices\Watcher\Prosolve.MicroService.Watcher.UnitTest\Prosolve.MicroService.Watcher.UnitTest.csproj", "{6A98F24A-C14D-4757-A872-D55BCD75FFA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Service.Watcher.UnitTest", "Sources\Prosolve\MicroServices\Watcher\Prosolve.Service.Watcher.UnitTest\Prosolve.Service.Watcher.UnitTest.csproj", "{6A98F24A-C14D-4757-A872-D55BCD75FFA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prosolve", "Prosolve", "{9FA37AD6-C917-427E-91CE-2B61A9234A9B}"
 EndProject
