@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\SDK\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
+      <ProjectReference Include="..\..\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
       <ProjectReference Include="..\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj" />
     </ItemGroup>
 
