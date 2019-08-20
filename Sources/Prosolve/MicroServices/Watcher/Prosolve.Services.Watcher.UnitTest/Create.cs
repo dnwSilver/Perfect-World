@@ -26,13 +26,11 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest
         ///     Создание модели для процесса.
         /// </summary>
         /// <returns>Готовый для тестов процесс.</returns>
-        /// >
         internal static ProcessDataModelStub ProcessDataModel => new ProcessDataModelStub();
 
         /// <summary>
         ///     Создание контекста для смотрящего.
         /// </summary>
-        /// >
         internal static VirtualWatcherContextMock WatcherContext => new VirtualWatcherContextMock();
 
         /// <summary>

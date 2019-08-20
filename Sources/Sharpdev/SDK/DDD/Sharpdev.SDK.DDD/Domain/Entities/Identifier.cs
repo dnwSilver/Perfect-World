@@ -153,7 +153,7 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     Приватный идентификатор нам должен выдать источник данных.   Публичный идентификатор
         ///     делаем прямо тут.
         /// </remarks>
-        public static Identifier<TEntity> New(ExternalIdentifiers externalIds)
+        public static Identifier<TEntity> New(ExternalIdentifiers externalIds = null)
         {
             const int privateId = Undefined;
             var publicId = Guid.NewGuid();

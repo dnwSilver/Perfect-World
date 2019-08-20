@@ -13,15 +13,19 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.
         /// </summary>
-        /// <param name="contactEmailAddress">Адрес электронной для связи с клиентом.</param>
-        /// <returns>Строитель с предыдущими параметрами.</returns>
-        IUserBuilder SetContactEmailAddress(IConfirmed<EmailAddress> contactEmailAddress);
+        /// <returns>Адрес электронной для связи с клиентом.</returns>
+        IConfirmed<EmailAddress> ContactEmailAddress { get; set; }
+        
+        /// <summary>
+        ///     Установка номера телефона указанного для получения обратной связи.
+        /// </summary>
+        /// <returns>Номер телефона для связи с клиентом.</returns>
+        IConfirmed<EmailAddress> ContactPhoneNumber { get; set; }
 
         /// <summary>
         ///     Установка фамилии имени и отчества пользователя.
         /// </summary>
-        /// <param name="fullName">Фамилия имя и отчество пользователя.</param>
-        /// <returns>Строитель с предыдущими параметрами.</returns>
-        IUserBuilder SetFullName(FullName fullName);
+        /// <returns>Фамилия имя и отчество пользователя.</returns>
+        FullName FullName { get; set; }
     }
 }

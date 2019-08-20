@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Prosolve.Services.Identification.Entities.Users;
 using Prosolve.Services.Identification.Entities.Users.DomainEvents;
@@ -20,7 +21,7 @@ namespace Prosolve.Services.Identification
         /// </summary>
         /// <param name="userBuilders">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        public Result CreateUsers(IUserBuilder[] userBuilders)
+        public Result CreateUsers(UserBuilder[] userBuilders)
         {
             var newUsers = new IUser[0];
 
@@ -30,7 +31,7 @@ namespace Prosolve.Services.Identification
 
             #region Создаём пользователей
 
-            var createResult = this._userEntityRepository.Create(newUsers);
+            var createResult = this._userRepository.Create(newUsers);
 
             #endregion
 
@@ -59,10 +60,10 @@ namespace Prosolve.Services.Identification
         /// <returns>Список пользователям по заданным параметрам.</returns>
         public Result<IUser[]> FindUser(ISpecification<IUser> userSpecification)
         {
-            if (this._userEntityRepository.Status != RepositoryStatus.Up)
+            if (this._userRepository.Status != RepositoryStatus.Up)
                 return Result.Fail<IUser[]>("Источник данных для пользователей недоступен.");
 
-            return this._userEntityRepository.Read(userSpecification).Result;
+            return this._userRepository.Read(userSpecification).Result;
         }
     }
 }

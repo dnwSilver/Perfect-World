@@ -3,6 +3,7 @@ using Sharpdev.SDK.Infrastructure.Statuses;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
+using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
@@ -14,7 +15,12 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// <summary>
         ///     Адрес электронной почты указанный для получения обратной связи.
         /// </summary>
-        IConfirmed<EmailAddress> ContactEmail { get; }
+        IConfirmed<EmailAddress>? ContactEmail { get; }
+
+        /// <summary>
+        ///     Контактный телефон.
+        /// </summary>
+        IConfirmed<PhoneNumber>? ContactPhoneNumber { get; }
 
         /// <summary>
         ///     Фио пользователя.

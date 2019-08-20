@@ -13,7 +13,7 @@ namespace Prosolve.Services.Identification.Entities.Users
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    public class UserEntityRepository : RepositoryBase<IUser>, IEntityRepository<IUser>
+    public class UserRepository : RepositoryBase<IUser>, IEntityRepository<IUser>
     {
         /// <summary>
         ///     Создание набора бизнес объектов.
@@ -69,7 +69,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>
-        public UserEntityRepository(IMapper mapper, IEntityFactory<IUser> entityFactory)
+        public UserRepository(IMapper mapper, IEntityFactory<IUser> entityFactory)
             : base(mapper, entityFactory)
         {
         }

@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="9.0.0" />
+      <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="3.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
+  </ItemGroup>
+    
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\Sharpdev\SDK\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
   </ItemGroup>
+
 
 </Project>

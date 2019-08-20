@@ -33,6 +33,12 @@ namespace Prosolve.Services.Identity.UnitTest
         }
 
         /// <summary>
+        ///     Создание модели для пользователя.
+        /// </summary>
+        /// <returns>Готовый для тестов пользователь.</returns>
+        internal static UserDataModelStub UserDataModel => new UserDataModelStub();
+        
+        /// <summary>
         ///     Создание электронного адреса.
         /// </summary>
         /// <param name="emailAddress">Адрес электронной почты.</param>

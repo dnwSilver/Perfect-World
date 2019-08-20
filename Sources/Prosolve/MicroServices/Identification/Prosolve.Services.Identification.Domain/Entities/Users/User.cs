@@ -2,6 +2,7 @@
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
+using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
@@ -17,14 +18,17 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// <param name="currentVersion">Версия объекта.</param>
         /// <param name="fullName">Фамилия имя и отчество пользователя.</param>
         /// <param name="contactEmail">Контактный адрес электронной почты.</param>
+        /// <param name="contactPhoneNumber">Контактный номер телефона.</param>
         public User(IIdentifier<IUser> identifier,
                     int currentVersion,
                     FullName fullName,
-                    IConfirmed<EmailAddress> contactEmail)
+                    IConfirmed<EmailAddress>? contactEmail,
+                    IConfirmed<PhoneNumber>? contactPhoneNumber)
             : base(identifier, currentVersion)
         {
             this.FullName = fullName;
             this.ContactEmail = contactEmail;
+            this.ContactPhoneNumber = contactPhoneNumber;
         }
 
         /// <summary>
@@ -46,6 +50,11 @@ namespace Prosolve.Services.Identification.Entities.Users
         ///     Адрес электронной почты указанный для получения обратной связи.
         /// </summary>
         public IConfirmed<EmailAddress> ContactEmail { get; }
+
+        /// <summary>
+        ///     Контактный телефон.
+        /// </summary>
+        public IConfirmed<PhoneNumber> ContactPhoneNumber { get; }
 
         /// <summary>
         ///     Фио пользователя.

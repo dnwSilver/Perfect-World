@@ -5,7 +5,7 @@ using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
-    internal class UserEntityFactory : IEntityFactory<IUser>
+    internal class UserFactory : IEntityFactory<IUser>
     {
         /// <summary>
         ///     Создание нового объекта.
