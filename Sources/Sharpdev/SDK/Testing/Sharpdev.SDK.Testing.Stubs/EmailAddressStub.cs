@@ -10,7 +10,7 @@ namespace Sharpdev.SDK.Testing
     /// <summary>
     ///     Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.
     /// </summary>
-    public sealed class EmailAddressStub : ITestStub<IConfirmed<EmailAddress>>
+    public sealed class EmailAddressStub : TestStubBase<IConfirmed<EmailAddress>>
     {
         /// <summary>
         ///     Заглушка для адреса электронной почты.
@@ -30,10 +30,11 @@ namespace Sharpdev.SDK.Testing
         }
 
         /// <summary>
-        ///     Построение заглушки для объекта <see cref="IConfirmed{TConfirmedObject}" />.
+        ///     Создание объекта.
         /// </summary>
-        /// <returns>Заглушка для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
-        public IConfirmed<EmailAddress> Please()
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected override IConfirmed<EmailAddress> AllocateStub(int stubNumber)
         {
             return this._emailAddressMock.Object;
         }

@@ -12,13 +12,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Stubs
     /// <summary>
     ///     Заглушка для идентификатора <see cref="IUser" />.
     /// </summary>
-    public class UserStub : ITestStub<IUser>
+    public class UserStub : TestStubBase<IUser>
     {
         /// <summary>
-        ///     Построение объекта <see cref="IUser" />.
+        ///     Создание объекта.
         /// </summary>
-        /// <returns>Экземпляр объекта <see cref="IUser" /></returns>
-        public IUser Please()
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected override IUser AllocateStub(int stubNumber)
         {
             throw new NotImplementedException();
         }

@@ -19,5 +19,12 @@
         /// </summary>
         /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" />.</returns>
         TBuildingObjectType Please();
+
+        /// <summary>
+        /// Количество заглушек для генерации.
+        /// </summary>
+        /// <param name="countStubObjects">Количество создаваемых объектов.</param>
+        /// <returns>Строитель для заглушек.</returns>
+        ITestStub<TBuildingObjectType> CountOf(int countStubObjects);
     }
 }

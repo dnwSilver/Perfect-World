@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Prosolve.Services.Watcher.Domain.Processes.DataSources;
 
@@ -11,41 +9,21 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Stubs
     /// <summary>
     ///     Заглушка для процесса <see cref="ProcessDataModel" />.
     /// </summary>
-    public class ProcessDataModelStub : ITestStub<IList<ProcessDataModel>>
+    public class ProcessDataModelStub : TestStubBase<ProcessDataModel>
     {
         /// <summary>
-        ///     Заглушка для идентификатора.
+        ///     Создание объекта.
         /// </summary>
-        private readonly IList<ProcessDataModel> _processDataModels =
-            new List<ProcessDataModel>();
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected override ProcessDataModel AllocateStub(int stubNumber)
+        {
+            var processDataModel = new ProcessDataModel();
+            processDataModel.PrivateId = stubNumber;
+            processDataModel.PublicId = Guid.NewGuid();
+            processDataModel.Name = $"Процесс №{stubNumber}.";
 
-        /// <summary>
-        ///     Построение объекта <see cref="ProcessDataModel" />.
-        /// </summary>
-        /// <returns>Экземпляр объекта <see cref="ProcessDataModel" /></returns>
-        public IList<ProcessDataModel> Please()
-        {
-            if (!this._processDataModels.Any())
-                this.CountOf(1);
-            return this._processDataModels;
-        }
-        
-        /// <summary>
-        /// Создание набора процессов.
-        /// </summary>
-        /// <param name="countProcess"></param>
-        /// <returns></returns>
-        public ProcessDataModelStub CountOf(int countProcess)
-        {
-            for(var id = 1; id <= countProcess; id++)
-            {
-                var processDataModel = new ProcessDataModel();
-                processDataModel.PrivateId = id;
-                processDataModel.PublicId = Guid.NewGuid();
-                processDataModel.Name = $"Процесс №{id}.";
-                this._processDataModels.Add(processDataModel);
-            }
-            return this;
+            return processDataModel;
         }
     }
 }

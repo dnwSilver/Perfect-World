@@ -12,7 +12,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
     /// <summary>
     ///     Виртуальный контекст для базы данных. Данные будем хранить в памяти.
     /// </summary>
-    public class VirtualWatcherContextMock : ITestStub<WatcherContext>
+    public class VirtualWatcherContextMock : TestStubBase<WatcherContext>
     {
         /// <summary>
         ///     Настройки для виртуального источника данных.
@@ -30,10 +30,11 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         }
 
         /// <summary>
-        ///     Построение заглушки <see cref="WatcherContext" />.
+        ///     Создание объекта.
         /// </summary>
-        /// <returns>Экземпляр заглушки объекта <see cref="WatcherContext" /></returns>
-        public WatcherContext Please()
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected override WatcherContext AllocateStub(int stubNumber)
         {
             return new WatcherContext(this._options);
         }

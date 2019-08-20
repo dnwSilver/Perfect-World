@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
+    <ProjectReference Include="..\Sharpdev.SDK.Testing.Stubs\Sharpdev.SDK.Testing.Stubs.csproj" />
     <ProjectReference Include="..\Sharpdev.SDK.Testing\Sharpdev.SDK.Testing.csproj" />
   </ItemGroup>
 

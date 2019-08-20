@@ -5,7 +5,7 @@ namespace Sharpdev.SDK.Testing
     /// <summary>
     ///     Фальшивка для интеграционной шины. Данные будем хранить в памяти.
     /// </summary>
-    public class VirtualIntegrateBusMock : ITestStub<IIntegrateBus>
+    public class VirtualIntegrateBusMock : TestStubBase<IIntegrateBus>
     {
         /// <summary>
         ///     Фальшивая шина данных для обмена сообщений.
@@ -13,10 +13,11 @@ namespace Sharpdev.SDK.Testing
         private readonly IIntegrateBus _integrateBus = new IntegrateBusMock();
 
         /// <summary>
-        ///     Построение заглушки <see cref="IIntegrateBus" />.
+        ///     Создание объекта.
         /// </summary>
-        /// <returns>Экземпляр заглушки объекта <see cref="IIntegrateBus" />.</returns>
-        public IIntegrateBus Please()
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected override IIntegrateBus AllocateStub(int stubNumber)
         {
             return this._integrateBus;
         }

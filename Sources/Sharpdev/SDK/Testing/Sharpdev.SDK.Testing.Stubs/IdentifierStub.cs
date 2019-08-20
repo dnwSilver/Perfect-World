@@ -10,7 +10,7 @@ namespace Sharpdev.SDK.Testing
     ///     Заглушка для идентификатора <see cref="IIdentifier{TOwner}" />.
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, для которого предназначен идентификатор.</typeparam>
-    public class IdentifierStub<TEntity> : ITestStub<IIdentifier<TEntity>>
+    public class IdentifierStub<TEntity> : TestStubBase<IIdentifier<TEntity>>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
@@ -20,10 +20,11 @@ namespace Sharpdev.SDK.Testing
             new Mock<IIdentifier<TEntity>>();
 
         /// <summary>
-        ///     Построение заглушки для объекта <see cref="IIdentifier{TEntity}" />.
+        ///     Создание объекта.
         /// </summary>
-        /// <returns>Заглушка для объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IIdentifier<TEntity> Please()
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected override IIdentifier<TEntity> AllocateStub(int stubNumber)
         {
             return this._identifierMock.Object;
         }

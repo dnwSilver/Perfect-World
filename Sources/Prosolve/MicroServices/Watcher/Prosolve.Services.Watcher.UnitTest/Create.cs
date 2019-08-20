@@ -23,13 +23,6 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest
     internal static class Create
     {
         /// <summary>
-        ///     Создание процесса.
-        /// </summary>
-        /// <returns>Готовый для тестов процесс.</returns>
-        /// >
-        internal static ProcessEntityStub ProcessEntity => new ProcessEntityStub();
-
-        /// <summary>
         ///     Создание модели для процесса.
         /// </summary>
         /// <returns>Готовый для тестов процесс.</returns>

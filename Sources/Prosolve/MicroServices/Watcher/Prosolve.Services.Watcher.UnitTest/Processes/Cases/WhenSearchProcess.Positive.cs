@@ -30,8 +30,8 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         private ProcessService AllocateProcessService(out IList<ProcessDataModel> processDataModels)
         {
             processDataModels = Create.ProcessDataModel.CountOf(10).Please();
-            var watcherContext = Create.WatcherContext.With(processDataModels).Please();
-            var integrationBus = Create.IntegrationBus.Please();
+            var watcherContext = Create.WatcherContext.With(processDataModels).Please().First();
+            var integrationBus = Create.IntegrationBus.Please().First();
             var unitOfWork = new WatcherUnitOfWork(watcherContext);
             var processFactory = new ProcessFactory();
             var processRepository = new ProcessEntityRepository(processFactory, WatcherConfiguration.Mapper);
