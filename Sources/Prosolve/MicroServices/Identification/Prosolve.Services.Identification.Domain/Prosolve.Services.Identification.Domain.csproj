@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <RootNamespace>Prosolve.Services.Identification</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Sharpdev\SDK\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
+  </ItemGroup>
+
+</Project>

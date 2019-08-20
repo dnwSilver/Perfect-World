@@ -9,7 +9,6 @@ using Sharpdev.SDK.Testing;
 
 namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
 {
-
     [TestFixture]
     [Category(nameof(Domain))]
     [Category(Constant.Negative)]

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+
+        <LangVersion>8</LangVersion>
+
+        <RootNamespace>Prosolve.Services.Watcher.Domain.UnitTest</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="EntityFrameworkCoreMock.Moq" Version="1.0.0.25" />
+        <PackageReference Include="FluentAssertions" Version="5.8.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.6" />
+        <PackageReference Include="nunit" Version="3.12.0" />
+        <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0-preview-20190808-03" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
+      <ProjectReference Include="..\Prosolve.Services.Watcher.Domain\Prosolve.Services.Watcher.Domain.csproj" />
+    </ItemGroup>
+
+</Project>
