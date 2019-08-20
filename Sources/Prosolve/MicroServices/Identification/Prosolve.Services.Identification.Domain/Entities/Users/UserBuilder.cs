@@ -7,7 +7,7 @@ using Sharpdev.SDK.Types.FullNames;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
-    public class UserBuilder : EntityBuilderBase<IUser>, IUserBuilder
+    public class UserBuilder : EntityBuilderBase<IUserEntity>, IUserBuilder
     {
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.

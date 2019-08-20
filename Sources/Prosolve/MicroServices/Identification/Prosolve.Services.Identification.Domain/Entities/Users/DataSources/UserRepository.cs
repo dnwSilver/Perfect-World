@@ -13,8 +13,18 @@ namespace Prosolve.Services.Identification.Entities.Users
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    public class UserRepository : RepositoryBase<IUser>, IEntityRepository<IUser>
+    internal class UserRepository : RepositoryBase<IUserEntity>, IEntityRepository<IUserEntity>
     {
+        /// <summary>
+        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
+        /// </summary>
+        /// <param name="mapper">Механизм для трансформации объектов.</param>
+        /// <param name="entityFactory">Фабрика для создания объектов.</param>
+        public UserRepository(IEntityFactory<IUserEntity> entityFactory, IMapper mapper)
+            : base(entityFactory, mapper)
+        {
+        }
+
         /// <summary>
         ///     Создание набора бизнес объектов.
         /// </summary>
@@ -23,7 +33,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public Task<Result> Create(IUser[] objectsToCreate)
+        public Task<Result> Create(IUserEntity[] objectsToCreate)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +46,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Task<Result> Update(IUser[] objectsToUpdate)
+        public Task<Result> Update(IUserEntity[] objectsToUpdate)
         {
             throw new NotImplementedException();
         }
@@ -49,7 +59,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Task<Result> Delete(IUser[] objectsToRemove)
+        public Task<Result> Delete(IUserEntity[] objectsToRemove)
         {
             throw new NotImplementedException();
         }
@@ -59,19 +69,9 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// </summary>
         /// <param name="searchParameters">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Task<Result<IUser[]>> Read(ISpecification<IUser> searchParameters)
+        public Task<Result<IUserEntity[]>> Read(ISpecification<IUserEntity> searchParameters)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
-        /// </summary>
-        /// <param name="mapper">Механизм для трансформации объектов.</param>
-        /// <param name="entityFactory">Фабрика для создания объектов.</param>
-        public UserRepository(IMapper mapper, IEntityFactory<IUser> entityFactory)
-            : base(mapper, entityFactory)
-        {
         }
     }
 }

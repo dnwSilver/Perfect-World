@@ -20,17 +20,16 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
     /// <summary>
     ///     Репозиторий для сущности <see cref="IProcessEntity" />.
     /// </summary>
-    public class ProcessEntityRepository : RepositoryBase<IProcessEntity>,
-                                           IEntityRepository<IProcessEntity>
+    public class ProcessRepository : RepositoryBase<IProcessEntity>,
+                                     IEntityRepository<IProcessEntity>
     {
         /// <summary>
-        ///     Инициализация репозитория <see cref="ProcessEntityRepository" />.
+        ///     Инициализация репозитория <see cref="ProcessRepository" />.
         /// </summary>
-        /// <param name="processFactory">Фабрика для создания объектов..</param>
+        /// <param name="processFactory">Фабрика для создания объектов.</param>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
-        public ProcessEntityRepository(IEntityFactory<IProcessEntity> processFactory,
-                                       IMapper mapper)
-            : base(mapper, processFactory)
+        public ProcessRepository(IEntityFactory<IProcessEntity> processFactory, IMapper mapper)
+            : base(processFactory, mapper)
         {
         }
 

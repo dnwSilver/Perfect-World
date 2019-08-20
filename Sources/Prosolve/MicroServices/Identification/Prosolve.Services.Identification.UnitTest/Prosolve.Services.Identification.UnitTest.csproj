@@ -8,16 +8,22 @@
     <LangVersion>8</LangVersion>
 
     <RootNamespace>Prosolve.Services.Identity.UnitTest</RootNamespace>
+
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.12.0" />
-    <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0-preview-20190808-03" />
+      <PackageReference Include="AutoMapper" Version="9.0.0" />
+      <PackageReference Include="EntityFrameworkCoreMock.Moq" Version="1.0.0.25" />
+      <PackageReference Include="FluentAssertions" Version="5.8.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.6" />
+      <PackageReference Include="nunit" Version="3.12.0" />
+      <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0-preview-20190808-03" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Sharpdev.SDK.DataSources.Databases\Sharpdev.SDK.DataSources.Databases.csproj" />
     <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
     <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Stubs\Sharpdev.SDK.Testing.Stubs.csproj" />
     <ProjectReference Include="..\Prosolve.Services.Identification.Domain\Prosolve.Services.Identification.Domain.csproj" />

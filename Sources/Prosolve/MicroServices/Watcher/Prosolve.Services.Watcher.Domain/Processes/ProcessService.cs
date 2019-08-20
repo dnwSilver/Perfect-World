@@ -14,7 +14,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
     /// <summary>
     ///     Сервис по управлению процессами <see cref="IProcessEntity" /> протекающими в системе.
     /// </summary>
-    public class ProcessService
+    internal class ProcessService
     {
         /// <summary>
         ///     Шина для обмена сообщениями.

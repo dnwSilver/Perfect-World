@@ -6,7 +6,7 @@ using Sharpdev.SDK.Domain;
 
 namespace Prosolve.Services.Identification
 {
-    public class IdentificationContext: DbContext, IBoundedContext
+    internal class IdentificationContext: DbContext, IBoundedContext
     {
         public IdentificationContext(DbContextOptions options)
             : base(options)

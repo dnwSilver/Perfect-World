@@ -32,9 +32,9 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
             processDataModels = Create.ProcessDataModel.CountOf(10).Please();
             var watcherContext = Create.WatcherContext.With(processDataModels).Please().First();
             var integrationBus = Create.IntegrationBus.Please().First();
-            var unitOfWork = new WatcherUnitOfWork(watcherContext);
+            var unitOfWork = new DatabaseUnitOfWork<WatcherContext>(watcherContext);
             var processFactory = new ProcessFactory();
-            var processRepository = new ProcessEntityRepository(processFactory, WatcherConfiguration.Mapper);
+            var processRepository = new ProcessRepository(processFactory, WatcherConfiguration.Mapper);
             var processService = new ProcessService(unitOfWork, integrationBus, processRepository);
 
             return processService;

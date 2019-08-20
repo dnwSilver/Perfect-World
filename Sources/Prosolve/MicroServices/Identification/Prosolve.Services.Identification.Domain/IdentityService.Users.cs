@@ -14,7 +14,7 @@ namespace Prosolve.Services.Identification
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    public partial class IdentityService : IIdentityService
+    internal partial class IdentityService : IIdentityService
     {
         /// <summary>
         ///     Создание пользователей в информационной системе.
@@ -23,7 +23,7 @@ namespace Prosolve.Services.Identification
         /// <returns>Информация по процессу создания пользователей.</returns>
         public Result CreateUsers(UserBuilder[] userBuilders)
         {
-            var newUsers = new IUser[0];
+            var newUsers = new IUserEntity[0];
 
             #region Проверяем занят ли адрес электронной почты
 
@@ -58,10 +58,10 @@ namespace Prosolve.Services.Identification
         /// </summary>
         /// <param name="userSpecification">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        public Result<IUser[]> FindUser(ISpecification<IUser> userSpecification)
+        public Result<IUserEntity[]> FindUser(ISpecification<IUserEntity> userSpecification)
         {
             if (this._userRepository.Status != RepositoryStatus.Up)
-                return Result.Fail<IUser[]>("Источник данных для пользователей недоступен.");
+                return Result.Fail<IUserEntity[]>("Источник данных для пользователей недоступен.");
 
             return this._userRepository.Read(userSpecification).Result;
         }

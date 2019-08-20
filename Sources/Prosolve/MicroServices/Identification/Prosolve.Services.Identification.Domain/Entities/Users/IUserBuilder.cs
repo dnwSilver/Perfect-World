@@ -6,9 +6,9 @@ using Sharpdev.SDK.Types.FullNames;
 namespace Prosolve.Services.Identification.Entities.Users
 {
     /// <summary>
-    ///     Строитель для объекта <see cref="IUser" />.
+    ///     Строитель для объекта <see cref="IUserEntity" />.
     /// </summary>
-    public interface IUserBuilder : IEntityBuilder<IUser>
+    public interface IUserBuilder : IEntityBuilder<IUserEntity>
     {
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.

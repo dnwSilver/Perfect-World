@@ -1,14 +1,15 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
 
-[assembly: InternalsVisibleTo("Prosolve.Services.Watcher.UnitTest")]
+[assembly: InternalsVisibleTo("Prosolve.Services.Identification.UnitTest")]
 
-namespace Prosolve.Services.Watcher.Domain
+namespace Prosolve.Services.Identification
 {
-    public static class WatcherConfiguration
+    public static class IdentificationConfiguration
     {
+        //todo инициализация мапперов получается одинаковой... надо убрать дубли кода.
         public static IMapper Mapper
         {
             get
@@ -16,7 +17,7 @@ namespace Prosolve.Services.Watcher.Domain
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.AddExpressionMapping();
-                    cfg.AddMaps(typeof(WatcherConfiguration).Assembly);
+                    cfg.AddMaps(typeof(IdentificationConfiguration).Assembly);
                     cfg.EnableNullPropagationForQueryMapping = true;
                 });
                 config.AssertConfigurationIsValid();

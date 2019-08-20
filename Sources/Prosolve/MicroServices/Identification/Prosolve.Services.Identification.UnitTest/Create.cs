@@ -1,7 +1,7 @@
-﻿using Prosolve.Services.Identity.UnitTest.Users.Stubs;
+﻿using Prosolve.Services.Identity.UnitTest.Users.Mocks;
+using Prosolve.Services.Identity.UnitTest.Users.Stubs;
 
 using Sharpdev.SDK.Domain.Entities;
-using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Testing;
 
 namespace Prosolve.Services.Identity.UnitTest
@@ -27,17 +27,25 @@ namespace Prosolve.Services.Identity.UnitTest
         ///     Создание пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
-        internal static UserStub User()
-        {
-            return new UserStub();
-        }
+        internal static UserStub User => new UserStub();
 
         /// <summary>
         ///     Создание модели для пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
         internal static UserDataModelStub UserDataModel => new UserDataModelStub();
-        
+
+        /// <summary>
+        ///     Создание контекста для сервиса идентификации.
+        /// </summary>
+        internal static VirtualIdentificationContextMock IdentificationContext =>
+            new VirtualIdentificationContextMock();
+
+        /// <summary>
+        ///     Создание эмуляции интеграционной шины.
+        /// </summary>
+        internal static VirtualIntegrateBusMock IntegrationBus => new VirtualIntegrateBusMock();
+
         /// <summary>
         ///     Создание электронного адреса.
         /// </summary>
@@ -57,15 +65,6 @@ namespace Prosolve.Services.Identity.UnitTest
             where TEntity : IEntity<TEntity>
         {
             return new IdentifierStub<TEntity>();
-        }
-
-        /// <summary>
-        ///     Создание эмуляции интеграционной шины<see cref="IIntegrateBus" />.
-        /// </summary>
-        /// <returns>Интеграционная шина.</returns>
-        internal static VirtualIntegrateBusMock IntegrateBus()
-        {
-            return new VirtualIntegrateBusMock();
         }
     }
 }

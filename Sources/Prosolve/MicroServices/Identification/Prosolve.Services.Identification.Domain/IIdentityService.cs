@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 using Prosolve.Services.Identification.Entities.Users;
@@ -19,7 +20,7 @@ namespace Prosolve.Services.Identification
         /// </summary>
         /// <param name="userSearchParameters">Набор параметров для поиска.</param>
         /// <returns>Список пользователям по заданным параметрам.</returns>
-        Result<IUser[]> FindUser(ISpecification<IUser> userSearchParameters);
+        Result<IUserEntity[]> FindUser(ISpecification<IUserEntity> userSearchParameters);
 
         /// <summary>
         ///     Создание пользователей в информационной системе.

@@ -9,7 +9,7 @@ using Sharpdev.SDK.Testing;
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
     [TestFixture]
-    [Category(nameof(IUser))]
+    [Category(nameof(IUserEntity))]
     [Category(Constant.Negative)]
     [Parallelizable(ParallelScope.All)]
     public class WhenRegistrationUserNegative

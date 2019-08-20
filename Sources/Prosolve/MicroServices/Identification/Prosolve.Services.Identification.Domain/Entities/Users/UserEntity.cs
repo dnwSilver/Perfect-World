@@ -9,17 +9,17 @@ namespace Prosolve.Services.Identification.Entities.Users
     /// <summary>
     ///     Пользователь информационной системы.
     /// </summary>
-    internal class User : Entity<IUser>, IUser
+    internal class UserEntity : Entity<IUserEntity>, IUserEntity
     {
         /// <summary>
-        ///     Конструктор для объекта <see cref="IUser" />.
+        ///     Конструктор для объекта <see cref="IUserEntity" />.
         /// </summary>
         /// <param name="identifier">Уникальный идентификатор объекта.</param>
         /// <param name="currentVersion">Версия объекта.</param>
         /// <param name="fullName">Фамилия имя и отчество пользователя.</param>
         /// <param name="contactEmail">Контактный адрес электронной почты.</param>
         /// <param name="contactPhoneNumber">Контактный номер телефона.</param>
-        public User(IIdentifier<IUser> identifier,
+        public UserEntity(IIdentifier<IUserEntity> identifier,
                     int currentVersion,
                     FullName fullName,
                     IConfirmed<EmailAddress>? contactEmail,

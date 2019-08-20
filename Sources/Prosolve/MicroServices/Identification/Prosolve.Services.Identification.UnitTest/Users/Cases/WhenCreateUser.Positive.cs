@@ -9,18 +9,17 @@ using NUnit.Framework;
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Entities.Users;
 using Prosolve.Services.Identification.Entities.Users.DataSources;
+using Prosolve.Services.Watcher.Domain;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.FullNames;
 
-using UserRepository = Prosolve.Services.Identification.Entities.Users.DataSources.UserRepository;
-
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
     [TestFixture]
-    [Category(nameof(IUser))]
+    [Category(nameof(IUserEntity))]
     [Category(Constant.Positive)]
     [Parallelizable(ParallelScope.All)]
     public class WhenCreateUserPositive
@@ -37,12 +36,11 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var identificationContext =
                 Create.IdentificationContext.With(userDataModels).Please().First();
             var integrationBus = Create.IntegrationBus.Please().First();
-            var unitOfWork = new IdentificationUnitOfWork(watcherContext);
+            var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
             var userRepository =
                 new UserRepository(userFactory, IdentificationConfiguration.Mapper);
-            var userService = new UserService(unitOfWork, integrationBus, userRepository);
-            var identityService = new IdentityService(userRepository, integrationBus);
+            var identityService = new IdentityService(unitOfWork, integrationBus, userRepository);
 
             return identityService;
         }
@@ -52,14 +50,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         {
             // Act:
             var userService = this.AllocateIdentityService(out var _);
-            var newUserBuilders = new UserBuilder
-                {
-                    FullName = new FullName("Петров", "Александр", "Андреевич"),
-                    ContactEmailAddress = Create.EmailAddress("TestUser@mail.ru").Please().First(),
-                    Identifier = Identifier<IUser>.New(),
-                    Version = 1
-                }.Yield()
-                 .ToArray();
+            var emailAddress = Create.EmailAddress("TestUser@mail.ru").Please().First();
+            var fullName = new FullName("Петров", "Александр", "Андреевич");
+            var newUserBuilder = new UserBuilder();
+            newUserBuilder.FullName = fullName;
+            newUserBuilder.ContactEmailAddress = emailAddress;
+            newUserBuilder.Identifier = Identifier<IUserEntity>.New();
+            newUserBuilder.Version = 1;
+            var newUserBuilders = newUserBuilder.Yield().ToArray();
 
             // Arrange:
             var result = userService.CreateUsers(newUserBuilders);

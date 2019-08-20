@@ -10,7 +10,7 @@ namespace Prosolve.Services.Identification.Entities.Users
     /// <summary>
     ///     Пользователь информационной системы.
     /// </summary>
-    public interface IUser : IEntity<IUser>, IHasStatus<UserStatus>
+    public interface IUserEntity : IEntity<IUserEntity>, IHasStatus<UserStatus>
     {
         /// <summary>
         ///     Адрес электронной почты указанный для получения обратной связи.

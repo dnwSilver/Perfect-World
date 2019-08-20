@@ -9,7 +9,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Stubs
     /// <summary>
     ///     Заглушка для процесса <see cref="UserDataModel" />.
     /// </summary>
-    public class UserDataModelStub : TestStubBase<UserDataModel>
+    internal class UserDataModelStub : TestStubBase<UserDataModel>
     {
         /// <summary>
         ///     Создание объекта.

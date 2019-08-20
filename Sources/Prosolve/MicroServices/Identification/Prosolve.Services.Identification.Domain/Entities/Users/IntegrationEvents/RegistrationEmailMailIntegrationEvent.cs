@@ -4,7 +4,7 @@ using Sharpdev.SDK.Infrastructure.Integrations;
 
 namespace Prosolve.Services.Identification.Entities.Users.IntegrationEvents
 {
-    public class ToSendMailIntegrationEvent : IIntegrationEvent
+    internal class ToSendMailIntegrationEvent : IIntegrationEvent
     {
         public ToSendMailIntegrationEvent(Guid id, DateTime creationDate)
         {

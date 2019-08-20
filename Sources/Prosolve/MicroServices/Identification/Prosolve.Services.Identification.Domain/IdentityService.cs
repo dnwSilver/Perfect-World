@@ -12,7 +12,7 @@ namespace Prosolve.Services.Identification
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    public partial class IdentityService
+    internal partial class IdentityService
     {
         /// <summary>
         ///     Шина для миграции данных.
@@ -22,17 +22,24 @@ namespace Prosolve.Services.Identification
         /// <summary>
         ///     Репозиторий для работы с пользователями.
         /// </summary>
-        private readonly IEntityRepository<IUser> _userRepository;
+        private readonly IEntityRepository<IUserEntity> _userRepository;
 
+        /// <summary>
+        ///     Механизм для работы с репозиториями.
+        /// </summary>
+        private readonly IUnitOfWork<IdentificationContext> _unitOfWork;
+        
         /// <summary>
         ///     Создание объекта <see cref="IdentityService" />.
         /// </summary>
         /// <param name="userRepository">Репозиторий для работы с пользователями.</param>
         /// <param name="integrateBus">Интеграционная шина.</param>
-        public IdentityService(IEntityRepository<IUser> userRepository,
-                               IIntegrateBus integrateBus)
+        public IdentityService(IUnitOfWork<IdentificationContext> unitOfWork,
+                               IIntegrateBus integrateBus,
+                               IEntityRepository<IUserEntity> userRepository)
         {
             this._userRepository = userRepository;
+            this._unitOfWork = unitOfWork;
             this._integrateBus = integrateBus;
         }
 

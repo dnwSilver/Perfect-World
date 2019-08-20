@@ -14,28 +14,18 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
-        /// 
         /// </summary>
         protected IBoundedContext BoundedContext;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="boundedContext"></param>
-        public void SetBoundedContext(IBoundedContext boundedContext)
-        {
-            this.BoundedContext = boundedContext;
-        }
-        
+
         /// <summary>
         ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>
-        protected RepositoryBase(IMapper mapper, IEntityFactory<TEntity> entityFactory)
+        protected RepositoryBase(IEntityFactory<TEntity> entityFactory, IMapper mapper)
         {
-            this.EntityFactory = entityFactory;
             this.Mapper = mapper;
+            this.EntityFactory = entityFactory;
         }
 
         /// <summary>
@@ -53,6 +43,14 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     Механизм для трансформации объектов.
         /// </summary>
         protected IMapper Mapper { get; }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="boundedContext"></param>
+        public void SetBoundedContext(IBoundedContext boundedContext)
+        {
+            this.BoundedContext = boundedContext;
+        }
 
         /// <summary>
         ///     Смена статуса.

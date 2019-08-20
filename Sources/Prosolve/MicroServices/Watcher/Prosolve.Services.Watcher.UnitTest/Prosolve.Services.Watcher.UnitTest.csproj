@@ -8,6 +8,8 @@
         <LangVersion>8</LangVersion>
 
         <RootNamespace>Prosolve.Services.Watcher.Domain.UnitTest</RootNamespace>
+
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Sharpdev.SDK.DataSources.Databases\Sharpdev.SDK.DataSources.Databases.csproj" />
       <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Mocks\Sharpdev.SDK.Testing.Mocks.csproj" />
       <ProjectReference Include="..\..\..\..\Sharpdev\SDK\Testing\Sharpdev.SDK.Testing.Stubs\Sharpdev.SDK.Testing.Stubs.csproj" />
       <ProjectReference Include="..\Prosolve.Services.Watcher.Domain\Prosolve.Services.Watcher.Domain.csproj" />

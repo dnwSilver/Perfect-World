@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+
+using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Prosolve.Services.Watcher.Domain
@@ -5,16 +8,17 @@ namespace Prosolve.Services.Watcher.Domain
     /// <summary>
     ///     Механизм для работы с набором репозиториями.
     /// </summary>
-    public class WatcherUnitOfWork : IUnitOfWork<WatcherContext>
+    public sealed class DatabaseUnitOfWork<TBoundedContext> : IUnitOfWork<TBoundedContext>
+        where TBoundedContext : DbContext, IBoundedContext
     {
         /// <summary>
         ///     Признак успешного выполнения транзакции.
         /// </summary>
         private bool _isCommitted;
 
-        public WatcherUnitOfWork(WatcherContext watcherContext)
+        public DatabaseUnitOfWork(TBoundedContext boundedContext)
         {
-            this.BoundedContext = watcherContext;
+            this.BoundedContext = boundedContext;
         }
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace Prosolve.Services.Watcher.Domain
         /// <summary>
         ///     Контекст источника данных.
         /// </summary>
-        public WatcherContext BoundedContext { get; }
+        public TBoundedContext BoundedContext { get; }
 
         /// <summary>
         ///     Сохранение всех объектов в источник данных.
