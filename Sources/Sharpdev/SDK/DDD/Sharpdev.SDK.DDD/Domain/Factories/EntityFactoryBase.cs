@@ -29,8 +29,7 @@ namespace Sharpdev.SDK.Domain.Factories
         /// </remarks>
         public Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate)
         {
-            entityToCreate.Identifier =
-                Identifier<TEntity>.New(entityToCreate.Identifier.Externals);
+            entityToCreate.SetIdentifier(Identifier<TEntity>.New(entityToCreate.Identifier.Externals));
 
             return this.Recovery(entityToCreate);
         }

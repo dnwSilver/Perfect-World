@@ -10,6 +10,7 @@ namespace Sharpdev.SDK.Kernel
     public interface IConfirmed<TConfirmedObject> : IEquatable<TConfirmedObject>
         where TConfirmedObject : struct
     {
+        // BUG У меня получилось присвоить Email к PhoneNumber, нарушается строгая типизация.
         /// <summary>
         ///     Значение объект бизнес логики.
         /// </summary>

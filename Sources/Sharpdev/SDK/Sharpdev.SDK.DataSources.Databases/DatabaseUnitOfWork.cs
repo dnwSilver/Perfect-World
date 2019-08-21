@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
-namespace Prosolve.Services.Watcher.Domain
+namespace Sharpdev.SDK.DataSources.Databases
 {
     /// <summary>
     ///     Механизм для работы с набором репозиториями.

@@ -1,13 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Sharpdev.SDK.Testing
 {
     /// <summary>
-    ///     Базовый класс для подготовки stub.
+    ///     Базовый класс для подготовки объектов.
     /// </summary>
     /// <typeparam name="TBuildingObjectType">Подменяемый объект.</typeparam>
-    public abstract class TestStubBase<TBuildingObjectType> : ITestStub<IList<TBuildingObjectType>>
+    public abstract class TestObjectGeneratorBase<TBuildingObjectType> : ITestObjectGenerator<TBuildingObjectType>
         where TBuildingObjectType : class
     {
         /// <summary>
@@ -24,19 +23,25 @@ namespace Sharpdev.SDK.Testing
         ///     Построение заглушки <see cref="TBuildingObjectType" />.
         /// </summary>
         /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" />.</returns>
-        public IList<TBuildingObjectType> Please()
+        public IEnumerable<TBuildingObjectType> Please()
         {
-            if (!this._stubObjects.Any())
-                this.CountOf(1);
-
             return this._stubObjects;
         }
 
         /// <summary>
+        ///     Построение объекта типа <see cref="TBuildingObjectType" />.
+        /// </summary>
+        /// <returns>Экземпляр объекта типа <see cref="TBuildingObjectType" />.</returns>
+        public TBuildingObjectType PorFavor()
+        {
+            return this.AllocateStub(this._createStubCount);
+        }
+        
+        /// <summary>
         ///     Количество заглушек для генерации.
         /// </summary>
         /// <returns></returns>
-        public ITestStub<IList<TBuildingObjectType>> CountOf(int countStubObjects)
+        public ITestObjectGenerator<TBuildingObjectType> CountOf(int countStubObjects)
         {
             for(var iteration = 0; iteration < countStubObjects; iteration++)
             {

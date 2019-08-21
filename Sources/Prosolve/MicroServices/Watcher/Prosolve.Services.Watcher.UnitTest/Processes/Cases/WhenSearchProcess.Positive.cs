@@ -11,6 +11,7 @@ using Prosolve.Services.Watcher.Domain.Processes.DataSources;
 using Prosolve.Services.Watcher.Domain.Processes.Factories;
 using Prosolve.Services.Watcher.Domain.Processes.Specifications;
 
+using Sharpdev.SDK.DataSources.Databases;
 using Sharpdev.SDK.Testing;
 
 namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
@@ -27,11 +28,11 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         /// </summary>
         /// <param name="processDataModels">Данные находящиеся в виртуальном хранилище.</param>
         /// <returns>Сервис готовый для тестов.</returns>
-        private ProcessService AllocateProcessService(out IList<ProcessDataModel> processDataModels)
+        private ProcessService AllocateProcessService(out IEnumerable<ProcessDataModel> processDataModels)
         {
             processDataModels = Create.ProcessDataModel.CountOf(10).Please();
-            var watcherContext = Create.WatcherContext.With(processDataModels).Please().First();
-            var integrationBus = Create.IntegrationBus.Please().First();
+            var watcherContext = Create.WatcherContext.With(processDataModels).PorFavor();
+            var integrationBus = Create.IntegrationBus.PorFavor();
             var unitOfWork = new DatabaseUnitOfWork<WatcherContext>(watcherContext);
             var processFactory = new ProcessFactory();
             var processRepository = new ProcessRepository(processFactory, WatcherConfiguration.Mapper);

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
 using Prosolve.Services.Identification.Entities.Users;
 
@@ -27,7 +25,7 @@ namespace Prosolve.Services.Identification
         /// </summary>
         /// <param name="newUsers">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        Result CreateUsers(UserBuilder[] newUsers);
+        Result CreateUsers(IUserBuilder[] newUsers);
 
         /// <summary>
         ///     Авторизация пользователя.

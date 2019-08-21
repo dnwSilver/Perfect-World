@@ -8,7 +8,7 @@ using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
-namespace Prosolve.Services.Identification.Entities.Users
+namespace Prosolve.Services.Identification.Entities.Users.DataSources
 {
     /// <summary>
     ///     Виртуальный репозиторий для тестов.

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Prosolve.Services.Identification.Entities.Users;
 using Prosolve.Services.Identification.Entities.Users.DomainEvents;
@@ -21,7 +20,7 @@ namespace Prosolve.Services.Identification
         /// </summary>
         /// <param name="userBuilders">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        public Result CreateUsers(UserBuilder[] userBuilders)
+        public Result CreateUsers(IUserBuilder[] userBuilders)
         {
             var newUsers = new IUserEntity[0];
 

@@ -5,7 +5,7 @@ namespace Sharpdev.SDK.Testing
     /// <summary>
     ///     Фальшивка для интеграционной шины. Данные будем хранить в памяти.
     /// </summary>
-    public class VirtualIntegrateBusMock : TestStubBase<IIntegrateBus>
+    public class VirtualIntegrateBusMock : TestObjectGeneratorBase<IIntegrateBus>
     {
         /// <summary>
         ///     Фальшивая шина данных для обмена сообщений.

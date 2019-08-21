@@ -4,12 +4,12 @@ using Prosolve.Services.Identification.Entities.Users.DataSources;
 
 using Sharpdev.SDK.Testing;
 
-namespace Prosolve.Services.Identity.UnitTest.Users.Stubs
+namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
 {
     /// <summary>
     ///     Заглушка для процесса <see cref="UserDataModel" />.
     /// </summary>
-    internal class UserDataModelStub : TestStubBase<UserDataModel>
+    internal class UserDataModelObjectGenerator : TestObjectGeneratorBase<UserDataModel>
     {
         /// <summary>
         ///     Создание объекта.

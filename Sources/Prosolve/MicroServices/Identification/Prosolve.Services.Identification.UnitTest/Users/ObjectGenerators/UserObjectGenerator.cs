@@ -7,12 +7,12 @@ using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.EmailAddresses;
 
-namespace Prosolve.Services.Identity.UnitTest.Users.Stubs
+namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
 {
     /// <summary>
     ///     Заглушка для идентификатора <see cref="IUserEntity" />.
     /// </summary>
-    public class UserStub : TestStubBase<IUserEntity>
+    public class UserObjectGenerator : TestObjectGeneratorBase<IUserEntity>
     {
         /// <summary>
         ///     Создание объекта.
@@ -29,7 +29,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Stubs
         /// </summary>
         /// <param name="userIdentifier">Идентификатор пользователя.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IUserEntity" />.</returns>
-        public UserStub With(IIdentifier<IUserEntity> userIdentifier)
+        public UserObjectGenerator With(IIdentifier<IUserEntity> userIdentifier)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +39,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Stubs
         /// </summary>
         /// <param name="contactEmail">Электронный адрес для контакта.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IUserEntity" />.</returns>
-        public UserStub With(IConfirmed<EmailAddress> contactEmail)
+        public UserObjectGenerator With(IConfirmed<EmailAddress> contactEmail)
         {
             throw new NotImplementedException();
         }

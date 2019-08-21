@@ -1,5 +1,5 @@
 ﻿using Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks;
-using Prosolve.Services.Watcher.Domain.UnitTest.Processes.Stubs;
+using Prosolve.Services.Watcher.Domain.UnitTest.Processes.ObjectGenerators;
 
 using Sharpdev.SDK.Testing;
 
@@ -26,7 +26,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest
         ///     Создание модели для процесса.
         /// </summary>
         /// <returns>Готовый для тестов процесс.</returns>
-        internal static ProcessDataModelStub ProcessDataModel => new ProcessDataModelStub();
+        internal static ProcessDataModelObjectGenerator ProcessDataModel => new ProcessDataModelObjectGenerator();
 
         /// <summary>
         ///     Создание контекста для смотрящего.

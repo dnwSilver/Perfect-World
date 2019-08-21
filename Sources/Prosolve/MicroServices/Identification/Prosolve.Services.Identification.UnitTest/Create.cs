@@ -1,5 +1,5 @@
 ﻿using Prosolve.Services.Identity.UnitTest.Users.Mocks;
-using Prosolve.Services.Identity.UnitTest.Users.Stubs;
+using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Testing;
@@ -27,13 +27,13 @@ namespace Prosolve.Services.Identity.UnitTest
         ///     Создание пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
-        internal static UserStub User => new UserStub();
+        internal static UserObjectGenerator User => new UserObjectGenerator();
 
         /// <summary>
         ///     Создание модели для пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
-        internal static UserDataModelStub UserDataModel => new UserDataModelStub();
+        internal static UserDataModelObjectGenerator UserDataModel => new UserDataModelObjectGenerator();
 
         /// <summary>
         ///     Создание контекста для сервиса идентификации.
@@ -51,9 +51,9 @@ namespace Prosolve.Services.Identity.UnitTest
         /// </summary>
         /// <param name="emailAddress">Адрес электронной почты.</param>
         /// <returns>Готовый для тестов адрес электронной почты.</returns>
-        internal static EmailAddressStub EmailAddress(string emailAddress)
+        internal static EmailAddressObjectGenerator EmailAddress(string emailAddress)
         {
-            return new EmailAddressStub(emailAddress);
+            return new EmailAddressObjectGenerator(emailAddress);
         }
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace Prosolve.Services.Identity.UnitTest
         /// </summary>
         /// <typeparam name="TEntity"> Доменная сущность. </typeparam>
         /// <returns>Уникальный идентификатор.</returns>
-        internal static IdentifierStub<TEntity> Identifier<TEntity>()
+        internal static IdentifierObjectGenerator<TEntity> Identifier<TEntity>()
             where TEntity : IEntity<TEntity>
         {
-            return new IdentifierStub<TEntity>();
+            return new IdentifierObjectGenerator<TEntity>();
         }
     }
 }

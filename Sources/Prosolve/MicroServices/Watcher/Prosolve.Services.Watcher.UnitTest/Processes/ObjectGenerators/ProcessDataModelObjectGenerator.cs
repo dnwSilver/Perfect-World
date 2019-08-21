@@ -4,12 +4,12 @@ using Prosolve.Services.Watcher.Domain.Processes.DataSources;
 
 using Sharpdev.SDK.Testing;
 
-namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Stubs
+namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.ObjectGenerators
 {
     /// <summary>
     ///     Заглушка для процесса <see cref="ProcessDataModel" />.
     /// </summary>
-    public class ProcessDataModelStub : TestStubBase<ProcessDataModel>
+    public class ProcessDataModelObjectGenerator : TestObjectGeneratorBase<ProcessDataModel>
     {
         /// <summary>
         ///     Создание объекта.

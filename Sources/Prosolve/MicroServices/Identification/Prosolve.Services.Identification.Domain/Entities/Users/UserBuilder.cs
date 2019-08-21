@@ -1,30 +1,64 @@
-﻿using System;
-
-using Sharpdev.SDK.Domain.Factories;
+﻿using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
+using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
-    public class UserBuilder : EntityBuilderBase<IUserEntity>, IUserBuilder
+    public class UserBuilder : EntityBuilderBase<IUserEntity, IUserBuilder>, IUserBuilder
     {
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.
         /// </summary>
         /// <returns>Адрес электронной для связи с клиентом.</returns>
-        public IConfirmed<EmailAddress> ContactEmailAddress { get; set; }
+        public IConfirmed<EmailAddress> ContactEmailAddress { get; private set; }
         
         /// <summary>
         ///     Установка номера телефона указанного для получения обратной связи.
         /// </summary>
         /// <returns>Номер телефона для связи с клиентом.</returns>
-        public IConfirmed<EmailAddress> ContactPhoneNumber { get; set; }
+        public IConfirmed<PhoneNumber> ContactPhoneNumber { get; private set;  }
 
         /// <summary>
         ///     Установка фамилии имени и отчества пользователя.
         /// </summary>
         /// <returns>Фамилия имя и отчество пользователя.</returns>
-        public FullName FullName { get; set; }
+        public FullName FullName { get; private set; }
+
+        /// <summary>
+        ///     Фиксация ФИО для объекта <see cref="IUserEntity" />.
+        /// </summary>
+        /// <param name="fullName">ФИО.</param>
+        /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
+        public IUserBuilder SetFullName(FullName fullName)
+        {
+            this.FullName = fullName;
+            return this;
+        }
+
+        /// <summary>
+        ///     Фиксация контактного электронного адреса для объекта <see cref="IUserEntity" />.
+        /// </summary>
+        /// <param name="confirmedEmailAddress">Контактный адрес электронной почты.</param>
+        /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
+        public IUserBuilder SetContactEmailAddress(IConfirmed<EmailAddress> confirmedEmailAddress)
+        {
+            this.ContactEmailAddress = confirmedEmailAddress;
+            
+            return this;
+        }
+
+        /// <summary>
+        ///     Фиксация контактного номера телефона для объекта <see cref="IUserEntity" />.
+        /// </summary>
+        /// <param name="confirmedContactPhoneNumber">Контактный номер телефона.</param>
+        /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
+        public IUserBuilder SetContactPhoneNumber(IConfirmed<PhoneNumber> confirmedContactPhoneNumber)
+        {
+            this.ContactPhoneNumber = confirmedContactPhoneNumber;
+            
+            return this;
+        }
     }
 }

@@ -1,29 +1,32 @@
-﻿using System;
+﻿using System.Collections.ObjectModel;
 
+using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
-using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
-    internal class UserFactory : IEntityFactory<IUserEntity>
+    internal class UserFactory : EntityFactoryBase<IUserEntity>
     {
         /// <summary>
-        ///     Создание нового объекта.
+        ///     Фиксация набора спецификаций.
         /// </summary>
-        /// <returns>Созданный объект.</returns>
-        public Result<IUserEntity> Create(IEntityBuilder<IUserEntity> entityToCreate)
+        /// <param name="processEntity">Сущность к которой будут применяться спецификации.</param>
+        protected override void SetSpecifications(IUserEntity processEntity)
         {
-            throw new NotImplementedException();
+            var specifications = new Collection<ISpecification<IUserEntity>>();
+            this.Specifications = specifications;
         }
 
         /// <summary>
-        ///     Восстановление уже созданного объекта.
+        ///     Создание объекта и размещение его в памяти.
         /// </summary>
-        /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
-        /// <returns>Восстановленный объект.</returns>
-        public Result<IUserEntity> Recovery(IEntityBuilder<IUserEntity> entityToRecovery)
+        /// <param name="entityBuilder">Строитель для объекта <see cref="Entity{TEntity}" />.</param>
+        /// <returns>Ссылка на созданный в куче объект.</returns>
+        protected override IUserEntity AllocateEntity(
+            IEntityBuilder<IUserEntity> entityBuilder)
         {
-            throw new NotImplementedException();
+            return new UserEntity(entityBuilder as IUserBuilder);
         }
     }
 }

@@ -14,21 +14,13 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// <summary>
         ///     Конструктор для объекта <see cref="IUserEntity" />.
         /// </summary>
-        /// <param name="identifier">Уникальный идентификатор объекта.</param>
-        /// <param name="currentVersion">Версия объекта.</param>
-        /// <param name="fullName">Фамилия имя и отчество пользователя.</param>
-        /// <param name="contactEmail">Контактный адрес электронной почты.</param>
-        /// <param name="contactPhoneNumber">Контактный номер телефона.</param>
-        public UserEntity(IIdentifier<IUserEntity> identifier,
-                    int currentVersion,
-                    FullName fullName,
-                    IConfirmed<EmailAddress>? contactEmail,
-                    IConfirmed<PhoneNumber>? contactPhoneNumber)
-            : base(identifier, currentVersion)
+        /// <param name="userBuilder">Строитель для объекта.</param>
+        public UserEntity(IUserBuilder userBuilder)
+            : base(userBuilder.Identifier, userBuilder.Version)
         {
-            this.FullName = fullName;
-            this.ContactEmail = contactEmail;
-            this.ContactPhoneNumber = contactPhoneNumber;
+            this.FullName = userBuilder.FullName;
+            this.ContactEmail = userBuilder.ContactEmailAddress;
+            this.ContactPhoneNumber = userBuilder.ContactPhoneNumber;
         }
 
         /// <summary>

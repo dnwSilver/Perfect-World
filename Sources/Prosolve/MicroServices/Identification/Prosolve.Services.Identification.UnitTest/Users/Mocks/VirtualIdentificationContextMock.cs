@@ -13,7 +13,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
     /// <summary>
     ///     Виртуальный контекст для базы данных. Данные будем хранить в памяти.
     /// </summary>
-    internal class VirtualIdentificationContextMock : TestStubBase<IdentificationContext>
+    internal class VirtualIdentificationContextMock : TestObjectGeneratorBase<IdentificationContext>
     {
         /// <summary>
         ///     Настройки для виртуального источника данных.

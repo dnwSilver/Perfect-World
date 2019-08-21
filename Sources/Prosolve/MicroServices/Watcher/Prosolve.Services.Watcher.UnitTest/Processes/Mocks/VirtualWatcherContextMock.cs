@@ -12,7 +12,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
     /// <summary>
     ///     Виртуальный контекст для базы данных. Данные будем хранить в памяти.
     /// </summary>
-    public class VirtualWatcherContextMock : TestStubBase<WatcherContext>
+    public class VirtualWatcherContextMock : TestObjectGeneratorBase<WatcherContext>
     {
         /// <summary>
         ///     Настройки для виртуального источника данных.

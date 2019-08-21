@@ -5,7 +5,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Factories
     /// <summary>
     ///     Строитель для объекта <see cref="IProcessEntity" />.
     /// </summary>
-    public sealed class ProcessBuilder : EntityBuilderBase<IProcessEntity>, IProcessBuilder
+    public sealed class ProcessBuilder : EntityBuilderBase<IProcessEntity, IProcessBuilder>, IProcessBuilder
     {
         /// <summary>
         ///     Наименование процесса.

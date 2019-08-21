@@ -10,7 +10,7 @@ namespace Sharpdev.SDK.Testing
     ///     Заглушка для идентификатора <see cref="IIdentifier{TOwner}" />.
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, для которого предназначен идентификатор.</typeparam>
-    public class IdentifierStub<TEntity> : TestStubBase<IIdentifier<TEntity>>
+    public class IdentifierObjectGenerator<TEntity> : TestObjectGeneratorBase<IIdentifier<TEntity>>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
@@ -34,7 +34,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="privateIdentifier">Значение приватного идентификатора.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IdentifierStub<TEntity> PrivateId(int privateIdentifier)
+        public IdentifierObjectGenerator<TEntity> PrivateId(int privateIdentifier)
         {
             this._identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
 
@@ -46,7 +46,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="publicIdentifier">Значение публичного идентификатора.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IdentifierStub<TEntity> PublicId(Guid publicIdentifier)
+        public IdentifierObjectGenerator<TEntity> PublicId(Guid publicIdentifier)
         {
             this._identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
 

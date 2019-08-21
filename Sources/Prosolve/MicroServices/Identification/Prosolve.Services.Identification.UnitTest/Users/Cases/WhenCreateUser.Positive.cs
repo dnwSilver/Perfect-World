@@ -9,8 +9,8 @@ using NUnit.Framework;
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Entities.Users;
 using Prosolve.Services.Identification.Entities.Users.DataSources;
-using Prosolve.Services.Watcher.Domain;
 
+using Sharpdev.SDK.DataSources.Databases;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Testing;
@@ -30,16 +30,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         /// </summary>
         /// <param name="userDataModels">Данные находящиеся в виртуальном хранилище.</param>
         /// <returns>Сервис готовый для тестов.</returns>
-        private IIdentityService AllocateIdentityService(out IList<UserDataModel> userDataModels)
+        private IIdentityService AllocateIdentityService(out IEnumerable<UserDataModel> userDataModels)
         {
             userDataModels = Create.UserDataModel.CountOf(10).Please();
-            var identificationContext =
-                Create.IdentificationContext.With(userDataModels).Please().First();
-            var integrationBus = Create.IntegrationBus.Please().First();
+            var identificationContext = Create.IdentificationContext.With(userDataModels).PorFavor();
+            var integrationBus = Create.IntegrationBus.PorFavor();
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
-            var userRepository =
-                new UserRepository(userFactory, IdentificationConfiguration.Mapper);
+            var userRepository = new UserRepository(userFactory, IdentificationConfiguration.Mapper);
             var identityService = new IdentityService(unitOfWork, integrationBus, userRepository);
 
             return identityService;
@@ -52,11 +50,12 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var userService = this.AllocateIdentityService(out var _);
             var emailAddress = Create.EmailAddress("TestUser@mail.ru").Please().First();
             var fullName = new FullName("Петров", "Александр", "Андреевич");
-            var newUserBuilder = new UserBuilder();
-            newUserBuilder.FullName = fullName;
-            newUserBuilder.ContactEmailAddress = emailAddress;
-            newUserBuilder.Identifier = Identifier<IUserEntity>.New();
-            newUserBuilder.Version = 1;
+            var newUserBuilder = new UserBuilder()
+                                 .SetFullName(fullName)
+                                 .SetContactEmailAddress(emailAddress)
+                                 .SetIdentifier(Identifier<IUserEntity>.New())
+                                 .SetVersion(1) as IUserBuilder;
+            
             var newUserBuilders = newUserBuilder.Yield().ToArray();
 
             // Arrange:
