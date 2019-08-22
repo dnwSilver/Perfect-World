@@ -15,12 +15,12 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// <summary>
         ///     Адрес электронной почты указанный для получения обратной связи.
         /// </summary>
-        IConfirmed<EmailAddress> ContactEmail { get; }
+        IConfirmed<EmailAddress>? ContactEmail { get; }
 
         /// <summary>
         ///     Контактный телефон.
         /// </summary>
-        IConfirmed<PhoneNumber> ContactPhoneNumber { get; }
+        IConfirmed<PhoneNumber>? ContactPhoneNumber { get; }
 
         /// <summary>
         ///     Фио пользователя.

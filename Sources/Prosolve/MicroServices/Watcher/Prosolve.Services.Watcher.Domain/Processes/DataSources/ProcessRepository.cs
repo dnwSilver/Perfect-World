@@ -34,11 +34,6 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         }
 
         /// <summary>
-        ///     Контекст источника данных.
-        /// </summary>
-        private WatcherContext WatcherContext => this.BoundedContext as WatcherContext;
-
-        /// <summary>
         ///     Создание набора бизнес объектов.
         /// </summary>
         /// <param name="processes">Список объектов для сохранения в хранилище.</param>
@@ -68,7 +63,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
 
             if (!processModels.Any())
                 return Result.Ok(Array.Empty<IProcessEntity>());
-
+            
             var processBuilders =
                 this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(processModels);
 
@@ -106,6 +101,20 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         public Task<Result> Delete(IProcessEntity[] objectsToRemove)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        ///     Контекст источника данных.
+        /// </summary>
+        private WatcherContext WatcherContext
+        {
+            get
+            {
+                if (this.BoundedContext is WatcherContext watcherContext)
+                    return watcherContext;
+
+                throw new NotImplementedException();
+            }
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Неудачный результат работы метода.</returns>
         public static Result<T> Fail<T>(string errorMessage)
         {
-            return new Result<T>(default, false, TextResultError.Create(errorMessage));
+            return new Result<T>(default!, false, TextResultError.Create(errorMessage));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Неудачный результат работы метода.</returns>
         public static Result<T> Fail<T>(IEnumerable<IResultError> errors)
         {
-            return new Result<T>(default(T), false, errors);
+            return new Result<T>(default!, false, errors);
         }
 
     }

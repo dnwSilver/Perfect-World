@@ -12,6 +12,27 @@ namespace Prosolve.Services.Identification.Entities.Users
     internal class UserEntity : Entity<IUserEntity>, IUserEntity
     {
         /// <summary>
+        ///     Текущий статус объекта.
+        /// </summary>
+        /// <returns>Статус объекта.</returns>
+        public UserStatus Status { get; private set; }
+
+        /// <summary>
+        ///     Адрес электронной почты указанный для получения обратной связи.
+        /// </summary>
+        public IConfirmed<EmailAddress>? ContactEmail { get; }
+
+        /// <summary>
+        ///     Контактный телефон.
+        /// </summary>
+        public IConfirmed<PhoneNumber>? ContactPhoneNumber { get; }
+
+        /// <summary>
+        ///     Фио пользователя.
+        /// </summary>
+        public FullName FullName { get; }
+
+        /// <summary>
         ///     Конструктор для объекта <see cref="IUserEntity" />.
         /// </summary>
         /// <param name="userBuilder">Строитель для объекта.</param>
@@ -24,12 +45,6 @@ namespace Prosolve.Services.Identification.Entities.Users
         }
 
         /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns>Статус объекта.</returns>
-        public UserStatus Status { get; private set; }
-
-        /// <summary>
         ///     Смена статуса.
         /// </summary>
         /// <param name="newStatus">Новый статус.</param>
@@ -37,20 +52,5 @@ namespace Prosolve.Services.Identification.Entities.Users
         {
             this.Status = newStatus;
         }
-
-        /// <summary>
-        ///     Адрес электронной почты указанный для получения обратной связи.
-        /// </summary>
-        public IConfirmed<EmailAddress> ContactEmail { get; }
-
-        /// <summary>
-        ///     Контактный телефон.
-        /// </summary>
-        public IConfirmed<PhoneNumber> ContactPhoneNumber { get; }
-
-        /// <summary>
-        ///     Фио пользователя.
-        /// </summary>
-        public FullName FullName { get; }
     }
 }

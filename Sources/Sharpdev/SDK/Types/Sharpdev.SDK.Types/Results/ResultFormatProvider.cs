@@ -16,15 +16,15 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="arg">Аргумент.</param>
         /// <param name="formatProvider">Провайдер.</param>
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
-        public string Format(string format, object arg, IFormatProvider formatProvider)
+        public string Format(string? format, object? arg, IFormatProvider? formatProvider)
         {
-            if (!formatProvider.Equals(this))
-                return null;
+            if (formatProvider!.If(x=>x.Equals(this)).ReturnFailure())
+                return string.Empty;
 
             if (arg is Exception exception)
                 return exception.ToStringWithInnerExceptions();
 
-            return null;
+            return string.Empty;
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace Sharpdev.SDK.Types.Results
         /// </summary>
         /// <param name="formatType">Формат.</param>
         /// <returns>Провайдер.</returns>
-        public object GetFormat(Type formatType)
+        public object? GetFormat(Type? formatType)
         {
-            return formatType == typeof(ICustomFormatter) ? this : null;
+            return formatType == typeof(ICustomFormatter) ? this : default;
         }
     }
 }

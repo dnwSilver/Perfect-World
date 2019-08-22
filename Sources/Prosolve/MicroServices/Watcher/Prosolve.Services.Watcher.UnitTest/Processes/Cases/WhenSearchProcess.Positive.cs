@@ -75,8 +75,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         {
             // Act:
             var processService = this.AllocateProcessService(out var processDataModels);
-            var specification =
-                new ProcessPublicIdSpecification(processDataModels.First().PublicId);
+            var specification = new ProcessPublicIdSpecification(processDataModels.First().PublicId);
 
             // Arrange:
             var result = processService.Find(specification);

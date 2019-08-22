@@ -48,7 +48,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         {
             // Act:
             var userService = this.AllocateIdentityService(out var _);
-            var emailAddress = Create.EmailAddress("TestUser@mail.ru").Please().First();
+            var emailAddress = Create.EmailAddress("TestUser@mail.ru").PorFavor();
             var fullName = new FullName("Петров", "Александр", "Андреевич");
             var newUserBuilder = new UserBuilder()
                                  .SetFullName(fullName)

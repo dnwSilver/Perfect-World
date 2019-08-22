@@ -14,7 +14,7 @@ namespace Prosolve.Services.Identification
             
         }
 
-        public DbSet<UserDataModel> Users { get; set; }
+        public DbSet<UserDataModel>? Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

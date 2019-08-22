@@ -15,7 +15,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     {
         /// <summary>
         /// </summary>
-        protected IBoundedContext BoundedContext;
+        protected IBoundedContext? BoundedContext;
 
         /// <summary>
         ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.

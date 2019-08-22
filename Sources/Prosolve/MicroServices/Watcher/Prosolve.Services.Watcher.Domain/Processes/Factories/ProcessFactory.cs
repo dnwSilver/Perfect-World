@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 
 using Prosolve.Services.Watcher.Domain.Processes.Specifications;
@@ -35,7 +36,10 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Factories
         protected override IProcessEntity AllocateEntity(
             IEntityBuilder<IProcessEntity> entityBuilder)
         {
-            return new ProcessEntity(entityBuilder as IProcessBuilder);
+            if (entityBuilder is IProcessBuilder processBuilder)
+                return new ProcessEntity(processBuilder);
+
+            throw new NotImplementedException();
         }
     }
 }

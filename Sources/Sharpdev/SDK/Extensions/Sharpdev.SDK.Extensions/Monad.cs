@@ -23,8 +23,8 @@ namespace Sharpdev.SDK.Extensions
         ///     вычислено выходное значение при помощи функции evaluator.
         /// </returns>
         public static TResult With<TInput, TResult>(this TInput o, Func<TInput, TResult> evaluator)
-            where TInput : class
-            where TResult : class
+            where TInput : class?
+            where TResult : class?
         {
             return o == null ? null : evaluator(o);
         }
@@ -90,12 +90,11 @@ namespace Sharpdev.SDK.Extensions
         ///     В противном случае будет вычислено выходное значение при помощи функции evaluator.
         /// </returns>
         public static TInput If<TInput>(this TInput o, Predicate<TInput> evaluator)
-            where TInput : class
         {
             if (o == null)
-                return null;
+                return default!;
 
-            return evaluator(o) ? o : null;
+            return evaluator(o) ? o : default!;
         }
 
         /// <summary>
@@ -106,10 +105,9 @@ namespace Sharpdev.SDK.Extensions
         /// <param name="action">Выполняемый метод. Входной параметр - проверяемый объект.</param>
         /// <returns>Проверяемый объект.</returns>
         public static TInput Do<TInput>(this TInput o, Action<TInput> action)
-            where TInput : class
         {
             if (o == null)
-                return null;
+                return default!;
             action(o);
 
             return o;

@@ -73,7 +73,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is null)
                 return false;

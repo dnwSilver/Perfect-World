@@ -1,7 +1,7 @@
 ﻿namespace Prosolve.Services.Identification.Entities.Users
 {
     /// <summary>
-    ///     Статус репозитория <see cref="IUser" />.
+    ///     Статус репозитория <see cref="IUserEntity" />.
     /// </summary>
     public enum UserStatus : byte
     {

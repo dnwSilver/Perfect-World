@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
 using Sharpdev.SDK.Domain.Events;
+using Sharpdev.SDK.Extensions;
 
 namespace Sharpdev.SDK.Domain.Entities
 {
@@ -28,9 +30,12 @@ namespace Sharpdev.SDK.Domain.Entities
         /// </summary>
         /// <param name="identifier">Уникальный идентификатор объекта.</param>
         /// <param name="currentVersion">Версия объекта.</param>
-        protected Entity(IIdentifier<TEntity> identifier, int currentVersion)
+        protected Entity(IIdentifier<TEntity>? identifier, int currentVersion)
         {
-            this.Id = identifier;
+            if (identifier!.ReturnFailure())
+                throw new ArgumentNullException(nameof(identifier));
+            
+            this.Id = identifier!;
             this.CurrentVersion = currentVersion;
             this.IsSoftDelete = true;
         }

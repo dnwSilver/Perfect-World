@@ -38,7 +38,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     Предоставляет механизм извлечения объекта для управления форматированием.
         /// </param>
         /// <returns>Строковое представление объекта <see cref="TextResultError" />.</returns>
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider? formatProvider)
         {
             return this.Text;
         }
@@ -64,7 +64,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is TextResultError other)
                 return this.Equals(other);

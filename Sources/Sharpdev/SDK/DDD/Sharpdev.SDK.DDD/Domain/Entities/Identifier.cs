@@ -34,7 +34,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// <param name="privateId">Приватный идентификатор.</param>
         /// <param name="publicId">Публичный идентификатор.</param>
         /// <param name="externalIds">Набор внешних идентификаторов.</param>
-        public Identifier(int privateId, Guid publicId, ExternalIdentifiers externalIds)
+        public Identifier(int privateId, Guid publicId, ExternalIdentifiers? externalIds)
         {
             this.Public = publicId;
             this.Private = privateId;
@@ -44,7 +44,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// <summary>
         ///     Набор внешних идентификаторов. Генерируются во внешнем сервисе.
         /// </summary>
-        public ExternalIdentifiers Externals { get; }
+        public ExternalIdentifiers Externals { get; } = new ExternalIdentifiers();
 
         /// <summary>
         ///     Публичный идентификатор. Генерируется внутри сервиса.
@@ -66,7 +66,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// </returns>
         public bool Equals(IIdentifier<TEntity> other)
         {
-            return other.If(x => x.Public == this.Public).ReturnSuccess();
+            return other != null && other.Public == this.Public;
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     <see langword="true" /> if the specified object  is equal to the current object; otherwise,
         ///     <see langword="false" />.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;
@@ -125,9 +125,9 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     <see langword="true" /> если <paramref name="left" /> объект не равен <paramref name="right" />
         ///     параметр; иначе, <see langword="false" />.
         /// </returns>
-        public static bool operator !=(Identifier<TEntity> left, IIdentifier<TEntity> right)
+        public static bool operator !=(Identifier<TEntity>? left, IIdentifier<TEntity> right)
         {
-            return left.If(x => x.Equals(right)).ReturnFailure();
+            return left!.If(x=>x.Equals(right)).ReturnFailure();
         }
 
         /// <summary>
@@ -139,9 +139,9 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     <see langword="true" /> если <paramref name="left" /> объект равен <paramref name="right" />
         ///     параметр; иначе, <see langword="false" />.
         /// </returns>
-        public static bool operator ==(Identifier<TEntity> left, IIdentifier<TEntity> right)
+        public static bool operator ==(Identifier<TEntity>? left, IIdentifier<TEntity> right)
         {
-            return left.If(x => !x.Equals(right)).ReturnFailure();
+            return left!.If(x=>!x!.Equals(right)).ReturnFailure();
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     Приватный идентификатор нам должен выдать источник данных.   Публичный идентификатор
         ///     делаем прямо тут.
         /// </remarks>
-        public static Identifier<TEntity> New(ExternalIdentifiers externalIds = null)
+        public static Identifier<TEntity> New(ExternalIdentifiers? externalIds = null)
         {
             const int privateId = Undefined;
             var publicId = Guid.NewGuid();

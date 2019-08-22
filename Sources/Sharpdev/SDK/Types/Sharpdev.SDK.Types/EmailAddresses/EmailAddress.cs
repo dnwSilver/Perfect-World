@@ -32,7 +32,7 @@ namespace Sharpdev.SDK.Types.EmailAddresses
         ///     <see langword="true" /> - <see cref="_value" /> не отличается от <paramref name="obj" />.
         ///     <see langword="false" /> - <see cref="_value" /> отличается от <paramref name="obj" />.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is null)
                 return this._value is null;

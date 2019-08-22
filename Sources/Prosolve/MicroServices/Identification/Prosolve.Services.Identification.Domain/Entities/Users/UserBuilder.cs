@@ -6,19 +6,19 @@ using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
-    public class UserBuilder : EntityBuilderBase<IUserEntity, IUserBuilder>, IUserBuilder
+    public class UserBuilder : EntityBuilderBase<IUserEntity>, IUserBuilder
     {
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.
         /// </summary>
         /// <returns>Адрес электронной для связи с клиентом.</returns>
-        public IConfirmed<EmailAddress> ContactEmailAddress { get; private set; }
+        public IConfirmed<EmailAddress>? ContactEmailAddress { get; private set; }
         
         /// <summary>
         ///     Установка номера телефона указанного для получения обратной связи.
         /// </summary>
         /// <returns>Номер телефона для связи с клиентом.</returns>
-        public IConfirmed<PhoneNumber> ContactPhoneNumber { get; private set;  }
+        public IConfirmed<PhoneNumber>? ContactPhoneNumber { get; private set;  }
 
         /// <summary>
         ///     Установка фамилии имени и отчества пользователя.
@@ -31,7 +31,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// </summary>
         /// <param name="fullName">ФИО.</param>
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
-        public IUserBuilder SetFullName(FullName fullName)
+        public UserBuilder SetFullName(FullName fullName)
         {
             this.FullName = fullName;
             return this;
@@ -42,7 +42,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// </summary>
         /// <param name="confirmedEmailAddress">Контактный адрес электронной почты.</param>
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
-        public IUserBuilder SetContactEmailAddress(IConfirmed<EmailAddress> confirmedEmailAddress)
+        public UserBuilder SetContactEmailAddress(IConfirmed<EmailAddress>? confirmedEmailAddress)
         {
             this.ContactEmailAddress = confirmedEmailAddress;
             
@@ -54,7 +54,7 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// </summary>
         /// <param name="confirmedContactPhoneNumber">Контактный номер телефона.</param>
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
-        public IUserBuilder SetContactPhoneNumber(IConfirmed<PhoneNumber> confirmedContactPhoneNumber)
+        public UserBuilder SetContactPhoneNumber(IConfirmed<PhoneNumber>? confirmedContactPhoneNumber)
         {
             this.ContactPhoneNumber = confirmedContactPhoneNumber;
             

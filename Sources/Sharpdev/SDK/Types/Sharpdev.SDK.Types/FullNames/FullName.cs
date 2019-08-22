@@ -55,7 +55,7 @@
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             switch(obj)
             {

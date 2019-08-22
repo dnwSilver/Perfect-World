@@ -14,7 +14,7 @@ namespace Prosolve.Services.Watcher.Domain
             
         }
 
-        public DbSet<ProcessDataModel> Processes { get; set; }
+        public DbSet<ProcessDataModel>? Processes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

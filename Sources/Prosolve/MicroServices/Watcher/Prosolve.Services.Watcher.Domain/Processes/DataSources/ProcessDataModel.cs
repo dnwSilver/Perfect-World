@@ -29,15 +29,15 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         /// </summary>
         [Required]
         [Column("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "Не указан.";
 
         /// <summary>
         ///     Ссылка на тип процесса.
         /// </summary>
         [Required]
         [Column("type")]
-        public string TypeName { get; set; }
-        
+        public string TypeName { get; set; } = "Не указан";
+
         /// <summary>
         /// Версия объекта.
         /// </summary>

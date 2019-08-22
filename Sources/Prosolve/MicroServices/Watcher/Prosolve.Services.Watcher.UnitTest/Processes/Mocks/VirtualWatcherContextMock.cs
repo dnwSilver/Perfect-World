@@ -48,7 +48,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         {
             using(var watcherContext = new WatcherContext(this._options))
             {
-                watcherContext.Processes.Add(processDataModel);
+                watcherContext.Processes!.Add(processDataModel);
                 watcherContext.SaveChanges();
             }
 

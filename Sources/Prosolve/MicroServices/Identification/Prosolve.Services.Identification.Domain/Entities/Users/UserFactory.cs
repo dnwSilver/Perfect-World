@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
@@ -6,7 +7,7 @@ using Sharpdev.SDK.Domain.Factories;
 
 namespace Prosolve.Services.Identification.Entities.Users
 {
-    internal class UserFactory : EntityFactoryBase<IUserEntity>
+    internal sealed class UserFactory : EntityFactoryBase<IUserEntity>
     {
         /// <summary>
         ///     Фиксация набора спецификаций.
@@ -23,10 +24,12 @@ namespace Prosolve.Services.Identification.Entities.Users
         /// </summary>
         /// <param name="entityBuilder">Строитель для объекта <see cref="Entity{TEntity}" />.</param>
         /// <returns>Ссылка на созданный в куче объект.</returns>
-        protected override IUserEntity AllocateEntity(
-            IEntityBuilder<IUserEntity> entityBuilder)
+        protected override IUserEntity AllocateEntity(IEntityBuilder<IUserEntity> entityBuilder)
         {
-            return new UserEntity(entityBuilder as IUserBuilder);
+            if (entityBuilder is IUserBuilder userBuilder)
+                return new UserEntity(userBuilder);
+
+            throw new Exception();
         }
     }
 }

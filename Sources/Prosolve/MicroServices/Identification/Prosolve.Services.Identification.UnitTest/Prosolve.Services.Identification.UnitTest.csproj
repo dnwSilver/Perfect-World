@@ -9,7 +9,7 @@
 
     <RootNamespace>Prosolve.Services.Identity.UnitTest</RootNamespace>
 
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

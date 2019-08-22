@@ -9,8 +9,8 @@ namespace Sharpdev.SDK.Types.Results
     /// <summary>
     ///     Результат выполнения метода, возвращающего данные (не void).
     /// </summary>
-    /// <typeparam name="T">Тип возвращаемых данных</typeparam>
-    public readonly struct Result<T> : IEquatable<Result<T>>
+    /// <typeparam name="TResultObjectType">Тип возвращаемых данных</typeparam>
+    public readonly struct Result<TResultObjectType> : IEquatable<Result<TResultObjectType>>
     {
         /// <summary>
         ///     Признак успешности выполнения метода.
@@ -32,7 +32,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     Данные-результат работы метода
         ///     Заполняется только в случае успеха при выполнении метода
         /// </summary>
-        public T Value { get; }
+        public TResultObjectType Value { get; }
 
         /// <summary>
         ///     Создание результата работы метода.
@@ -40,20 +40,20 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="value">Данные-результат работы метода.</param>
         /// <param name="success">Признак успешности выполнения метода.</param>
         /// <param name="errors">Список описаний ошибок, возникших при выполнении метода.</param>
-        internal Result(T value, bool success, IEnumerable<IResultError> errors)
+        internal Result(TResultObjectType value, bool success, IEnumerable<IResultError> errors)
         {
             this.Success = success;
             this.Errors = errors;
             this.Value = value;
         }
-
+        
         /// <summary>
         ///     Создание результата работы метода.
         /// </summary>
         /// <param name="value">Данные-результат работы метода.</param>
         /// <param name="success">Признак успешности выполнения метода.</param>
         /// <param name="resultError">Описание ошибки, возникшей при выполнении метода.</param>
-        internal Result(T value, bool success, IResultError resultError)
+        internal Result(TResultObjectType value, bool success, IResultError resultError)
         {
             this.Success = success;
             this.Errors = resultError.Yield();
@@ -68,7 +68,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <exception cref="InvalidOperationException">
         ///     При попытке получить значение  неудачно завершившегося метода.
         /// </exception>
-        public static implicit operator T(Result<T> result)
+        public static implicit operator TResultObjectType(Result<TResultObjectType> result)
         {
             if (result.Failure)
                 throw new ResultException(result);
@@ -83,7 +83,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>
         ///     <see cref="Result" />
         /// </returns>
-        public static implicit operator Result(Result<T> result)
+        public static implicit operator Result(Result<TResultObjectType> result)
         {
             return new Result(result.Success, result.Errors);
         }
@@ -96,11 +96,11 @@ namespace Sharpdev.SDK.Types.Results
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public bool Equals(Result<T> other)
+        public bool Equals(Result<TResultObjectType> other)
         {
             return this.Success == other.Success &&
                    this.Errors.SequenceEqual(other.Errors) &&
-                   EqualityComparer<T>.Default.Equals(this.Value, other.Value);
+                   EqualityComparer<TResultObjectType>.Default.Equals(this.Value, other.Value);
         }
 
         /// <summary>
@@ -111,12 +111,12 @@ namespace Sharpdev.SDK.Types.Results
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is null)
                 return false;
 
-            return obj is Result<T> result && this.Equals(result);
+            return obj is Result<TResultObjectType> result && this.Equals(result);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Sharpdev.SDK.Types.Results
             {
                 var hashCode = this.Success.GetHashCode();
                 hashCode = (hashCode * 397) ^ (this.Errors?.GetHashCode() ?? 0);
-                hashCode = (hashCode * 397) ^ EqualityComparer<T>.Default.GetHashCode(this.Value);
+                hashCode = (hashCode * 397) ^ EqualityComparer<TResultObjectType>.Default.GetHashCode(this.Value);
 
                 return hashCode;
             }
@@ -139,9 +139,9 @@ namespace Sharpdev.SDK.Types.Results
         ///     Приведение текстовой ошибки к формату <see cref="string" />.
         /// </summary>
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
-        public override string ToString()
+        public override string? ToString()
         {
-            return this.Success ? this.Value.ToString() : this.Format(new ResultFormatProvider());
+            return this.Success ? this.Value?.ToString() : this.Format(new ResultFormatProvider());
         }
     }
 }

@@ -67,12 +67,12 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="formatProvider">Предоставляет механизм извлечения объекта для управления форматированием.</param>
         /// <param name="delimiter">Строка разделения ошибок.</param>
         /// <returns>Строковое представление объекта <see cref="Result" />.</returns>
-        public static string ToString<T>(this Result<T> result,
+        public static string? ToString<T>(this Result<T> result,
                                          IFormatProvider formatProvider,
                                          string delimiter = DefaultDelimiter)
         {
             if (result.Success)
-                return result.Value.ToString();
+                return result.Value?.ToString();
 
             return Format(result, formatProvider, delimiter);
         }
@@ -83,9 +83,9 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="result">Результат выполнения метода, не возвращающего значение.</param>
         /// <param name="delimiter">Строка разделения ошибок.</param>
         /// <returns>Строковое представление объекта <see cref="Result" />.</returns>
-        public static string ToString<T>(this Result<T> result, string delimiter = DefaultDelimiter)
+        public static string? ToString<T>(this Result<T> result, string delimiter = DefaultDelimiter)
         {
-            return ToString(result, null, delimiter);
+            return ToString(result, new ResultFormatProvider(), delimiter);
         }
 
         /// <summary>
@@ -94,10 +94,10 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="result">Результат выполнения метода, не возвращающего значение.</param>
         /// <param name="errorsToString">Делегат преобразования списка ошибок в одну строку.</param>
         /// <returns>Строковое представление объекта <see cref="Result" />.</returns>
-        public static string ToString<T>(this Result<T> result, Func<IEnumerable<IFormattable>, string> errorsToString)
+        public static string? ToString<T>(this Result<T> result, Func<IEnumerable<IFormattable>, string> errorsToString)
         {
             if (result.Success)
-                return result.Value.ToString();
+                return result.Value?.ToString();
 
             return errorsToString(result.Errors);
         }
