@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Prosolve.Services.Identification.Entities.Users;
 using Prosolve.Services.Identification.Entities.Users.DomainEvents;
@@ -22,34 +23,28 @@ namespace Prosolve.Services.Identification
         /// <returns>Информация по процессу создания пользователей.</returns>
         public Result CreateUsers(IUserBuilder[] userBuilders)
         {
-            var newUsers = new IUserEntity[0];
+            var factory = new UserFactory();
+            var newUsers = new List<IUserEntity>();
 
-            #region Проверяем занят ли адрес электронной почты
+            foreach(var userBuilder in userBuilders)
+            {
+                var userEntity = factory.Create(userBuilder);
+                newUsers.Add(userEntity.Value);
+            }
+       
+            using var uow = this._unitOfWork;
+            this._userRepository.SetBoundedContext(uow.BoundedContext);
+            var createResult = this._userRepository.Create(newUsers.ToArray());
+            var commitResult = uow.Commit();
 
-            #endregion
-
-            #region Создаём пользователей
-
-            var createResult = this._userRepository.Create(newUsers);
-
-            #endregion
-
-            #region Отправляем заявки на отправку письма с подтверждением
-
+            if (commitResult.Failure)
+                return commitResult;
+            
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             this._integrateBus.PublishAsync(registrationEvent);
 
-            #endregion
-
-            #region Фиксируем статус действия в BI системе
-
             var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
-            newUsers[0].AddDomainEvent(domainEvent);
-            this._integrateBus.PublishAsync(domainEvent);
-
-            #endregion
-
-            return createResult.Result;
+            return Result.Ok();
         }
 
         /// <summary>

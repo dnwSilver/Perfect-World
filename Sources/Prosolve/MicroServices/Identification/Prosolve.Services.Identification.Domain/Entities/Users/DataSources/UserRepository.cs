@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -24,7 +25,20 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
             : base(entityFactory, mapper)
         {
         }
+        /// <summary>
+        ///     Контекст источника данных.
+        /// </summary>
+        private IdentificationContext IdentificationContext
+        {
+            get
+            {
+                if (this.BoundedContext is IdentificationContext identificationContext)
+                    return identificationContext;
 
+                throw new NotImplementedException();
+            }
+        }
+        
         /// <summary>
         ///     Создание набора бизнес объектов.
         /// </summary>
@@ -33,9 +47,12 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public Task<Result> Create(IUserEntity[] objectsToCreate)
+        public async Task<Result> Create(IUserEntity[] objectsToCreate)
         {
-            throw new NotImplementedException();
+            var userDataModels = this.Mapper.Map<IList<IUserEntity>, IList<UserDataModel>>(objectsToCreate);
+            this.IdentificationContext.Users.Add(userDataModels[0]);
+            await this.IdentificationContext.SaveChangesAsync();
+            return Result.Ok();
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {
@@ -20,7 +21,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// <summary>
         ///     Сохранение всех объектов в источник данных.
         /// </summary>
-        void Commit();
+        Result Commit();
 
         /// <summary>
         ///     Откат данных до первоначального состояния.

@@ -38,7 +38,7 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
         /// <summary>
         ///     Имя.
         /// </summary>
-        [Column("first_name"), NotNull]
+        [Required, Column("first_name"), NotNull]
         public string FirstName { get; set; } = "Не указано";
 
         /// <summary>

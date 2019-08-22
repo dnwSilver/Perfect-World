@@ -28,11 +28,12 @@ namespace Prosolve.Services.Identification
         ///     Механизм для работы с репозиториями.
         /// </summary>
         private readonly IUnitOfWork<IdentificationContext> _unitOfWork;
-        
+
         /// <summary>
         ///     Создание объекта <see cref="IdentityService" />.
         /// </summary>
         /// <param name="userRepository">Репозиторий для работы с пользователями.</param>
+        /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
         /// <param name="integrateBus">Интеграционная шина.</param>
         public IdentityService(IUnitOfWork<IdentificationContext> unitOfWork,
                                IIntegrateBus integrateBus,

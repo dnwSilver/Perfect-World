@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Infrastructure.Repositories;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.DataSources.Databases
 {
@@ -16,9 +18,12 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// </summary>
         private bool _isCommitted;
 
+        private readonly IDbContextTransaction _transaction;
+
         public DatabaseUnitOfWork(TBoundedContext boundedContext)
         {
             this.BoundedContext = boundedContext;
+            this._transaction = boundedContext.Database.BeginTransaction();
         }
 
         /// <summary>
@@ -29,6 +34,8 @@ namespace Sharpdev.SDK.DataSources.Databases
         {
             if (!this._isCommitted)
                 this.Rollback();
+
+            this._transaction.Dispose();
         }
 
         /// <summary>
@@ -39,10 +46,16 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <summary>
         ///     Сохранение всех объектов в источник данных.
         /// </summary>
-        public void Commit()
+        public Result Commit()
         {
-            this.BoundedContext.SaveChanges();
+            this._transaction.Commit();
+/*
+            if (result == 0)
+                return Result.Fail("Не удалось сохранить данные в источнике данных.");
+*/
             this._isCommitted = true;
+
+            return Result.Ok();
         }
 
         /// <summary>
@@ -50,6 +63,8 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// </summary>
         public void Rollback()
         {
+            this._transaction.Rollback();
+
             //todo Обязательно должны быть добавлены логи.
         }
     }

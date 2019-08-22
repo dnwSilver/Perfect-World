@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using Prosolve.Services.Watcher.Domain.Processes.DataSources;
 
@@ -26,6 +27,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         {
             this._options = new DbContextOptionsBuilder<WatcherContext>()
                             .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                             .Options;
         }
 

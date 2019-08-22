@@ -15,7 +15,16 @@ namespace Prosolve.Services.Identification
         }
 
         public DbSet<UserDataModel>? Users { get; set; }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<UserDataModel>()
+                   .HasIndex(u => u.EmailAddress)
+                   .IsUnique();
+            
+            builder.Entity<UserDataModel>()
+                   .HasIndex(u => u.PhoneNumber)
+                   .IsUnique();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

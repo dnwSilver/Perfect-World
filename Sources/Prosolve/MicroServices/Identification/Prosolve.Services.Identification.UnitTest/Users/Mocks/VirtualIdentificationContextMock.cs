@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Entities.Users.DataSources;
@@ -26,7 +27,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         public VirtualIdentificationContextMock()
         {
             this._options = new DbContextOptionsBuilder<IdentificationContext>()
-                            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                            .UseInMemoryDatabase(Guid.NewGuid().ToString()) 
+                            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                             .Options;
         }
 

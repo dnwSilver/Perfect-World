@@ -20,6 +20,17 @@ namespace Sharpdev.SDK.Types.PhoneNumbers
         }
 
         /// <summary>
+        /// Создание нового экземпляра телефонного номера.
+        /// </summary>
+        /// <param name="phoneNumber">Телефонный номер.</param>
+        /// <returns>Новый экземпляр телефонного номера.</returns>
+        public static implicit operator PhoneNumber(string phoneNumber)
+        {
+            // todo Проверка номера телефона на соответствие стандартам отсутствует.
+            return new PhoneNumber(phoneNumber);
+        }
+        
+        /// <summary>
         ///     Приведение к строке.
         /// </summary>
         /// <returns>Значение в типе строка.</returns>

@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+
+using Microsoft.VisualBasic;
 
 using Sharpdev.SDK.Infrastructure.Integrations;
 
@@ -11,11 +12,6 @@ namespace Sharpdev.SDK.Testing
     /// </summary>
     internal class IntegrateBusMock : IIntegrateBus
     {
-        /// <summary>
-        /// Список события для отправки в шину данных.
-        /// </summary>
-        private readonly IList<IIntegrationEvent> _events = new List<IIntegrationEvent>();
-
         /// <summary>
         ///     Текущий статус объекта.
         /// </summary>
@@ -42,7 +38,10 @@ namespace Sharpdev.SDK.Testing
         /// </remarks>
         public Task PublishAsync(IIntegrationEvent @event)
         {
-            this._events.Add(@event);
+            // Список события для отправки в шину данных.
+            var events = new Collection();
+            events.Add(@event);
+            events.Clear();
 
             return Task.CompletedTask;
         }

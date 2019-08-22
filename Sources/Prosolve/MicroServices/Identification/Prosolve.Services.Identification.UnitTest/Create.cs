@@ -1,4 +1,5 @@
-﻿using Prosolve.Services.Identity.UnitTest.Users.Mocks;
+﻿using Prosolve.Services.Identification.Entities.Users;
+using Prosolve.Services.Identity.UnitTest.Users.Mocks;
 using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 
 using Sharpdev.SDK.Domain.Entities;
@@ -33,7 +34,8 @@ namespace Prosolve.Services.Identity.UnitTest
         ///     Создание модели для пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
-        internal static UserDataModelObjectGenerator UserDataModel => new UserDataModelObjectGenerator();
+        internal static UserDataModelObjectGenerator UserDataModel =>
+            new UserDataModelObjectGenerator();
 
         /// <summary>
         ///     Создание контекста для сервиса идентификации.
@@ -51,20 +53,28 @@ namespace Prosolve.Services.Identity.UnitTest
         /// </summary>
         /// <param name="emailAddress">Адрес электронной почты.</param>
         /// <returns>Готовый для тестов адрес электронной почты.</returns>
-        internal static EmailAddressObjectGenerator EmailAddress(string emailAddress)
-        {
-            return new EmailAddressObjectGenerator(emailAddress);
-        }
+        internal static EmailAddressGenerator EmailAddress(string emailAddress)
+            =>new EmailAddressGenerator(emailAddress);
+
+        /// <summary>
+        ///     Создание строителя для <see cref="IUserEntity" />.
+        /// </summary>
+        internal static UserBuilderGenerator UserBuilder => new UserBuilderGenerator();
 
         /// <summary>
         ///     Создание идентификатора <see cref="IIdentifier{TOwner}" />.
         /// </summary>
         /// <typeparam name="TEntity"> Доменная сущность. </typeparam>
         /// <returns>Уникальный идентификатор.</returns>
-        internal static IdentifierObjectGenerator<TEntity> Identifier<TEntity>()
+        internal static IdentifierGenerator<TEntity> Identifier<TEntity>()
             where TEntity : IEntity<TEntity>
-        {
-            return new IdentifierObjectGenerator<TEntity>();
-        }
+            =>new IdentifierGenerator<TEntity>();
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        internal static PhoneNumberGenerator PhoneNumber
+            =>new PhoneNumberGenerator();
     }
 }

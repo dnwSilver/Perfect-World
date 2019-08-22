@@ -7,10 +7,10 @@ using Sharpdev.SDK.Domain.Entities;
 namespace Sharpdev.SDK.Testing
 {
     /// <summary>
-    ///     Заглушка для идентификатора <see cref="IIdentifier{TOwner}" />.
+    ///     Генератор для идентификатора <see cref="IIdentifier{TOwner}" />.
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, для которого предназначен идентификатор.</typeparam>
-    public class IdentifierObjectGenerator<TEntity> : TestObjectGeneratorBase<IIdentifier<TEntity>>
+    public class IdentifierGenerator<TEntity> : TestObjectGeneratorBase<IIdentifier<TEntity>>
         where TEntity : IEntity<TEntity>
     {
         /// <summary>
@@ -34,7 +34,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="privateIdentifier">Значение приватного идентификатора.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IdentifierObjectGenerator<TEntity> PrivateId(int privateIdentifier)
+        public IdentifierGenerator<TEntity> PrivateId(int privateIdentifier)
         {
             this._identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
 
@@ -46,7 +46,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="publicIdentifier">Значение публичного идентификатора.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IdentifierObjectGenerator<TEntity> PublicId(Guid publicIdentifier)
+        public IdentifierGenerator<TEntity> PublicId(Guid publicIdentifier)
         {
             this._identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
 
