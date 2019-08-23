@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Microsoft.EntityFrameworkCore;
+
 using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -84,11 +89,37 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
-        /// <param name="searchParameters">Набор параметров для поиска.</param>
+        /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Task<Result<IUserEntity[]>> Read(ISpecification<IUserEntity> searchParameters)
-        {
-            throw new NotImplementedException();
+        public async Task<Result<IUserEntity[]>> Read(ISpecification<IUserEntity> specification)
+        {       
+            // IUserEntity
+            // IUserBuilder
+            // UserDataModel
+            // IdentificationContext.Users
+            
+            var userExpression =
+                this.Mapper.Map<Expression<Func<UserDataModel, bool>>>(specification.Expression);
+
+            var userDataModels =
+                await this.IdentificationContext.Users.Where(userExpression).ToListAsync();
+
+            if (!userDataModels.Any())
+                return Result.Ok(Array.Empty<IUserEntity>());
+            
+            var userBuilders =
+                this.Mapper.Map<IList<UserDataModel>, IList<IUserBuilder>>(userDataModels);
+
+            var users = new List<IUserEntity>();
+            users.AddRange(from userBuilder in userBuilders
+                               let userFactory = this.EntityFactory
+                               select userFactory.Recovery(userBuilder)
+                               into userEntity
+                               select userEntity.Value);
+
+            return Result.Ok(users.ToArray());
         }
+
+     
     }
 }

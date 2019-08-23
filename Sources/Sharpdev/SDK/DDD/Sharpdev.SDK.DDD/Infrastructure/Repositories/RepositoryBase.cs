@@ -1,8 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
 using AutoMapper;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {
@@ -59,6 +66,31 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         public void ChangeStatus(RepositoryStatus newStatus)
         {
             this.Status = newStatus;
+        }
+        
+        protected async Task<Result<TEntity[]>> Read<TEntityBuilder, TDataModel>(ISpecification<TEntity> specification)
+            where TEntityBuilder: IEntityBuilder<TEntity>
+        {
+            var userExpression =
+                this.Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
+
+            var dataModels =
+                await this.BoundedContext.Users.Where(userExpression).ToListAsync();
+
+            if (!dataModels.Any())
+                return Result.Ok(Array.Empty<TEntity>());
+            
+            var builders =
+                this.Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
+
+            var entities = new List<TEntity>();
+            entities.AddRange(from builder in builders
+                              let factory = this.EntityFactory
+                              select factory.Recovery(builder)
+                              into entity
+                              select entity.Value);
+
+            return Result.Ok(entities.ToArray());
         }
     }
 }
