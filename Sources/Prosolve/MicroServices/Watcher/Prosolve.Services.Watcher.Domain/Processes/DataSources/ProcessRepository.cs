@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
-using Microsoft.EntityFrameworkCore;
-
 using Prosolve.Services.Watcher.Domain.Processes.Factories;
 
-using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -20,8 +17,9 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
     /// <summary>
     ///     Репозиторий для сущности <see cref="IProcessEntity" />.
     /// </summary>
-    public class ProcessRepository : RepositoryBase<IProcessEntity>,
-                                     IEntityRepository<IProcessEntity>
+    public class ProcessRepository :
+        RepositoryBase<IProcessEntity, ProcessDataModel, IProcessBuilder>,
+        IEntityRepository<IProcessEntity>
     {
         /// <summary>
         ///     Инициализация репозитория <see cref="ProcessRepository" />.
@@ -31,6 +29,20 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         public ProcessRepository(IEntityFactory<IProcessEntity> processFactory, IMapper mapper)
             : base(processFactory, mapper)
         {
+        }
+
+        /// <summary>
+        ///     Контекст источника данных.
+        /// </summary>
+        private WatcherContext WatcherContext
+        {
+            get
+            {
+                if (this.BoundedContext is WatcherContext watcherContext)
+                    return watcherContext;
+
+                throw new NotImplementedException();
+            }
         }
 
         /// <summary>
@@ -44,37 +56,6 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         public Task<Result> Create(IProcessEntity[] processes)
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Поиск и получение необходимых бизнес объектов в источнике данных.
-        /// </summary>
-        /// <param name="specification">Набор параметров для поиска.</param>
-        /// <returns>Набор бизнес объектов.</returns>
-        public async Task<Result<IProcessEntity[]>> Read(
-            ISpecification<IProcessEntity> specification)
-        {
-            // todo Я точно уверен что всё это можно вынести в базовый абстрактный класс. Нужно потратить на это часок другой. 
-            var processExpression =
-                this.Mapper.Map<Expression<Func<ProcessDataModel, bool>>>(specification.Expression);
-
-            var processModels =
-                await this.WatcherContext.Processes.Where(processExpression).ToListAsync();
-
-            if (!processModels.Any())
-                return Result.Ok(Array.Empty<IProcessEntity>());
-            
-            var processBuilders =
-                this.Mapper.Map<IList<ProcessDataModel>, IList<IProcessBuilder>>(processModels);
-
-            var processes = new List<IProcessEntity>();
-            processes.AddRange(from processBuilder in processBuilders
-                               let processFactory = this.EntityFactory
-                               select processFactory.Recovery(processBuilder)
-                               into processEntity
-                               select processEntity.Value);
-
-            return Result.Ok(processes.ToArray());
         }
 
         /// <summary>
@@ -103,18 +84,10 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        ///     Контекст источника данных.
-        /// </summary>
-        private WatcherContext WatcherContext
+        protected override IEnumerable<ProcessDataModel> ReadQuery(
+            Expression<Func<ProcessDataModel, bool>> expression)
         {
-            get
-            {
-                if (this.BoundedContext is WatcherContext watcherContext)
-                    return watcherContext;
-
-                throw new NotImplementedException();
-            }
+            return this.WatcherContext.Processes.Where(expression);
         }
     }
 }

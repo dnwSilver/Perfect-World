@@ -17,8 +17,10 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     ///     Базовая реализация для любых потомков интерфейса <see cref="IEntityRepository{TEntity}" />.
     /// </summary>
     /// <typeparam name="TEntity">Сущность для которой предназначено хранилище.</typeparam>
-    public abstract class RepositoryBase<TEntity>
+    public abstract class RepositoryBase<TEntity, TDataModel, TEntityBuilder>
         where TEntity : IEntity<TEntity>
+        where TEntityBuilder : IEntityBuilder<TEntity>
+        where TDataModel : class
     {
         /// <summary>
         /// </summary>
@@ -67,21 +69,20 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         {
             this.Status = newStatus;
         }
-        
-        protected async Task<Result<TEntity[]>> Read<TEntityBuilder, TDataModel>(ISpecification<TEntity> specification)
-            where TEntityBuilder: IEntityBuilder<TEntity>
+
+        protected abstract IEnumerable<TDataModel> ReadQuery(Expression<Func<TDataModel, bool>> expression);
+
+        public Task<Result<TEntity[]>> Read(ISpecification<TEntity> specification)
         {
             var userExpression =
                 this.Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
 
-            var dataModels =
-                await this.BoundedContext.Users.Where(userExpression).ToListAsync();
+            var dataModels = this.ReadQuery(userExpression).ToList();
 
             if (!dataModels.Any())
-                return Result.Ok(Array.Empty<TEntity>());
-            
-            var builders =
-                this.Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
+                return Task.Run(()=>Result.Ok(Array.Empty<TEntity>()));
+
+            var builders = this.Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
 
             var entities = new List<TEntity>();
             entities.AddRange(from builder in builders
@@ -90,7 +91,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
                               into entity
                               select entity.Value);
 
-            return Result.Ok(entities.ToArray());
+            return Task.Run(()=>Result.Ok(entities.ToArray()));
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 using Prosolve.Services.Identification.Entities.Users;
 using Prosolve.Services.Identification.Entities.Users.DomainEvents;
 using Prosolve.Services.Identification.Entities.Users.IntegrationEvents;
 
 using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
@@ -23,27 +24,26 @@ namespace Prosolve.Services.Identification
         /// <returns>Информация по процессу создания пользователей.</returns>
         public Result CreateUsers(IUserBuilder[] userBuilders)
         {
-            var factory = new UserFactory();
-            var newUsers = new List<IUserEntity>();
+            IEntityFactory<IUserEntity> factory = new UserFactory();
 
-            foreach(var userBuilder in userBuilders)
-            {
-                var userEntity = factory.Create(userBuilder);
-                newUsers.Add(userEntity.Value);
-            }
-       
             using var uow = this._unitOfWork;
             this._userRepository.SetBoundedContext(uow.BoundedContext);
-            var createResult = this._userRepository.Create(newUsers.ToArray());
+            var createResult = this._userRepository.Create(
+                userBuilders
+                    .Select(userBuilder => factory.Create(userBuilder))
+                    .Select(userEntity => userEntity.Value)
+                    .ToArray());
+            
             var commitResult = uow.Commit();
 
             if (commitResult.Failure)
                 return commitResult;
-            
+
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             this._integrateBus.PublishAsync(registrationEvent);
 
             var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
+
             return Result.Ok();
         }
 
