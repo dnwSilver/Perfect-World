@@ -15,7 +15,7 @@ namespace Prosolve.Services.Identification
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    internal partial class IdentityService : IIdentityService
+    internal class UserService : IUserService
     {
         /// <summary>
         ///     Создание пользователей в информационной системе.
