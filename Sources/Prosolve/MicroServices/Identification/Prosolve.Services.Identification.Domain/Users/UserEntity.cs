@@ -1,10 +1,12 @@
-﻿using Sharpdev.SDK.Domain.Entities;
+﻿using Prosolve.Services.Identification.Users.Factories;
+
+using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 using Sharpdev.SDK.Types.PhoneNumbers;
 
-namespace Prosolve.Services.Identification.Entities.Users
+namespace Prosolve.Services.Identification.Users
 {
     /// <summary>
     ///     Пользователь информационной системы.

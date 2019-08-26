@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-using Prosolve.Services.Identification.Entities.Users;
+using Prosolve.Services.Identification.Users;
 
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
@@ -12,7 +12,7 @@ namespace Prosolve.Services.Identification
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    internal partial class IdentityService
+    internal class IdentificationService
     {
         /// <summary>
         ///     Шина для миграции данных.
@@ -35,7 +35,7 @@ namespace Prosolve.Services.Identification
         /// <param name="userRepository">Репозиторий для работы с пользователями.</param>
         /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
         /// <param name="integrateBus">Интеграционная шина.</param>
-        public IdentityService(IUnitOfWork<IdentificationContext> unitOfWork,
+        public IdentificationService(IUnitOfWork<IdentificationContext> unitOfWork,
                                IIntegrateBus integrateBus,
                                IEntityRepository<IUserEntity> userRepository)
         {

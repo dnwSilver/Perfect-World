@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Prosolve.Services.Identification.Entities.Users;
+using Prosolve.Services.Identification.Users;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Kernel;

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-using Prosolve.Services.Identification.Entities.Users.DataSources;
+using Prosolve.Services.Identification.Users.DataSources;
 
 using Sharpdev.SDK.Domain;
 
@@ -17,13 +17,11 @@ namespace Prosolve.Services.Identification
         public DbSet<UserDataModel>? Users { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<UserDataModel>()
-                   .HasIndex(u => u.EmailAddress)
-                   .IsUnique();
+            // todo Как-то тут всё подозрительно работает, такое ощущение что оно НЕ РАБОТАЕТ
+            // https://entityframeworkcore.com/knowledge-base/49526370/is-there-a-data-annotation-for-unique-constraint-in-ef-core--code-first--
             
-            builder.Entity<UserDataModel>()
-                   .HasIndex(u => u.PhoneNumber)
-                   .IsUnique();
+            builder.Entity<UserDataModel>().HasIndex(u => u.EmailAddress).IsUnique();
+            builder.Entity<UserDataModel>().HasIndex(u => u.PhoneNumber).IsUnique();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

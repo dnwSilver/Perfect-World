@@ -3,28 +3,29 @@ using System.Linq.Expressions;
 
 using Sharpdev.SDK.Domain;
 
-namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
+namespace Prosolve.Services.Identification.Users.Specifications
 {
     /// <summary>
     ///     Спецификация на ограничение длины наименования процесса.
     /// </summary>
-    public sealed class ProcessNameLengthSpecification : SpecificationBase<IProcessEntity>
+    public sealed class UserNameLengthSpecification : SpecificationBase<IUserEntity>
     {
         /// <summary>
         ///     Максимальная длина наименования процесса.
         /// </summary>
-        private const int MaxLength = 50;
+        private const int MaxLength = 150;
 
         /// <summary>
         ///     Сообщение в случае не соответствия спецификации.
         /// </summary>
+        /// todo Создать файл ресурсов для получения текстовых значений по пользователям.
         private static readonly string FailureMessage =
-            string.Format(ProcessResources.NameLengthSpecification, MaxLength);
+            string.Format("dsadas", MaxLength);
 
         /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
-        public ProcessNameLengthSpecification()
+        public UserNameLengthSpecification()
             : base(Criteria, FailureMessage)
         {
         }
@@ -32,7 +33,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IProcessEntity, bool>> Criteria => x =>
-            x.Name.Length <= MaxLength;
+        private static Expression<Func<IUserEntity, bool>> Criteria => x =>
+            x.FullName.GetFullName.Length <= MaxLength;
     }
 }

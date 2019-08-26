@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using Prosolve.Services.Identification;
-using Prosolve.Services.Identification.Entities.Users.DataSources;
+using Prosolve.Services.Identification.Users.DataSources;
 
 using Sharpdev.SDK.Testing;
 
@@ -52,7 +52,6 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
             using var identificationContext = new IdentificationContext(this._options);
             identificationContext.Users.Add(userDataModel);
             identificationContext.SaveChanges();
-
             return this;
         }
 

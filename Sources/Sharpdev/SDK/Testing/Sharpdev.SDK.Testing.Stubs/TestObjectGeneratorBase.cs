@@ -34,7 +34,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Экземпляр объекта типа <see cref="TBuildingObjectType" />.</returns>
         public TBuildingObjectType PorFavor()
         {
-            return this.AllocateStub(this._createStubCount);
+            return this.AllocateStub(default);
         }
         
         /// <summary>
@@ -43,7 +43,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns></returns>
         public ITestObjectGenerator<TBuildingObjectType> CountOf(int countStubObjects)
         {
-            for(var iteration = 0; iteration < countStubObjects; iteration++)
+            for(var iteration = 1; iteration <= countStubObjects; iteration++)
             {
                 this._createStubCount++;
                 this._stubObjects.Add(this.AllocateStub(this._createStubCount));

@@ -1,4 +1,4 @@
-﻿using Prosolve.Services.Identification.Entities.Users;
+﻿using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identity.UnitTest.Users.Mocks;
 using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 

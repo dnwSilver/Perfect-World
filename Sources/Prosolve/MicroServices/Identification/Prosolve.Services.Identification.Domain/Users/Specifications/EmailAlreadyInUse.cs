@@ -1,6 +1,6 @@
 ﻿using Sharpdev.SDK.Domain;
 
-namespace Prosolve.Services.Identification.Entities.Users.Specifications
+namespace Prosolve.Services.Identification.Users.Specifications
 {
     /// <summary>
     ///     Проверка адреса электронной почты на привязку к пользователю.

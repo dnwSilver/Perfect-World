@@ -1,6 +1,6 @@
 using System;
 
-using Prosolve.Services.Identification.Entities.Users.DataSources;
+using Prosolve.Services.Identification.Users.DataSources;
 
 using Sharpdev.SDK.Testing;
 
@@ -18,8 +18,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override UserDataModel AllocateStub(int stubNumber)
         {
+            //Нельзя задавать уникальные приватные идентификаторы, их выдаёт база данных.
             var userDataModel = new UserDataModel();
-            userDataModel.PrivateId = stubNumber;
             userDataModel.PublicId = Guid.NewGuid();
             userDataModel.FirstName = "Иван";
             userDataModel.MiddleName = "Иванович";

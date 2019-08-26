@@ -1,9 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 
-namespace Prosolve.Services.Identification.Entities.Users.DataSources
+namespace Prosolve.Services.Identification.Users.DataSources
 {
     /// <summary>
     ///     Модель отображающая таблицу в базе данных для пользователя.
@@ -14,31 +13,31 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
         /// <summary>
         ///     Внутренний идентификатор процесса.
         /// </summary>
-        [Key, Required, NotNull, Column("id")]
+        [Key, Required, Column("id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PrivateId { get; set; }
 
         /// <summary>
         ///     Внешний идентификатор процесса.
         /// </summary>
-        [Required, Column("guid"), NotNull]
+        [Required, Column("guid")]
         public Guid PublicId { get; set; }
 
         /// <summary>
         ///     Версия объекта.
         /// </summary>
-        [Required, Column("version"), NotNull]
+        [Required, Column("version")]
         public int Version { get; set; }
 
         /// <summary>
         ///     Фамилия.
         /// </summary>
-        [Column("surname"), NotNull]
+        [Column("surname")]
         public string Surname { get; set; } = "Не указана";
 
         /// <summary>
         ///     Имя.
         /// </summary>
-        [Required, Column("first_name"), NotNull]
+        [Required, Column("first_name")]
         public string FirstName { get; set; } = "Не указано";
 
         /// <summary>

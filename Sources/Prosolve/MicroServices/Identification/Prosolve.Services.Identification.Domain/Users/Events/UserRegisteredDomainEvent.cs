@@ -2,7 +2,7 @@
 
 using Sharpdev.SDK.Domain.Events;
 
-namespace Prosolve.Services.Identification.Entities.Users.DomainEvents
+namespace Prosolve.Services.Identification.Users.Events
 {
     /// <summary>
     ///     Событие предметной области, реакция на  событие.

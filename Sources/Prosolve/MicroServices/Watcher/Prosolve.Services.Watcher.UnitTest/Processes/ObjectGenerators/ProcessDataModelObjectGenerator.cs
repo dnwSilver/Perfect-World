@@ -19,7 +19,6 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.ObjectGenerators
         protected override ProcessDataModel AllocateStub(int stubNumber)
         {
             var processDataModel = new ProcessDataModel();
-            processDataModel.PrivateId = stubNumber;
             processDataModel.PublicId = Guid.NewGuid();
             processDataModel.Name = $"Процесс №{stubNumber}.";
 

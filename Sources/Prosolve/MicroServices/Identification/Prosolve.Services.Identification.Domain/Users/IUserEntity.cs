@@ -5,7 +5,7 @@ using Sharpdev.SDK.Types.EmailAddresses;
 using Sharpdev.SDK.Types.FullNames;
 using Sharpdev.SDK.Types.PhoneNumbers;
 
-namespace Prosolve.Services.Identification.Entities.Users
+namespace Prosolve.Services.Identification.Users
 {
     /// <summary>
     ///     Пользователь информационной системы.

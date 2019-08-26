@@ -6,11 +6,11 @@ using FluentAssertions;
 using NUnit.Framework;
 
 using Prosolve.Services.Identification;
-using Prosolve.Services.Identification.Entities.Users;
-using Prosolve.Services.Identification.Entities.Users.DataSources;
+using Prosolve.Services.Identification.Users;
+using Prosolve.Services.Identification.Users.DataSources;
+using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.DataSources.Databases;
-using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
@@ -31,10 +31,10 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         /// </summary>
         /// <param name="userDataModels">Данные находящиеся в виртуальном хранилище.</param>
         /// <returns>Сервис готовый для тестов.</returns>
-        private IIdentityService AllocateIdentityService(
+        private UserService AllocateIdentityService(
             out IEnumerable<UserDataModel> userDataModels)
         {
-            userDataModels = Create.UserDataModel.CountOf(10).Please();
+            userDataModels = Create.UserDataModel.CountOf(2).Please();
             var identificationContext =
                 Create.IdentificationContext.With(userDataModels).PorFavor();
             var integrationBus = Create.IntegrationBus.PorFavor();
@@ -42,9 +42,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var userFactory = new UserFactory();
             var userRepository =
                 new UserRepository(userFactory, IdentificationConfiguration.Mapper);
-            var identityService = new IdentityService(unitOfWork, integrationBus, userRepository);
+            var userService = new UserService(unitOfWork, integrationBus, userRepository);
 
-            return identityService;
+            return userService;
         }
 
         [Test]
@@ -57,7 +57,6 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var newUserBuilders = Create.UserBuilder
                                         .With(fullName)
                                         .With(emailAddress)
-                                        .With(Identifier<IUserEntity>.New())
                                         .PorFavor()
                                         .Yield()
                                         .ToArray();
@@ -79,7 +78,6 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var newUserBuilders = Create.UserBuilder
                                         .With(fullName)
                                         .With(phoneNumber)
-                                        .With(Identifier<IUserEntity>.New())
                                         .PorFavor()
                                         .Yield()
                                         .ToArray();

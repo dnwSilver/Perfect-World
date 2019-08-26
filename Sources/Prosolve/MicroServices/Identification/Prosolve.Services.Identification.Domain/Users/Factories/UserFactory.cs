@@ -5,7 +5,7 @@ using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
 
-namespace Prosolve.Services.Identification.Entities.Users
+namespace Prosolve.Services.Identification.Users.Factories
 {
     internal sealed class UserFactory : EntityFactoryBase<IUserEntity>
     {

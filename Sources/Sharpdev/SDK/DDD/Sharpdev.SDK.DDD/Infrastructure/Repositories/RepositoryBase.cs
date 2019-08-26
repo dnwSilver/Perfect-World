@@ -17,6 +17,8 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     ///     Базовая реализация для любых потомков интерфейса <see cref="IEntityRepository{TEntity}" />.
     /// </summary>
     /// <typeparam name="TEntity">Сущность для которой предназначено хранилище.</typeparam>
+    /// <typeparam name="TDataModel">Модель данных в источнике данных.</typeparam>
+    /// <typeparam name="TEntityBuilder">Строитель для объекта.</typeparam>
     public abstract class RepositoryBase<TEntity, TDataModel, TEntityBuilder>
         where TEntity : IEntity<TEntity>
         where TEntityBuilder : IEntityBuilder<TEntity>
@@ -27,7 +29,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         protected IBoundedContext? BoundedContext;
 
         /// <summary>
-        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
+        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity,TDataModel,TEntityBuilder}" />.
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>

@@ -2,7 +2,7 @@
 
 using Sharpdev.SDK.Infrastructure.Integrations;
 
-namespace Prosolve.Services.Identification.Entities.Users.IntegrationEvents
+namespace Prosolve.Services.Identification.Users.Events
 {
     internal class ToSendMailIntegrationEvent : IIntegrationEvent
     {

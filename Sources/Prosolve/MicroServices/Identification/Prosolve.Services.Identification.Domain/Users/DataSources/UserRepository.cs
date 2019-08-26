@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Prosolve.Services.Identification.Users.Factories;
+
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
 
-namespace Prosolve.Services.Identification.Entities.Users.DataSources
+namespace Prosolve.Services.Identification.Users.DataSources
 {
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
@@ -19,7 +21,7 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
                                     IEntityRepository<IUserEntity>
     {
         /// <summary>
-        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity}" />.
+        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>
@@ -54,9 +56,18 @@ namespace Prosolve.Services.Identification.Entities.Users.DataSources
         {
             var userDataModels =
                 this.Mapper.Map<IList<IUserEntity>, IList<UserDataModel>>(objectsToCreate);
-            this.IdentificationContext.Users.Add(userDataModels[0]);
-            await this.IdentificationContext.SaveChangesAsync();
+            
+            await this.IdentificationContext.Users.AddRangeAsync(userDataModels);
 
+            try
+            {
+                await this.IdentificationContext.SaveChangesAsync();
+            }
+            catch(Exception exception)
+            {
+                // todo Обязательно сюда добавить лог и Debug.Assert
+                return Result.Fail(exception.Message);
+            }
             return Result.Ok();
         }
 
