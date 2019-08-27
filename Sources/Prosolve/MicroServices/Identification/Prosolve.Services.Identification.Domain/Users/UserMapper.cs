@@ -38,7 +38,7 @@ namespace Prosolve.Services.Identification.Users
             
             this.CreateMap<UserDataModel, IUserBuilder>()
                 .ForMember(d => d.Identifier, o => o.MapFrom(s => this.Id(s.PrivateId, s.PublicId)))
-                .ForMember(d => d.ContactEmailAddress, o => o.MapFrom(s => new ConfirmedBase<EmailAddress>(s.EmailAddress, null)))
+                .ForMember(d => d.ContactEmailAddress, o => o.MapFrom(s => new ConfirmedBase<EmailAddress>(s.EmailAddress, s.EmailAddressConfirmDate)))
                 .ReverseMap()
                 .ForAllOtherMembers(x => x.Ignore());
         }

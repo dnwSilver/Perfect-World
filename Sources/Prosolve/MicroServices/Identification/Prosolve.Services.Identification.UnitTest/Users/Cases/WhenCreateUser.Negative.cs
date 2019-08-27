@@ -41,7 +41,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
             var userRepository =
-                new UserRepository(userFactory, IdentificationConfiguration.Mapper);
+                new UserEntityFrameworkRepository(userFactory, IdentificationConfiguration.Mapper);
             var userService = new UserService(unitOfWork, integrationBus, userRepository);
 
             return userService;

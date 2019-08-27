@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Microsoft.EntityFrameworkCore;
+
 using Prosolve.Services.Watcher.Domain.Processes.Factories;
 
+using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -17,8 +20,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
     /// <summary>
     ///     Репозиторий для сущности <see cref="IProcessEntity" />.
     /// </summary>
-    public class ProcessRepository :
-        RepositoryBase<IProcessEntity, ProcessDataModel, IProcessBuilder>,
+    public class ProcessRepository : EntityFrameworkRepositoryBase<IProcessEntity, ProcessDataModel, IProcessBuilder>,
         IEntityRepository<IProcessEntity>
     {
         /// <summary>
@@ -44,19 +46,17 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
                 throw new NotImplementedException();
             }
         }
-
-        /// <summary>
-        ///     Создание набора бизнес объектов.
-        /// </summary>
-        /// <param name="processes">Список объектов для сохранения в хранилище.</param>
-        /// <returns>
-        ///     True - сохранение выполнено успешно.
-        ///     False - сохранение не выполнено.
-        /// </returns>
-        public Task<Result> Create(IProcessEntity[] processes)
+        
+        public void SetBoundedContext(IBoundedContext boundedContext)
         {
-            throw new NotImplementedException();
+            this.BoundedContext = boundedContext as WatcherContext;
         }
+        
+        /// <summary>
+        /// Контекст для работы с таблицей.
+        /// </summary>
+        /// <returns></returns>
+        protected override DbSet<ProcessDataModel> DbSetEntity() => this.WatcherContext.Processes;
 
         /// <summary>
         ///     Обновление набора процессов.
@@ -84,10 +84,5 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
             throw new NotImplementedException();
         }
 
-        protected override IEnumerable<ProcessDataModel> ReadQuery(
-            Expression<Func<ProcessDataModel, bool>> expression)
-        {
-            return this.WatcherContext.Processes.Where(expression);
-        }
     }
 }

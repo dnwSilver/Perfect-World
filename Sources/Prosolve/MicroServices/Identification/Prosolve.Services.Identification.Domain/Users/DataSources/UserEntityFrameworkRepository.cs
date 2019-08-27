@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Microsoft.EntityFrameworkCore;
+
 using Prosolve.Services.Identification.Users.Factories;
 
+using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Types.Results;
@@ -17,15 +20,15 @@ namespace Prosolve.Services.Identification.Users.DataSources
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    internal class UserRepository : RepositoryBase<IUserEntity, UserDataModel, IUserBuilder>,
+    internal class UserEntityFrameworkRepository : EntityFrameworkRepositoryBase<IUserEntity, UserDataModel, IUserBuilder>,
                                     IEntityRepository<IUserEntity>
     {
         /// <summary>
-        ///     Инициализация репозитория <see cref="RepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
+        ///     Инициализация репозитория <see cref="EntityFrameworkEntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>
-        public UserRepository(IEntityFactory<IUserEntity> entityFactory, IMapper mapper)
+        public UserEntityFrameworkRepository(IEntityFactory<IUserEntity> entityFactory, IMapper mapper)
             : base(entityFactory, mapper)
         {
         }
@@ -44,31 +47,9 @@ namespace Prosolve.Services.Identification.Users.DataSources
             }
         }
 
-        /// <summary>
-        ///     Создание набора бизнес объектов.
-        /// </summary>
-        /// <param name="objectsToCreate">Список объектов для сохранения в хранилище.</param>
-        /// <returns>
-        ///     True - сохранение выполнено успешно.
-        ///     False - сохранение не выполнено.
-        /// </returns>
-        public async Task<Result> Create(IUserEntity[] objectsToCreate)
+        public void SetBoundedContext(IBoundedContext boundedContext)
         {
-            var userDataModels =
-                this.Mapper.Map<IList<IUserEntity>, IList<UserDataModel>>(objectsToCreate);
-            
-            await this.IdentificationContext.Users.AddRangeAsync(userDataModels);
-
-            try
-            {
-                await this.IdentificationContext.SaveChangesAsync();
-            }
-            catch(Exception exception)
-            {
-                // todo Обязательно сюда добавить лог и Debug.Assert
-                return Result.Fail(exception.Message);
-            }
-            return Result.Ok();
+            this.BoundedContext = boundedContext as IdentificationContext ;
         }
 
         /// <summary>
@@ -97,10 +78,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
             throw new NotImplementedException();
         }
 
-        protected override IEnumerable<UserDataModel> ReadQuery(
-            Expression<Func<UserDataModel, bool>> specification)
-        {
-            return this.IdentificationContext.Users.Where(specification);
-        }
+
+        protected override DbSet<UserDataModel> DbSetEntity() => this.IdentificationContext.Users;
     }
 }
