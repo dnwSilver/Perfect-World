@@ -25,14 +25,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
     [Category(Constant.Negative)]
     [Parallelizable(ParallelScope.All)]
     public class WhenCreateUserNegative
-    {  /// <summary>
+    {  
+        /// <summary>
         ///     Подготовка сервиса для тестирования. Создание всех необходимых объектов и заполнение
         ///     данными виртуальное хранилище.
         /// </summary>
         /// <param name="userDataModels">Данные находящиеся в виртуальном хранилище.</param>
         /// <returns>Сервис готовый для тестов.</returns>
-        private UserService AllocateUserService(
-            out IEnumerable<UserDataModel> userDataModels)
+        private UserService AllocateUserService(out IEnumerable<UserDataModel> userDataModels)
         {
             userDataModels = Create.UserDataModel.CountOf(10).Please();
             var identificationContext =

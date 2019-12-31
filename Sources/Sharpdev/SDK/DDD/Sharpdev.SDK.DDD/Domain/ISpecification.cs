@@ -21,7 +21,7 @@ namespace Sharpdev.SDK.Domain
     ///     3.  Заказать создание нового объекта для определенных потребностей.
     /// </remarks>
     public interface ISpecification<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Проверка пригодности объекта для удовлетворения потребности или достижения цели.

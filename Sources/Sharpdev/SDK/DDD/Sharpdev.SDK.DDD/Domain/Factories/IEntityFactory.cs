@@ -15,20 +15,20 @@ namespace Sharpdev.SDK.Domain.Factories
     ///     в базе данных.
     /// </remarks>
     public interface IEntityFactory<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
-        /// <summary>
-        ///     Создание нового объекта.
-        /// </summary>
-        /// <param name="entityToCreate">Строитель нового объекта.</param>
-        /// <returns>Созданный объект.</returns>
-        Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate);
+    /// <summary>
+    ///     Создание нового объекта.
+    /// </summary>
+    /// <param name="entityToCreate">Строитель нового объекта.</param>
+    /// <returns>Созданный объект.</returns>
+    Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate);
 
-        /// <summary>
-        ///     Восстановление уже созданного объекта.
-        /// </summary>
-        /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
-        /// <returns>Восстановленный объект.</returns>
-        Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery);
+    /// <summary>
+    ///     Восстановление уже созданного объекта.
+    /// </summary>
+    /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
+    /// <returns>Восстановленный объект.</returns>
+    Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery);
     }
 }

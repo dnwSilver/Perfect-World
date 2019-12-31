@@ -22,7 +22,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     ///     - удаление (<see cref="Delete" />).
     /// </remarks>
     public interface IEntityRepository<TEntity> : IHasStatus<RepositoryStatus>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Создание набора бизнес объектов.

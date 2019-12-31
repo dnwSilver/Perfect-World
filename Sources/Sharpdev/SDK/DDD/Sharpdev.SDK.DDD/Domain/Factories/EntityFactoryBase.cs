@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Types.Results;
@@ -10,7 +11,7 @@ namespace Sharpdev.SDK.Domain.Factories
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, который будем собирать.</typeparam>
     public abstract class EntityFactoryBase<TEntity> : IEntityFactory<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Набор проверок для создания и восстановления объекта.
@@ -43,6 +44,7 @@ namespace Sharpdev.SDK.Domain.Factories
         {
             var entity = this.AllocateEntity(entityToRecovery);
             this.SetSpecifications(entity);
+
             foreach(var specification in this.Specifications)
                 specification.IsSatisfiedBy(entity);
 

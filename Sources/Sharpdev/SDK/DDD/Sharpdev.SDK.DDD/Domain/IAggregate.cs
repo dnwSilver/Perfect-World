@@ -18,7 +18,7 @@ namespace Sharpdev.SDK.Domain
     ///     В границах АГРЕГАТА действует определенный набор правил согласования и единообразия.
     /// </remarks>
     public interface IAggregate<out TRootObject> : IEncapsulated
-        where TRootObject : IEntity<TRootObject>
+        where TRootObject : class, IEntity<TRootObject>
     {
         /// <summary>
         ///     Получение коневого объекта.

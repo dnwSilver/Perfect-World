@@ -12,7 +12,7 @@ namespace Sharpdev.SDK.Domain.Factories
     /// </remarks>
     public abstract class
         EntityBuilderBase<TEntity> : IEntityBuilder<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Идентификатор объекта <see cref="TEntity" />.

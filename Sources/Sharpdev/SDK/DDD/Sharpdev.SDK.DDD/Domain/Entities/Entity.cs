@@ -13,7 +13,7 @@ namespace Sharpdev.SDK.Domain.Entities
     ///     Сущность бизнес модели. Основная единица DDD.
     /// </summary>
     public abstract class Entity<TEntity> : IEntity<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Набор событий предметной области.

@@ -26,7 +26,7 @@ namespace Sharpdev.SDK.Domain.Entities
     ///     - 128-битный идентификатор (6F9619FF-8B86-D011-B42D-00CF4FC964FF)
     /// </remarks>
     public interface IIdentifier<TOwner> : IEquatable<IIdentifier<TOwner>>
-        where TOwner : IEntity<TOwner>
+        where TOwner : class, IEntity<TOwner>
     {
         /// <summary>
         ///     Публичный идентификатор. Генерируется внутри сервиса.

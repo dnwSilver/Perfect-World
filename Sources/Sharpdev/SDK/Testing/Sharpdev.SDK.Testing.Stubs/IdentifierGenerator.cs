@@ -11,7 +11,7 @@ namespace Sharpdev.SDK.Testing
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, для которого предназначен идентификатор.</typeparam>
     public class IdentifierGenerator<TEntity> : TestObjectGeneratorBase<IIdentifier<TEntity>>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Заглушка для идентификатора.

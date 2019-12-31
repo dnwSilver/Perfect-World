@@ -14,7 +14,7 @@ namespace Sharpdev.SDK.Domain
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта для которого предназначена проверка.</typeparam>
     public class SpecificationBase<TEntity> : ISpecification<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Сообщение в случае не соответствия спецификации.
@@ -45,14 +45,14 @@ namespace Sharpdev.SDK.Domain
         /// </returns>
         public Result IsSatisfiedBy(TEntity candidate)
         {
-            if (candidate == null)
+            if (candidate.ReturnFailure())
                 throw new ArgumentNullException(nameof(candidate));
 
             TEntity[] candidates =
             {
                 candidate
             };
-
+            //todo Что за хрень я тут написал? Зачем оно так? Что оно должно делать?
             return candidates.AsQueryable().Any() ? Result.Ok() : Result.Fail(this._failureMessage);
         }
 

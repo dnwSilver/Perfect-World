@@ -26,8 +26,11 @@ namespace Sharpdev.SDK.Domain.Entities
     ///     квартире позвонят и по отдельности закажут какие-то работы, фирме нужно знать,  что они
     ///     находятся в одном месте.  Здесь адрес  -  также СУЩНОСТЬ.
     /// </remarks>
-    public interface IEntity<TEntity> : IEncapsulated, IStored, IHasIdentifier<TEntity>, IHasDomainEvent
-        where TEntity : IEntity<TEntity>
+    public interface IEntity<TEntity> : IEncapsulated,
+                                        IStored,
+                                        IHasIdentifier<TEntity>,
+                                        IHasDomainEvent
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Набор условий-ограничение.

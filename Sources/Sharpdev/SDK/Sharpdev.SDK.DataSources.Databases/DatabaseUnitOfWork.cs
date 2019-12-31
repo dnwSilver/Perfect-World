@@ -49,10 +49,10 @@ namespace Sharpdev.SDK.DataSources.Databases
         public Result Commit()
         {
             this._transaction.Commit();
-/*
-            if (result == 0)
-                return Result.Fail("Не удалось сохранить данные в источнике данных.");
-*/
+
+            // if (result == 0)
+            //     return Result.Fail("Не удалось сохранить данные в источнике данных.");
+
             this._isCommitted = true;
 
             return Result.Ok();

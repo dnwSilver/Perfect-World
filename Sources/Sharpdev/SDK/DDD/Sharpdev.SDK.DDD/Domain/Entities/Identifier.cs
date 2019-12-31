@@ -10,7 +10,7 @@ namespace Sharpdev.SDK.Domain.Entities
     ///     - private.
     /// </summary>
     public class Identifier<TEntity> : IIdentifier<TEntity>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
         ///     Значение неопределённого приватного идентификатора.

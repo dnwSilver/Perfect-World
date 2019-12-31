@@ -5,7 +5,7 @@
     /// </summary>
     /// <typeparam name="TOwner">Владелец идентификатора.</typeparam>
     public interface IHasIdentifier<TOwner>
-        where TOwner : IEntity<TOwner>
+        where TOwner : class, IEntity<TOwner>
     {
         /// <summary>
         ///     Уникальный идентификатор.

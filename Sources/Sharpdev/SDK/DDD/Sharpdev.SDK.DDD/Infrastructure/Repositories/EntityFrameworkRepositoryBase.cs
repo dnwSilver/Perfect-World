@@ -22,7 +22,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     /// <typeparam name="TDataModel">Модель данных в источнике данных.</typeparam>
     /// <typeparam name="TEntityBuilder">Строитель для объекта.</typeparam>
     public abstract class EntityFrameworkRepositoryBase<TEntity, TDataModel, TEntityBuilder>
-        where TEntity : IEntity<TEntity>
+        where TEntity : class, IEntity<TEntity>
         where TEntityBuilder : IEntityBuilder<TEntity>
         where TDataModel : class
     {

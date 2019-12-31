@@ -53,8 +53,8 @@ namespace Prosolve.Services.Identity.UnitTest
         /// </summary>
         /// <param name="emailAddress">Адрес электронной почты.</param>
         /// <returns>Готовый для тестов адрес электронной почты.</returns>
-        internal static EmailAddressGenerator EmailAddress(string emailAddress)
-            =>new EmailAddressGenerator(emailAddress);
+        internal static EmailAddressGenerator EmailAddress(string emailAddress) =>
+            new EmailAddressGenerator(emailAddress);
 
         /// <summary>
         ///     Создание строителя для <see cref="IUserEntity" />.
@@ -67,14 +67,12 @@ namespace Prosolve.Services.Identity.UnitTest
         /// <typeparam name="TEntity"> Доменная сущность. </typeparam>
         /// <returns>Уникальный идентификатор.</returns>
         internal static IdentifierGenerator<TEntity> Identifier<TEntity>()
-            where TEntity : IEntity<TEntity>
-            =>new IdentifierGenerator<TEntity>();
-        
+            where TEntity : class, IEntity<TEntity> => new IdentifierGenerator<TEntity>();
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        internal static PhoneNumberGenerator PhoneNumber
-            =>new PhoneNumberGenerator();
+        internal static PhoneNumberGenerator PhoneNumber => new PhoneNumberGenerator();
     }
 }
