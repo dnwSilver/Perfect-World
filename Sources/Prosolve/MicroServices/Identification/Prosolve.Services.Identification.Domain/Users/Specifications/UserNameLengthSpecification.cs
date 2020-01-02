@@ -20,7 +20,7 @@ namespace Prosolve.Services.Identification.Users.Specifications
         /// </summary>
         /// todo Создать файл ресурсов для получения текстовых значений по пользователям.
         private static readonly string FailureMessage =
-            string.Format("dsadas", MaxLength);
+            $"Превышено максимальное значение длины ({MaxLength}) наименования процесса.";
 
         /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.

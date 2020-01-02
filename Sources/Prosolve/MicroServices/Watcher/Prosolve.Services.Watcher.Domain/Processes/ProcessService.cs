@@ -1,5 +1,6 @@
 #nullable enable
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Prosolve.Services.Watcher.Domain.Processes.Events;
@@ -51,7 +52,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         /// </summary>
         /// <param name="processSpecification">Набор спецификаций для поиска процессов.</param>
         /// <returns>Список найденных процессов.</returns>
-        public async Task<Result<IProcessEntity[]>> Find(
+        public async Task<Result<IEnumerable<IProcessEntity>>> Find(
             ISpecification<IProcessEntity> processSpecification)
         {
             using var uow = this._unitOfWork;
@@ -64,7 +65,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
 
             await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Ok<IProcessEntity[]>(foundProcess);
+            return Result.Ok(foundProcess.Value);
         }
     }
 }

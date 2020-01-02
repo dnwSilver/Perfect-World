@@ -30,7 +30,7 @@ namespace Prosolve.Services.Identification
         private readonly IUnitOfWork<IdentificationContext> _unitOfWork;
 
         /// <summary>
-        ///     Создание объекта <see cref="IdentityService" />.
+        ///     Создание объекта <see cref="IdentificationService" />.
         /// </summary>
         /// <param name="userRepository">Репозиторий для работы с пользователями.</param>
         /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>

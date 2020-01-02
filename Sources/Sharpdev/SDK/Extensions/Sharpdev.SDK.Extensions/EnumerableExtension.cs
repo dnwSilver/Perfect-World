@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Sharpdev.SDK.Extensions
 {
@@ -18,6 +19,20 @@ namespace Sharpdev.SDK.Extensions
         public static IEnumerable<TElementType> Yield<TElementType>(this TElementType item)
         {
             yield return item;
+        }
+
+        /// <summary>
+        ///     Определяет существование и заполнение перечисления.
+        /// </summary>
+        /// <param name="data">Проверяемое перечисление.</param>
+        /// <typeparam name="T">Тип объектов которые находятся в перечислении.</typeparam>
+        /// <returns>
+        ///     true - если перечисление остутсвует либо в нём нет элементов
+        ///     false - если в перечислении есть хотя бы один элемент
+        /// </returns>
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> data)
+        {
+            return data == null || !data.Any();
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Sharpdev.SDK.Extensions;
+
 namespace Sharpdev.SDK.Types.Results
 {
     /// <summary>
@@ -138,9 +140,10 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Строковое представление объекта <see cref="Result" />.</returns>
         private static string DoFormat(Result result, IFormatProvider formatProvider, string delimiter)
         {
-            if (result.Errors == null || !result.Errors.Any())
+            if (result.Errors.IsNullOrEmpty())
                 return string.Empty;
 
+            // todo вынести в базовый конструктор. Бугаенко будет сильно возмущён такой штукой.
             var sb = new StringBuilder();
 
             foreach(var error in result.Errors)

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -66,7 +64,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Task<Result> Update(IProcessEntity[] processes)
+        public Task<Result> Update(IEnumerable<IProcessEntity> processes)
         {
             throw new NotImplementedException();
         }
@@ -79,7 +77,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Task<Result> Delete(IProcessEntity[] objectsToRemove)
+        public Task<Result> Delete(IEnumerable<IProcessEntity> objectsToRemove)
         {
             throw new NotImplementedException();
         }

@@ -1,7 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -24,7 +22,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
                                     IEntityRepository<IUserEntity>
     {
         /// <summary>
-        ///     Инициализация репозитория <see cref="EntityFrameworkEntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
+        ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>
@@ -43,6 +41,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
                 if (this.BoundedContext is IdentificationContext identificationContext)
                     return identificationContext;
 
+                // todo Тут как-бы надо что-то придумать. Нельзя просто так оставит не имплеминтированный метод.
                 throw new NotImplementedException();
             }
         }
@@ -60,7 +59,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Task<Result> Update(IUserEntity[] objectsToUpdate)
+        public Task<Result> Update(IEnumerable<IUserEntity> objectsToUpdate)
         {
             throw new NotImplementedException();
         }
@@ -73,7 +72,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Task<Result> Delete(IUserEntity[] objectsToRemove)
+        public Task<Result> Delete(IEnumerable<IUserEntity> objectsToRemove)
         {
             throw new NotImplementedException();
         }

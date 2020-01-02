@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -6,7 +7,6 @@ using Prosolve.Services.Identification.Users.Events;
 using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.Domain;
-using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Presentation;
@@ -54,17 +54,17 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="userBuilders">Список новых пользователей.</param>
         /// <returns>Информация по процессу создания пользователей.</returns>
-        public Result CreateUsers(IUserBuilder[] userBuilders)
+        public Result CreateUsers(IEnumerable<IUserBuilder> userBuilders)
         {
-            IEntityFactory<IUserEntity> factory = new UserFactory();
+            // todo Вынести инициализацию объекта в конструктор. 
+            var factory = new UserFactory();
 
             using var uow = this._unitOfWork;
             this._userRepository.SetBoundedContext(uow.BoundedContext);
             var createResult = this._userRepository.Create(
                 userBuilders
                     .Select(userBuilder => factory.Create(userBuilder))
-                    .Select(userEntity => userEntity.Value)
-                    .ToArray());
+                    .Select(userEntity => userEntity.Value));
 
             if (createResult.Result.Failure)
                 return createResult.Result;
@@ -77,6 +77,7 @@ namespace Prosolve.Services.Identification.Users
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             this._integrateBus.PublishAsync(registrationEvent);
 
+            // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
             var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
 
             return Result.Ok();
@@ -87,7 +88,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="processSpecification">Набор спецификаций для поиска процессов.</param>
         /// <returns>Список найденных процессов.</returns>
-        public async Task<Result<IUserEntity[]>> Find(
+        public async Task<Result<IEnumerable<IUserEntity>>> Find(
             ISpecification<IUserEntity> processSpecification)
         {
             using var uow = this._unitOfWork;
@@ -100,7 +101,7 @@ namespace Prosolve.Services.Identification.Users
 
             // await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Ok<IUserEntity[]>(foundProcess);
+            return Result.Ok(foundProcess.Value);
         }
 
         

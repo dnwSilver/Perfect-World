@@ -58,8 +58,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .With(fullName)
                                         .With(emailAddress)
                                         .PorFavor()
-                                        .Yield()
-                                        .ToArray();
+                                        .Yield();
 
             // Arrange:
             var result = userService.CreateUsers(newUserBuilders);
@@ -79,8 +78,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .With(fullName)
                                         .With(phoneNumber)
                                         .PorFavor()
-                                        .Yield()
-                                        .ToArray();
+                                        .Yield();
 
             // Arrange:
             var result = userService.CreateUsers(newUserBuilders);
@@ -100,8 +98,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .With(fullName)
                                         .With(emailAddress)
                                         .PorFavor()
-                                        .Yield()
-                                        .ToArray();
+                                        .Yield();
 
             // Arrange:
             var result = userService.CreateUsers(newUserBuilders);
@@ -119,8 +116,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var newUserBuilders = Create.UserBuilder
                                         .With(emailAddress)
                                         .PorFavor()
-                                        .Yield()
-                                        .ToArray();
+                                        .Yield();
 
             // Arrange:
             var result = userService.CreateUsers(newUserBuilders);

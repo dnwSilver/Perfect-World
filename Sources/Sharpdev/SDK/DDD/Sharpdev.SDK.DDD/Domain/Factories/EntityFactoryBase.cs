@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Types.Results;

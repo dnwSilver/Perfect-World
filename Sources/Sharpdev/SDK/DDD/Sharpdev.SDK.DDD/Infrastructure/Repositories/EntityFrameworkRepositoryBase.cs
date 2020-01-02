@@ -31,7 +31,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         protected DbContext? BoundedContext;
 
         /// <summary>
-        ///     Инициализация репозитория <see cref="EntityFrameworkEntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}" />.
+        ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}" />.
         /// </summary>
         /// <param name="mapper">Механизм для трансформации объектов.</param>
         /// <param name="entityFactory">Фабрика для создания объектов.</param>
@@ -44,7 +44,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// <summary>
         ///     Фабрика для сборки объектов.
         /// </summary>
-        protected IEntityFactory<TEntity> EntityFactory { get; }
+        private IEntityFactory<TEntity> EntityFactory { get; }
 
         /// <summary>
         ///     Текущий статус объекта.
@@ -55,7 +55,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// <summary>
         ///     Механизм для трансформации объектов.
         /// </summary>
-        protected IMapper Mapper { get; }
+        private IMapper Mapper { get; }
 
         /// <summary>
         /// </summary>
@@ -85,15 +85,15 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// </summary>
         /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        public Task<Result<TEntity[]>> Read(ISpecification<TEntity> specification)
+        public async Task<Result<IEnumerable<TEntity>>> Read(ISpecification<TEntity> specification)
         {
             var userExpression =
                 this.Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
 
-            var dataModels = this.DbSetEntity().Where(userExpression).ToList();
+            var dataModels = await this.DbSetEntity().Where(userExpression).ToListAsync();
 
             if (!dataModels.Any())
-                return Task.Run(()=>Result.Ok(Array.Empty<TEntity>()));
+                return Result.Ok(Enumerable.Empty<TEntity>());
 
             var builders = this.Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
 
@@ -104,10 +104,9 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
                               into entity
                               select entity.Value);
 
-            return Task.Run(()=>Result.Ok(entities.ToArray()));
+            return Result.Ok<IEnumerable<TEntity>>(entities);
         }
-        
-        
+
         /// <summary>
         ///     Создание набора бизнес объектов.
         /// </summary>
@@ -116,10 +115,10 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public async Task<Result> Create(TEntity[] objectsToCreate)
+        public async Task<Result> Create(IEnumerable<TEntity> objectsToCreate)
         {
             var userDataModels =
-                this.Mapper.Map<IList<TEntity>, IList<TDataModel>>(objectsToCreate);
+                this.Mapper.Map<IEnumerable<TEntity>, IEnumerable<TDataModel>>(objectsToCreate);
             
             await this.DbSetEntity().AddRangeAsync(userDataModels);
 
