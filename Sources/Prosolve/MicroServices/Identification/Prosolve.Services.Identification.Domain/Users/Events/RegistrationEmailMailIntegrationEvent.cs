@@ -4,12 +4,16 @@ using Sharpdev.SDK.Infrastructure.Integrations;
 
 namespace Prosolve.Services.Identification.Users.Events
 {
+
+    /// <summary>
+    ///     Событие миграции данных. Отправка электронного письма.
+    /// </summary>
     internal class ToSendMailIntegrationEvent : IIntegrationEvent
     {
         public ToSendMailIntegrationEvent(Guid id, DateTime creationDate)
         {
-            this.Id = id;
-            this.CreationDate = creationDate;
+            Id = id;
+            CreationDate = creationDate;
         }
 
         /// <summary>

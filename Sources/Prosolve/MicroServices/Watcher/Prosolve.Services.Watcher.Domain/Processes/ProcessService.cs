@@ -1,4 +1,3 @@
-#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -61,11 +60,11 @@ namespace Prosolve.Services.Watcher.Domain.Processes
 
             var foundProcess = await this._processRepository.Read(processSpecification);
 
-            var domainEvent = new ProcessFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
+            var domainEvent = new ProcessFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
 
             await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Ok(foundProcess.Value);
+            return Result.Ok(foundProcess);
         }
     }
 }

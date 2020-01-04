@@ -7,17 +7,19 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Events
     /// <summary>
     ///     Событие описывающие поиск процессов.
     /// </summary>
-    public class ProcessFindDomainEvent : IDomainEvent
+    public class ProcessFindDomainEvent : IDomainEvent<IProcessEntity>
     {
         /// <summary>
         ///     Инициализация объекта <see cref="ProcessFindDomainEvent" />.
         /// </summary>
         /// <param name="id">Уникальный идентификатор события.</param>
         /// <param name="creationDate">Дата события (UTC+0).</param>
-        public ProcessFindDomainEvent(Guid id, DateTime creationDate)
+        /// <param name="data"> Информация о событии. Желательно хранить её в JSON. </param>
+        public ProcessFindDomainEvent(Guid id, DateTime creationDate, string data)
         {
             this.Id = id;
             this.CreationDate = creationDate;
+            this.Data = data;
         }
 
         /// <summary>
@@ -29,5 +31,10 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Events
         ///     Дата события (UTC+0).
         /// </summary>
         public DateTime CreationDate { get; }
+        
+        /// <summary>
+        /// Информация о событии. Желательно хранить её в JSON.
+        /// </summary>
+        public string Data { get; }
     }
 }

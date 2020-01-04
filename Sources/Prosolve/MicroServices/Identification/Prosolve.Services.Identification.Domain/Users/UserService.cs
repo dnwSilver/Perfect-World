@@ -88,20 +88,17 @@ namespace Prosolve.Services.Identification.Users
                                                      .Select(userBuilder => _userFactory.Create(userBuilder))
                                                      .Select(userEntity => userEntity.Value));
 
-            if (createResult.Result.Failure)
-                return createResult.Result;
-
             var commitResult = uow.Commit();
 
             if (commitResult.Failure)
                 return commitResult;
 
-            // todo Нужен интерфейс IClock для работы с датами. Также нужна реализация дл него.
+            // todo Нужен интерфейс IClock для работы с датами. Также нужна реализация для него.
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             _integrateBus.PublishAsync(registrationEvent);
 
             // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
-            var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
+            var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
 
             return Result.Ok();
         }
@@ -123,7 +120,7 @@ namespace Prosolve.Services.Identification.Users
 
             // await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Ok(foundProcess.Value);
+            return Result.Ok(foundProcess);
         }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
-using Sharpdev.SDK.Domain.Events;
 using Sharpdev.SDK.Extensions;
 
 namespace Sharpdev.SDK.Domain.Entities
@@ -15,11 +12,6 @@ namespace Sharpdev.SDK.Domain.Entities
     public abstract class Entity<TEntity> : IEntity<TEntity>
         where TEntity : class, IEntity<TEntity>
     {
-        /// <summary>
-        ///     Набор событий предметной области.
-        /// </summary>
-        private readonly ICollection<IDomainEvent> _domainEvents = new Collection<IDomainEvent>();
-
         /// <summary>
         ///     Набор условий ограничений.
         /// </summary>
@@ -61,41 +53,6 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     <see langword="false" /> - используется не безопасное удаление.
         /// </returns>
         public bool IsSoftDelete { get; }
-
-        /// <summary>
-        ///     Список всех событий предметной области.
-        /// </summary>
-        /// <returns>Список всех событий предметной области.</returns>
-        public IEnumerable DomainEvents()
-        {
-            return this._domainEvents.ToArray();
-        }
-
-        /// <summary>
-        ///     Добавление нового события предметной области.
-        /// </summary>
-        /// <param name="domainEvent">Событие предметной области.</param>
-        public void AddDomainEvent(IDomainEvent domainEvent)
-        {
-            this._domainEvents.Add(domainEvent);
-        }
-
-        /// <summary>
-        ///     Удаление события предметной области.
-        /// </summary>
-        /// <param name="domainEvent">Событие предметной области.</param>
-        public void RemoveDomainEvent(IDomainEvent domainEvent)
-        {
-            this._domainEvents.Remove(domainEvent);
-        }
-
-        /// <summary>
-        ///     Удаление всех событий предметной области.
-        /// </summary>
-        public void ClearDomainEvents()
-        {
-            this._domainEvents.Clear();
-        }
 
         /// <summary>
         ///     Набор условий-ограничение.

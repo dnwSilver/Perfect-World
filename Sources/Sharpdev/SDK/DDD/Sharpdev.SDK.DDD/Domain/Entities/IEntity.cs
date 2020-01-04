@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 
-using Sharpdev.SDK.Domain.Events;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
@@ -28,8 +27,7 @@ namespace Sharpdev.SDK.Domain.Entities
     /// </remarks>
     public interface IEntity<TEntity> : IEncapsulated,
                                         IStored,
-                                        IHasIdentifier<TEntity>,
-                                        IHasDomainEvent
+                                        IHasIdentifier<TEntity>
         where TEntity : class, IEntity<TEntity>
     {
         /// <summary>

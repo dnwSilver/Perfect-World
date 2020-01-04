@@ -1,4 +1,5 @@
-﻿using Sharpdev.SDK.Infrastructure.Integrations;
+﻿using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Infrastructure.Integrations;
 
 namespace Sharpdev.SDK.Domain.Events
 {
@@ -12,7 +13,12 @@ namespace Sharpdev.SDK.Domain.Events
     ///     Используем  механизм  отложенного выполнения <see cref="IEventHandler{TDomainEvent}" />.
     ///     Найти объекты с событиями можно при  помощи  интерфейса  <see cref="IHasDomainEvent" />.
     /// </remarks>
-    public interface IDomainEvent : IIntegrationEvent
+    public interface IDomainEvent<TEntity> : IIntegrationEvent
+        where TEntity:class, IEntity<TEntity>
     {
+        /// <summary>
+        /// Информация о событии. Желательно хранить её в JSON.
+        /// </summary>
+        string Data { get; }
     }
 }

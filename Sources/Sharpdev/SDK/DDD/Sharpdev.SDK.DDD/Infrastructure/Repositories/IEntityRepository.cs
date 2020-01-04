@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
-using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Statuses;
-using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {
@@ -34,14 +32,14 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        Task<Result> Create(IEnumerable<TEntity> objectsToCreate);
+        Task Create(IEnumerable<TEntity> objectsToCreate);
 
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
         /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Task<Result<IEnumerable<TEntity>>> Read(ISpecification<TEntity> specification);
+        Task<IEnumerable<TEntity>> Read(ISpecification<TEntity> specification);
 
         /// <summary>
         ///     Обновление объектов.
@@ -51,7 +49,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        Task<Result> Update(IEnumerable<TEntity> objectsToUpdate);
+        Task Update(IEnumerable<TEntity> objectsToUpdate);
 
         /// <summary>
         ///     Удаление объектов.
@@ -61,7 +59,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        Task<Result> Delete(IEnumerable<TEntity> objectsToRemove);
+        Task Delete(IEnumerable<TEntity> objectsToRemove);
 
         void SetBoundedContext(IBoundedContext boundedContext);
     }

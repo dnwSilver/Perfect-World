@@ -11,34 +11,33 @@ using Microsoft.EntityFrameworkCore;
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
-using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {
     /// <summary>
-    ///     Базовая реализация для любых потомков интерфейса <see cref="IEntityRepository{TEntity}" />.
+    ///     Базовая реализация для любых потомков интерфейса <see cref="IEntityRepository{TEntity}"/>.
     /// </summary>
-    /// <typeparam name="TEntity">Сущность для которой предназначено хранилище.</typeparam>
-    /// <typeparam name="TDataModel">Модель данных в источнике данных.</typeparam>
-    /// <typeparam name="TEntityBuilder">Строитель для объекта.</typeparam>
+    /// <typeparam name="TEntity"> Сущность для которой предназначено хранилище. </typeparam>
+    /// <typeparam name="TDataModel"> Модель данных в источнике данных. </typeparam>
+    /// <typeparam name="TEntityBuilder"> Строитель для объекта. </typeparam>
     public abstract class EntityFrameworkRepositoryBase<TEntity, TDataModel, TEntityBuilder>
-        where TEntity : class, IEntity<TEntity>
-        where TEntityBuilder : IEntityBuilder<TEntity>
-        where TDataModel : class
+            where TEntity: class, IEntity<TEntity>
+            where TEntityBuilder: IEntityBuilder<TEntity>
+            where TDataModel: class
     {
         /// <summary>
         /// </summary>
         protected DbContext? BoundedContext;
 
         /// <summary>
-        ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}" />.
+        ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
-        /// <param name="mapper">Механизм для трансформации объектов.</param>
-        /// <param name="entityFactory">Фабрика для создания объектов.</param>
+        /// <param name="mapper"> Механизм для трансформации объектов. </param>
+        /// <param name="entityFactory"> Фабрика для создания объектов. </param>
         protected EntityFrameworkRepositoryBase(IEntityFactory<TEntity> entityFactory, IMapper mapper)
         {
-            this.Mapper = mapper;
-            this.EntityFactory = entityFactory;
+            Mapper = mapper;
+            EntityFactory = entityFactory;
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// <summary>
         ///     Текущий статус объекта.
         /// </summary>
-        /// <returns>Статус объекта.</returns>
+        /// <returns> Статус объекта. </returns>
         public RepositoryStatus Status { get; private set; }
 
         /// <summary>
@@ -59,79 +58,81 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
 
         /// <summary>
         /// </summary>
-        /// <param name="boundedContext"></param>
+        /// <param name="boundedContext"> </param>
         public void SetBoundedContext(DbContext boundedContext)
         {
-            this.BoundedContext = boundedContext;
+            BoundedContext = boundedContext;
         }
 
         /// <summary>
         ///     Смена статуса.
         /// </summary>
-        /// <param name="newStatus">Новый статус.</param>
+        /// <param name="newStatus"> Новый статус. </param>
         public void ChangeStatus(RepositoryStatus newStatus)
         {
-            this.Status = newStatus;
+            Status = newStatus;
         }
-        
+
         /// <summary>
-        /// Контекст для работы с таблицей.
+        ///     Контекст для работы с таблицей.
         /// </summary>
-        /// <returns></returns>
+        /// <returns> </returns>
         protected abstract DbSet<TDataModel> DbSetEntity();
-        
+
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
-        /// <param name="specification">Набор параметров для поиска.</param>
-        /// <returns>Набор бизнес объектов.</returns>
-        public async Task<Result<IEnumerable<TEntity>>> Read(ISpecification<TEntity> specification)
+        /// <param name="specification"> Набор параметров для поиска. </param>
+        /// <returns> Набор бизнес объектов. </returns>
+        public async Task<IEnumerable<TEntity>> Read(ISpecification<TEntity> specification)
         {
             var userExpression =
-                this.Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
+                    Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
 
-            var dataModels = await this.DbSetEntity().Where(userExpression).ToListAsync();
+            var dataModels = await DbSetEntity()
+                                  .Where(userExpression)
+                                  .ToListAsync();
 
             if (!dataModels.Any())
-                return Result.Ok(Enumerable.Empty<TEntity>());
+                return Enumerable.Empty<TEntity>();
 
-            var builders = this.Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
+            var builders = Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
 
             var entities = new List<TEntity>();
-            entities.AddRange(from builder in builders
-                              let factory = this.EntityFactory
-                              select factory.Recovery(builder)
-                              into entity
-                              select entity.Value);
 
-            return Result.Ok<IEnumerable<TEntity>>(entities);
+            entities.AddRange(
+                    from builder in builders
+                    let factory = EntityFactory
+                    select factory.Recovery(builder)
+                    into entity
+                    select entity.Value);
+
+            return entities;
         }
 
         /// <summary>
         ///     Создание набора бизнес объектов.
         /// </summary>
-        /// <param name="objectsToCreate">Список объектов для сохранения в хранилище.</param>
+        /// <param name="objectsToCreate"> Список объектов для сохранения в хранилище. </param>
         /// <returns>
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public async Task<Result> Create(IEnumerable<TEntity> objectsToCreate)
+        public async Task Create(IEnumerable<TEntity> objectsToCreate)
         {
-            var userDataModels =
-                this.Mapper.Map<IEnumerable<TEntity>, IEnumerable<TDataModel>>(objectsToCreate);
-            
-            await this.DbSetEntity().AddRangeAsync(userDataModels);
+            var userDataModels = Mapper.Map<IEnumerable<TEntity>, IEnumerable<TDataModel>>(objectsToCreate);
+
+            await DbSetEntity().AddRangeAsync(userDataModels);
 
             try
             {
-                await this.BoundedContext.SaveChangesAsync();
+                await BoundedContext.SaveChangesAsync();
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 // todo Обязательно сюда добавить лог и Debug.Assert
-                return Result.Fail(exception.Message);
+                throw new Exception("Вот так беда. Ничего не получилось.", exception);
             }
-            return Result.Ok();
         }
     }
 }
