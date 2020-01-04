@@ -59,7 +59,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Task Update(IEnumerable<IUserEntity> objectsToUpdate)
+        public Task UpdateAsync(IEnumerable<IUserEntity> objectsToUpdate)
         {
             throw new NotImplementedException();
         }
@@ -72,7 +72,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Task Delete(IEnumerable<IUserEntity> objectsToRemove)
+        public Task DeleteAsync(IEnumerable<IUserEntity> objectsToRemove)
         {
             throw new NotImplementedException();
         }

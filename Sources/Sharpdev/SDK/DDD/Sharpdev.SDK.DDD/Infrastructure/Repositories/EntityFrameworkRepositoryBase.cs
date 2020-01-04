@@ -84,7 +84,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// </summary>
         /// <param name="specification"> Набор параметров для поиска. </param>
         /// <returns> Набор бизнес объектов. </returns>
-        public async Task<IEnumerable<TEntity>> Read(ISpecification<TEntity> specification)
+        public async Task<IEnumerable<TEntity>> ReadAsync(ISpecification<TEntity> specification)
         {
             var userExpression =
                     Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
@@ -118,7 +118,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     True - сохранение выполнено успешно.
         ///     False - сохранение не выполнено.
         /// </returns>
-        public async Task Create(IEnumerable<TEntity> objectsToCreate)
+        public async Task CreateAsync(IEnumerable<TEntity> objectsToCreate)
         {
             var userDataModels = Mapper.Map<IEnumerable<TEntity>, IEnumerable<TDataModel>>(objectsToCreate);
 

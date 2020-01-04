@@ -84,9 +84,9 @@ namespace Prosolve.Services.Identification.Users
             using var uow = _unitOfWork;
             _userRepository.SetBoundedContext(uow.BoundedContext);
 
-            var createResult = _userRepository.Create(userBuilders
-                                                     .Select(userBuilder => _userFactory.Create(userBuilder))
-                                                     .Select(userEntity => userEntity.Value));
+            _userRepository.CreateAsync(userBuilders
+                                  .Select(userBuilder => _userFactory.Create(userBuilder))
+                                  .Select(userEntity => userEntity.Value));
 
             var commitResult = uow.Commit();
 
@@ -98,7 +98,7 @@ namespace Prosolve.Services.Identification.Users
             _integrateBus.PublishAsync(registrationEvent);
 
             // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
-            var domainEvent = new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
+            new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
 
             return Result.Ok();
         }
@@ -114,7 +114,7 @@ namespace Prosolve.Services.Identification.Users
 
             _userRepository.SetBoundedContext(uow.BoundedContext);
 
-            var foundProcess = await _userRepository.Read(processSpecification);
+            var foundProcess = await _userRepository.ReadAsync(processSpecification);
 
             //var domainEvent = new UserFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
 

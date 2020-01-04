@@ -57,7 +57,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public async Task Update(IEnumerable<IProcessEntity> processes)
+        public Task UpdateAsync(IEnumerable<IProcessEntity> processes)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +70,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public async Task Delete(IEnumerable<IProcessEntity> objectsToRemove)
+        public Task DeleteAsync(IEnumerable<IProcessEntity> objectsToRemove)
         {
             throw new NotImplementedException();
         }

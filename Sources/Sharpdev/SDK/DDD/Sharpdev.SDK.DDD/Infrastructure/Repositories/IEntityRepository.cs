@@ -16,10 +16,10 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     /// <remarks>
     ///     Все репозитории должны соответствовать модели CRUD. CRUD — акроним, обозначающий четыре
     ///     базовые функции, используемые при работе с источниками данных:
-    ///     - создание (<see cref="Create" />);
-    ///     - чтение (<see cref="Read" />);
-    ///     - модификация (<see cref="Update" />);
-    ///     - удаление (<see cref="Delete" />).
+    ///     - создание (<see cref="CreateAsync" />);
+    ///     - чтение (<see cref="ReadAsync" />);
+    ///     - модификация (<see cref="UpdateAsync" />);
+    ///     - удаление (<see cref="DeleteAsync" />).
     /// </remarks>
     public interface IEntityRepository<TEntity> : IHasStatus<RepositoryStatus>
         where TEntity : class, IEntity<TEntity>
@@ -28,38 +28,26 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         ///     Создание набора бизнес объектов.
         /// </summary>
         /// <param name="objectsToCreate">Список объектов для сохранения в хранилище.</param>
-        /// <returns>
-        ///     True - сохранение выполнено успешно.
-        ///     False - сохранение не выполнено.
-        /// </returns>
-        Task Create(IEnumerable<TEntity> objectsToCreate);
+        Task CreateAsync(IEnumerable<TEntity> objectsToCreate);
 
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
         /// </summary>
         /// <param name="specification">Набор параметров для поиска.</param>
         /// <returns>Набор бизнес объектов.</returns>
-        Task<IEnumerable<TEntity>> Read(ISpecification<TEntity> specification);
+        Task<IEnumerable<TEntity>> ReadAsync(ISpecification<TEntity> specification);
 
         /// <summary>
         ///     Обновление объектов.
         /// </summary>
         /// <param name="objectsToUpdate">Список бизнес объектов.</param>
-        /// <returns>
-        ///     True - обновление выполнено успешно.
-        ///     False - обновление не выполнено.
-        /// </returns>
-        Task Update(IEnumerable<TEntity> objectsToUpdate);
+        Task UpdateAsync(IEnumerable<TEntity> objectsToUpdate);
 
         /// <summary>
         ///     Удаление объектов.
         /// </summary>
         /// <param name="objectsToRemove">Список бизнес объектов.</param>
-        /// <returns>
-        ///     True - удаление выполнено успешно.
-        ///     False - удаление не выполнено.
-        /// </returns>
-        Task Delete(IEnumerable<TEntity> objectsToRemove);
+        Task DeleteAsync(IEnumerable<TEntity> objectsToRemove);
 
         void SetBoundedContext(IBoundedContext boundedContext);
     }

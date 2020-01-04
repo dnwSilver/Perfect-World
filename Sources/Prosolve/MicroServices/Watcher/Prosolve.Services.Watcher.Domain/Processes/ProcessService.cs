@@ -58,7 +58,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
 
             this._processRepository.SetBoundedContext(uow.BoundedContext);
 
-            var foundProcess = await this._processRepository.Read(processSpecification);
+            var foundProcess = await this._processRepository.ReadAsync(processSpecification);
 
             var domainEvent = new ProcessFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
 
