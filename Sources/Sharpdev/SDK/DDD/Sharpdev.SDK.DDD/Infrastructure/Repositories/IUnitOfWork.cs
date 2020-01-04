@@ -6,12 +6,11 @@ using Sharpdev.SDK.Types.Results;
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {
     /// <summary>
-    ///     Шаблон  Unit  of  Work  позволяет   упростить   работу   с   различными   репозиториями
-    ///     (<seealso cref="IEntityRepository{TEntity}" />)  и  дает  уверенность, что все
-    ///     репозитории будут использовать один и тот же контекст данных.
+    ///     Шаблон Unit of Work позволяет упростить работу с репозиториями <see cref="IEntityRepository{TEntity}"/> и
+    ///     дает уверенность, что все репозитории будут использовать один и тот же  контекст данных.
     /// </summary>
-    public interface IUnitOfWork<out TBoundedContext> : IDisposable
-        where TBoundedContext : IBoundedContext
+    public interface IUnitOfWork<out TBoundedContext>: IDisposable
+            where TBoundedContext: IBoundedContext
     {
         /// <summary>
         ///     Контекст источника данных.

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Statuses;
 using Sharpdev.SDK.Types.Results;
 
