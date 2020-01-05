@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 using Prosolve.Services.Identification.Users.Factories;
 
-using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
@@ -17,16 +16,15 @@ namespace Prosolve.Services.Identification.Users.DataSources
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    internal class UserEntityFrameworkRepository:
-            EntityFrameworkRepositoryBase<IUserEntity, UserDataModel, IUserBuilder>,
-            IEntityRepository<IUserEntity>
+    internal class UserFrameworkRepository:
+            EntityFrameworkRepositoryBase<IUserAggregate, UserDataModel, IUserBuilder>
     {
         /// <summary>
         ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
         /// <param name="mapper"> Механизм для трансформации объектов. </param>
         /// <param name="entityFactory"> Фабрика для создания объектов. </param>
-        public UserEntityFrameworkRepository(IEntityFactory<IUserEntity> entityFactory, IMapper mapper)
+        public UserFrameworkRepository(IEntityFactory<IUserAggregate> entityFactory, IMapper mapper)
                 : base(entityFactory, mapper)
         {
         }
@@ -46,11 +44,6 @@ namespace Prosolve.Services.Identification.Users.DataSources
             }
         }
 
-        public void SetBoundedContext(IBoundedContext boundedContext)
-        {
-            BoundedContext = boundedContext as IdentificationContext;
-        }
-
         /// <summary>
         ///     Обновление объектов.
         /// </summary>
@@ -59,7 +52,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Task UpdateAsync(IEnumerable<IUserEntity> objectsToUpdate)
+        public Task UpdateAsync(IEnumerable<IUserAggregate> objectsToUpdate)
         {
             throw new NotImplementedException();
         }
@@ -72,7 +65,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Task DeleteAsync(IEnumerable<IUserEntity> objectsToRemove)
+        public Task DeleteAsync(IEnumerable<IUserAggregate> objectsToRemove)
         {
             throw new NotImplementedException();
         }

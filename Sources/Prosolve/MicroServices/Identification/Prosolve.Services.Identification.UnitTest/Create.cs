@@ -57,7 +57,7 @@ namespace Prosolve.Services.Identity.UnitTest
             new EmailAddressGenerator(emailAddress);
 
         /// <summary>
-        ///     Создание строителя для <see cref="IUserEntity" />.
+        ///     Создание строителя для <see cref="IUserAggregate" />.
         /// </summary>
         internal static UserBuilderGenerator UserBuilder => new UserBuilderGenerator();
 

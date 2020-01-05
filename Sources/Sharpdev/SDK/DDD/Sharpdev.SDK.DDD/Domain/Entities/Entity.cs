@@ -13,11 +13,6 @@ namespace Sharpdev.SDK.Domain.Entities
         where TEntity : class, IEntity<TEntity>
     {
         /// <summary>
-        ///     Набор условий ограничений.
-        /// </summary>
-        private readonly IEnumerable _policies = new Collection<IPolicy>();
-
-        /// <summary>
         ///     Конструктор для объекта <see cref="TEntity" />.
         /// </summary>
         /// <param name="identifier">Уникальный идентификатор объекта.</param>
@@ -53,13 +48,5 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     <see langword="false" /> - используется не безопасное удаление.
         /// </returns>
         public bool IsSoftDelete { get; }
-
-        /// <summary>
-        ///     Набор условий-ограничение.
-        /// </summary>
-        public IEnumerable Policies()
-        {
-            return this._policies;
-        }
     }
 }

@@ -15,13 +15,13 @@ using Sharpdev.SDK.Domain.Factories;
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {
     /// <summary>
-    ///     Базовая реализация для любых потомков интерфейса <see cref="IEntityRepository{TEntity}"/>.
+    ///     Базовая реализация для любых потомков интерфейса <see cref="IRepository{TAggregate}"/>.
     /// </summary>
     /// <typeparam name="TEntity"> Сущность для которой предназначено хранилище. </typeparam>
     /// <typeparam name="TDataModel"> Модель данных в источнике данных. </typeparam>
     /// <typeparam name="TEntityBuilder"> Строитель для объекта. </typeparam>
-    public abstract class EntityFrameworkRepositoryBase<TEntity, TDataModel, TEntityBuilder>
-            where TEntity: class, IEntity<TEntity>
+    public abstract class EntityFrameworkRepositoryBase<TEntity, TDataModel, TEntityBuilder>: IRepository<TEntity>
+            where TEntity: IEntity<TEntity>, IAggregate<TEntity>
             where TEntityBuilder: IEntityBuilder<TEntity>
             where TDataModel: class
     {
@@ -56,12 +56,18 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// </summary>
         private IMapper Mapper { get; }
 
+        public Task DeleteAsync(IEnumerable<TEntity> objectsToRemove)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// </summary>
         /// <param name="boundedContext"> </param>
-        public void SetBoundedContext(DbContext boundedContext)
+        public void SetBoundedContext(IBoundedContext boundedContext)
         {
-            BoundedContext = boundedContext;
+            //todo Добавить выбрасывание ошибки.
+            BoundedContext = boundedContext as DbContext;
         }
 
         /// <summary>
@@ -108,6 +114,11 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
                     select entity.Value);
 
             return entities;
+        }
+
+        public Task UpdateAsync(IEnumerable<TEntity> objectsToUpdate)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

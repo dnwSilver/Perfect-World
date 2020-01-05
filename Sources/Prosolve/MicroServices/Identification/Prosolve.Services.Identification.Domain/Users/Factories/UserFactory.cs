@@ -7,15 +7,15 @@ using Sharpdev.SDK.Domain.Factories;
 
 namespace Prosolve.Services.Identification.Users.Factories
 {
-    internal sealed class UserFactory : EntityFactoryBase<IUserEntity>
+    internal sealed class UserFactory : EntityFactoryBase<IUserAggregate>
     {
         /// <summary>
         ///     Фиксация набора спецификаций.
         /// </summary>
         /// <param name="processEntity">Сущность к которой будут применяться спецификации.</param>
-        protected override void SetSpecifications(IUserEntity processEntity)
+        protected override void SetSpecifications(IUserAggregate processEntity)
         {
-            var specifications = new Collection<ISpecification<IUserEntity>>();
+            var specifications = new Collection<ISpecification<IUserAggregate>>();
             this.Specifications = specifications;
         }
 
@@ -24,10 +24,10 @@ namespace Prosolve.Services.Identification.Users.Factories
         /// </summary>
         /// <param name="entityBuilder">Строитель для объекта <see cref="Entity{TEntity}" />.</param>
         /// <returns>Ссылка на созданный в куче объект.</returns>
-        protected override IUserEntity AllocateEntity(IEntityBuilder<IUserEntity> entityBuilder)
+        protected override IUserAggregate AllocateEntity(IEntityBuilder<IUserAggregate> entityBuilder)
         {
             if (entityBuilder is IUserBuilder userBuilder)
-                return new UserEntity(userBuilder);
+                return new UserAggregate(userBuilder);
 
             throw new Exception();
         }

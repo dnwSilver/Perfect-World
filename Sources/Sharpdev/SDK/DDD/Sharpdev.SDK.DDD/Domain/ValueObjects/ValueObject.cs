@@ -3,13 +3,10 @@
     /// <summary>
     ///     Объект-значение.
     /// </summary>
-    /// <typeparam name="TValueObject">
-    ///     Потомок класса <see cref="ValueObject{TValueObject}" />.
-    /// </typeparam>
     /// <remarks>
     ///     <see href="https://enterprisecraftsmanship.com/2015/01/03/value-objects-explained/" />.
     /// </remarks>
-    public abstract class ValueObject<TValueObject> : IValueObject<TValueObject>
+    public abstract class ValueObject<TValueObject> : IValueObject
         where TValueObject : ValueObject<TValueObject>
     {
         /// <summary>
@@ -20,7 +17,7 @@
         ///     <see langword="true" /> - Объекты равны.
         ///     <see langword="false" /> - Объекты не равны.
         /// </returns>
-        public bool Equals(IValueObject<TValueObject> other)
+        public bool Equals(IValueObject other)
         {
             return ReferenceEquals(this, other);
         }

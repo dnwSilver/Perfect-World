@@ -122,7 +122,7 @@ namespace Sharpdev.SDK.UnitTest.Domain.Entities.Cases
             };
 
             // Arrange:
-            var identifier = Identifier<StubEntity>.New(externalIds);
+            var identifier = Identifier<StubEntity>.Create(externalIds);
 
             // Assert:
             identifier.Private.Should().Be(Identifier<StubEntity>.Undefined);

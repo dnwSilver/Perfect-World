@@ -6,7 +6,7 @@ using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Users.Factories
 {
-    public class UserBuilder : EntityBuilderBase<IUserEntity>, IUserBuilder
+    public class UserBuilder : EntityBuilderBase<IUserAggregate>, IUserBuilder
     {
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.
@@ -27,7 +27,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         public FullName FullName { get; private set; }
 
         /// <summary>
-        ///     Фиксация ФИО для объекта <see cref="IUserEntity" />.
+        ///     Фиксация ФИО для объекта <see cref="IUserAggregate" />.
         /// </summary>
         /// <param name="fullName">ФИО.</param>
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
@@ -38,7 +38,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         }
 
         /// <summary>
-        ///     Фиксация контактного электронного адреса для объекта <see cref="IUserEntity" />.
+        ///     Фиксация контактного электронного адреса для объекта <see cref="IUserAggregate" />.
         /// </summary>
         /// <param name="confirmedEmailAddress">Контактный адрес электронной почты.</param>
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
@@ -50,7 +50,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         }
 
         /// <summary>
-        ///     Фиксация контактного номера телефона для объекта <see cref="IUserEntity" />.
+        ///     Фиксация контактного номера телефона для объекта <see cref="IUserAggregate" />.
         /// </summary>
         /// <param name="confirmedContactPhoneNumber">Контактный номер телефона.</param>
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>

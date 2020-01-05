@@ -1,5 +1,5 @@
 ﻿using Sharpdev.SDK.Domain.Entities;
-using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Sharpdev.SDK.Domain
 {
@@ -17,13 +17,13 @@ namespace Sharpdev.SDK.Domain
     ///     возможны только на один объект АГРЕГАТА, именуемый корневым (<see cref="TRootObject" />).
     ///     В границах АГРЕГАТА действует определенный набор правил согласования и единообразия.
     /// </remarks>
-    public interface IAggregate<out TRootObject> : IEncapsulated
-        where TRootObject : class, IEntity<TRootObject>
+    public interface IAggregate<TRootObject> : IEntity<TRootObject>
+        where TRootObject : IEntity<TRootObject>
     {
         /// <summary>
         ///     Получение коневого объекта.
         /// </summary>
         /// <returns>Корневой объект.</returns>
-        TRootObject GetRootEntity();
+        TRootObject RootEntity { get; }
     }
 }

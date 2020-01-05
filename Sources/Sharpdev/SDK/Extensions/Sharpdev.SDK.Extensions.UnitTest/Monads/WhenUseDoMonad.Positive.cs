@@ -19,7 +19,7 @@ namespace Sharpdev.SDK.Extensions.UnitTest.Monads
             AddressStub address = null;
             
             // Arrange:
-            var result = address.Do(null);
+            var result = address.Execute(null);
 
             // Assert:
             result.Should().BeNull();
@@ -37,7 +37,7 @@ namespace Sharpdev.SDK.Extensions.UnitTest.Monads
             }
             
             // Arrange:
-            var result = address.Do(ChangeAddressText);
+            var result = address.Execute(ChangeAddressText);
 
             // Assert:
             result.Text.Should().Be(newAddressText);

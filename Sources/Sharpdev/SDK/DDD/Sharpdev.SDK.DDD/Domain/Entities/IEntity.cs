@@ -1,7 +1,4 @@
-﻿using System.Collections;
-
-using Sharpdev.SDK.Domain.Factories;
-using Sharpdev.SDK.Infrastructure.Repositories;
+﻿using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Sharpdev.SDK.Domain.Entities
 {
@@ -25,14 +22,12 @@ namespace Sharpdev.SDK.Domain.Entities
     ///     квартире позвонят и по отдельности закажут какие-то работы, фирме нужно знать,  что они
     ///     находятся в одном месте.  Здесь адрес  -  также СУЩНОСТЬ.
     /// </remarks>
-    public interface IEntity<TEntity> : IEncapsulated,
-                                        IStored,
-                                        IHasIdentifier<TEntity>
-        where TEntity : class, IEntity<TEntity>
+    public interface IEntity<TEntity> : IVersioned
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
-        ///     Набор условий-ограничение.
+        ///     Уникальный идентификатор.
         /// </summary>
-        IEnumerable Policies();
+        IIdentifier<TEntity> Id { get; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using Prosolve.Services.Identification.Users.Events;
@@ -8,6 +7,7 @@ using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Presentation;
@@ -33,12 +33,12 @@ namespace Prosolve.Services.Identification.Users
         /// <summary>
         ///     Фабрика для работы с пользователями.
         /// </summary>
-        private readonly IEntityFactory<IUserEntity> _userFactory;
+        private readonly IEntityFactory<IUserAggregate> _userFactory;
 
         /// <summary>
         ///     Репозиторий для работы с пользователями.
         /// </summary>
-        private readonly IEntityRepository<IUserEntity> _userRepository;
+        private readonly IRepository<IUserAggregate> _userRepository;
 
         /// <summary>
         ///     Создание объекта <see cref="IdentificationService"/>.
@@ -49,8 +49,8 @@ namespace Prosolve.Services.Identification.Users
         /// <param name="integrateBus"> Интеграционная шина. </param>
         public UserService(IUnitOfWork<IdentificationContext> unitOfWork,
                            IIntegrateBus integrateBus,
-                           IEntityFactory<IUserEntity> userFactory,
-                           IEntityRepository<IUserEntity> userRepository)
+                           IEntityFactory<IUserAggregate> userFactory,
+                           IRepository<IUserAggregate> userRepository)
         {
             _userFactory = userFactory;
             _userRepository = userRepository;
@@ -77,16 +77,19 @@ namespace Prosolve.Services.Identification.Users
         /// <summary>
         ///     Создание пользователей в информационной системе.
         /// </summary>
-        /// <param name="userBuilders"> Список новых пользователей. </param>
+        /// <param name="userBuilder"> Список новых пользователей. </param>
         /// <returns> Информация по процессу создания пользователей. </returns>
-        public Result CreateUsers(IEnumerable<IUserBuilder> userBuilders)
+        public Result CreateUser(IUserBuilder userBuilder)
         {
             using var uow = _unitOfWork;
             _userRepository.SetBoundedContext(uow.BoundedContext);
 
-            _userRepository.CreateAsync(userBuilders
-                                  .Select(userBuilder => _userFactory.Create(userBuilder))
-                                  .Select(userEntity => userEntity.Value));
+            var user = _userFactory.Create(userBuilder).Value;
+
+            // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
+            var domainEvent = user.Process(new CreateUserDomainCommand());
+            user.Apply(domainEvent);
+            _userRepository.CreateAsync(user.Yield());
 
             var commitResult = uow.Commit();
 
@@ -97,10 +100,8 @@ namespace Prosolve.Services.Identification.Users
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             _integrateBus.PublishAsync(registrationEvent);
 
-            // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
-            new UserRegisteredDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
 
-            return Result.Ok();
+            return Result.Done();
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="processSpecification"> Набор спецификаций для поиска процессов. </param>
         /// <returns> Список найденных процессов. </returns>
-        public async Task<Result<IEnumerable<IUserEntity>>> Find(ISpecification<IUserEntity> processSpecification)
+        public async Task<Result<IEnumerable<IUserAggregate>>> Find(ISpecification<IUserAggregate> processSpecification)
         {
             using var uow = _unitOfWork;
 
@@ -120,7 +121,7 @@ namespace Prosolve.Services.Identification.Users
 
             // await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Ok(foundProcess);
+            return Result.Done(foundProcess);
         }
     }
 }

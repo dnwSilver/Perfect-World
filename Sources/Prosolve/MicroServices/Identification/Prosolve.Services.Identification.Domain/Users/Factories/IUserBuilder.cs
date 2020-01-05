@@ -7,9 +7,9 @@ using Sharpdev.SDK.Types.PhoneNumbers;
 namespace Prosolve.Services.Identification.Users.Factories
 {
     /// <summary>
-    ///     Строитель для объекта <see cref="IUserEntity" />.
+    ///     Строитель для объекта <see cref="IUserAggregate" />.
     /// </summary>
-    public interface IUserBuilder : IEntityBuilder<IUserEntity>
+    public interface IUserBuilder : IEntityBuilder<IUserAggregate>
     {
         /// <summary>
         ///     Установка адрес электронной почты указанный для получения обратной связи.

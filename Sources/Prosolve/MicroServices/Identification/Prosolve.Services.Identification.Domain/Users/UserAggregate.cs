@@ -1,4 +1,5 @@
-﻿using Prosolve.Services.Identification.Users.Factories;
+﻿using Prosolve.Services.Identification.Users.Events;
+using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Kernel;
@@ -11,7 +12,7 @@ namespace Prosolve.Services.Identification.Users
     /// <summary>
     ///     Пользователь информационной системы.
     /// </summary>
-    internal class UserEntity : Entity<IUserEntity>, IUserEntity
+    internal class UserAggregate : Entity<IUserAggregate>, IUserAggregate
     {
         /// <summary>
         ///     Текущий статус объекта.
@@ -34,11 +35,21 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         public FullName FullName { get; }
 
+        public CreateUserDomainEvent Process(CreateUserDomainCommand command)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Apply(CreateUserDomainEvent @event)
+        {
+            throw new System.NotImplementedException();
+        }
+
         /// <summary>
-        ///     Конструктор для объекта <see cref="IUserEntity" />.
+        ///     Конструктор для объекта <see cref="IUserAggregate" />.
         /// </summary>
         /// <param name="userBuilder">Строитель для объекта.</param>
-        public UserEntity(IUserBuilder userBuilder)
+        public UserAggregate(IUserBuilder userBuilder)
             : base(userBuilder.Identifier, userBuilder.Version)
         {
             this.FullName = userBuilder.FullName;
@@ -54,5 +65,7 @@ namespace Prosolve.Services.Identification.Users
         {
             this.Status = newStatus;
         }
+
+        public IUserAggregate RootEntity { get; }
     }
 }

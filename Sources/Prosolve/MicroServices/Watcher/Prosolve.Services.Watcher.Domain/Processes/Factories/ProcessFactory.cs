@@ -10,20 +10,20 @@ using Sharpdev.SDK.Domain.Factories;
 namespace Prosolve.Services.Watcher.Domain.Processes.Factories
 {
     /// <summary>
-    ///     Фабрика для объекта <see cref="IProcessEntity" />.
+    ///     Фабрика для объекта <see cref="IProcessAggregate" />.
     /// </summary>
-    public sealed class ProcessFactory : EntityFactoryBase<IProcessEntity>
+    public sealed class ProcessFactory : EntityFactoryBase<IProcessAggregate>
     {
         /// <summary>
         ///     Фиксация набора спецификаций.
         /// </summary>
-        /// <param name="processEntity">Сущность к которой будут применяться спецификации.</param>
-        protected override void SetSpecifications(IProcessEntity processEntity)
+        /// <param name="processAggregate">Сущность к которой будут применяться спецификации.</param>
+        protected override void SetSpecifications(IProcessAggregate processAggregate)
         {
-            var specifications = new Collection<ISpecification<IProcessEntity>>
+            var specifications = new Collection<ISpecification<IProcessAggregate>>
             {
                 new ProcessNameLengthSpecification(),
-                new ProcessPublicIdSpecification(processEntity.Id.Public)
+                new ProcessPublicIdSpecification(processAggregate.Id.Public)
             };
             this.Specifications = specifications;
         }
@@ -33,11 +33,11 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Factories
         /// </summary>
         /// <param name="entityBuilder">Строитель для объекта <see cref="Entity{TEntity}" />.</param>
         /// <returns>Ссылка на созданный в куче объект.</returns>
-        protected override IProcessEntity AllocateEntity(
-            IEntityBuilder<IProcessEntity> entityBuilder)
+        protected override IProcessAggregate AllocateEntity(
+            IEntityBuilder<IProcessAggregate> entityBuilder)
         {
             if (entityBuilder is IProcessBuilder processBuilder)
-                return new ProcessEntity(processBuilder);
+                return new ProcessAggregate(processBuilder);
 
             throw new NotImplementedException();
         }

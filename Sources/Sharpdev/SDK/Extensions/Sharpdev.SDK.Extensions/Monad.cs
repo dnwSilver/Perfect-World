@@ -104,7 +104,7 @@ namespace Sharpdev.SDK.Extensions
         /// <param name="o">Проверяемый объект.</param>
         /// <param name="action">Выполняемый метод. Входной параметр - проверяемый объект.</param>
         /// <returns>Проверяемый объект.</returns>
-        public static TInput Do<TInput>(this TInput o, Action<TInput> action)
+        public static TInput Execute<TInput>(this TInput o, Action<TInput> action)
         {
             if (o == null)
                 return default!;

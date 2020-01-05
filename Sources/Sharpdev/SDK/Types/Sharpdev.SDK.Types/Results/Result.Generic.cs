@@ -26,7 +26,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <summary>
         ///     Признак не выполнения метода.
         /// </summary>
-        public bool Failure => !this.Success;
+        public bool Failure => !Success;
 
         /// <summary>
         ///     Данные-результат работы метода
@@ -127,9 +127,10 @@ namespace Sharpdev.SDK.Types.Results
         {
             unchecked
             {
-                var hashCode = this.Success.GetHashCode();
-                hashCode = (hashCode * 397) ^ (this.Errors?.GetHashCode() ?? 0);
-                hashCode = (hashCode * 397) ^ EqualityComparer<TResultObjectType>.Default.GetHashCode(this.Value);
+                var hashCode = Success.GetHashCode();
+                var errorsHashCode = Errors?.GetHashCode() ?? 0;
+                hashCode = hashCode * 397 ^ errorsHashCode;
+                hashCode = hashCode * 397 ^ EqualityComparer<TResultObjectType>.Default.GetHashCode(Value);
 
                 return hashCode;
             }

@@ -29,7 +29,7 @@ namespace Sharpdev.SDK.Domain.Factories
         /// </remarks>
         public Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate)
         {
-            entityToCreate.Identifier = Identifier<TEntity>.New();
+            entityToCreate.Identifier = Identifier<TEntity>.Create();
 
             return this.Recovery(entityToCreate);
         }
@@ -47,7 +47,7 @@ namespace Sharpdev.SDK.Domain.Factories
             foreach(var specification in this.Specifications)
                 specification.IsSatisfiedBy(entity);
 
-            return Result.Ok(entity);
+            return Result.Done(entity);
         }
 
         /// <summary>

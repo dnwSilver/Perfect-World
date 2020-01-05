@@ -8,7 +8,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
     /// <summary>
     ///     Спецификация на ограничение длины наименования процесса.
     /// </summary>
-    public sealed class ProcessNameLengthSpecification : SpecificationBase<IProcessEntity>
+    public sealed class ProcessNameLengthSpecification : SpecificationBase<IProcessAggregate>
     {
         /// <summary>
         ///     Максимальная длина наименования процесса.
@@ -32,7 +32,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IProcessEntity, bool>> Criteria => x =>
+        private static Expression<Func<IProcessAggregate, bool>> Criteria => x =>
             x.Name.Length <= MaxLength;
     }
 }

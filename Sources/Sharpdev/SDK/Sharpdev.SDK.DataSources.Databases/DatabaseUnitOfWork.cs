@@ -55,7 +55,7 @@ namespace Sharpdev.SDK.DataSources.Databases
 
             this._isCommitted = true;
 
-            return Result.Ok();
+            return Result.Done();
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ using Sharpdev.SDK.Types.PhoneNumbers;
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
     [TestFixture]
-    [Category(nameof(IUserEntity))]
+    [Category(nameof(IUserAggregate))]
     [Category(Constant.Positive)]
     [Parallelizable(ParallelScope.All)]
     public class WhenCreateUserPositive
@@ -40,7 +40,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
             var userRepository =
-                new UserEntityFrameworkRepository(userFactory, IdentificationConfiguration.Mapper);
+                new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper);
             var userService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
 
             return userService;
@@ -53,14 +53,13 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var userService = this.AllocateIdentityService(out var _);
             var emailAddress = Create.EmailAddress("TestUser@mail.ru").PorFavor();
             var fullName = new FullName("Петров", "Александр", "Андреевич");
-            var newUserBuilders = Create.UserBuilder
+            var newUserBuilder = Create.UserBuilder
                                         .With(fullName)
                                         .With(emailAddress)
-                                        .PorFavor()
-                                        .Yield();
+                                        .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUsers(newUserBuilders);
+            var result = userService.CreateUser(newUserBuilder);
 
             // Assert:
             result.Success.Should().BeTrue();
@@ -73,14 +72,13 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var userService = this.AllocateIdentityService(out var _);
             var phoneNumber = new ConfirmedBase<PhoneNumber>($"+7{10000000:D10}");
             var fullName = new FullName("Петров", "Александр", "Андреевич");
-            var newUserBuilders = Create.UserBuilder
+            var newUserBuilder = Create.UserBuilder
                                         .With(fullName)
                                         .With(phoneNumber)
-                                        .PorFavor()
-                                        .Yield();
+                                        .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUsers(newUserBuilders);
+            var result = userService.CreateUser(newUserBuilder);
 
             // Assert:
             result.Success.Should().BeTrue();

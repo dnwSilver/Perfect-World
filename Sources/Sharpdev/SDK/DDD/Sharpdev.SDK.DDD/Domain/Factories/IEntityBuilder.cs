@@ -11,7 +11,7 @@ namespace Sharpdev.SDK.Domain.Factories
     ///     одного и того  же  процесса  конструирования  могут  получаться  разные  представления.
     /// </remarks>
     public interface IEntityBuilder<TEntity>
-        where TEntity : class, IEntity<TEntity>
+        where TEntity : IEntity<TEntity>
     {
         // TODO Сделать snippet для создания свойства и метода для занесения значения в IEntityBuilder
         /// <summary>

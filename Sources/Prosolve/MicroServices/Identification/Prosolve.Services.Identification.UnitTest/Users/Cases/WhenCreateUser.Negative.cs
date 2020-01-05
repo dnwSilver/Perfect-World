@@ -21,47 +21,51 @@ using Sharpdev.SDK.Types.PhoneNumbers;
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
     [TestFixture]
-    [Category(nameof(IUserEntity))]
+    [Category(nameof(IUserAggregate))]
     [Category(Constant.Negative)]
     [Parallelizable(ParallelScope.All)]
     public class WhenCreateUserNegative
-    {  
+    {
         /// <summary>
         ///     Подготовка сервиса для тестирования. Создание всех необходимых объектов и заполнение
         ///     данными виртуальное хранилище.
         /// </summary>
-        /// <param name="userDataModels">Данные находящиеся в виртуальном хранилище.</param>
-        /// <returns>Сервис готовый для тестов.</returns>
+        /// <param name="userDataModels"> Данные находящиеся в виртуальном хранилище. </param>
+        /// <returns> Сервис готовый для тестов. </returns>
         private UserService AllocateUserService(out IEnumerable<UserDataModel> userDataModels)
         {
             userDataModels = Create.UserDataModel.CountOf(10).Please();
-            var identificationContext =
-                Create.IdentificationContext.With(userDataModels).PorFavor();
+
+            var identificationContext = Create.IdentificationContext.With(userDataModels).PorFavor();
+
             var integrationBus = Create.IntegrationBus.PorFavor();
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
-            var userRepository =
-                new UserEntityFrameworkRepository(userFactory, IdentificationConfiguration.Mapper);
+
+            var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper);
+
             var userService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
 
             return userService;
         }
-        
+
         [Test]
         public void WhenCreateUser_WithExistsEmailAddress_ResultShouldBeFailure()
         {
             // Act:
-            var userService = this.AllocateUserService(out var userDataModels);
+            var userService = AllocateUserService(out var userDataModels);
+
             var emailAddress = new ConfirmedBase<EmailAddress>(userDataModels.First().EmailAddress);
+
             var fullName = new FullName("Петров", "Александр", "Андреевич");
-            var newUserBuilders = Create.UserBuilder
+
+            var newUserBuilder = Create.UserBuilder
                                         .With(fullName)
                                         .With(emailAddress)
-                                        .PorFavor()
-                                        .Yield();
+                                        .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUsers(newUserBuilders);
+            var result = userService.CreateUser(newUserBuilder);
 
             // Assert:
             result.Success.Should().BeFalse();
@@ -69,60 +73,71 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 
         [Test]
         public void WhenCreateUser_WithExistsPhoneNumber_ResultShouldBeFailure()
-        { 
+        {
             // Act:
-            var userService = this.AllocateUserService(out var userDataModels);
-            var phoneNumber = new ConfirmedBase<PhoneNumber>(userDataModels.First().PhoneNumber);
+            var userService = AllocateUserService(out var userDataModels);
+
+            var phoneNumber = new ConfirmedBase<PhoneNumber>(userDataModels.First()
+                                                                           .PhoneNumber);
+
             var fullName = new FullName("Петров", "Александр", "Андреевич");
-            var newUserBuilders = Create.UserBuilder
+
+            var newUserBuilder = Create.UserBuilder
                                         .With(fullName)
                                         .With(phoneNumber)
-                                        .PorFavor()
-                                        .Yield();
+                                        .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUsers(newUserBuilders);
+            var result = userService.CreateUser(newUserBuilder);
 
             // Assert:
-            result.Success.Should().BeFalse();
+            result.Success.Should()
+                  .BeFalse();
         }
 
         [Test]
         public void WhenCreateUser_WithoutContactInformation_ResultShouldBeFailure()
-        { 
+        {
             // Act:
-            var userService = this.AllocateUserService(out var userDataModels);
-            var emailAddress = new ConfirmedBase<EmailAddress>(userDataModels.First().EmailAddress);
+            var userService = AllocateUserService(out var userDataModels);
+
+            var emailAddress = new ConfirmedBase<EmailAddress>(userDataModels.First()
+                                                                             .EmailAddress);
+
             var fullName = new FullName("Петров", "Александр", "Андреевич");
-            var newUserBuilders = Create.UserBuilder
+
+            var newUserBuilder = Create.UserBuilder
                                         .With(fullName)
                                         .With(emailAddress)
-                                        .PorFavor()
-                                        .Yield();
+                                        .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUsers(newUserBuilders);
+            var result = userService.CreateUser(newUserBuilder);
 
             // Assert:
-            result.Success.Should().BeFalse();
+            result.Success.Should()
+                  .BeFalse();
         }
 
         [Test]
         public void WhenCreateUser_WithoutFullName_ResultShouldBeFailure()
-        { 
+        {
             // Act:
-            var userService = this.AllocateUserService(out var userDataModels);
-            var emailAddress = new ConfirmedBase<EmailAddress>(userDataModels.First().EmailAddress);
-            var newUserBuilders = Create.UserBuilder
+            var userService = AllocateUserService(out var userDataModels);
+
+            var emailAddress = new ConfirmedBase<EmailAddress>(userDataModels.First()
+                                                                             .EmailAddress);
+
+            var newUserBuilder = Create.UserBuilder
                                         .With(emailAddress)
-                                        .PorFavor()
-                                        .Yield();
+                                        .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUsers(newUserBuilders);
+            var result = userService.CreateUser(newUserBuilder);
 
             // Assert:
-            result.Success.Should().BeFalse();
+            result.Success.Should()
+                  .BeFalse();
         }
     }
 }

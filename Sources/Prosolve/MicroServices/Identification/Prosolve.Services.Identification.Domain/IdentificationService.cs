@@ -31,7 +31,7 @@ namespace Prosolve.Services.Identification
 
             //_logger.LogInformation($"Авторизация пользователя {login}");
 
-            return Result.Ok(claimsIdentity);
+            return Result.Done(claimsIdentity);
         }
     }
 }

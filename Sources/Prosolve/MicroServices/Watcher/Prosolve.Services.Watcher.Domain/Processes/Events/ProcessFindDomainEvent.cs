@@ -7,7 +7,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Events
     /// <summary>
     ///     Событие описывающие поиск процессов.
     /// </summary>
-    public class ProcessFindDomainEvent : IDomainEvent<IProcessEntity>
+    public class ProcessFindDomainEvent : IDomainEvent<IProcessAggregate>
     {
         /// <summary>
         ///     Инициализация объекта <see cref="ProcessFindDomainEvent" />.

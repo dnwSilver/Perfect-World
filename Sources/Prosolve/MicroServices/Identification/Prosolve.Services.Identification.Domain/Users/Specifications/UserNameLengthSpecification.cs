@@ -8,7 +8,7 @@ namespace Prosolve.Services.Identification.Users.Specifications
     /// <summary>
     ///     Спецификация на ограничение длины наименования процесса.
     /// </summary>
-    public sealed class UserNameLengthSpecification : SpecificationBase<IUserEntity>
+    public sealed class UserNameLengthSpecification : SpecificationBase<IUserAggregate>
     {
         /// <summary>
         ///     Максимальная длина наименования процесса.
@@ -33,7 +33,7 @@ namespace Prosolve.Services.Identification.Users.Specifications
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IUserEntity, bool>> Criteria => x =>
+        private static Expression<Func<IUserAggregate, bool>> Criteria => x =>
             x.FullName.GetFullName.Length <= MaxLength;
     }
 }

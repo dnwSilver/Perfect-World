@@ -53,7 +53,7 @@ namespace Sharpdev.SDK.Domain
                 candidate
             };
             //todo Что за хрень я тут написал? Зачем оно так? Что оно должно делать?
-            return candidates.AsQueryable().Any() ? Result.Ok() : Result.Fail(this._failureMessage);
+            return candidates.AsQueryable().Any() ? Result.Done() : Result.Fail(this._failureMessage);
         }
 
         /// <summary>

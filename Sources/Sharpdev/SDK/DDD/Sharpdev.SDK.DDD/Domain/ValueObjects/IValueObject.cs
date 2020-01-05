@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Sharpdev.SDK.Domain.Factories;
-
 namespace Sharpdev.SDK.Domain.ValueObjects
 {
     /// <summary>
@@ -21,8 +19,7 @@ namespace Sharpdev.SDK.Domain.ValueObjects
     ///     - Lifetime shortening.
     ///     - Should not have separate tables in database.
     /// </remarks>
-    public interface IValueObject<T> : IEncapsulated, IEquatable<IValueObject<T>>
-        where T : IValueObject<T>
+    public interface IValueObject : IEquatable<IValueObject>
     {
     }
 }

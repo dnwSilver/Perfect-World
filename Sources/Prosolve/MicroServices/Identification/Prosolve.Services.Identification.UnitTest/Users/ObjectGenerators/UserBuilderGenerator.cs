@@ -20,7 +20,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
 
         private FullName _fullName;
 
-        private IIdentifier<IUserEntity> _userIdentifier;
+        private IIdentifier<IUserAggregate> _userIdentifier;
 
         /// <summary>
         ///     Создание объекта.
@@ -43,8 +43,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         ///     Заполнение идентификатора пользователя.
         /// </summary>
         /// <param name="userIdentifier">Идентификатор пользователя.</param>
-        /// <returns>Строитель для заглушки объекта <see cref="IUserEntity" />.</returns>
-        public UserBuilderGenerator With(IIdentifier<IUserEntity> userIdentifier)
+        /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
+        public UserBuilderGenerator With(IIdentifier<IUserAggregate> userIdentifier)
         {
             this._userIdentifier = userIdentifier;
 
@@ -55,7 +55,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         ///     Заполнение идентификатора пользователя.
         /// </summary>
         /// <param name="fullName">ФИО клиента.</param>
-        /// <returns>Строитель для заглушки объекта <see cref="IUserEntity" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(FullName fullName)
         {
             this._fullName = fullName;
@@ -67,21 +67,19 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         ///     Заполнение контактного адреса электронной почты.
         /// </summary>
         /// <param name="contactEmail">Электронный адрес для контакта.</param>
-        /// <returns>Строитель для заглушки объекта <see cref="IUserEntity" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(IConfirmed<EmailAddress> contactEmail)
         {
             this._emailAddress = contactEmail;
 
             return this;
         }
-        
-        
 
         /// <summary>
         ///     Заполнение телефонного номера.
         /// </summary>
         /// <param name="phoneNumber">Номер телефона для контакта.</param>
-        /// <returns>Строитель для заглушки объекта <see cref="IUserEntity" />.</returns>
+        /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(IConfirmed<PhoneNumber> phoneNumber)
         {
             this._phoneNumber = phoneNumber;

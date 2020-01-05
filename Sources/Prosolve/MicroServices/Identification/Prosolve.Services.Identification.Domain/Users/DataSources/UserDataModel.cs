@@ -13,7 +13,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
         /// <summary>
         ///     Внутренний идентификатор процесса.
         /// </summary>
-        [Key, Required, Column("id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key][Required][Column("id")][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PrivateId { get; set; }
 
         /// <summary>

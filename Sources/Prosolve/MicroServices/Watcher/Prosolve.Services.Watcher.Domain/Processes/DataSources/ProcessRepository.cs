@@ -15,17 +15,16 @@ using Sharpdev.SDK.Infrastructure.Repositories;
 namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
 {
     /// <summary>
-    ///     Репозиторий для сущности <see cref="IProcessEntity"/>.
+    ///     Репозиторий для сущности <see cref="IProcessAggregate"/>.
     /// </summary>
-    public class ProcessRepository: EntityFrameworkRepositoryBase<IProcessEntity, ProcessDataModel, IProcessBuilder>,
-                                    IEntityRepository<IProcessEntity>
+    public class ProcessRepository: EntityFrameworkRepositoryBase<IProcessAggregate, ProcessDataModel, IProcessBuilder>
     {
         /// <summary>
         ///     Инициализация репозитория <see cref="ProcessRepository"/>.
         /// </summary>
         /// <param name="processFactory"> Фабрика для создания объектов. </param>
         /// <param name="mapper"> Механизм для трансформации объектов. </param>
-        public ProcessRepository(IEntityFactory<IProcessEntity> processFactory, IMapper mapper)
+        public ProcessRepository(IEntityFactory<IProcessAggregate> processFactory, IMapper mapper)
                 : base(processFactory, mapper)
         {
         }
@@ -57,7 +56,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     True - обновление выполнено успешно.
         ///     False - обновление не выполнено.
         /// </returns>
-        public Task UpdateAsync(IEnumerable<IProcessEntity> processes)
+        public Task UpdateAsync(IEnumerable<IProcessAggregate> processes)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +69,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     True - удаление выполнено успешно.
         ///     False - удаление не выполнено.
         /// </returns>
-        public Task DeleteAsync(IEnumerable<IProcessEntity> objectsToRemove)
+        public Task DeleteAsync(IEnumerable<IProcessAggregate> objectsToRemove)
         {
             throw new NotImplementedException();
         }

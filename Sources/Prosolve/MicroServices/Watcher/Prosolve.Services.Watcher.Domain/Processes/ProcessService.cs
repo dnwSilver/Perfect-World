@@ -12,7 +12,7 @@ using Sharpdev.SDK.Types.Results;
 namespace Prosolve.Services.Watcher.Domain.Processes
 {
     /// <summary>
-    ///     Сервис по управлению процессами <see cref="IProcessEntity" /> протекающими в системе.
+    ///     Сервис по управлению процессами <see cref="IProcessAggregate" /> протекающими в системе.
     /// </summary>
     internal class ProcessService
     {
@@ -22,9 +22,9 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         private readonly IIntegrateBus _integrateBus;
 
         /// <summary>
-        ///     Репозиторий для работы с <see cref="IProcessEntity" />.
+        ///     Репозиторий для работы с <see cref="IProcessAggregate" />.
         /// </summary>
-        private readonly IEntityRepository<IProcessEntity> _processRepository;
+        private readonly IRepository<IProcessAggregate> _processRepository;
 
         /// <summary>
         ///     Механизм для работы с репозиториями.
@@ -36,10 +36,10 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         /// </summary>
         /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
         /// <param name="integrateBus">Шина для обмена сообщениями.</param>
-        /// <param name="processRepository">Репозиторий для работы с <see cref="IProcessEntity" />.</param>
+        /// <param name="processRepository">Репозиторий для работы с <see cref="IProcessAggregate" />.</param>
         public ProcessService(IUnitOfWork<WatcherContext> unitOfWork,
                               IIntegrateBus integrateBus,
-                              IEntityRepository<IProcessEntity> processRepository)
+                              IRepository<IProcessAggregate> processRepository)
         {
             this._processRepository = processRepository!;
             this._integrateBus = integrateBus!;
@@ -51,8 +51,8 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         /// </summary>
         /// <param name="processSpecification">Набор спецификаций для поиска процессов.</param>
         /// <returns>Список найденных процессов.</returns>
-        public async Task<Result<IEnumerable<IProcessEntity>>> Find(
-            ISpecification<IProcessEntity> processSpecification)
+        public async Task<Result<IEnumerable<IProcessAggregate>>> Find(
+            ISpecification<IProcessAggregate> processSpecification)
         {
             using var uow = this._unitOfWork;
 
@@ -64,7 +64,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
 
             await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Ok(foundProcess);
+            return Result.Done(foundProcess);
         }
     }
 }

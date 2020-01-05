@@ -9,7 +9,7 @@ namespace Sharpdev.SDK.Types.Results
         ///     Создание удачного результата работы метода, не возвращающего значение.
         /// </summary>
         /// <returns>Удачный результат работы метода.</returns>
-        public static Result Ok()
+        public static Result Done()
         {
             return new Result(true, Enumerable.Empty<IResultError>());
         }
@@ -18,9 +18,9 @@ namespace Sharpdev.SDK.Types.Results
         ///     Создание удачного результата работы метода, не возвращающего значение.
         /// </summary>
         /// <param name="data">Данные-результат работы метода.</param>
-        /// <typeparam name="T">Тип данных-результата работы метода.</typeparam>
+        /// <typeparam name="T">Тип данных-результата работы метода.</typeparam>             
         /// <returns>Удачный результат работы метода.</returns>
-        public static Result<T> Ok<T>(T data)
+        public static Result<T> Done<T>(T data)
         {
             return new Result<T>(data, true, Enumerable.Empty<IResultError>());
         }
