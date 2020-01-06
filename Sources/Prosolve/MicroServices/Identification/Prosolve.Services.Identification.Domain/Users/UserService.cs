@@ -10,6 +10,7 @@ using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
+using Sharpdev.SDK.Infrastructure.Statuses;
 using Sharpdev.SDK.Presentation;
 using Sharpdev.SDK.Types.Results;
 
@@ -18,8 +19,10 @@ namespace Prosolve.Services.Identification.Users
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    internal class UserService: IService
+    internal class UserService: HasStatusBase<ServiceStatus>, IService
     {
+        /// todo Создать абстрактный класс ServiceBase и в нём реализовать работу c UoW.
+
         /// <summary>
         ///     Шина для миграции данных.
         /// </summary>
@@ -50,28 +53,12 @@ namespace Prosolve.Services.Identification.Users
         public UserService(IUnitOfWork<IdentificationContext> unitOfWork,
                            IIntegrateBus integrateBus,
                            IEntityFactory<IUserAggregate> userFactory,
-                           IRepository<IUserAggregate> userRepository)
+                           IRepository<IUserAggregate> userRepository): base(ServiceStatus.Up)
         {
             _userFactory = userFactory;
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _integrateBus = integrateBus;
-        }
-
-        /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns> Статус объекта. </returns>
-        /// todo Создать абстрактный класс ServiceBase и в нём реализовать работу со статусами и UoW.
-        public ServiceStatus Status { get; }
-
-        /// <summary>
-        ///     Смена статуса.
-        /// </summary>
-        /// <param name="newStatus"> Новый статус. </param>
-        public void ChangeStatus(ServiceStatus newStatus)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
