@@ -10,7 +10,6 @@ using Prosolve.Services.Identification.Users.DataSources;
 using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.DataSources.Databases;
-using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.FullNames;
@@ -50,7 +49,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithNotExistsEmailAddress_ResultShouldBeTrue()
         {
             // Act:
-            var userService = this.AllocateIdentityService(out var _);
+            var userService = AllocateIdentityService(out var _);
             var emailAddress = Create.EmailAddress("TestUser@mail.ru").PorFavor();
             var fullName = new FullName("Петров", "Александр", "Андреевич");
             var newUserBuilder = Create.UserBuilder
@@ -69,7 +68,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithNotExistsPhoneNumber_ResultShouldBeTrue()
         { 
             // Act:
-            var userService = this.AllocateIdentityService(out var _);
+            var userService = AllocateIdentityService(out var _);
             var phoneNumber = new ConfirmedBase<PhoneNumber>($"+7{10000000:D10}");
             var fullName = new FullName("Петров", "Александр", "Андреевич");
             var newUserBuilder = Create.UserBuilder

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
 
 using Sharpdev.SDK.Extensions;
 
@@ -22,9 +20,9 @@ namespace Sharpdev.SDK.Domain.Entities
             if (identifier!.ReturnFailure())
                 throw new ArgumentNullException(nameof(identifier));
             
-            this.Id = identifier!;
-            this.CurrentVersion = currentVersion;
-            this.IsSoftDelete = true;
+            Id = identifier!;
+            CurrentVersion = currentVersion;
+            IsSoftDelete = true;
         }
 
         /// <summary>

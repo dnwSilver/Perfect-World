@@ -16,8 +16,8 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         internal ProcessAggregate(IProcessBuilder processBuilder)
             : base(processBuilder.Identifier, processBuilder.Version)
         {
-            this.Name = processBuilder.Name;
-            this.TypeName = processBuilder.TypeName;
+            Name = processBuilder.Name;
+            TypeName = processBuilder.TypeName;
         }
 
         /// <summary>

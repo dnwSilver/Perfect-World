@@ -89,7 +89,7 @@ namespace Sharpdev.SDK.Extensions
         ///     В случае если объект не существует вернётся альтернативное значение.
         ///     В противном случае будет вычислено выходное значение при помощи функции evaluator.
         /// </returns>
-        public static TInput If<TInput>(this TInput o, Predicate<TInput> evaluator)
+        public static TInput Check<TInput>(this TInput o, Predicate<TInput> evaluator)
         {
             if (o == null)
                 return default!;

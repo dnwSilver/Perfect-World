@@ -16,7 +16,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         protected override void SetSpecifications(IUserAggregate processEntity)
         {
             var specifications = new Collection<ISpecification<IUserAggregate>>();
-            this.Specifications = specifications;
+            Specifications = specifications;
         }
 
         /// <summary>

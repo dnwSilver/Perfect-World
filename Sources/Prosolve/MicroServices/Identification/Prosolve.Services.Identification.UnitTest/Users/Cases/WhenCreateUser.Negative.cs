@@ -11,7 +11,6 @@ using Prosolve.Services.Identification.Users.DataSources;
 using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.DataSources.Databases;
-using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.EmailAddresses;

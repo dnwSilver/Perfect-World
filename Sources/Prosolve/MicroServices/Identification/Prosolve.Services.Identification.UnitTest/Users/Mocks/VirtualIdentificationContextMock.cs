@@ -26,7 +26,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// </summary>
         public VirtualIdentificationContextMock()
         {
-            this._options = new DbContextOptionsBuilder<IdentificationContext>()
+            _options = new DbContextOptionsBuilder<IdentificationContext>()
                             .UseInMemoryDatabase(Guid.NewGuid().ToString()) 
                             .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                             .Options;
@@ -39,7 +39,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override IdentificationContext AllocateStub(int stubNumber)
         {
-            return new IdentificationContext(this._options);
+            return new IdentificationContext(_options);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// <returns>Строитель для контекста данных.</returns>
         public VirtualIdentificationContextMock With(UserDataModel userDataModel)
         {
-            using var identificationContext = new IdentificationContext(this._options);
+            using var identificationContext = new IdentificationContext(_options);
             identificationContext.Users.Add(userDataModel);
             identificationContext.SaveChanges();
             return this;
@@ -63,7 +63,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         public VirtualIdentificationContextMock With(IEnumerable<UserDataModel> userDataModels)
         {
             foreach(var userDataModel in userDataModels)
-                this.With(userDataModel);
+                With(userDataModel);
 
             return this;
         }

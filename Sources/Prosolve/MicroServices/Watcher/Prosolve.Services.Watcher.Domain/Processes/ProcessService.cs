@@ -41,9 +41,9 @@ namespace Prosolve.Services.Watcher.Domain.Processes
                               IIntegrateBus integrateBus,
                               IRepository<IProcessAggregate> processRepository)
         {
-            this._processRepository = processRepository!;
-            this._integrateBus = integrateBus!;
-            this._unitOfWork = unitOfWork!;
+            _processRepository = processRepository!;
+            _integrateBus = integrateBus!;
+            _unitOfWork = unitOfWork!;
         }
 
         /// <summary>
@@ -54,15 +54,15 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         public async Task<Result<IEnumerable<IProcessAggregate>>> Find(
             ISpecification<IProcessAggregate> processSpecification)
         {
-            using var uow = this._unitOfWork;
+            using var uow = _unitOfWork;
 
-            this._processRepository.SetBoundedContext(uow.BoundedContext);
+            _processRepository.SetBoundedContext(uow.BoundedContext);
 
-            var foundProcess = await this._processRepository.ReadAsync(processSpecification);
+            var foundProcess = await _processRepository.ReadAsync(processSpecification);
 
             var domainEvent = new ProcessFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);
 
-            await this._integrateBus.PublishAsync(domainEvent);
+            await _integrateBus.PublishAsync(domainEvent);
 
             return Result.Done(foundProcess);
         }

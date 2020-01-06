@@ -18,7 +18,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public string Format(string? format, object? arg, IFormatProvider? formatProvider)
         {
-            if (formatProvider!.If(x=>x.Equals(this)).ReturnFailure())
+            if (formatProvider!.Check(x=>x.Equals(this)).ReturnFailure())
                 return string.Empty;
 
             if (arg is Exception exception)

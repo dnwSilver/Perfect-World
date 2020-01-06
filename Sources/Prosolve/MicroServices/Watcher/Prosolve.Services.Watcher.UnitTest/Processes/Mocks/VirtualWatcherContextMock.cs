@@ -25,7 +25,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         /// </summary>
         public VirtualWatcherContextMock()
         {
-            this._options = new DbContextOptionsBuilder<WatcherContext>()
+            _options = new DbContextOptionsBuilder<WatcherContext>()
                             .UseInMemoryDatabase(Guid.NewGuid().ToString())
                             .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                             .Options;
@@ -38,7 +38,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override WatcherContext AllocateStub(int stubNumber)
         {
-            return new WatcherContext(this._options);
+            return new WatcherContext(_options);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         /// <returns>Строитель для контекста данных.</returns>
         public VirtualWatcherContextMock With(ProcessDataModel processDataModel)
         {
-            using(var watcherContext = new WatcherContext(this._options))
+            using(var watcherContext = new WatcherContext(_options))
             {
                 watcherContext.Processes!.Add(processDataModel);
                 watcherContext.SaveChanges();
@@ -65,7 +65,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Mocks
         public VirtualWatcherContextMock With(IEnumerable<ProcessDataModel> processDataModels)
         {
             foreach(var processDataModel in processDataModels)
-                this.With(processDataModel);
+                With(processDataModel);
 
             return this;
         }

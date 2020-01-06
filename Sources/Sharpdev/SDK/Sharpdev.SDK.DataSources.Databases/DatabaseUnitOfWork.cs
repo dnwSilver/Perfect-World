@@ -22,8 +22,8 @@ namespace Sharpdev.SDK.DataSources.Databases
 
         public DatabaseUnitOfWork(TBoundedContext boundedContext)
         {
-            this.BoundedContext = boundedContext;
-            this._transaction = boundedContext.Database.BeginTransaction();
+            BoundedContext = boundedContext;
+            _transaction = boundedContext.Database.BeginTransaction();
         }
 
         /// <summary>
@@ -32,10 +32,10 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// </summary>
         public void Dispose()
         {
-            if (!this._isCommitted)
-                this.Rollback();
+            if (!_isCommitted)
+                Rollback();
 
-            this._transaction.Dispose();
+            _transaction.Dispose();
         }
 
         /// <summary>
@@ -48,12 +48,12 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// </summary>
         public Result Commit()
         {
-            this._transaction.Commit();
+            _transaction.Commit();
 
             // if (result == 0)
             //     return Result.Fail("Не удалось сохранить данные в источнике данных.");
 
-            this._isCommitted = true;
+            _isCommitted = true;
 
             return Result.Done();
         }
@@ -63,7 +63,7 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// </summary>
         public void Rollback()
         {
-            this._transaction.Rollback();
+            _transaction.Rollback();
 
             //todo Обязательно должны быть добавлены логи.
         }

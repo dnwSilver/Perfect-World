@@ -17,12 +17,12 @@ namespace Sharpdev.SDK.Kernel
         /// <param name="confirmedDate"></param>
         public ConfirmedBase(TConfirmedObject confirmedObjectValue, DateTime? confirmedDate = null)
         {
-            this.Value = confirmedObjectValue;
+            Value = confirmedObjectValue;
 
             if (confirmedDate != null)
             {
-                this.ConfirmedDate = confirmedDate;
-                this.IsConfirmed = true;
+                ConfirmedDate = confirmedDate;
+                IsConfirmed = true;
             }
         }
 
@@ -49,7 +49,7 @@ namespace Sharpdev.SDK.Kernel
         /// </returns>
         public bool Equals(TConfirmedObject other)
         {
-            return other.Equals(this.Value);
+            return other.Equals(Value);
         }
     }
 }

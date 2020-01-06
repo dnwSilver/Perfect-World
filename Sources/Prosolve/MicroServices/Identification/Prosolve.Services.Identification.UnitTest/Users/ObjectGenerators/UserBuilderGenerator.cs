@@ -30,10 +30,10 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         protected override IUserBuilder AllocateStub(int stubNumber)
         {
             var userBuilder = new UserBuilder()
-                              .SetFullName(this._fullName)
-                              .SetContactEmailAddress(this._emailAddress)
-                              .SetContactPhoneNumber(this._phoneNumber)
-                              .SetIdentifier(this._userIdentifier)
+                              .SetFullName(_fullName)
+                              .SetContactEmailAddress(_emailAddress)
+                              .SetContactPhoneNumber(_phoneNumber)
+                              .SetIdentifier(_userIdentifier)
                               .SetVersion(1) as IUserBuilder;
 
             return userBuilder;
@@ -46,7 +46,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(IIdentifier<IUserAggregate> userIdentifier)
         {
-            this._userIdentifier = userIdentifier;
+            _userIdentifier = userIdentifier;
 
             return this;
         }
@@ -58,7 +58,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(FullName fullName)
         {
-            this._fullName = fullName;
+            _fullName = fullName;
 
             return this;
         }
@@ -70,7 +70,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(IConfirmed<EmailAddress> contactEmail)
         {
-            this._emailAddress = contactEmail;
+            _emailAddress = contactEmail;
 
             return this;
         }
@@ -82,7 +82,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         /// <returns>Строитель для заглушки объекта <see cref="IUserAggregate" />.</returns>
         public UserBuilderGenerator With(IConfirmed<PhoneNumber> phoneNumber)
         {
-            this._phoneNumber = phoneNumber;
+            _phoneNumber = phoneNumber;
 
             return this;
         }

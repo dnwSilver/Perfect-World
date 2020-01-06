@@ -18,7 +18,7 @@ namespace Sharpdev.SDK.Types.Results
         public ResultException(Result result, string delimiter = "\n")
             : base(result.ToString(delimiter))
         {
-            this.Errors = result.Errors;
+            Errors = result.Errors;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Sharpdev.SDK.Types.Results
                                Func<IEnumerable<IFormattable>, string> errorsToString)
             : base(result.ToString(errorsToString))
         {
-            this.Errors = result.Errors;
+            Errors = result.Errors;
         }
 
         /// <summary>

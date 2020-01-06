@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using AutoMapper;
 
@@ -43,35 +41,9 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
             }
         }
 
-        public void SetBoundedContext(IBoundedContext boundedContext)
+        public new void SetBoundedContext(IBoundedContext boundedContext)
         {
             BoundedContext = boundedContext as WatcherContext;
-        }
-
-        /// <summary>
-        ///     Обновление набора процессов.
-        /// </summary>
-        /// <param name="processes"> Список процессов. </param>
-        /// <returns>
-        ///     True - обновление выполнено успешно.
-        ///     False - обновление не выполнено.
-        /// </returns>
-        public Task UpdateAsync(IEnumerable<IProcessAggregate> processes)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Удаление объектов.
-        /// </summary>
-        /// <param name="objectsToRemove"> Список бизнес объектов. </param>
-        /// <returns>
-        ///     True - удаление выполнено успешно.
-        ///     False - удаление не выполнено.
-        /// </returns>
-        public Task DeleteAsync(IEnumerable<IProcessAggregate> objectsToRemove)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -38,7 +38,7 @@
             if (ReferenceEquals(this, obj))
                 return true;
 
-            return obj.GetType() == this.GetType() && this.Equals((object)(ValueObject<TValueObject>)obj);
+            return obj.GetType() == GetType() && Equals((object)(ValueObject<TValueObject>)obj);
         }
 
 
@@ -58,7 +58,7 @@
         /// <returns>Значение хэш-кода.</returns>
         public override int GetHashCode()
         {
-            return this.GetHashCodeCore();
+            return GetHashCodeCore();
         }
 
         /// <summary>

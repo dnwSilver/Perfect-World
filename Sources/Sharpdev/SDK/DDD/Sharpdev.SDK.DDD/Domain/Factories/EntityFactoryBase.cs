@@ -31,7 +31,7 @@ namespace Sharpdev.SDK.Domain.Factories
         {
             entityToCreate.Identifier = Identifier<TEntity>.Create();
 
-            return this.Recovery(entityToCreate);
+            return Recovery(entityToCreate);
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace Sharpdev.SDK.Domain.Factories
         /// <returns>Восстановленный объект.</returns>
         public Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery)
         {
-            var entity = this.AllocateEntity(entityToRecovery);
-            this.SetSpecifications(entity);
+            var entity = AllocateEntity(entityToRecovery);
+            SetSpecifications(entity);
 
-            foreach(var specification in this.Specifications)
+            foreach(var specification in Specifications)
                 specification.IsSatisfiedBy(entity);
 
             return Result.Done(entity);

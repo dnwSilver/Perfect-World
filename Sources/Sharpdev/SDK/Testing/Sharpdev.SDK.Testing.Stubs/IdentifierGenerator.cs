@@ -26,7 +26,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override IIdentifier<TEntity> AllocateStub(int stubNumber)
         {
-            return this._identifierMock.Object;
+            return _identifierMock.Object;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IdentifierGenerator<TEntity> PrivateId(int privateIdentifier)
         {
-            this._identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
+            _identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
 
             return this;
         }
@@ -48,7 +48,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
         public IdentifierGenerator<TEntity> PublicId(Guid publicIdentifier)
         {
-            this._identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
+            _identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
 
             return this;
         }

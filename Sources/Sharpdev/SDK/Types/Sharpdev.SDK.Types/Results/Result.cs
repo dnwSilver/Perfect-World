@@ -28,7 +28,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <summary>
         ///     Признак не успешности выполнения метода.
         /// </summary>
-        public bool Failure => !this.Success;
+        public bool Failure => !Success;
 
         /// <summary>
         ///     Конструктор для объекта <see cref="Result" />.
@@ -37,8 +37,8 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="errors">Набор ошибок.</param>
         internal Result(bool success, IEnumerable<IResultError> errors)
         {
-            this.Success = success;
-            this.Errors = errors;
+            Success = success;
+            Errors = errors;
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="resultError">Ошибка.</param>
         internal Result(bool success, IResultError resultError)
         {
-            this.Success = success;
-            this.Errors = resultError.Yield();
+            Success = success;
+            Errors = resultError.Yield();
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Sharpdev.SDK.Types.Results
         /// </returns>
         public bool Equals(Result other)
         {
-            return this.Success == other.Success && this.Errors.SequenceEqual(other.Errors);
+            return Success == other.Success && Errors.SequenceEqual(other.Errors);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Sharpdev.SDK.Types.Results
             if (obj is null)
                 return false;
 
-            return obj is Result result && this.Equals(result);
+            return obj is Result result && Equals(result);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Sharpdev.SDK.Types.Results
         {
             unchecked
             {
-                return (this.Success.GetHashCode() * 397) ^ (this.Errors?.GetHashCode() ?? 0);
+                return (Success.GetHashCode() * 397) ^ (Errors?.GetHashCode() ?? 0);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public override string ToString()
         {
-            return this.Success ? string.Empty : this.Format(new ResultFormatProvider());
+            return Success ? string.Empty : this.Format(new ResultFormatProvider());
         }
     }
 }

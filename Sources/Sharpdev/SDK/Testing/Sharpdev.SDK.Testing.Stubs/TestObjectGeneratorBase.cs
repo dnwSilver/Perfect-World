@@ -25,7 +25,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" />.</returns>
         public IEnumerable<TBuildingObjectType> Please()
         {
-            return this._stubObjects;
+            return _stubObjects;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Экземпляр объекта типа <see cref="TBuildingObjectType" />.</returns>
         public TBuildingObjectType PorFavor()
         {
-            return this.AllocateStub(default);
+            return AllocateStub(default);
         }
         
         /// <summary>
@@ -45,8 +45,8 @@ namespace Sharpdev.SDK.Testing
         {
             for(var iteration = 1; iteration <= countStubObjects; iteration++)
             {
-                this._createStubCount++;
-                this._stubObjects.Add(this.AllocateStub(this._createStubCount));
+                _createStubCount++;
+                _stubObjects.Add(AllocateStub(_createStubCount));
             }
 
             return this;

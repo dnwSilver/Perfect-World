@@ -23,7 +23,7 @@
         /// <summary>
         ///     Полное фио.
         /// </summary>
-        public string GetFullName => $"{this.Surname} {this.FirstName} {this.Patronymic}";
+        public string GetFullName => $"{Surname} {FirstName} {Patronymic}";
 
         /// <summary>
         ///     Конструктор для ФИО.
@@ -33,9 +33,9 @@
         /// <param name="patronymic"> Отчество. </param>
         public FullName(string surname, string firstName, string patronymic)
         {
-            this.Surname = surname.Trim();
-            this.FirstName = firstName.Trim();
-            this.Patronymic = patronymic.Trim();
+            Surname = surname.Trim();
+            FirstName = firstName.Trim();
+            Patronymic = patronymic.Trim();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public override string ToString()
         {
-            return this.GetFullName;
+            return GetFullName;
         }
 
         /// <summary>
@@ -61,12 +61,12 @@
             {
                 case null:
 
-                    return this.Surname is null && this.FirstName is null && this.Patronymic is null;
+                    return Surname is null && FirstName is null && Patronymic is null;
                 case FullName fullName:
 
-                    return this.Surname.Equals(fullName.Surname) &&
-                           this.FirstName.Equals(fullName.FirstName) &&
-                           this.Patronymic.Equals(fullName.Patronymic);
+                    return Surname.Equals(fullName.Surname) &&
+                           FirstName.Equals(fullName.FirstName) &&
+                           Patronymic.Equals(fullName.Patronymic);
                 default:
 
                     return false;
@@ -79,7 +79,7 @@
         /// <returns>Значение хэш-кода.</returns>
         public override int GetHashCode()
         {
-            return this.ToString().GetHashCode();
+            return ToString().GetHashCode();
         }
 
         /// <summary>

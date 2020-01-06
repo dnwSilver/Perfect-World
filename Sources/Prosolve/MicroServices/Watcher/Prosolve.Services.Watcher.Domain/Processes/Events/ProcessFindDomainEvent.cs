@@ -17,9 +17,9 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Events
         /// <param name="data"> Информация о событии. Желательно хранить её в JSON. </param>
         public ProcessFindDomainEvent(Guid id, DateTime creationDate, string data)
         {
-            this.Id = id;
-            this.CreationDate = creationDate;
-            this.Data = data;
+            Id = id;
+            CreationDate = creationDate;
+            Data = data;
         }
 
         /// <summary>

@@ -127,7 +127,7 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     параметр; иначе, <see langword="false"/>.
         /// </returns>
         public static bool operator !=(Identifier<TEntity>? left, IIdentifier<TEntity> right)
-            => left!.If(x => x.Equals(right)).ReturnFailure();
+            => left!.Check(x => x.Equals(right)).ReturnFailure();
 
         /// <summary>
         ///     Указывает, равен ли один объект другому объекту того же типа.
@@ -139,7 +139,7 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     параметр; иначе, <see langword="false"/>.
         /// </returns>
         public static bool operator ==(Identifier<TEntity>? left, IIdentifier<TEntity> right)
-            => left!.If(x => !x!.Equals(right)).ReturnFailure();
+            => left!.Check(x => !x!.Equals(right)).ReturnFailure();
 
         /// <summary>
         ///     Создание нового уникального идентификатора.

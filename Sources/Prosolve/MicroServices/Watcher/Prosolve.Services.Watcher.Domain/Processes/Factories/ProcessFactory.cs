@@ -25,7 +25,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Factories
                 new ProcessNameLengthSpecification(),
                 new ProcessPublicIdSpecification(processAggregate.Id.Public)
             };
-            this.Specifications = specifications;
+            Specifications = specifications;
         }
 
         /// <summary>

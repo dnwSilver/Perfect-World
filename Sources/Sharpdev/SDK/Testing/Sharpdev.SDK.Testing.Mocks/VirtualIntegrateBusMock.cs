@@ -19,7 +19,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override IIntegrateBus AllocateStub(int stubNumber)
         {
-            return this._integrateBus;
+            return _integrateBus;
         }
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using AutoMapper;
 
@@ -42,32 +40,6 @@ namespace Prosolve.Services.Identification.Users.DataSources
                 // todo Тут как-бы надо что-то придумать. Нельзя просто так оставит не имплеминтированный метод.
                 throw new NotImplementedException();
             }
-        }
-
-        /// <summary>
-        ///     Обновление объектов.
-        /// </summary>
-        /// <param name="objectsToUpdate"> Список бизнес объектов. </param>
-        /// <returns>
-        ///     True - обновление выполнено успешно.
-        ///     False - обновление не выполнено.
-        /// </returns>
-        public Task UpdateAsync(IEnumerable<IUserAggregate> objectsToUpdate)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        ///     Удаление объектов.
-        /// </summary>
-        /// <param name="objectsToRemove"> Список бизнес объектов. </param>
-        /// <returns>
-        ///     True - удаление выполнено успешно.
-        ///     False - удаление не выполнено.
-        /// </returns>
-        public Task DeleteAsync(IEnumerable<IUserAggregate> objectsToRemove)
-        {
-            throw new NotImplementedException();
         }
 
         protected override DbSet<UserDataModel> DbSetEntity()

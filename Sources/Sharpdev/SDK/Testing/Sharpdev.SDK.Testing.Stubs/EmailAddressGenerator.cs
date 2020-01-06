@@ -25,8 +25,8 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
         public EmailAddressGenerator(EmailAddress emailAddress)
         {
-            this._emailAddressMock.Setup(x => x.Value).Returns(emailAddress);
-            this._emailAddressMock.Setup(x => x.IsConfirmed).Returns(false);
+            _emailAddressMock.Setup(x => x.Value).Returns(emailAddress);
+            _emailAddressMock.Setup(x => x.IsConfirmed).Returns(false);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override IConfirmed<EmailAddress> AllocateStub(int stubNumber)
         {
-            return this._emailAddressMock.Object;
+            return _emailAddressMock.Object;
         }
 
         /// <summary>
@@ -46,8 +46,8 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Строитель для объекта <see cref="IConfirmed{TConfirmedObject}" />.</returns>
         public EmailAddressGenerator Confirmed(DateTime confirmedDate)
         {
-            this._emailAddressMock.Setup(x => x.ConfirmedDate).Returns(confirmedDate);
-            this._emailAddressMock.Setup(x => x.IsConfirmed).Returns(true);
+            _emailAddressMock.Setup(x => x.ConfirmedDate).Returns(confirmedDate);
+            _emailAddressMock.Setup(x => x.IsConfirmed).Returns(true);
 
             return this;
         }

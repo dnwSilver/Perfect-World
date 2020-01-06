@@ -12,7 +12,7 @@ namespace Prosolve.Services.Identification.Users
     /// <summary>
     ///     Пользователь информационной системы.
     /// </summary>
-    internal class UserAggregate : Entity<IUserAggregate>, IUserAggregate
+    internal class UserAggregate: Entity<IUserAggregate>, IUserAggregate
     {
         /// <summary>
         ///     Текущий статус объекта.
@@ -50,11 +50,11 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="userBuilder">Строитель для объекта.</param>
         public UserAggregate(IUserBuilder userBuilder)
-            : base(userBuilder.Identifier, userBuilder.Version)
+                : base(userBuilder.Identifier, userBuilder.Version)
         {
-            this.FullName = userBuilder.FullName;
-            this.ContactEmail = userBuilder.ContactEmailAddress;
-            this.ContactPhoneNumber = userBuilder.ContactPhoneNumber;
+            FullName = userBuilder.FullName;
+            ContactEmail = userBuilder.ContactEmailAddress;
+            ContactPhoneNumber = userBuilder.ContactPhoneNumber;
         }
 
         /// <summary>
@@ -63,9 +63,7 @@ namespace Prosolve.Services.Identification.Users
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(UserStatus newStatus)
         {
-            this.Status = newStatus;
+            Status = newStatus;
         }
-
-        public IUserAggregate RootEntity { get; }
     }
 }

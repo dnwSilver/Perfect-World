@@ -31,8 +31,8 @@ namespace Sharpdev.SDK.Domain
             if (criteria.ReturnFailure())
                 throw new ArgumentNullException(nameof(criteria));
 
-            this.Expression = criteria;
-            this._failureMessage = failureMessage;
+            Expression = criteria;
+            _failureMessage = failureMessage;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Sharpdev.SDK.Domain
                 candidate
             };
             //todo Что за хрень я тут написал? Зачем оно так? Что оно должно делать?
-            return candidates.AsQueryable().Any() ? Result.Done() : Result.Fail(this._failureMessage);
+            return candidates.AsQueryable().Any() ? Result.Done() : Result.Fail(_failureMessage);
         }
 
         /// <summary>

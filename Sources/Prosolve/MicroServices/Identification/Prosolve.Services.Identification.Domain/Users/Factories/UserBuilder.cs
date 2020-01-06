@@ -33,7 +33,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
         public UserBuilder SetFullName(FullName fullName)
         {
-            this.FullName = fullName;
+            FullName = fullName;
             return this;
         }
 
@@ -44,7 +44,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
         public UserBuilder SetContactEmailAddress(IConfirmed<EmailAddress>? confirmedEmailAddress)
         {
-            this.ContactEmailAddress = confirmedEmailAddress;
+            ContactEmailAddress = confirmedEmailAddress;
             
             return this;
         }
@@ -56,7 +56,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         /// <returns>Строитель для <see cref="IUserBuilder" />". /></returns>
         public UserBuilder SetContactPhoneNumber(IConfirmed<PhoneNumber>? confirmedContactPhoneNumber)
         {
-            this.ContactPhoneNumber = confirmedContactPhoneNumber;
+            ContactPhoneNumber = confirmedContactPhoneNumber;
             
             return this;
         }

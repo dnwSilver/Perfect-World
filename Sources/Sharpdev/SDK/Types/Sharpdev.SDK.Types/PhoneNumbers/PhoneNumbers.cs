@@ -16,7 +16,7 @@ namespace Sharpdev.SDK.Types.PhoneNumbers
         /// <param name="value">телефонный номер.</param>
         public PhoneNumber(string value)
         {
-            this._value = value;
+            _value = value;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Sharpdev.SDK.Types.PhoneNumbers
         /// <returns>Значение в типе строка.</returns>
         public override string ToString()
         {
-            return this._value;
+            return _value;
         }
     }
 }

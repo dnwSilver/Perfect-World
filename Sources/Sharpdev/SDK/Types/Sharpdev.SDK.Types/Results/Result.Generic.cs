@@ -42,9 +42,9 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="errors">Список описаний ошибок, возникших при выполнении метода.</param>
         internal Result(TResultObjectType value, bool success, IEnumerable<IResultError> errors)
         {
-            this.Success = success;
-            this.Errors = errors;
-            this.Value = value;
+            Success = success;
+            Errors = errors;
+            Value = value;
         }
         
         /// <summary>
@@ -55,9 +55,9 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="resultError">Описание ошибки, возникшей при выполнении метода.</param>
         internal Result(TResultObjectType value, bool success, IResultError resultError)
         {
-            this.Success = success;
-            this.Errors = resultError.Yield();
-            this.Value = value;
+            Success = success;
+            Errors = resultError.Yield();
+            Value = value;
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace Sharpdev.SDK.Types.Results
         /// </returns>
         public bool Equals(Result<TResultObjectType> other)
         {
-            return this.Success == other.Success &&
-                   this.Errors.SequenceEqual(other.Errors) &&
-                   EqualityComparer<TResultObjectType>.Default.Equals(this.Value, other.Value);
+            return Success == other.Success &&
+                   Errors.SequenceEqual(other.Errors) &&
+                   EqualityComparer<TResultObjectType>.Default.Equals(Value, other.Value);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Sharpdev.SDK.Types.Results
             if (obj is null)
                 return false;
 
-            return obj is Result<TResultObjectType> result && this.Equals(result);
+            return obj is Result<TResultObjectType> result && Equals(result);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public override string? ToString()
         {
-            return this.Success ? this.Value?.ToString() : this.Format(new ResultFormatProvider());
+            return Success ? Value?.ToString() : this.Format(new ResultFormatProvider());
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <param name="text">Текст ошибки.</param>
         private TextResultError(string text)
         {
-            this.Text = text;
+            Text = text;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Текстовое значение ошибки.</returns>
         public override string ToString()
         {
-            return this.ToString(string.Empty, null);
+            return ToString(string.Empty, null);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Строковое представление объекта <see cref="TextResultError" />.</returns>
         public string ToString(string? format, IFormatProvider? formatProvider)
         {
-            return this.Text;
+            return Text;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Sharpdev.SDK.Types.Results
         /// </returns>
         public bool Equals(TextResultError other)
         {
-            return string.Equals(this.Text, other.Text);
+            return string.Equals(Text, other.Text);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Sharpdev.SDK.Types.Results
         public override bool Equals(object? obj)
         {
             if (obj is TextResultError other)
-                return this.Equals(other);
+                return Equals(other);
 
             return false;
         }
@@ -78,7 +78,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Значение хэш-кода.</returns>
         public override int GetHashCode()
         {
-            return this.Text?.GetHashCode() ?? 0;
+            return Text?.GetHashCode() ?? 0;
         }
 
         /// <summary>

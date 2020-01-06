@@ -1,8 +1,6 @@
 using Prosolve.Services.Identification.Users.Events;
-using Prosolve.Services.Identification.Users.ValueObjects;
 
 using Sharpdev.SDK.Domain;
-using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Infrastructure.Statuses;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
@@ -15,7 +13,7 @@ namespace Prosolve.Services.Identification.Users
     /// <summary>
     ///     Пользователь информационной системы.
     /// </summary>
-    public interface IUserAggregate: IAggregate<IUserAggregate>, IEntity<IUserAggregate>, IHasStatus<UserStatus>
+    public interface IUserAggregate: IAggregate<IUserAggregate>, IHasStatus<UserStatus>
     {
         /// <summary>
         ///     Адрес электронной почты указанный для получения обратной связи.

@@ -1,5 +1,4 @@
 using Sharpdev.SDK.Domain;
-using Sharpdev.SDK.Domain.Entities;
 
 namespace Prosolve.Services.Watcher.Domain.Processes
 {

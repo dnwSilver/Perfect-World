@@ -24,7 +24,7 @@ namespace Sharpdev.SDK.Testing
         /// <param name="newStatus">Новый статус.</param>
         public void ChangeStatus(IntegrationBusStatus newStatus)
         {
-            this.Status = newStatus;
+            Status = newStatus;
         }
 
         /// <summary>

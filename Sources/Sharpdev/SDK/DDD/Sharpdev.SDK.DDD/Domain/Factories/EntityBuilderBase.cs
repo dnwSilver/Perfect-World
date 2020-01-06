@@ -31,7 +31,7 @@ namespace Sharpdev.SDK.Domain.Factories
         /// <returns>Строитель для <see cref="TEntity" />". /></returns>
         public EntityBuilderBase<TEntity> SetIdentifier(IIdentifier<TEntity> identifier)
         {
-            this.Identifier = identifier;
+            Identifier = identifier;
 
             return this;
         }
@@ -43,7 +43,7 @@ namespace Sharpdev.SDK.Domain.Factories
         /// <returns>Строитель для <see cref="TEntity" />". /></returns>
         public EntityBuilderBase<TEntity> SetVersion(int version)
         {
-            this.Version = version;
+            Version = version;
 
             return this;
         }

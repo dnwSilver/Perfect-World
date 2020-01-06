@@ -45,7 +45,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         public void WhenFindProcess_ByPublicId_CountShouldBeOne()
         {
             // Act:
-            var processService = this.AllocateProcessService(out var processDataModels);
+            var processService = AllocateProcessService(out var processDataModels);
             var specification =
                 new ProcessPublicIdSpecification(processDataModels.First().PublicId);
 
@@ -60,7 +60,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         public void WhenFindProcess_ByPublicId_CountShouldBeZero()
         {
             // Act:
-            var processService = this.AllocateProcessService(out var _);
+            var processService = AllocateProcessService(out var _);
             var specification = new ProcessPublicIdSpecification(Guid.NewGuid());
 
             // Arrange:
@@ -74,7 +74,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         public void WhenFindProcess_ByPublicId_ResultShouldBeTrue()
         {
             // Act:
-            var processService = this.AllocateProcessService(out var processDataModels);
+            var processService = AllocateProcessService(out var processDataModels);
             var specification = new ProcessPublicIdSpecification(processDataModels.First().PublicId);
 
             // Arrange:
