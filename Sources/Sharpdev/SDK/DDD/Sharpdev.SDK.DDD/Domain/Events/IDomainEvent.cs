@@ -13,7 +13,7 @@ namespace Sharpdev.SDK.Domain.Events
     ///     Используем  механизм  отложенного выполнения <see cref="IEventHandler{TEvent,TEntity}" />.
     /// </remarks>
     public interface IDomainEvent<TEntity> : IIntegrationEvent
-        where TEntity:class, IEntity<TEntity>
+        where TEntity: IEntity<TEntity>
     {
         /// <summary>
         /// Информация о событии. Желательно хранить её в JSON.

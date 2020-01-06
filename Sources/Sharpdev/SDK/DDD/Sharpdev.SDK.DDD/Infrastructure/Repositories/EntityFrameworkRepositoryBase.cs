@@ -46,12 +46,6 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         private IEntityFactory<TEntity> EntityFactory { get; }
 
         /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns> Статус объекта. </returns>
-        public RepositoryStatus Status { get; private set; }
-
-        /// <summary>
         ///     Механизм для трансформации объектов.
         /// </summary>
         private IMapper Mapper { get; }
@@ -68,15 +62,6 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         {
             //todo Добавить выбрасывание ошибки.
             BoundedContext = boundedContext as DbContext;
-        }
-
-        /// <summary>
-        ///     Смена статуса.
-        /// </summary>
-        /// <param name="newStatus"> Новый статус. </param>
-        public void ChangeStatus(RepositoryStatus newStatus)
-        {
-            Status = newStatus;
         }
 
         /// <summary>

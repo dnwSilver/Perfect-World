@@ -8,7 +8,7 @@ namespace Prosolve.Services.Identification.Users.Events
     ///     Событие предметной области, реакция на  событие.
     ///     Регистрация нового пользователя.
     /// </summary>
-    internal class UserRegisteredDomainEvent: IDomainEvent<IUserAggregate>
+    internal class UserRegisteredDomainEvent:DomainEventBase<IUserAggregate>
     {
         /// <summary>
         ///     Инициализация нового события предметной области.
@@ -16,26 +16,8 @@ namespace Prosolve.Services.Identification.Users.Events
         /// <param name="id"> Уникальный идентификатор события. </param>
         /// <param name="creationDate"> Дата события (UTC+0). </param>
         /// <param name="data"> Информация о событии. Желательно хранить её в JSON. </param>
-        public UserRegisteredDomainEvent(Guid id, DateTime creationDate, string data)
+        public UserRegisteredDomainEvent(Guid id, DateTime creationDate, string data):base(id, creationDate, data)
         {
-            Id = id;
-            CreationDate = creationDate;
-            Data = data; 
         }
-
-        /// <summary>
-        ///     Уникальный идентификатор события.
-        /// </summary>
-        public Guid Id { get; }
-
-        /// <summary>
-        ///     Дата события (UTC+0).
-        /// </summary>
-        public DateTime CreationDate { get; }
-
-        /// <summary>
-        ///     Информация о событии. Желательно хранить её в JSON.
-        /// </summary>
-        public string Data { get; }
     }
 }

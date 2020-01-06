@@ -29,7 +29,5 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         ///     Тип процесса: бизнес процесс или технологический процесс.
         /// </summary>
         public string TypeName { get; }
-
-        public IProcessAggregate RootEntity { get; }
     }
 }

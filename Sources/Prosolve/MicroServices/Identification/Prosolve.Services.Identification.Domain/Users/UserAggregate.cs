@@ -15,12 +15,6 @@ namespace Prosolve.Services.Identification.Users
     internal class UserAggregate: Entity<IUserAggregate>, IUserAggregate
     {
         /// <summary>
-        ///     Текущий статус объекта.
-        /// </summary>
-        /// <returns>Статус объекта.</returns>
-        public UserStatus Status { get; private set; }
-
-        /// <summary>
         ///     Адрес электронной почты указанный для получения обратной связи.
         /// </summary>
         public IConfirmed<EmailAddress>? ContactEmail { get; }
@@ -55,15 +49,6 @@ namespace Prosolve.Services.Identification.Users
             FullName = userBuilder.FullName;
             ContactEmail = userBuilder.ContactEmailAddress;
             ContactPhoneNumber = userBuilder.ContactPhoneNumber;
-        }
-
-        /// <summary>
-        ///     Смена статуса.
-        /// </summary>
-        /// <param name="newStatus">Новый статус.</param>
-        public void ChangeStatus(UserStatus newStatus)
-        {
-            Status = newStatus;
         }
     }
 }
