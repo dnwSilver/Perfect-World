@@ -10,7 +10,6 @@ using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
-using Sharpdev.SDK.Infrastructure.Statuses;
 using Sharpdev.SDK.Presentation;
 using Sharpdev.SDK.Types.Results;
 
@@ -19,19 +18,12 @@ namespace Prosolve.Services.Identification.Users
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    internal class UserService: HasStatusBase<ServiceStatus>, IService
+    internal class UserService: ServiceBase<IdentificationContext>
     {
-        /// todo Создать абстрактный класс ServiceBase и в нём реализовать работу c UoW.
-
         /// <summary>
         ///     Шина для миграции данных.
         /// </summary>
         private readonly IIntegrateBus _integrateBus;
-
-        /// <summary>
-        ///     Механизм для работы с репозиториями.
-        /// </summary>
-        private readonly IUnitOfWork<IdentificationContext> _unitOfWork;
 
         /// <summary>
         ///     Фабрика для работы с пользователями.
@@ -53,11 +45,10 @@ namespace Prosolve.Services.Identification.Users
         public UserService(IUnitOfWork<IdentificationContext> unitOfWork,
                            IIntegrateBus integrateBus,
                            IEntityFactory<IUserAggregate> userFactory,
-                           IRepository<IUserAggregate> userRepository): base(ServiceStatus.Up)
+                           IRepository<IUserAggregate> userRepository): base(unitOfWork)
         {
             _userFactory = userFactory;
             _userRepository = userRepository;
-            _unitOfWork = unitOfWork;
             _integrateBus = integrateBus;
         }
 
@@ -68,10 +59,11 @@ namespace Prosolve.Services.Identification.Users
         /// <returns> Информация по процессу создания пользователей. </returns>
         public Result CreateUser(IUserBuilder userBuilder)
         {
-            using var uow = _unitOfWork;
+            using var uow = UnitOfWork;
             _userRepository.SetBoundedContext(uow.BoundedContext);
 
-            var user = _userFactory.Create(userBuilder).Value;
+            var user = _userFactory.Create(userBuilder)
+                                   .Value;
 
             // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
             var domainEvent = user.Process(new CreateUserDomainCommand());
@@ -87,7 +79,6 @@ namespace Prosolve.Services.Identification.Users
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             _integrateBus.PublishAsync(registrationEvent);
 
-
             return Result.Done();
         }
 
@@ -98,7 +89,7 @@ namespace Prosolve.Services.Identification.Users
         /// <returns> Список найденных процессов. </returns>
         public async Task<Result<IEnumerable<IUserAggregate>>> Find(ISpecification<IUserAggregate> processSpecification)
         {
-            using var uow = _unitOfWork;
+            using var uow = UnitOfWork;
 
             _userRepository.SetBoundedContext(uow.BoundedContext);
 

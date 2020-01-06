@@ -7,6 +7,7 @@ using Prosolve.Services.Watcher.Domain.Processes.Events;
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
+using Sharpdev.SDK.Presentation;
 using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.Services.Watcher.Domain.Processes
@@ -14,7 +15,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
     /// <summary>
     ///     Сервис по управлению процессами <see cref="IProcessAggregate" /> протекающими в системе.
     /// </summary>
-    internal class ProcessService
+    internal class ProcessService : ServiceBase<WatcherContext>
     {
         /// <summary>
         ///     Шина для обмена сообщениями.
@@ -27,11 +28,6 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         private readonly IRepository<IProcessAggregate> _processRepository;
 
         /// <summary>
-        ///     Механизм для работы с репозиториями.
-        /// </summary>
-        private readonly IUnitOfWork<WatcherContext> _unitOfWork;
-
-        /// <summary>
         ///     Инициализация объекта <see cref="ProcessService" />.
         /// </summary>
         /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
@@ -39,11 +35,10 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         /// <param name="processRepository">Репозиторий для работы с <see cref="IProcessAggregate" />.</param>
         public ProcessService(IUnitOfWork<WatcherContext> unitOfWork,
                               IIntegrateBus integrateBus,
-                              IRepository<IProcessAggregate> processRepository)
+                              IRepository<IProcessAggregate> processRepository):base(unitOfWork)
         {
             _processRepository = processRepository!;
             _integrateBus = integrateBus!;
-            _unitOfWork = unitOfWork!;
         }
 
         /// <summary>
@@ -54,7 +49,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         public async Task<Result<IEnumerable<IProcessAggregate>>> Find(
             ISpecification<IProcessAggregate> processSpecification)
         {
-            using var uow = _unitOfWork;
+            using var uow = UnitOfWork;
 
             _processRepository.SetBoundedContext(uow.BoundedContext);
 
