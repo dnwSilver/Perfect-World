@@ -10,14 +10,23 @@
   <ItemGroup>
       <PackageReference Include="AutoMapper" Version="9.0.0" />
       <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="3.0.1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
   </ItemGroup>
     
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Sharpdev\SDK\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Folder Include="Migrations" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Remove="Migrations\20200108143918_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200108143918_InitialCreate.Designer.cs" />
   </ItemGroup>
 
 

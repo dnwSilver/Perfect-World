@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\DDD\Sharpdev.SDK.DDD\Sharpdev.SDK.DDD.csproj" />
