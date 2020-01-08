@@ -31,12 +31,12 @@ namespace Prosolve.Services.Identification.Users
 
         public CreateUserDomainEvent Process(CreateUserDomainCommand command)
         {
-            throw new System.NotImplementedException();
+            return new CreateUserDomainEvent(command.Id, command.CreationDate, command.Data);
         }
 
         public void Apply(CreateUserDomainEvent @event)
         {
-            throw new System.NotImplementedException();
+            //todo Необходимо реализовать метод.Gj
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ namespace Prosolve.Services.Identification.Users.DataSources
     ///     Модель отображающая таблицу в базе данных для пользователя.
     /// </summary>
     [Table("user")]
-    internal class UserDataModel
+    public class UserDataModel
     {
         /// <summary>
         ///     Внутренний идентификатор процесса.
