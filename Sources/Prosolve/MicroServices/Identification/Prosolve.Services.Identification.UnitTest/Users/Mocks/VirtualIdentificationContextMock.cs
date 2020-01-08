@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Users.DataSources;
@@ -16,20 +15,24 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
     /// </summary>
     internal class VirtualIdentificationContextMock : TestObjectGeneratorBase<IdentificationContext>
     {
-        /// <summary>
-        ///     Настройки для виртуального источника данных.
-        /// </summary>
-        private readonly DbContextOptions<IdentificationContext> _options;
+        private readonly IdentificationContext _identificationContext;
+
+        private readonly SqliteConnection _sqliteConnection;
 
         /// <summary>
         ///     Инициализация контекста данных хранимого в памяти.
         /// </summary>
         public VirtualIdentificationContextMock()
         {
-            _options = new DbContextOptionsBuilder<IdentificationContext>()
-                            .UseInMemoryDatabase(Guid.NewGuid().ToString()) 
-                            .ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
-                            .Options;
+            _sqliteConnection = new SqliteConnection("DataSource=:memory:");
+            _sqliteConnection.Open();
+            
+            var options = new DbContextOptionsBuilder<IdentificationContext>()
+                   .UseSqlite(_sqliteConnection)
+                   .Options;
+
+            _identificationContext = new IdentificationContext(options);
+            _identificationContext.Database.EnsureCreated();
         }
 
         /// <summary>
@@ -39,7 +42,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override IdentificationContext AllocateStub(int stubNumber)
         {
-            return new IdentificationContext(_options);
+            return _identificationContext;
         }
 
         /// <summary>
@@ -47,12 +50,10 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// </summary>
         /// <param name="userDataModel">Новый пользователь.</param>
         /// <returns>Строитель для контекста данных.</returns>
-        public VirtualIdentificationContextMock With(UserDataModel userDataModel)
+        public void With(UserDataModel userDataModel)
         {
-            using var identificationContext = new IdentificationContext(_options);
-            identificationContext.Users.Add(userDataModel);
-            identificationContext.SaveChanges();
-            return this;
+            _identificationContext.Users.Add(userDataModel);
+            _identificationContext.SaveChanges();
         }
 
         /// <summary>
@@ -67,5 +68,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
 
             return this;
         }
+
+        public void CloseConnection()
+        {
+            _sqliteConnection.Close();
+        }
+        // ~VirtualIdentificationContextMock()
+        // {
+        //     _sqliteConnection.Close();
+        // }
     }
 }

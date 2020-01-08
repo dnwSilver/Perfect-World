@@ -123,11 +123,13 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
 
             try
             {
+                //todo Получается что у меня фиксацией изменений управляет репозиторий, это совсем не правильно.
                 await BoundedContext.SaveChangesAsync();
             }
             catch (Exception exception)
             {
                 // todo Обязательно сюда добавить лог и Debug.Assert
+                // Debugger.Break();
                 throw new Exception("Вот так беда. Ничего не получилось.", exception);
             }
         }

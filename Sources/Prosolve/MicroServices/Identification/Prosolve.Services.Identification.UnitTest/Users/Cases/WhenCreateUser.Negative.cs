@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using FluentAssertions;
 
@@ -25,6 +27,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
     [Parallelizable(ParallelScope.All)]
     public class WhenCreateUserNegative
     {
+        // todo надо сделать StartUp и вынести его в базовый класс для тестов.
         /// <summary>
         ///     Подготовка сервиса для тестирования. Создание всех необходимых объектов и заполнение
         ///     данными виртуальное хранилище.
@@ -64,10 +67,12 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUser(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
 
             // Assert:
-            result.Success.Should().BeFalse();
+            function.Should()
+                    .Throw<Exception>()
+                    .WithMessage("Вот так беда. Ничего не получилось.");
         }
 
         [Test]
@@ -87,11 +92,12 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUser(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
 
             // Assert:
-            result.Success.Should()
-                  .BeFalse();
+            function.Should()
+                    .Throw<Exception>()
+                    .WithMessage("Вот так беда. Ничего не получилось.");
         }
 
         [Test]
@@ -111,11 +117,12 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUser(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
 
             // Assert:
-            result.Success.Should()
-                  .BeFalse();
+            function.Should()
+                    .Throw<Exception>()
+                    .WithMessage("Вот так беда. Ничего не получилось.");
         }
 
         [Test]
@@ -132,11 +139,12 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUser(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
 
             // Assert:
-            result.Success.Should()
-                  .BeFalse();
+            function.Should()
+                    .Throw<Exception>()
+                    .WithMessage("Вот так беда. Ничего не получилось.");
         }
     }
 }

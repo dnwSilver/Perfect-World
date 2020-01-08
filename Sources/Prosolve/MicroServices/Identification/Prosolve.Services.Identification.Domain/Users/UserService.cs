@@ -57,7 +57,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="userBuilder"> Список новых пользователей. </param>
         /// <returns> Информация по процессу создания пользователей. </returns>
-        public Result CreateUser(IUserBuilder userBuilder)
+        public async Task<Result> CreateUserAsync(IUserBuilder userBuilder)
         {
             using var uow = UnitOfWork;
             _userRepository.SetBoundedContext(uow.BoundedContext);
@@ -68,7 +68,7 @@ namespace Prosolve.Services.Identification.Users
             // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
             var domainEvent = user.Process(new CreateUserDomainCommand(Guid.NewGuid(), DateTime.UtcNow, ""));
             user.Apply(domainEvent);
-            _userRepository.CreateAsync(user.Yield());
+            await _userRepository.CreateAsync(user.Yield());
 
             var commitResult = uow.Commit();
 
@@ -77,7 +77,7 @@ namespace Prosolve.Services.Identification.Users
 
             // todo Нужен интерфейс IClock для работы с датами. Также нужна реализация для него.
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
-            _integrateBus.PublishAsync(registrationEvent);
+            await _integrateBus.PublishAsync(registrationEvent);
 
             return Result.Done();
         }
@@ -87,7 +87,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="processSpecification"> Набор спецификаций для поиска процессов. </param>
         /// <returns> Список найденных процессов. </returns>
-        public async Task<Result<IEnumerable<IUserAggregate>>> Find(ISpecification<IUserAggregate> processSpecification)
+        public async Task<Result<IEnumerable<IUserAggregate>>> FindAsync(ISpecification<IUserAggregate> processSpecification)
         {
             using var uow = UnitOfWork;
 

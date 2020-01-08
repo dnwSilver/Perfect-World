@@ -58,7 +58,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUser(newUserBuilder);
+            var result = userService.CreateUserAsync(newUserBuilder).Result;
 
             // Assert:
             result.Success.Should().BeTrue();
@@ -77,7 +77,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUser(newUserBuilder);
+            var result = userService.CreateUserAsync(newUserBuilder).Result;
 
             // Assert:
             result.Success.Should().BeTrue();
