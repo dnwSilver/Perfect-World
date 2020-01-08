@@ -139,7 +139,7 @@ namespace Sharpdev.SDK.Types.Results
         /// <returns>Строковое представление объекта <see cref="Result" />.</returns>
         private static string DoFormat(Result result, IFormatProvider formatProvider, string delimiter)
         {
-            if (result.Errors.IsNullOrEmpty())
+            if (result.Errors.NullOrEmpty())
                 return string.Empty;
 
             // todo вынести в базовый конструктор. Бугаенко будет сильно возмущён такой штукой.

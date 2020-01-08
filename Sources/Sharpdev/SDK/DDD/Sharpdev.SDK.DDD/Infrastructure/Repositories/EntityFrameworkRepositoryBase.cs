@@ -26,6 +26,7 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
             where TDataModel: class
     {
         /// <summary>
+        /// todo Описание не составлено.
         /// </summary>
         protected DbContext? BoundedContext;
 

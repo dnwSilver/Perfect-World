@@ -66,7 +66,7 @@ namespace Prosolve.Services.Identification.Users
                                    .Value;
 
             // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
-            var domainEvent = user.Process(new CreateUserDomainCommand());
+            var domainEvent = user.Process(new CreateUserDomainCommand(Guid.NewGuid(), DateTime.UtcNow, ""));
             user.Apply(domainEvent);
             _userRepository.CreateAsync(user.Yield());
 
