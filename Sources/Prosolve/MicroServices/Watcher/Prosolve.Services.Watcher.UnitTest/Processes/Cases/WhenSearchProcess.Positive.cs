@@ -35,7 +35,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
             var integrationBus = Create.IntegrationBus.PorFavor();
             var unitOfWork = new DatabaseUnitOfWork<WatcherContext>(watcherContext);
             var processFactory = new ProcessFactory();
-            var processRepository = new ProcessRepository(processFactory, WatcherConfiguration.Mapper);
+            var processRepository = new ProcessRepository(processFactory, WatcherConfiguration.Mapper, watcherContext);
             var processService = new ProcessService(unitOfWork, integrationBus, processRepository);
 
             return processService;

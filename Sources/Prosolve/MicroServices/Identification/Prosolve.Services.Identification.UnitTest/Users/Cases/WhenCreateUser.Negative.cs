@@ -44,7 +44,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
 
-            var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper);
+            var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper, identificationContext);
 
             var userService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
 
@@ -71,7 +71,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 
             // Assert:
             function.Should()
-                    .Throw<Exception>()
+                    .Throw<DataSourceInnerException>()
                     .WithMessage("Вот так беда. Ничего не получилось.");
         }
 
@@ -96,7 +96,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 
             // Assert:
             function.Should()
-                    .Throw<Exception>()
+                    .Throw<DataSourceInnerException>()
                     .WithMessage("Вот так беда. Ничего не получилось.");
         }
 
@@ -121,7 +121,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 
             // Assert:
             function.Should()
-                    .Throw<Exception>()
+                    .Throw<DataSourceInnerException>()
                     .WithMessage("Вот так беда. Ничего не получилось.");
         }
 
@@ -143,7 +143,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 
             // Assert:
             function.Should()
-                    .Throw<Exception>()
+                    .Throw<DataSourceInnerException>()
                     .WithMessage("Вот так беда. Ничего не получилось.");
         }
     }

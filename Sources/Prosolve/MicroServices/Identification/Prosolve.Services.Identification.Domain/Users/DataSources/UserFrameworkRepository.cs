@@ -6,45 +6,39 @@ using Microsoft.EntityFrameworkCore;
 
 using Prosolve.Services.Identification.Users.Factories;
 
+using Sharpdev.SDK.DataSources.Databases;
+using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
-using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Prosolve.Services.Identification.Users.DataSources
 {
     /// <summary>
     ///     Виртуальный репозиторий для тестов.
     /// </summary>
-    internal class UserFrameworkRepository:
-            EntityFrameworkRepositoryBase<IUserAggregate, UserDataModel, IUserBuilder>
+    internal class UserFrameworkRepository: EntityFrameworkRepositoryBase<IUserAggregate, UserDataModel, IUserBuilder>
     {
         /// <summary>
         ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
-        /// <param name="mapper"> Механизм для трансформации объектов. </param>
+        /// <param name="entityMapper"> Механизм для трансформации объектов. </param>
         /// <param name="entityFactory"> Фабрика для создания объектов. </param>
-        public UserFrameworkRepository(IEntityFactory<IUserAggregate> entityFactory, IMapper mapper)
-                : base(entityFactory, mapper)
+        /// <param name="boundedContext"> Контекст базы данных. </param>
+        public UserFrameworkRepository(IEntityFactory<IUserAggregate> entityFactory, IMapper entityMapper,
+                                       IBoundedContext boundedContext)
+                : base(entityFactory, entityMapper, boundedContext)
         {
         }
 
         /// <summary>
         ///     Контекст источника данных.
         /// </summary>
-        private IdentificationContext IdentificationContext
-        {
-            get
-            {
-                if (BoundedContext is IdentificationContext identificationContext)
-                    return identificationContext;
-
-                // todo Тут как-бы надо что-то придумать. Нельзя просто так оставит не имплеминтированный метод.
-                throw new NotImplementedException();
-            }
-        }
-
         protected override DbSet<UserDataModel> DbSetEntity()
         {
-            return IdentificationContext.Users;
+            if (BoundedContext is IdentificationContext identificationContext)
+                return identificationContext.Users;
+
+            // todo Тут как-бы надо что-то придумать. Нельзя просто так оставит не имплеминтированный метод.
+            throw new NotImplementedException();
         }
     }
 }

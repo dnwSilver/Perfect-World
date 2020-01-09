@@ -49,10 +49,6 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         public async Task<Result<IEnumerable<IProcessAggregate>>> Find(
             ISpecification<IProcessAggregate> processSpecification)
         {
-            using var uow = UnitOfWork;
-
-            _processRepository.SetBoundedContext(uow.BoundedContext);
-
             var foundProcess = await _processRepository.ReadAsync(processSpecification);
 
             var domainEvent = new ProcessFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow, string.Empty);

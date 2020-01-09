@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 using Prosolve.Services.Watcher.Domain.Processes.Factories;
 
+using Sharpdev.SDK.DataSources.Databases;
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
-using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
 {
@@ -21,29 +21,13 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         ///     Инициализация репозитория <see cref="ProcessRepository"/>.
         /// </summary>
         /// <param name="processFactory"> Фабрика для создания объектов. </param>
-        /// <param name="mapper"> Механизм для трансформации объектов. </param>
-        public ProcessRepository(IEntityFactory<IProcessAggregate> processFactory, IMapper mapper)
-                : base(processFactory, mapper)
+        /// <param name="entityMapper"> Механизм для трансформации объектов. </param>
+        /// <param name="boundedContext"> Контекст базы данных. </param>
+        public ProcessRepository(IEntityFactory<IProcessAggregate> processFactory,
+                                 IMapper entityMapper,
+                                 IBoundedContext boundedContext)
+                : base(processFactory, entityMapper, boundedContext)
         {
-        }
-
-        /// <summary>
-        ///     Контекст источника данных.
-        /// </summary>
-        private WatcherContext WatcherContext
-        {
-            get
-            {
-                if (BoundedContext is WatcherContext watcherContext)
-                    return watcherContext;
-
-                throw new NotImplementedException();
-            }
-        }
-
-        public new void SetBoundedContext(IBoundedContext boundedContext)
-        {
-            BoundedContext = boundedContext as WatcherContext;
         }
 
         /// <summary>
@@ -52,7 +36,9 @@ namespace Prosolve.Services.Watcher.Domain.Processes.DataSources
         /// <returns> </returns>
         protected override DbSet<ProcessDataModel> DbSetEntity()
         {
-            return WatcherContext.Processes;
+            if (BoundedContext is WatcherContext watcherContext)
+                return watcherContext.Processes;
+            throw new NotImplementedException();
         }
     }
 }

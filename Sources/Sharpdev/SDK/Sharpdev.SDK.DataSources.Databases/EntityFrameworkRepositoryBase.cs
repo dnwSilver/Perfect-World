@@ -11,8 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Infrastructure.Repositories;
 
-namespace Sharpdev.SDK.Infrastructure.Repositories
+namespace Sharpdev.SDK.DataSources.Databases
 {
     /// <summary>
     ///     Базовая реализация для любых потомков интерфейса <see cref="IRepository{TAggregate}"/>.
@@ -26,19 +27,23 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
             where TDataModel: class
     {
         /// <summary>
-        /// todo Описание не составлено.
+        ///     Контекст базы данных.
         /// </summary>
-        protected DbContext? BoundedContext;
+        protected DbContext BoundedContext;
 
         /// <summary>
         ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.
         /// </summary>
-        /// <param name="mapper"> Механизм для трансформации объектов. </param>
+        /// <param name="entityMapper"> Механизм для трансформации объектов. </param>
         /// <param name="entityFactory"> Фабрика для создания объектов. </param>
-        protected EntityFrameworkRepositoryBase(IEntityFactory<TEntity> entityFactory, IMapper mapper)
+        /// <param name="boundedContext"> Контекст базы данных. </param>
+        protected EntityFrameworkRepositoryBase(IEntityFactory<TEntity> entityFactory,
+                                                IMapper entityMapper,
+                                                IBoundedContext boundedContext)
         {
-            Mapper = mapper;
+            EntityMapper = entityMapper;
             EntityFactory = entityFactory;
+            BoundedContext = boundedContext as DbContext;
         }
 
         /// <summary>
@@ -49,27 +54,12 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// <summary>
         ///     Механизм для трансформации объектов.
         /// </summary>
-        private IMapper Mapper { get; }
+        private IMapper EntityMapper { get; }
 
         public Task DeleteAsync(IEnumerable<TEntity> objectsToRemove)
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="boundedContext"> </param>
-        public void SetBoundedContext(IBoundedContext boundedContext)
-        {
-            //todo Добавить выбрасывание ошибки.
-            BoundedContext = boundedContext as DbContext;
-        }
-
-        /// <summary>
-        ///     Контекст для работы с таблицей.
-        /// </summary>
-        /// <returns> </returns>
-        protected abstract DbSet<TDataModel> DbSetEntity();
 
         /// <summary>
         ///     Поиск и получение необходимых бизнес объектов в источнике данных.
@@ -78,17 +68,16 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// <returns> Набор бизнес объектов. </returns>
         public async Task<IEnumerable<TEntity>> ReadAsync(ISpecification<TEntity> specification)
         {
-            var userExpression =
-                    Mapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
+            var expression = EntityMapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
 
             var dataModels = await DbSetEntity()
-                                  .Where(userExpression)
+                                  .Where(expression)
                                   .ToListAsync();
 
             if (!dataModels.Any())
                 return Enumerable.Empty<TEntity>();
 
-            var builders = Mapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
+            var builders = EntityMapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
 
             var entities = new List<TEntity>();
 
@@ -117,9 +106,10 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
         /// </returns>
         public async Task CreateAsync(IEnumerable<TEntity> objectsToCreate)
         {
-            var userDataModels = Mapper.Map<IEnumerable<TEntity>, IEnumerable<TDataModel>>(objectsToCreate);
+            var userDataModels = EntityMapper.Map<IEnumerable<TEntity>, IEnumerable<TDataModel>>(objectsToCreate);
 
-            await DbSetEntity().AddRangeAsync(userDataModels);
+            await DbSetEntity()
+                   .AddRangeAsync(userDataModels);
 
             try
             {
@@ -130,8 +120,14 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
             {
                 // todo Обязательно сюда добавить лог и Debug.Assert
                 // Debugger.Break();
-                throw new Exception("Вот так беда. Ничего не получилось.", exception);
+                throw new DataSourceInnerException("Вот так беда. Ничего не получилось.", exception);
             }
         }
+
+        /// <summary>
+        ///     Контекст для работы с таблицей.
+        /// </summary>
+        /// <returns> </returns>
+        protected abstract DbSet<TDataModel> DbSetEntity();
     }
 }

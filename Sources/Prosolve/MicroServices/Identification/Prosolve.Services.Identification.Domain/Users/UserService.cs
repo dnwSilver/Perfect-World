@@ -59,9 +59,6 @@ namespace Prosolve.Services.Identification.Users
         /// <returns> Информация по процессу создания пользователей. </returns>
         public async Task<Result> CreateUserAsync(IUserBuilder userBuilder)
         {
-            using var uow = UnitOfWork;
-            _userRepository.SetBoundedContext(uow.BoundedContext);
-
             var user = _userFactory.Create(userBuilder)
                                    .Value;
 
@@ -70,7 +67,7 @@ namespace Prosolve.Services.Identification.Users
             user.Apply(domainEvent);
             await _userRepository.CreateAsync(user.Yield());
 
-            var commitResult = uow.Commit();
+            var commitResult = UnitOfWork.Commit();
 
             if (commitResult.Failure)
                 return commitResult;
@@ -89,10 +86,6 @@ namespace Prosolve.Services.Identification.Users
         /// <returns> Список найденных процессов. </returns>
         public async Task<Result<IEnumerable<IUserAggregate>>> FindAsync(ISpecification<IUserAggregate> processSpecification)
         {
-            using var uow = UnitOfWork;
-
-            _userRepository.SetBoundedContext(uow.BoundedContext);
-
             var foundProcess = await _userRepository.ReadAsync(processSpecification);
 
             //var domainEvent = new UserFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow);

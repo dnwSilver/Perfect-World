@@ -21,6 +21,5 @@ namespace Sharpdev.SDK.Infrastructure.Repositories
     IUpdateRepository<TAggregate>, IDeleteRepository<TAggregate>
             where TAggregate: IAggregate<TAggregate>, IEntity<TAggregate>
     {
-        void SetBoundedContext(IBoundedContext boundedContext);
     }
 }
