@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Prosolve.Services.Identification.Users.Events;
 using Prosolve.Services.Identification.Users.Factories;
 
-using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
@@ -59,8 +59,7 @@ namespace Prosolve.Services.Identification.Users
         /// <returns> Информация по процессу создания пользователей. </returns>
         public async Task<Result> CreateUserAsync(IUserBuilder userBuilder)
         {
-            var user = _userFactory.Create(userBuilder)
-                                   .Value;
+            var user = _userFactory.Create(userBuilder);
 
             // todo Нужно написать реализацию механизма для отправки обращений в шину данных.
             var domainEvent = user.Process(new CreateUserDomainCommand(Guid.NewGuid(), DateTime.UtcNow, ""));

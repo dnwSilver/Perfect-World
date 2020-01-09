@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Infrastructure.Repositories;
 
 namespace Sharpdev.SDK.DataSources.Databases
@@ -68,7 +69,7 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <returns> Набор бизнес объектов. </returns>
         public async Task<IEnumerable<TEntity>> ReadAsync(ISpecification<TEntity> specification)
         {
-            var expression = EntityMapper.Map<Expression<Func<TDataModel, bool>>>(specification.Expression);
+            var expression = EntityMapper.Map<Expression<Func<TDataModel, bool>>>(specification.Criteria);
 
             var dataModels = await DbSetEntity()
                                   .Where(expression)
@@ -86,7 +87,7 @@ namespace Sharpdev.SDK.DataSources.Databases
                     let factory = EntityFactory
                     select factory.Recovery(builder)
                     into entity
-                    select entity.Value);
+                    select entity);
 
             return entities;
         }

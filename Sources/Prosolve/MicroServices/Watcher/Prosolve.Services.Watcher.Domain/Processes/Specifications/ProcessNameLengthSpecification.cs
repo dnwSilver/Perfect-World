@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
 {
@@ -32,7 +32,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IProcessAggregate, bool>> Criteria => x =>
+        private new static Expression<Func<IProcessAggregate, bool>> Criteria => x =>
             x.Name.Length <= MaxLength;
     }
 }

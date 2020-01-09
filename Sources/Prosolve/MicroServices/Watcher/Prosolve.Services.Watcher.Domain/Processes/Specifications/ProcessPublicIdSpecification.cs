@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
 {

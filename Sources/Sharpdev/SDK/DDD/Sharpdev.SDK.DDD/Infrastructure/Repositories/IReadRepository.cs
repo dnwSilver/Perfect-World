@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Sharpdev.SDK.Infrastructure.Repositories
 {

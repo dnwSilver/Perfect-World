@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using Prosolve.Services.Watcher.Domain.Processes.Events;
 
-using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Presentation;

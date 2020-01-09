@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Domain.Factories
@@ -27,7 +28,7 @@ namespace Sharpdev.SDK.Domain.Factories
         ///     По факту создание сущности отличается от восстановления только генераций  уникальных
         ///     идентификаторов.
         /// </remarks>
-        public Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate)
+        public TEntity Create(IEntityBuilder<TEntity> entityToCreate)
         {
             entityToCreate.Identifier = Identifier<TEntity>.Create();
 
@@ -39,13 +40,13 @@ namespace Sharpdev.SDK.Domain.Factories
         /// </summary>
         /// <param name="entityToRecovery">Строитель восстанавливаемого объекта.</param>
         /// <returns>Восстановленный объект.</returns>
-        public Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery)
+        public TEntity Recovery(IEntityBuilder<TEntity> entityToRecovery)
         {
             var entity = AllocateEntity(entityToRecovery);
             SetSpecifications(entity);
 
             foreach(var specification in Specifications)
-                specification.IsSatisfiedBy(entity);
+                specification.Satisfies(entity);
 
             return Result.Done(entity);
         }

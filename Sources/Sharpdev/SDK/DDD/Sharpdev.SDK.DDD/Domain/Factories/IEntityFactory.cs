@@ -1,5 +1,4 @@
 ﻿using Sharpdev.SDK.Domain.Entities;
-using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Domain.Factories
 {
@@ -22,13 +21,13 @@ namespace Sharpdev.SDK.Domain.Factories
         /// </summary>
         /// <param name="entityToCreate"> Строитель нового объекта. </param>
         /// <returns> Созданный объект. </returns>
-        Result<TEntity> Create(IEntityBuilder<TEntity> entityToCreate);
+        TEntity Create(IEntityBuilder<TEntity> entityToCreate);
 
         /// <summary>
         ///     Восстановление уже созданного объекта.
         /// </summary>
         /// <param name="entityToRecovery"> Строитель восстанавливаемого объекта. </param>
         /// <returns> Восстановленный объект. </returns>
-        Result<TEntity> Recovery(IEntityBuilder<TEntity> entityToRecovery);
+        TEntity Recovery(IEntityBuilder<TEntity> entityToRecovery);
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-using Sharpdev.SDK.Domain;
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Identification.Users.Specifications
 {
@@ -33,7 +33,7 @@ namespace Prosolve.Services.Identification.Users.Specifications
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private static Expression<Func<IUserAggregate, bool>> Criteria => x =>
+        private new static Expression<Func<IUserAggregate, bool>> Criteria => x =>
             x.FullName.GetFullName.Length <= MaxLength;
     }
 }

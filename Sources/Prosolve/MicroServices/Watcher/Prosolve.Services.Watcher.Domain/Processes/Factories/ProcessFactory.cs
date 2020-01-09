@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 
 using Prosolve.Services.Watcher.Domain.Processes.Specifications;
 
-using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Watcher.Domain.Processes.Factories
 {

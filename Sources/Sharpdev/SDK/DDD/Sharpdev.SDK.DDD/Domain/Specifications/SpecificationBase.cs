@@ -4,9 +4,8 @@ using System.Linq.Expressions;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Extensions;
-using Sharpdev.SDK.Types.Results;
 
-namespace Sharpdev.SDK.Domain
+namespace Sharpdev.SDK.Domain.Specifications
 {
     /// <summary>
     ///     Спецификация  -  это  предикат,  который  определяет,  удовлетворяет  объект  некоторым
@@ -26,7 +25,7 @@ namespace Sharpdev.SDK.Domain
         ///     потребности или достижения цели.
         /// </summary>
         /// <returns> Функция для проверки. </returns>
-        public Expression<Func<TEntity, bool>> Expression { get; }
+        public Expression<Func<TEntity, bool>> Criteria { get; }
 
         /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}"/>.
@@ -38,7 +37,7 @@ namespace Sharpdev.SDK.Domain
             if (criteria.ReturnFailure())
                 throw new ArgumentNullException(nameof(criteria));
 
-            Expression = criteria;
+            Criteria = criteria;
             _failureMessage = failureMessage;
         }
 
@@ -50,14 +49,16 @@ namespace Sharpdev.SDK.Domain
         ///     <see langword="true"/> - Объект <see cref="TEntity"/> прошёл проверку.
         ///     <see langword="false"/> - Объект <see cref="TEntity"/> не прошёл проверку.
         /// </returns>
-        public Result IsSatisfiedBy(TEntity candidate)
+        /// <exception cref="SpecificationSatisfiesException" />
+        /// <exception cref="ArgumentException" />
+        public void Satisfies(TEntity candidate)
         {
             if (candidate.ReturnFailure())
                 throw new ArgumentNullException(nameof(candidate));
 
-            return candidate.Yield()
-                            .AsQueryable()
-                            .Any()? Result.Done(): Result.Fail(_failureMessage);
+            //todo Надо проверить всё то и написать тесты. Возможно есть способы написать красивее.
+            if(candidate.Yield().AsQueryable().Where(Criteria).Empty())
+                throw new SpecificationSatisfiesException(_failureMessage);
         }
     }
 }

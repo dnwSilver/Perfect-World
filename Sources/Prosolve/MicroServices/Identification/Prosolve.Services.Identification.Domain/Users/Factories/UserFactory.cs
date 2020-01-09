@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Identification.Users.Factories
 {

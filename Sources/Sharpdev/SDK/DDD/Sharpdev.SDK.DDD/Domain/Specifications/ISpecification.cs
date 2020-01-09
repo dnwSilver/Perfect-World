@@ -2,9 +2,8 @@
 using System.Linq.Expressions;
 
 using Sharpdev.SDK.Domain.Entities;
-using Sharpdev.SDK.Types.Results;
 
-namespace Sharpdev.SDK.Domain
+namespace Sharpdev.SDK.Domain.Specifications
 {
     /// <summary>
     ///     Спецификация  -  это  предикат,  который  определяет,  удовлетворяет  объект  некоторым
@@ -31,13 +30,13 @@ namespace Sharpdev.SDK.Domain
         ///     <see langword="true" /> - Объект <see cref="TEntity"/> прошёл проверку.
         ///     <see langword="false" /> - Объект <see cref="TEntity"/> не прошёл проверку.
         /// </returns>
-        Result IsSatisfiedBy(TEntity candidate);
+        void Satisfies(TEntity candidate);
 
         /// <summary>
         ///     Формирование функции для проведения проверки пригодности объекта для удовлетворения
         ///     потребности или достижения цели.
         /// </summary>
         /// <returns>Функция для проверки.</returns>
-        Expression<Func<TEntity, bool>> Expression { get; }
+        Expression<Func<TEntity, bool>> Criteria { get; }
     }
 }

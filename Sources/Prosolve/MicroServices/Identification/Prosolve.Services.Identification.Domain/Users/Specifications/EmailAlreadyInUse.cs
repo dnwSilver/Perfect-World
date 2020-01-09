@@ -1,4 +1,4 @@
-﻿using Sharpdev.SDK.Domain;
+﻿using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Identification.Users.Specifications
 {
