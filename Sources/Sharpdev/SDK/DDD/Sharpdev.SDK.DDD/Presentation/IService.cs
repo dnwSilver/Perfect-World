@@ -1,5 +1,4 @@
 ﻿using Sharpdev.SDK.Infrastructure.Statuses;
-using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Presentation
 {
@@ -12,8 +11,7 @@ namespace Sharpdev.SDK.Presentation
     ///     сгруппированных  по  элементам пользовательского  интерфейса.     Работает хорошо, если
     ///     интерфейс разработан в стиле Task Based UI.
     ///     Проверка  запроса  производится  в  отдельном   слое   строго  до  выполнения    метода
-    ///     (<see cref="AntiCorruption" />).  Если метод может завершиться  неудачей,  следует явно
-    ///     обозначить это в сигнатуре с помощью типа <see cref="Result" />.
+    ///     (<see cref="AntiCorruption" />).
     ///     Основные  действия   должны   начинаться  с  глаголов,  для  общих  case'ов  необходимо
     ///     использовать следующие обозначения:
     ///     - Поиск (find);

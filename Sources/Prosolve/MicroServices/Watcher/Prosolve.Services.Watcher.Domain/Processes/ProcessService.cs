@@ -8,7 +8,6 @@ using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Presentation;
-using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.Services.Watcher.Domain.Processes
 {
@@ -46,7 +45,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         /// </summary>
         /// <param name="processSpecification">Набор спецификаций для поиска процессов.</param>
         /// <returns>Список найденных процессов.</returns>
-        public async Task<Result<IEnumerable<IProcessAggregate>>> Find(
+        public async Task<IEnumerable<IProcessAggregate>> Find(
             ISpecification<IProcessAggregate> processSpecification)
         {
             var foundProcess = await _processRepository.ReadAsync(processSpecification);
@@ -55,7 +54,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
 
             await _integrateBus.PublishAsync(domainEvent);
 
-            return Result.Done(foundProcess);
+            return foundProcess;
         }
     }
 }

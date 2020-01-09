@@ -53,7 +53,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
             var result = processService.Find(specification);
 
             // Assert:
-            result.Result.Value.Should().HaveCount(1);
+            result.Result.Should().HaveCount(1);
         }
 
         [Test]
@@ -67,21 +67,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
             var result = processService.Find(specification);
 
             // Assert:
-            result.Result.Value.Should().HaveCount(0);
-        }
-
-        [Test]
-        public void WhenFindProcess_ByPublicId_ResultShouldBeTrue()
-        {
-            // Act:
-            var processService = AllocateProcessService(out var processDataModels);
-            var specification = new ProcessPublicIdSpecification(processDataModels.First().PublicId);
-
-            // Arrange:
-            var result = processService.Find(specification);
-
-            // Assert:
-            result.Result.Success.Should().BeTrue();
+            result.Result.Should().HaveCount(0);
         }
     }
 }

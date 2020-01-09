@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 using Sharpdev.SDK.Domain;
 using Sharpdev.SDK.Infrastructure.Repositories;
-using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.DataSources.Databases
 {
@@ -46,7 +45,7 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <summary>
         ///     Сохранение всех объектов в источник данных.
         /// </summary>
-        public Result Commit()
+        public void Commit()
         {
             _transaction.Commit();
 
@@ -55,8 +54,6 @@ namespace Sharpdev.SDK.DataSources.Databases
             //     return Result.Fail("Не удалось сохранить данные в источнике данных.");
 
             _isCommitted = true;
-
-            return Result.Done();
         }
 
         /// <summary>

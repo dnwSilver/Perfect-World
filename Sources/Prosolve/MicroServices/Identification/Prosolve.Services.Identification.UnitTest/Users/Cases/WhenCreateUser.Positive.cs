@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using FluentAssertions;
 
@@ -46,7 +48,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         }
 
         [Test]
-        public void WhenCreateUser_WithNotExistsEmailAddress_ResultShouldBeTrue()
+        public void WhenCreateUser_WithNotExistsEmailAddress_ExecuteWithoutThrow()
         {
             // Act:
             var userService = AllocateIdentityService(out var _);
@@ -58,14 +60,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUserAsync(newUserBuilder).Result;
+            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
 
             // Assert:
-            result.Success.Should().BeTrue();
+            function.Should().NotThrowAsync();
         }
 
         [Test]
-        public void WhenCreateUser_WithNotExistsPhoneNumber_ResultShouldBeTrue()
+        public void WhenCreateUser_WithNotExistsPhoneNumber_ExecuteWithoutThrow()
         { 
             // Act:
             var userService = AllocateIdentityService(out var _);
@@ -77,10 +79,11 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            var result = userService.CreateUserAsync(newUserBuilder).Result;
+            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
 
             // Assert:
-            result.Success.Should().BeTrue();
+
+            function.Should().NotThrowAsync();
         }
     }
 }

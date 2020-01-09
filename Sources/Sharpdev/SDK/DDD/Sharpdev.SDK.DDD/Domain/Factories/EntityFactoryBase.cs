@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Specifications;
-using Sharpdev.SDK.Types.Results;
 
 namespace Sharpdev.SDK.Domain.Factories
 {
@@ -48,7 +47,7 @@ namespace Sharpdev.SDK.Domain.Factories
             foreach(var specification in Specifications)
                 specification.Satisfies(entity);
 
-            return Result.Done(entity);
+            return entity;
         }
 
         /// <summary>

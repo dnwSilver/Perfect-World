@@ -22,7 +22,6 @@ namespace Sharpdev.SDK.Domain.Entities
             
             Id = identifier!;
             CurrentVersion = currentVersion;
-            IsSoftDelete = true;
         }
 
         /// <summary>
@@ -34,17 +33,5 @@ namespace Sharpdev.SDK.Domain.Entities
         ///     Версия объекта. Начальное значение 1. Шаг 1.
         /// </summary>
         public int CurrentVersion { get; }
-
-        /// <summary>
-        ///     Признак  безопасного  удаления  объекта.  Информация по объекту не будет стираться,
-        ///     у объекта  будет выставлен  признак его  блокировки и он перестанет  участвовать во
-        ///     всех  операциях в системе.  Разблокировать  можно  будет  только  ручным  образом в
-        ///     источнике данных.
-        /// </summary>
-        /// <returns>
-        ///     <see langword="true" /> - используется безопасное удаление.
-        ///     <see langword="false" /> - используется не безопасное удаление.
-        /// </returns>
-        public bool IsSoftDelete { get; }
     }
 }

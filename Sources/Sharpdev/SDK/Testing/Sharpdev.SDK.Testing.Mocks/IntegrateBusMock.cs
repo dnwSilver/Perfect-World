@@ -34,13 +34,15 @@ namespace Sharpdev.SDK.Testing
         /// <remarks>
         ///     Шина событий передает  полученное  событие  интеграции  всем  микрослужбам  и  даже
         ///     внешним приложениям, которые подписаны на  это  событие.  Этот  метод  используется
-        ///     микрослужбой, которая публикует событие.
+        ///     микросервисом, которая публикует событие.
         /// </remarks>
         public Task PublishAsync(IIntegrationEvent @event)
         {
-            // Список события для отправки в шину данных.
-            var events = new Collection();
-            events.Add(@event);
+            var events = new Collection
+            {
+                @event
+            };
+
             events.Clear();
 
             return Task.CompletedTask;

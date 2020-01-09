@@ -11,7 +11,6 @@ using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Infrastructure.Integrations;
 using Sharpdev.SDK.Infrastructure.Repositories;
 using Sharpdev.SDK.Presentation;
-using Sharpdev.SDK.Types.Results;
 
 namespace Prosolve.Services.Identification.Users
 {
@@ -57,7 +56,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="userBuilder"> Список новых пользователей. </param>
         /// <returns> Информация по процессу создания пользователей. </returns>
-        public async Task<Result> CreateUserAsync(IUserBuilder userBuilder)
+        public async Task CreateUserAsync(IUserBuilder userBuilder)
         {
             var user = _userFactory.Create(userBuilder);
 
@@ -66,17 +65,12 @@ namespace Prosolve.Services.Identification.Users
             user.Apply(domainEvent);
             await _userRepository.CreateAsync(user.Yield());
 
-            var commitResult = UnitOfWork.Commit();
-
-            if (commitResult.Failure)
-                return commitResult;
+            UnitOfWork.Commit();
 
             // todo Нужен интерфейс IClock для работы с датами. Также нужна реализация для него.
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
             // todo Тут мы должны только фиксировать необходимость отправки сообщения, а не делать саму отправку.
             await _integrateBus.PublishAsync(registrationEvent);
-
-            return Result.Done();
         }
 
         /// <summary>
@@ -84,7 +78,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="processSpecification"> Набор спецификаций для поиска процессов. </param>
         /// <returns> Список найденных процессов. </returns>
-        public async Task<Result<IEnumerable<IUserAggregate>>> FindAsync(ISpecification<IUserAggregate> processSpecification)
+        public async Task<IEnumerable<IUserAggregate>> FindAsync(ISpecification<IUserAggregate> processSpecification)
         {
             var foundProcess = await _userRepository.ReadAsync(processSpecification);
 
@@ -92,7 +86,7 @@ namespace Prosolve.Services.Identification.Users
 
             // await this._integrateBus.PublishAsync(domainEvent);
 
-            return Result.Done(foundProcess);
+            return foundProcess;
         }
     }
 }

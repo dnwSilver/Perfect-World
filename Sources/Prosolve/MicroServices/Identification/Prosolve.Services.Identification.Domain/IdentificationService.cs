@@ -1,7 +1,5 @@
 ﻿using System.Security.Claims;
 
-using Sharpdev.SDK.Types.Results;
-
 namespace Prosolve.Services.Identification
 {
     /// <summary>
@@ -17,7 +15,7 @@ namespace Prosolve.Services.Identification
         /// <returns>
         ///     Коллекция объектов <see cref="Claim" />, описывающих утверждения для пользователя.
         /// </returns>
-        public Result<ClaimsIdentity> Authorize(string login, string password)
+        public ClaimsIdentity Authorize(string login, string password)
         {
             var claims = new []
                          {
@@ -31,7 +29,7 @@ namespace Prosolve.Services.Identification
 
             //_logger.LogInformation($"Авторизация пользователя {login}");
 
-            return Result.Done(claimsIdentity);
+            return claimsIdentity;
         }
     }
 }
