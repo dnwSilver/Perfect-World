@@ -29,7 +29,7 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <summary>
         ///     Контекст базы данных.
         /// </summary>
-        protected DbContext BoundedContext;
+        protected readonly DbContext BoundedContext;
 
         /// <summary>
         ///     Инициализация репозитория <see cref="EntityFrameworkRepositoryBase{TEntity,TDataModel,TEntityBuilder}"/>.

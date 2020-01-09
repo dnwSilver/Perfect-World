@@ -18,7 +18,7 @@ namespace Prosolve.Services.Identification.Users
     /// <summary>
     ///     Сервис по управлению пользователями предоставляемый для бизнеса.
     /// </summary>
-    internal class UserService: ServiceBase<IdentificationContext>
+    internal class UserService: ServiceBase
     {
         /// <summary>
         ///     Шина для миграции данных.
@@ -42,7 +42,7 @@ namespace Prosolve.Services.Identification.Users
         /// <param name="userRepository"> Репозиторий для работы с пользователями. </param>
         /// <param name="unitOfWork"> Механизм для работы с репозиториями. </param>
         /// <param name="integrateBus"> Интеграционная шина. </param>
-        public UserService(IUnitOfWork<IdentificationContext> unitOfWork,
+        public UserService(IUnitOfWork unitOfWork,
                            IIntegrateBus integrateBus,
                            IEntityFactory<IUserAggregate> userFactory,
                            IRepository<IUserAggregate> userRepository): base(unitOfWork)
@@ -74,6 +74,7 @@ namespace Prosolve.Services.Identification.Users
 
             // todo Нужен интерфейс IClock для работы с датами. Также нужна реализация для него.
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
+            // todo Тут мы должны только фиксировать необходимость отправки сообщения, а не делать саму отправку.
             await _integrateBus.PublishAsync(registrationEvent);
 
             return Result.Done();

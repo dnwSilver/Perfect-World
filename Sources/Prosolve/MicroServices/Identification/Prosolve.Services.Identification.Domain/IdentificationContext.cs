@@ -6,6 +6,7 @@ using Sharpdev.SDK.Domain;
 
 namespace Prosolve.Services.Identification
 {
+    // todo Где коменты еба?
     public class IdentificationContext: DbContext, IBoundedContext
     {
         public IdentificationContext(DbContextOptions<IdentificationContext> options)
@@ -15,9 +16,9 @@ namespace Prosolve.Services.Identification
         }
 
         public DbSet<UserDataModel>? Users { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // todo Как-то тут всё подозрительно работает, такое ощущение что оно НЕ РАБОТАЕТ
             builder.Entity<UserDataModel>().HasIndex(u => u.EmailAddress).IsUnique();
             builder.Entity<UserDataModel>().HasIndex(u => u.PhoneNumber).IsUnique();
         }

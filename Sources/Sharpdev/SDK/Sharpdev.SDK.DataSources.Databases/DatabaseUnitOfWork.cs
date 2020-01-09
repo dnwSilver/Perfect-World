@@ -10,7 +10,7 @@ namespace Sharpdev.SDK.DataSources.Databases
     /// <summary>
     ///     Механизм для работы с набором репозиториями.
     /// </summary>
-    public sealed class DatabaseUnitOfWork<TBoundedContext> : IUnitOfWork<TBoundedContext>
+    public sealed class DatabaseUnitOfWork<TBoundedContext> : IUnitOfWork
         where TBoundedContext : DbContext, IBoundedContext
     {
         /// <summary>
@@ -22,7 +22,7 @@ namespace Sharpdev.SDK.DataSources.Databases
 
         public DatabaseUnitOfWork(TBoundedContext boundedContext)
         {
-            BoundedContext = boundedContext;
+            _boundedContext = boundedContext;
             _transaction = boundedContext.Database.BeginTransaction();
         }
 
@@ -41,7 +41,7 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <summary>
         ///     Контекст источника данных.
         /// </summary>
-        public TBoundedContext BoundedContext { get; }
+        private readonly TBoundedContext _boundedContext;
 
         /// <summary>
         ///     Сохранение всех объектов в источник данных.
@@ -50,6 +50,7 @@ namespace Sharpdev.SDK.DataSources.Databases
         {
             _transaction.Commit();
 
+            _boundedContext.Database.CommitTransaction();
             // if (result == 0)
             //     return Result.Fail("Не удалось сохранить данные в источнике данных.");
 

@@ -15,7 +15,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
     /// <summary>
     ///     Сервис по управлению процессами <see cref="IProcessAggregate" /> протекающими в системе.
     /// </summary>
-    internal class ProcessService : ServiceBase<WatcherContext>
+    internal class ProcessService : ServiceBase
     {
         /// <summary>
         ///     Шина для обмена сообщениями.
@@ -33,7 +33,7 @@ namespace Prosolve.Services.Watcher.Domain.Processes
         /// <param name="unitOfWork">Механизм для работы с репозиториями.</param>
         /// <param name="integrateBus">Шина для обмена сообщениями.</param>
         /// <param name="processRepository">Репозиторий для работы с <see cref="IProcessAggregate" />.</param>
-        public ProcessService(IUnitOfWork<WatcherContext> unitOfWork,
+        public ProcessService(IUnitOfWork unitOfWork,
                               IIntegrateBus integrateBus,
                               IRepository<IProcessAggregate> processRepository):base(unitOfWork)
         {
