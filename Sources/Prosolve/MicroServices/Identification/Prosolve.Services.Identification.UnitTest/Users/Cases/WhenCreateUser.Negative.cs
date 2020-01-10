@@ -67,7 +67,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateAsync(newUserBuilder);
 
             // Assert:
             function.Should()
@@ -92,7 +92,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateAsync(newUserBuilder);
 
             // Assert:
             function.Should()
@@ -117,7 +117,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateAsync(newUserBuilder);
 
             // Assert:
             function.Should()
@@ -139,7 +139,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
                                         .PorFavor();
 
             // Arrange:
-            Func<Task> function = async () => await userService.CreateUserAsync(newUserBuilder);
+            Func<Task> function = async () => await userService.CreateAsync(newUserBuilder);
 
             // Assert:
             function.Should()

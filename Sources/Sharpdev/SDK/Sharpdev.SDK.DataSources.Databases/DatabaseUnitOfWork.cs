@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -22,19 +25,20 @@ namespace Sharpdev.SDK.DataSources.Databases
         public DatabaseUnitOfWork(TBoundedContext boundedContext)
         {
             _boundedContext = boundedContext;
-            _transaction = boundedContext.Database.BeginTransaction();
+            _transaction = _boundedContext.Database.BeginTransaction();
         }
 
         /// <summary>
         ///     Выполняет определенные пользователем задачи, связанные с освобождением, освобождением
         ///     или сбросом неуправляемых ресурсов.
         /// </summary>
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
             if (!_isCommitted)
-                Rollback();
+                await RollbackAsync();
 
             _transaction.Dispose();
+            _boundedContext.Dispose();
         }
 
         /// <summary>
@@ -45,25 +49,25 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <summary>
         ///     Сохранение всех объектов в источник данных.
         /// </summary>
-        public void Commit()
+        public async Task CommitAsync()
         {
-            _transaction.Commit();
-
-            _boundedContext.Database.CommitTransaction();
-            // if (result == 0)
-            //     return Result.Fail("Не удалось сохранить данные в источнике данных.");
-
-            _isCommitted = true;
+            try
+            {
+                await _boundedContext.SaveChangesAsync();
+                _isCommitted = true;
+            }
+            catch (Exception exception)
+            {
+                throw new DataSourceInnerException("Вот так беда. Ничего не получилось.", exception);
+            }
         }
 
         /// <summary>
         ///     Откат данных до первоначального состояния.
         /// </summary>
-        public void Rollback()
+        public async Task RollbackAsync()
         {
-            _transaction.Rollback();
-
-            //todo Обязательно должны быть добавлены логи.
+            await _transaction.RollbackAsync();
         }
     }
 }

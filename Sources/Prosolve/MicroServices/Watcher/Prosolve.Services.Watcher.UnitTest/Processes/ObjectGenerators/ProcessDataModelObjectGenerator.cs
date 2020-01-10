@@ -18,10 +18,12 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.ObjectGenerators
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected override ProcessDataModel AllocateStub(int stubNumber)
         {
-            var processDataModel = new ProcessDataModel();
-            processDataModel.PublicId = Guid.NewGuid();
-            processDataModel.Name = $"Процесс №{stubNumber}.";
-            processDataModel.TypeName = $"Тип №{stubNumber}.";
+            var processDataModel = new ProcessDataModel
+            {
+                PublicId = Guid.NewGuid(),
+                Name = $"Процесс №{stubNumber}.",
+                TypeName = $"Тип №{stubNumber}."
+            };
 
             return processDataModel;
         }

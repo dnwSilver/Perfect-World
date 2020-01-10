@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+
+using Prosolve.Services.Identification.Users.Specifications;
 
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
@@ -7,15 +8,23 @@ using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Identification.Users.Factories
 {
+    /// <summary>
+    ///     Фабрика для объекта <see cref="IUserAggregate" />.
+    /// </summary>
     internal sealed class UserFactory : EntityFactoryBase<IUserAggregate>
     {
         /// <summary>
         ///     Фиксация набора спецификаций.
         /// </summary>
-        /// <param name="processEntity">Сущность к которой будут применяться спецификации.</param>
-        protected override void SetSpecifications(IUserAggregate processEntity)
+        /// <param name="userEntity">Сущность к которой будут применяться спецификации.</param>
+        protected override void SetSpecifications(IUserAggregate userEntity)
         {
-            var specifications = new Collection<ISpecification<IUserAggregate>>();
+            var specifications = new ISpecification<IUserAggregate>[]
+            {
+                new UserNameLengthSpecification(),
+                new UserPublicIdSpecification(userEntity.Id.Public)
+            };
+
             Specifications = specifications;
         }
 
@@ -32,4 +41,6 @@ namespace Prosolve.Services.Identification.Users.Factories
             throw new Exception();
         }
     }
+
+
 }

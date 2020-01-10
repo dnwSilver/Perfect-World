@@ -22,9 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Processes\ProcessResources.resx">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </EmbeddedResource>
+      <Folder Include="Processes" />
     </ItemGroup>
 
 </Project>

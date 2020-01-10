@@ -10,13 +10,13 @@ namespace Sharpdev.SDK.Domain.Factories
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, который будем собирать.</typeparam>
     public abstract class EntityFactoryBase<TEntity> : IEntityFactory<TEntity>
-        where TEntity : class, IEntity<TEntity>
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Набор проверок для создания и восстановления объекта.
         /// </summary>
         protected IEnumerable<ISpecification<TEntity>> Specifications { private get; set; } =
-            new List<ISpecification<TEntity>>();
+            new ISpecification<TEntity>[]{};
 
         /// <summary>
         ///     Создание нового объекта.

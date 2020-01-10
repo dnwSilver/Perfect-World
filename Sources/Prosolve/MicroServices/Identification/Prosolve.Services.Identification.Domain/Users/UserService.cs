@@ -56,7 +56,7 @@ namespace Prosolve.Services.Identification.Users
         /// </summary>
         /// <param name="userBuilder"> Список новых пользователей. </param>
         /// <returns> Информация по процессу создания пользователей. </returns>
-        public async Task CreateUserAsync(IUserBuilder userBuilder)
+        public async Task CreateAsync(IUserBuilder userBuilder)
         {
             var user = _userFactory.Create(userBuilder);
 
@@ -65,7 +65,7 @@ namespace Prosolve.Services.Identification.Users
             user.Apply(domainEvent);
             await _userRepository.CreateAsync(user.Yield());
 
-            UnitOfWork.Commit();
+            await UnitOfWork.CommitAsync();
 
             // todo Нужен интерфейс IClock для работы с датами. Также нужна реализация для него.
             var registrationEvent = new ToSendMailIntegrationEvent(Guid.NewGuid(), DateTime.UtcNow);
@@ -80,13 +80,7 @@ namespace Prosolve.Services.Identification.Users
         /// <returns> Список найденных процессов. </returns>
         public async Task<IEnumerable<IUserAggregate>> FindAsync(ISpecification<IUserAggregate> processSpecification)
         {
-            var foundProcess = await _userRepository.ReadAsync(processSpecification);
-
-            //var domainEvent = new UserFindDomainEvent(Guid.NewGuid(), DateTime.UtcNow);
-
-            // await this._integrateBus.PublishAsync(domainEvent);
-
-            return foundProcess;
+            return await _userRepository.ReadAsync(processSpecification);
         }
     }
 }

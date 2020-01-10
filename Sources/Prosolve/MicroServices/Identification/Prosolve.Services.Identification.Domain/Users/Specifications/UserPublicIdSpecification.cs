@@ -3,19 +3,19 @@ using System.Linq.Expressions;
 
 using Sharpdev.SDK.Domain.Specifications;
 
-namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
+namespace Prosolve.Services.Identification.Users.Specifications
 {
     /// <summary>
     ///     Спецификация на соответствие идентификатору процесса.
     /// </summary>
-    public class ProcessPublicIdSpecification : SpecificationBase<IProcessAggregate>
+    internal sealed class UserPublicIdSpecification: SpecificationBase<IUserAggregate>
     {
         /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
         /// <param name="publicIdentifier">Публичный идентификатор.</param>
-        public ProcessPublicIdSpecification(Guid publicIdentifier)
-            : base(Criteria(publicIdentifier), FailureMessage(publicIdentifier))
+        public UserPublicIdSpecification(Guid publicIdentifier)
+                : base(Criteria(publicIdentifier), FailureMessage(publicIdentifier))
         {
         }
 
@@ -23,18 +23,12 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
         ///     Сообщение в случае не соответствия спецификации.
         /// </summary>
         private static string FailureMessage(Guid publicIdentifier)
-        {
-            return string.Format(ProcessResources.IdSpecification,
-                                 nameof(IProcessAggregate),
-                                 publicIdentifier);
-        }
+            => string.Format(UserResources.UserPublicIdSpecificationMessage, nameof(IUserAggregate), publicIdentifier);
 
         /// <summary>
         ///     Проверка соответствия идентификатору.
         /// </summary>
-        private static Expression<Func<IProcessAggregate, bool>> Criteria(Guid publicIdentifier)
-        {
-            return x => x.Id.Public == publicIdentifier;
-        }
+        private static Expression<Func<IUserAggregate, bool>> Criteria(Guid publicIdentifier)
+            => x => x.Id.Public == publicIdentifier;
     }
 }

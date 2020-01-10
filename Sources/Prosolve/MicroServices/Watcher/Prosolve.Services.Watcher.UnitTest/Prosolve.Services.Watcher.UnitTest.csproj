@@ -29,4 +29,8 @@
       <ProjectReference Include="..\Prosolve.Services.Watcher.Domain\Prosolve.Services.Watcher.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Processes\Cases" />
+    </ItemGroup>
+
 </Project>

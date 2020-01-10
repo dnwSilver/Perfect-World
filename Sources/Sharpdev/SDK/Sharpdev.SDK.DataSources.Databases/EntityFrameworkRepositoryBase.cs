@@ -105,17 +105,6 @@ namespace Sharpdev.SDK.DataSources.Databases
             await DbSetEntity()
                    .AddRangeAsync(userDataModels);
 
-            try
-            {
-                //todo Получается что у меня фиксацией изменений управляет репозиторий, это совсем не правильно.
-                await BoundedContext.SaveChangesAsync();
-            }
-            catch (Exception exception)
-            {
-                // todo Обязательно сюда добавить лог и Debug.Assert
-                // Debugger.Break();
-                throw new DataSourceInnerException("Вот так беда. Ничего не получилось.", exception);
-            }
         }
 
         /// <summary>
