@@ -68,16 +68,15 @@ namespace Sharpdev.SDK.DataSources.Databases
         /// <returns> Набор бизнес объектов. </returns>
         public async Task<IEnumerable<TEntity>> ReadAsync(ISpecification<TEntity> specification)
         {
-            var expression = EntityMapper.Map<Expression<Func<TDataModel, bool>>>(specification.Criteria);
-
+            var specificationCriteria = EntityMapper.Map<Expression<Func<TDataModel, bool>>>(specification.Criteria);
             var dataModels = await DbSetEntity()
-                                  .Where(expression)
-                                  .ToListAsync();
+                                  .Where(specificationCriteria)
+                                  .ToArrayAsync();
 
             if (!dataModels.Any())
                 return Enumerable.Empty<TEntity>();
 
-            var builders = EntityMapper.Map<IEnumerable<TDataModel>, IEnumerable<TEntityBuilder>>(dataModels);
+            var builders = EntityMapper.Map<TDataModel[], TEntityBuilder[]>(dataModels);
 
             return  from builder in builders
                     let factory = EntityFactory
