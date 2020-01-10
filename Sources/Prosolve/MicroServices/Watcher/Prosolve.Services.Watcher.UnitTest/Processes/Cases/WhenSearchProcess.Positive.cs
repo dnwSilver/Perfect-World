@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using FluentAssertions;
 
@@ -42,18 +43,17 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.Cases
         }
 
         [Test]
-        public void WhenFindProcess_ByPublicId_CountShouldBeOne()
+        public async Task WhenFindProcess_ByPublicId_CountShouldBeOne()
         {
             // Act:
             var processService = AllocateProcessService(out var processDataModels);
-            var specification =
-                new ProcessPublicIdSpecification(processDataModels.First().PublicId);
+            var specification = new ProcessPublicIdSpecification(processDataModels.First().PublicId);
 
             // Arrange:
-            var result = processService.Find(specification);
+            var result = await processService.Find(specification);
 
             // Assert:
-            result.Result.Should().HaveCount(1);
+            result.Should().HaveCount(1);
         }
 
         [Test]

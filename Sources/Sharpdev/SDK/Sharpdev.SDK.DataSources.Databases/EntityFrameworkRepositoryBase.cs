@@ -9,7 +9,6 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 using Sharpdev.SDK.Domain;
-using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Factories;
 using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Infrastructure.Repositories;
@@ -23,7 +22,7 @@ namespace Sharpdev.SDK.DataSources.Databases
     /// <typeparam name="TDataModel"> Модель данных в источнике данных. </typeparam>
     /// <typeparam name="TEntityBuilder"> Строитель для объекта. </typeparam>
     public abstract class EntityFrameworkRepositoryBase<TEntity, TDataModel, TEntityBuilder>: IRepository<TEntity>
-            where TEntity: IEntity<TEntity>, IAggregate<TEntity>
+            where TEntity: IAggregate<TEntity>
             where TEntityBuilder: IEntityBuilder<TEntity>
             where TDataModel: class
     {
@@ -78,18 +77,13 @@ namespace Sharpdev.SDK.DataSources.Databases
             if (!dataModels.Any())
                 return Enumerable.Empty<TEntity>();
 
-            var builders = EntityMapper.Map<IList<TDataModel>, IList<TEntityBuilder>>(dataModels);
+            var builders = EntityMapper.Map<IEnumerable<TDataModel>, IEnumerable<TEntityBuilder>>(dataModels);
 
-            var entities = new List<TEntity>();
-
-            entities.AddRange(
-                    from builder in builders
+            return  from builder in builders
                     let factory = EntityFactory
                     select factory.Recovery(builder)
                     into entity
-                    select entity);
-
-            return entities;
+                    select entity;
         }
 
         public Task UpdateAsync(IEnumerable<TEntity> objectsToUpdate)

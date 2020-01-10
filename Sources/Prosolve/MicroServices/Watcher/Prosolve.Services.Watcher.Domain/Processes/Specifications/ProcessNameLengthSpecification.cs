@@ -25,14 +25,14 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Specifications
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
         public ProcessNameLengthSpecification()
-            : base(Criteria, FailureMessage)
+            : base(Criteria(), FailureMessage)
         {
         }
 
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private new static Expression<Func<IProcessAggregate, bool>> Criteria => x =>
+        private new static Expression<Func<IProcessAggregate, bool>> Criteria() => x =>
             x.Name.Length <= MaxLength;
     }
 }

@@ -21,6 +21,7 @@ namespace Prosolve.Services.Watcher.Domain.UnitTest.Processes.ObjectGenerators
             var processDataModel = new ProcessDataModel();
             processDataModel.PublicId = Guid.NewGuid();
             processDataModel.Name = $"Процесс №{stubNumber}.";
+            processDataModel.TypeName = $"Тип №{stubNumber}.";
 
             return processDataModel;
         }

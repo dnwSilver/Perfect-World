@@ -10,11 +10,11 @@ namespace Prosolve.Services.Watcher.Domain.Processes.Factories
         /// <summary>
         ///     Наименование процесса.
         /// </summary>
-        string Name { get; }
+        string Name { get; set; }
 
         /// <summary>
         ///     Тип процесса.
         /// </summary>
-        string TypeName { get; }
+        string TypeName { get; set; }
     }
 }

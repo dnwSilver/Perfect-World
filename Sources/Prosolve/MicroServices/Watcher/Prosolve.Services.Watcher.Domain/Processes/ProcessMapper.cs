@@ -24,12 +24,15 @@ namespace Prosolve.Services.Watcher.Domain.Processes
                    .ForMember(d => d.PrivateId, o => o.MapFrom(s => s.Id.Private))
                    .ForMember(d => d.PublicId, p => p.MapFrom(s => s.Id.Public))
                    .ForMember(d => d.TypeName, o => o.MapFrom(s => s.TypeName))
+                   .ForMember(d => d.Name, o => o.MapFrom(s => s.Name))
                    .ForMember(d => d.Version, o => o.MapFrom(s => s.CurrentVersion))
                    .ReverseMap()
                    .ForAllOtherMembers(x => x.Ignore());
 
             CreateMap<ProcessDataModel, IProcessBuilder>()
                    .ForMember(d => d.Identifier, o => o.MapFrom(s => Identifier(s.PrivateId, s.PublicId)))
+                   .ForMember(d => d.Version, o => o.MapFrom(s => s.Version))
+                   .ForMember(d => d.Name, o => o.MapFrom(s => s.Name))
                    .ForMember(d => d.TypeName, o => o.MapFrom(s => s.TypeName))
                    .ReverseMap()
                    .ForAllOtherMembers(x => x.Ignore());
