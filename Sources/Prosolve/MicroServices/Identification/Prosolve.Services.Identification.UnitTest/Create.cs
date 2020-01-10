@@ -1,9 +1,14 @@
 ﻿using Prosolve.Services.Identification.Users;
+using Prosolve.Services.Identification.Users.Factories;
 using Prosolve.Services.Identity.UnitTest.Users.Mocks;
 using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 
 using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
+using Sharpdev.SDK.Testing.Mocks;
+using Sharpdev.SDK.Types.FullNames;
+using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identity.UnitTest
 {
@@ -34,14 +39,12 @@ namespace Prosolve.Services.Identity.UnitTest
         ///     Создание модели для пользователя.
         /// </summary>
         /// <returns>Готовый для тестов пользователь.</returns>
-        internal static UserDataModelObjectGenerator UserDataModel =>
-            new UserDataModelObjectGenerator();
+        internal static UserDataModelObjectGenerator UserDataModel => new UserDataModelObjectGenerator();
 
         /// <summary>
         ///     Создание контекста для сервиса идентификации.
         /// </summary>
-        internal static VirtualIdentificationContextMock IdentificationContext =>
-            new VirtualIdentificationContextMock();
+        internal static VirtualIdentificationContextMock IdentificationContext => new VirtualIdentificationContextMock();
 
         /// <summary>
         ///     Создание эмуляции интеграционной шины.
@@ -51,28 +54,31 @@ namespace Prosolve.Services.Identity.UnitTest
         /// <summary>
         ///     Создание электронного адреса.
         /// </summary>
-        /// <param name="emailAddress">Адрес электронной почты.</param>
         /// <returns>Готовый для тестов адрес электронной почты.</returns>
-        internal static EmailAddressGenerator EmailAddress(string emailAddress) =>
-            new EmailAddressGenerator(emailAddress);
+        internal static EmailAddressGenerator EmailAddress => new EmailAddressGenerator();
 
         /// <summary>
         ///     Создание строителя для <see cref="IUserAggregate" />.
         /// </summary>
-        internal static UserBuilderGenerator UserBuilder => new UserBuilderGenerator();
+        internal static ITestObjectGenerator<IUserBuilder> UserBuilder => new UserBuilderStubGenerator();
 
         /// <summary>
         ///     Создание идентификатора <see cref="IIdentifier{TOwner}" />.
         /// </summary>
         /// <typeparam name="TEntity"> Доменная сущность. </typeparam>
-        /// <returns>Уникальный идентификатор.</returns>
-        internal static IdentifierGenerator<TEntity> Identifier<TEntity>()
-            where TEntity : class, IEntity<TEntity> => new IdentifierGenerator<TEntity>();
+        /// <returns>Генератор уникальных идентификаторов.</returns>
+        internal static ITestObjectGenerator<IIdentifier<TEntity>> Identifier<TEntity>() where TEntity: IEntity<TEntity>
+            => new IdentifierMockGenerator<TEntity>();
 
         /// <summary>
-        /// 
+        ///     Создание номеров телефонов <see cref="PhoneNumber"/>.
         /// </summary>
-        /// <returns></returns>
-        internal static PhoneNumberGenerator PhoneNumber => new PhoneNumberGenerator();
+        /// <returns>Генератор телефонных номеров.</returns>
+        internal static ITestObjectGenerator<IConfirmed<PhoneNumber>> PhoneNumber => new PhoneNumberGenerator();
+
+        /// <summary>
+        ///
+        /// </summary>
+        public static ITestObjectGenerator<FullName> FullName => new FullNameMockGenerator();
     }
 }

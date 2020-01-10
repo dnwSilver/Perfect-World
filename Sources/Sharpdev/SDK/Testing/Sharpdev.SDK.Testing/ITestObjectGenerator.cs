@@ -17,19 +17,19 @@ namespace Sharpdev.SDK.Testing
         ///      Построение набора объектов типа <see cref="TBuildingObjectType" />.
         /// </summary>
         /// <returns>Набор экземпляров объекта типа <see cref="TBuildingObjectType" />.</returns>
-        IEnumerable<TBuildingObjectType> Please();
+        IEnumerable<TBuildingObjectType> Please { get; }
 
         /// <summary>
         ///     Построение объекта типа <see cref="TBuildingObjectType" />.
         /// </summary>
         /// <returns>Экземпляр объекта типа <see cref="TBuildingObjectType" />.</returns>
-        TBuildingObjectType PorFavor();
+        TBuildingObjectType PorFavor { get; }
         
         /// <summary>
-        /// Количество заглушек для генерации.
+        /// Количество объектов для генерации.
         /// </summary>
         /// <param name="countGeneratedObjects">Количество создаваемых объектов.</param>
-        /// <returns>Строитель для заглушек.</returns>
+        /// <returns>Генератор объектов.</returns>
         ITestObjectGenerator<TBuildingObjectType> CountOf(int countGeneratedObjects);
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Sharpdev.SDK.Testing
 {
@@ -6,37 +8,49 @@ namespace Sharpdev.SDK.Testing
     ///     Базовый класс для подготовки объектов.
     /// </summary>
     /// <typeparam name="TBuildingObjectType">Подменяемый объект.</typeparam>
-    public abstract class TestObjectGeneratorBase<TBuildingObjectType> : ITestObjectGenerator<TBuildingObjectType>
-        where TBuildingObjectType : class
+    public abstract class TestObjectGeneratorBase<TBuildingObjectType>: ITestObjectGenerator<TBuildingObjectType>
     {
         /// <summary>
-        ///     Заглушка для идентификатора.
+        ///     Набор созданных объектов.
         /// </summary>
-        private readonly IList<TBuildingObjectType> _stubObjects = new List<TBuildingObjectType>();
+        private readonly IList<TBuildingObjectType> _objectsForTest = new List<TBuildingObjectType>();
 
         /// <summary>
         ///     Количество созданных заглушек.
         /// </summary>
-        private int _createStubCount;
+        private int _createObjectsCount;
+
+        /// <summary>
+        ///     Создание объекта.
+        /// </summary>
+        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <returns>Созданный объект, размещённый в куче.</returns>
+        protected abstract TBuildingObjectType AllocateStub(int stubNumber);
 
         /// <summary>
         ///     Построение заглушки <see cref="TBuildingObjectType" />.
         /// </summary>
         /// <returns>Экземпляр заглушки объекта <see cref="TBuildingObjectType" />.</returns>
-        public IEnumerable<TBuildingObjectType> Please()
+        public IEnumerable<TBuildingObjectType> Please
         {
-            return _stubObjects;
+            get
+            {
+                if (!_objectsForTest.Any())
+                    throw new Exception("Нечего генерировать.");
+
+                var generatedObjects = _objectsForTest.ToArray();
+                _objectsForTest.Clear();
+                return generatedObjects;
+
+            }
         }
 
         /// <summary>
         ///     Построение объекта типа <see cref="TBuildingObjectType" />.
         /// </summary>
         /// <returns>Экземпляр объекта типа <see cref="TBuildingObjectType" />.</returns>
-        public TBuildingObjectType PorFavor()
-        {
-            return AllocateStub(default);
-        }
-        
+        public TBuildingObjectType PorFavor => AllocateStub(default);
+
         /// <summary>
         ///     Количество заглушек для генерации.
         /// </summary>
@@ -45,18 +59,11 @@ namespace Sharpdev.SDK.Testing
         {
             for(var iteration = 1; iteration <= countStubObjects; iteration++)
             {
-                _createStubCount++;
-                _stubObjects.Add(AllocateStub(_createStubCount));
+                _createObjectsCount++;
+                _objectsForTest.Add(AllocateStub(_createObjectsCount));
             }
 
             return this;
         }
-
-        /// <summary>
-        ///     Создание объекта.
-        /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
-        /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected abstract TBuildingObjectType AllocateStub(int stubNumber);
     }
 }

@@ -4,20 +4,19 @@ using Moq;
 
 using Sharpdev.SDK.Domain.Entities;
 
-namespace Sharpdev.SDK.Testing
+namespace Sharpdev.SDK.Testing.Mocks
 {
     /// <summary>
     ///     Генератор для идентификатора <see cref="IIdentifier{TOwner}" />.
     /// </summary>
     /// <typeparam name="TEntity">Тип объекта, для которого предназначен идентификатор.</typeparam>
-    public class IdentifierGenerator<TEntity> : TestObjectGeneratorBase<IIdentifier<TEntity>>
-        where TEntity : class, IEntity<TEntity>
+    public class IdentifierMockGenerator<TEntity> : TestObjectGeneratorBase<IIdentifier<TEntity>>
+        where TEntity : IEntity<TEntity>
     {
         /// <summary>
         ///     Заглушка для идентификатора.
         /// </summary>
-        private readonly Mock<IIdentifier<TEntity>> _identifierMock =
-            new Mock<IIdentifier<TEntity>>();
+        private readonly Mock<IIdentifier<TEntity>> _identifierMock = new Mock<IIdentifier<TEntity>>();
 
         /// <summary>
         ///     Создание объекта.
@@ -34,7 +33,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="privateIdentifier">Значение приватного идентификатора.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IdentifierGenerator<TEntity> PrivateId(int privateIdentifier)
+        public IdentifierMockGenerator<TEntity> PrivateId(int privateIdentifier)
         {
             _identifierMock.Setup(x => x.Private).Returns(privateIdentifier);
 
@@ -46,7 +45,7 @@ namespace Sharpdev.SDK.Testing
         /// </summary>
         /// <param name="publicIdentifier">Значение публичного идентификатора.</param>
         /// <returns>Строитель для заглушки объекта <see cref="IIdentifier{TEntity}" />.</returns>
-        public IdentifierGenerator<TEntity> PublicId(Guid publicIdentifier)
+        public IdentifierMockGenerator<TEntity> PublicId(Guid publicIdentifier)
         {
             _identifierMock.Setup(x => x.Public).Returns(publicIdentifier);
 

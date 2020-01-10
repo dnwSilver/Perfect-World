@@ -3,7 +3,7 @@
     /// <summary>
     ///     Фамилия имя и отчество человека.
     /// </summary>
-    public struct FullName
+    public class FullName
     {
         /// <summary>
         ///     Фамилия.
@@ -33,9 +33,9 @@
         /// <param name="patronymic"> Отчество. </param>
         public FullName(string surname, string firstName, string patronymic)
         {
-            Surname = surname.Trim();
-            FirstName = firstName.Trim();
-            Patronymic = patronymic.Trim();
+            Surname = surname;
+            FirstName = firstName;
+            Patronymic = patronymic;
         }
 
         /// <summary>
@@ -57,20 +57,14 @@
         /// </returns>
         public override bool Equals(object? obj)
         {
-            switch(obj)
+            return obj switch
             {
-                case null:
-
-                    return Surname is null && FirstName is null && Patronymic is null;
-                case FullName fullName:
-
-                    return Surname.Equals(fullName.Surname) &&
-                           FirstName.Equals(fullName.FirstName) &&
-                           Patronymic.Equals(fullName.Patronymic);
-                default:
-
-                    return false;
-            }
+                null => (Surname is null && FirstName is null && Patronymic is null),
+                FullName fullName => Surname.Equals(fullName.Surname)
+                                  && FirstName.Equals(fullName.FirstName)
+                                  && Patronymic.Equals(fullName.Patronymic),
+                _ => false
+            };
         }
 
         /// <summary>

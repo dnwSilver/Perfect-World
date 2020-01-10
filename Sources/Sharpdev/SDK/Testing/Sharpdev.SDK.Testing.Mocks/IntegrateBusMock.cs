@@ -5,7 +5,7 @@ using Microsoft.VisualBasic;
 
 using Sharpdev.SDK.Infrastructure.Integrations;
 
-namespace Sharpdev.SDK.Testing
+namespace Sharpdev.SDK.Testing.Mocks
 {
     /// <summary>
     ///     Виртуальная шина для тестов.
