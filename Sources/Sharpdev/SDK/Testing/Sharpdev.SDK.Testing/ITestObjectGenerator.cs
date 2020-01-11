@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sharpdev.SDK.Testing
 {
@@ -32,4 +33,15 @@ namespace Sharpdev.SDK.Testing
         /// <returns>Генератор объектов.</returns>
         ITestObjectGenerator<TBuildingObjectType> CountOf(int countGeneratedObjects);
     }
+
+    public static class UpdateObjectExtension
+    {
+        public static TObject With<TObject>(this TObject @object, Action<TObject> action)
+        {
+            action.Invoke(@object);
+
+            return @object;
+        }
+    }
+
 }

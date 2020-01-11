@@ -27,6 +27,6 @@ namespace Prosolve.Services.Identification.Users.Factories
         ///     Установка фамилии имени и отчества пользователя.
         /// </summary>
         /// <returns>Фамилия имя и отчество пользователя.</returns>
-        FullName FullName { get; }
+        IFullName FullName { get; }
     }
 }

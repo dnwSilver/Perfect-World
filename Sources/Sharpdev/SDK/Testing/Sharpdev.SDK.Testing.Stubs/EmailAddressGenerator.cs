@@ -18,11 +18,11 @@ namespace Sharpdev.SDK.Testing
         /// <summary>
         ///     Создание объекта.
         /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <param name="testObjectNumber">Порядковый номер создаваемого объекта.</param>
         /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected override IConfirmed<EmailAddress> AllocateStub(int stubNumber)
+        protected override IConfirmed<EmailAddress> Allocate(int testObjectNumber)
         {
-            _emailAddressMock.Setup(x => x.Value).Returns($"user{stubNumber}@email.com");
+            _emailAddressMock.Setup(x => x.Value).Returns($"user{testObjectNumber}@email.com");
             _emailAddressMock.Setup(x => x.IsConfirmed).Returns(false);
 
             return _emailAddressMock.Object;

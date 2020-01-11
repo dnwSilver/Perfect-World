@@ -6,25 +6,25 @@ using Sharpdev.SDK.Testing;
 namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
 {
     /// <summary>
-    ///     Заглушка для процесса <see cref="IUserBuilder" />.
+    ///     Заглушка для процесса <see cref="IUserBuilder"/>.
     /// </summary>
-    internal class UserBuilderStubGenerator : TestObjectGeneratorBase<IUserBuilder>
+    internal class UserBuilderStubGenerator: TestObjectGeneratorBase<IUserBuilder>
     {
         /// <summary>
         ///     Создание объекта.
         /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
-        /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected override IUserBuilder AllocateStub(int stubNumber)
+        /// <param name="testObjectNumber"> Порядковый номер создаваемого объекта. </param>
+        /// <returns> Созданный объект, размещённый в куче. </returns>
+        protected override IUserBuilder Allocate(int testObjectNumber)
         {
-            var userBuilder = new UserBuilder()
-                             .SetFullName(Create.FullName.PorFavor)
-                             .SetContactEmailAddress(Create.EmailAddress.PorFavor)
-                             .SetContactPhoneNumber(Create.PhoneNumber.PorFavor)
-                             .SetIdentifier(Create.Identifier<IUserAggregate>().PorFavor)
-                             .SetVersion(1) as IUserBuilder;
-
-            return userBuilder;
+            return new UserBuilder
+            {
+                Identifier = Prepare.Identifier<IUserAggregate>().PorFavor,
+                FullName = Prepare.FullName.PorFavor,
+                ContactEmailAddress = Prepare.EmailAddress.PorFavor,
+                ContactPhoneNumber = Prepare.PhoneNumber.PorFavor,
+                Version = 1
+            };
         }
     }
 }

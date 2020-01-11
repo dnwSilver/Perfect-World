@@ -1,9 +1,16 @@
 ﻿namespace Sharpdev.SDK.Types.FullNames
 {
+    public interface IFullName
+    {
+        string Surname { get; }
+        string FirstName { get; }
+        string Patronymic { get; }
+        int Length { get; }
+    }
     /// <summary>
     ///     Фамилия имя и отчество человека.
     /// </summary>
-    public class FullName
+    public class FullName : IFullName
     {
         /// <summary>
         ///     Фамилия.
@@ -19,11 +26,6 @@
         ///     Отчество.
         /// </summary>
         public string Patronymic { get; }
-
-        /// <summary>
-        ///     Полное фио.
-        /// </summary>
-        public string GetFullName => $"{Surname} {FirstName} {Patronymic}";
 
         /// <summary>
         ///     Конструктор для ФИО.
@@ -43,9 +45,12 @@
         /// </summary>
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public override string ToString()
-        {
-            return GetFullName;
-        }
+            => $"{Surname} {FirstName} {Patronymic}";
+
+        /// <summary>
+        /// Количество символов в ФИО.
+        /// </summary>
+        public int Length => ToString().Length;
 
         /// <summary>
         ///     Сравнение двух объектов по основным полям.

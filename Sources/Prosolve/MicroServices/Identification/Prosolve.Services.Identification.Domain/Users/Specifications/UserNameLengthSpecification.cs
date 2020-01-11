@@ -32,7 +32,6 @@ namespace Prosolve.Services.Identification.Users.Specifications
         /// <summary>
         ///     Проверка наименования на длину.
         /// </summary>
-        private new static Expression<Func<IUserAggregate, bool>> Criteria
-            => x => x.FullName.GetFullName.Length <= MaxLength;
+        private new static Expression<Func<IUserAggregate, bool>> Criteria => x => x.FullName.Length <= MaxLength;
     }
 }

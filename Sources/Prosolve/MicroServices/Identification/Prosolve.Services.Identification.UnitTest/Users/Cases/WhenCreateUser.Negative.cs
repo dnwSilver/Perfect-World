@@ -7,8 +7,10 @@ using FluentAssertions;
 using NUnit.Framework;
 
 using Prosolve.Services.Identification.Users;
+using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.DataSources.Databases;
+using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.FullNames;
 
@@ -24,14 +26,10 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithExistsEmailAddress_ResultShouldBeFailure()
         {
             // Act:
-            var emailAddress = UserDataModels.First().EmailAddress;
-
-            var fullName = new FullName("Петров", "Александр", "Андреевич");
-
-            var newUserBuilder = Create.UserBuilder
-                                        //.With(fullName)
-                                        //.With(emailAddress)
-                                        .PorFavor;
+            var newUserBuilder = Prepare.UserBuilder.PorFavor.With(_ => new UserBuilder
+            {
+                ContactEmailAddress = Prepare.EmailAddress.PorFavor
+            });
 
             // Arrange:
             Func<Task> function = async () => await UserService.CreateAsync(newUserBuilder);
@@ -49,7 +47,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var phoneNumber = UserDataModels.First().PhoneNumber;
             var fullName = new FullName("Петров", "Александр", "Андреевич");
 
-            var newUserBuilder = Create.UserBuilder
+            var newUserBuilder = Prepare.UserBuilder
                                         //.With(fullName)
                                         //.With(phoneNumber)
                                         .PorFavor;
@@ -69,9 +67,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             // Act:
             var emailAddress = UserDataModels.First().EmailAddress;
 
-            var fullName = Create.FullName.PorFavor;
+            var fullName = Prepare.FullName.PorFavor;
 
-            var newUserBuilder = Create.UserBuilder
+            var newUserBuilder = Prepare.UserBuilder
                                        // .With(fullName)
                                        // .With(emailAddress)
                                         .PorFavor;
@@ -91,7 +89,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             // Act:
             var emailAddress = UserDataModels.First().EmailAddress;
 
-            var newUserBuilder = Create.UserBuilder
+            var newUserBuilder = Prepare.UserBuilder
                                         //.With(emailAddress)
                                         .PorFavor;
 

@@ -27,7 +27,7 @@ namespace Prosolve.Services.Identity.UnitTest
     ///     - Каждый тест работает со свежими данными.
     ///     - Тесты всегда очищаются после себя.
     /// </remarks>
-    internal static class Create
+    internal static class Prepare
     {
         /// <summary>
         ///     Создание пользователя.
@@ -79,6 +79,6 @@ namespace Prosolve.Services.Identity.UnitTest
         /// <summary>
         ///
         /// </summary>
-        public static ITestObjectGenerator<FullName> FullName => new FullNameMockGenerator();
+        public static ITestObjectGenerator<IFullName> FullName => new FullNameMockGenerator();
     }
 }

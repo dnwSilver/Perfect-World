@@ -1,5 +1,3 @@
-using Moq;
-
 using Sharpdev.SDK.Types.FullNames;
 
 namespace Sharpdev.SDK.Testing.Mocks
@@ -7,28 +5,18 @@ namespace Sharpdev.SDK.Testing.Mocks
     /// <summary>
     /// Генератор имён.
     /// </summary>
-    public class FullNameMockGenerator: TestObjectGeneratorBase<FullName>
+    public sealed class FullNameMockGenerator: MockGeneratorBase<IFullName>
     {
-        /// <summary>
-        ///     Имитация номера телефона.
-        /// </summary>
-        private readonly Mock<FullName> _fullName = new Mock<FullName>();
-
         /// <summary>
         /// Генерация имени.
         /// </summary>
-        /// <param name="stubNumber">Номер генерируемого имени.</param>
+        /// <param name="mockNumber">Номер генерируемого имени.</param>
         /// <returns>Новое имя.</returns>
-        protected override FullName AllocateStub(int stubNumber)
+        protected override void SetupBehavior(int mockNumber)
         {
-            var firstName = $"Имя{stubNumber}";
-            var surname = $"Фамилия{stubNumber}";
-            var patronymic = $"Отчество{stubNumber}";
-            _fullName.Setup(x => x.FirstName).Returns(firstName);
-            _fullName.Setup(x => x.Surname).Returns(surname);
-            _fullName.Setup(x => x.Patronymic).Returns(patronymic);
-            _fullName.Setup(x => x.GetFullName).Returns($"{surname}{firstName}{patronymic}");
-            return _fullName.Object;
+            _mockObject.Setup(x => x.FirstName).Returns($"Имя{mockNumber}");
+            _mockObject.Setup(x => x.Surname).Returns($"Фамилия{mockNumber}");
+            _mockObject.Setup(x => x.Patronymic).Returns($"Отчество{mockNumber}");
         }
     }
 }

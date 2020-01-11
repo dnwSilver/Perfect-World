@@ -38,9 +38,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// <summary>
         ///     Создание объекта.
         /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <param name="testObjectNumber">Порядковый номер создаваемого объекта.</param>
         /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected override IdentificationContext AllocateStub(int stubNumber)
+        protected override IdentificationContext Allocate(int testObjectNumber)
         {
             return _identificationContext;
         }

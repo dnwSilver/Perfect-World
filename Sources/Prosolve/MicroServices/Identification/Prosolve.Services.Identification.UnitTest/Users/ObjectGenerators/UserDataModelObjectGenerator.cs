@@ -14,9 +14,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         /// <summary>
         ///     Создание объекта.
         /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <param name="testObjectNumber">Порядковый номер создаваемого объекта.</param>
         /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected override UserDataModel AllocateStub(int stubNumber)
+        protected override UserDataModel Allocate(int testObjectNumber)
         {
             //Нельзя задавать уникальные приватные идентификаторы, их выдаёт база данных.
             var userDataModel = new UserDataModel();
@@ -25,9 +25,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
             userDataModel.MiddleName = "Иванович";
             userDataModel.Surname = "Иванов";
             userDataModel.Version = 1;
-            userDataModel.EmailAddress = $"user{stubNumber}@mail.ru";
+            userDataModel.EmailAddress = $"user{testObjectNumber}@mail.ru";
             userDataModel.EmailAddressConfirmDate = DateTime.UtcNow;
-            userDataModel.PhoneNumber = $"+7{stubNumber:D10}";
+            userDataModel.PhoneNumber = $"+7{testObjectNumber:D10}";
             userDataModel.PhoneNumberConfirmDate = DateTime.UtcNow;
             
             return userDataModel;

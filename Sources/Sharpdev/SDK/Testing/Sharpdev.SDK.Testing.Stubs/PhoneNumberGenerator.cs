@@ -18,11 +18,11 @@ namespace Sharpdev.SDK.Testing
         /// <summary>
         ///     Создание объекта.
         /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <param name="testObjectNumber">Порядковый номер создаваемого объекта.</param>
         /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected override IConfirmed<PhoneNumber> AllocateStub(int stubNumber)
+        protected override IConfirmed<PhoneNumber> Allocate(int testObjectNumber)
         {
-            _phoneNumberMock.Setup(x => x.Value).Returns($"+7{stubNumber:D10}");
+            _phoneNumberMock.Setup(x => x.Value).Returns($"+7{testObjectNumber:D10}");
             _phoneNumberMock.Setup(x => x.IsConfirmed).Returns(false);
             
             return _phoneNumberMock.Object;

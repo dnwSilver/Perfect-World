@@ -15,9 +15,9 @@ namespace Sharpdev.SDK.Testing.Mocks
         /// <summary>
         ///     Создание объекта.
         /// </summary>
-        /// <param name="stubNumber">Порядковый номер создаваемого объекта.</param>
+        /// <param name="testObjectNumber">Порядковый номер создаваемого объекта.</param>
         /// <returns>Созданный объект, размещённый в куче.</returns>
-        protected override IIntegrateBus AllocateStub(int stubNumber)
+        protected override IIntegrateBus Allocate(int testObjectNumber)
         {
             return _integrateBus;
         }

@@ -31,15 +31,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         [SetUp]
         protected void SetUp()
         {
-            var userDataModels = Create.UserDataModel.CountOf(10).Please;
-            var identificationContext = Create.IdentificationContext.With(userDataModels).PorFavor;
-            var integrationBus = Create.IntegrationBus.PorFavor;
+            var integrationBus = Prepare.IntegrationBus.PorFavor;
+
+            UserDataModels = Prepare.UserDataModel.CountOf(10).Please;
+            var identificationContext = Prepare.IdentificationContext.With(UserDataModels).PorFavor;
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
             var userFactory = new UserFactory();
             var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper, identificationContext);
-            var userService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
-            UserService = userService;
-            UserDataModels = userDataModels;
+            UserService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
         }
     }
 }

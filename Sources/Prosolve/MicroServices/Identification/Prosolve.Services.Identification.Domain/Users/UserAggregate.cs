@@ -27,7 +27,7 @@ namespace Prosolve.Services.Identification.Users
         /// <summary>
         ///     Фио пользователя.
         /// </summary>
-        public FullName FullName { get; }
+        public IFullName FullName { get; }
 
         public CreateUserDomainEvent Process(CreateUserDomainCommand command)
         {
