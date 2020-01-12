@@ -8,31 +8,33 @@ using NUnit.Framework;
 
 using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.Factories;
+using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 
 using Sharpdev.SDK.DataSources.Databases;
+using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
-using Sharpdev.SDK.Types.FullNames;
+using Sharpdev.SDK.Types.EmailAddresses;
+using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
-    [TestFixture]
     [Category(nameof(IUserAggregate))]
     [Category(Constant.Negative)]
-    [Parallelizable(ParallelScope.All)]
     internal class WhenCreateUserNegative : UserServiceTestBase
     {
         [Test]
         public void WhenCreateUser_WithExistsEmailAddress_ResultShouldBeFailure()
         {
             // Act:
-            var newUserBuilder = Prepare.UserBuilder.PorFavor.With(_ => new UserBuilder
-            {
-                ContactEmailAddress = Prepare.EmailAddress.PorFavor
-            });
+            var emailAddressAlreadyInUse = IdentificationContext.Users.First().EmailAddress;
+
+            var newUserBuilder = Prepare.UserBuilder
+                                        .With(nameof(IUserBuilder.ContactEmailAddress), emailAddressAlreadyInUse)
+                                        .PorFavor;
 
             // Arrange:
             Func<Task> function = async () => await UserService.CreateAsync(newUserBuilder);
-
+            
             // Assert:
             function.Should()
                     .Throw<DataSourceInnerException>()
@@ -43,12 +45,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithExistsPhoneNumber_ResultShouldBeFailure()
         {
             // Act:
-            var phoneNumber = UserDataModels.First().PhoneNumber;
-            var fullName = new FullName("Петров", "Александр", "Андреевич");
-
+            var phoneNumberAlreadyInUse = UserDataModels.First().PhoneNumber;
             var newUserBuilder = Prepare.UserBuilder
-                                        //.With(fullName)
-                                        //.With(phoneNumber)
+                                        .With(nameof(IUserBuilder.ContactPhoneNumber), phoneNumberAlreadyInUse)
                                         .PorFavor;
 
             // Arrange:
@@ -64,13 +63,9 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithoutContactInformation_ResultShouldBeFailure()
         {
             // Act:
-            var emailAddress = UserDataModels.First().EmailAddress;
-
-            var fullName = Prepare.FullName.PorFavor;
-
             var newUserBuilder = Prepare.UserBuilder
-                                       // .With(fullName)
-                                       // .With(emailAddress)
+                                        .WithOut(nameof(IUserBuilder.ContactPhoneNumber))
+                                        .WithOut(nameof(IUserBuilder.ContactEmailAddress))
                                         .PorFavor;
 
             // Arrange:
@@ -86,10 +81,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithoutFullName_ResultShouldBeFailure()
         {
             // Act:
-            var emailAddress = UserDataModels.First().EmailAddress;
-
             var newUserBuilder = Prepare.UserBuilder
-                                        //.With(emailAddress)
+                                        .WithOut(nameof(IUserBuilder.FullName))
                                         .PorFavor;
 
             // Arrange:

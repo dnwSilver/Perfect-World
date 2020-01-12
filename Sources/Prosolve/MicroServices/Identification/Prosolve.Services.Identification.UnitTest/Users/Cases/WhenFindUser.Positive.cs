@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 
 using FluentAssertions;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using NUnit.Framework;
 
 using Prosolve.Services.Identification.Users.Specifications;
@@ -20,12 +18,11 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
     [Parallelizable(ParallelScope.All)]
     internal class WhenFindUserPositive: UserServiceTestBase
     {
-
         [Test]
         public async Task WhenFindUser_ByPublicId_CountShouldBeOne()
         {
             // Act:
-            var specification = new UserPublicIdSpecification(UserDataModels.First().PublicId);
+            var specification = new UserPublicIdSpecification(IdentificationContext.Users.First().PublicId);
 
             // Arrange:
             var foundUsers = await UserService.FindAsync(specification);

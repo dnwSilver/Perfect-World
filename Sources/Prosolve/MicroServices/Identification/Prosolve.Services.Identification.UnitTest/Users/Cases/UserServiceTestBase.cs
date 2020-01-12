@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 
-using Microsoft.Extensions.DependencyInjection;
-
 using NUnit.Framework;
 
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.DataSources;
 using Prosolve.Services.Identification.Users.Factories;
-using Prosolve.Services.Identity.UnitTest.Users.Mocks;
 
 using Sharpdev.SDK.DataSources.Databases;
 
@@ -26,16 +23,11 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         ///     Данные находящиеся в виртуальном хранилище.
         /// </summary>
         protected IEnumerable<UserDataModel> UserDataModels;
-        
-        public UserServiceTestBase()
-        {
-            var services = new ServiceCollection();
-            services.AddDbContext<IdentificationContext>();
-            
-            // var serviceProvider = services.BuildServiceProvider();
-            //
-            // matchRepository = serviceProvider.GetService<IMatchRepository>();
-        }
+
+        /// <summary>
+        ///
+        /// </summary>
+        protected IdentificationContext IdentificationContext;
 
         /// <summary>
         ///     Подготовка сервиса для тестирования. Создание всех необходимых объектов и заполнение
@@ -47,10 +39,10 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             var integrationBus = Prepare.IntegrationBus.PorFavor;
 
             UserDataModels = Prepare.UserDataModel.CountOf(10).Please;
-            var identificationContext = Prepare.IdentificationContext.With(UserDataModels).PorFavor;
-            var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(identificationContext);
+            IdentificationContext = Prepare.IdentificationContext.With(UserDataModels).PorFavor;
+            var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(IdentificationContext);
             var userFactory = new UserFactory();
-            var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper, identificationContext);
+            var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper, IdentificationContext);
             UserService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
         }
     }

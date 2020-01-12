@@ -22,6 +22,6 @@
         <value>Фамилия превышает максимальное значение длины ({0} символов).</value>
     </data>
     <data name="UserPublicIdSpecificationMessage" xml:space="preserve">
-        <value>Объект {0} с идентификатором {0} не найден.</value>
+        <value>Объект {0} с идентификатором {1} не найден.</value>
     </data>
 </root>
