@@ -1,11 +1,7 @@
-﻿namespace Sharpdev.SDK.Types.FullNames
+﻿using Sharpdev.SDK.Extensions;
+
+namespace Sharpdev.SDK.Types.FullNames
 {
-    public interface IFullName
-    {
-        string Surname { get; }
-        string FirstName { get; }
-        string Patronymic { get; }
-    }
     /// <summary>
     ///     Фамилия имя и отчество человека.
     /// </summary>
@@ -85,7 +81,7 @@
         /// </returns>
         public static bool operator ==(FullName a, object b)
         {
-            return a.Equals(b);
+            return a.ReturnFailure().Equals(b);
         }
 
         /// <summary>
@@ -98,7 +94,7 @@
         /// </returns>
         public static bool operator !=(FullName a, object b)
         {
-            return !a.Equals(b);
+            return !a.ReturnFailure().Equals(b);
         }
     }
 }

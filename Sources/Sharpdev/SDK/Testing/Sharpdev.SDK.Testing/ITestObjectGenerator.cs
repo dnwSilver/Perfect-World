@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Sharpdev.SDK.Testing
 {
@@ -36,9 +36,25 @@ namespace Sharpdev.SDK.Testing
 
     public static class UpdateObjectExtension
     {
-        public static TObject With<TObject>(this TObject @object, Action<TObject> action)
+        public static TObject With<TObject>(this TObject @object, string propertyName, object value)
         {
-            action.Invoke(@object);
+            var prop = @object.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+
+            if(null != prop && prop.CanWrite)
+            {
+                prop.SetValue(@object, value, null);
+            }
+            
+            return @object;
+        }
+        public static TObject WithOut<TObject>(this TObject @object, string propertyName)
+        {
+            var prop = @object.GetType().GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+
+            if(null != prop && prop.CanWrite)
+            {
+                prop.SetValue(@object, null, null);
+            }
 
             return @object;
         }

@@ -13,7 +13,7 @@ namespace Prosolve.Services.Identification.Users.Specifications
         private readonly IUserAggregate _userAggregate;
         public EmailAlreadyInUse(IUserAggregate userAggregate)
         {
-            userAggregate = _userAggregate;
+            _userAggregate = userAggregate;
         }
 
         /// <summary>

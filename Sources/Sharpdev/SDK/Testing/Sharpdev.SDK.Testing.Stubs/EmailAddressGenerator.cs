@@ -27,5 +27,12 @@ namespace Sharpdev.SDK.Testing
 
             return _emailAddressMock.Object;
         }
+
+        public EmailAddressGenerator WithEmailAddress(string emailAddress)
+        {
+            _emailAddressMock.Setup(x => x.Value).Returns(emailAddress);
+
+            return this;
+        }
     }
 }

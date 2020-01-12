@@ -7,7 +7,7 @@ namespace Sharpdev.SDK.Kernel
     ///     номер телефонов или электронные адреса.
     /// </summary>
     /// <typeparam name="TConfirmedObject">Объект бизнес логики.</typeparam>
-    public class ConfirmedBase<TConfirmedObject> : IConfirmed<TConfirmedObject>
+    public class Confirmed<TConfirmedObject> : IConfirmed<TConfirmedObject>
         where TConfirmedObject : struct
     {
         /// <summary>
@@ -15,7 +15,7 @@ namespace Sharpdev.SDK.Kernel
         /// </summary>
         /// <param name="confirmedObjectValue"></param>
         /// <param name="confirmedDate"></param>
-        public ConfirmedBase(TConfirmedObject confirmedObjectValue, DateTime? confirmedDate = null)
+        public Confirmed(TConfirmedObject confirmedObjectValue, DateTime? confirmedDate = null)
         {
             Value = confirmedObjectValue;
 

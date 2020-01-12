@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Users.DataSources;
@@ -17,21 +18,17 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
     {
         private readonly IdentificationContext _identificationContext;
 
-        private readonly SqliteConnection _sqliteConnection;
-
         /// <summary>
         ///     Инициализация контекста данных хранимого в памяти.
         /// </summary>
         public IdentificationContextMock()
         {
-            _sqliteConnection = new SqliteConnection("DataSource=:memory:");
-            _sqliteConnection.Open();
-            
-            var options = new DbContextOptionsBuilder<IdentificationContext>()
-                   .UseSqlite(_sqliteConnection)
-                   .Options;
+            var services = new ServiceCollection();
+            services.AddDbContext<IdentificationContext>(options => options.UseSqlite($"DataSource=:memory{Guid.NewGuid()}:"), ServiceLifetime.Transient);
 
-            _identificationContext = new IdentificationContext(options);
+            var serviceProvider = services.BuildServiceProvider();
+            _identificationContext = serviceProvider.GetService<IdentificationContext>();
+            _identificationContext.Database.OpenConnection();
             _identificationContext.Database.EnsureCreated();
         }
 
@@ -68,15 +65,5 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
 
             return this;
         }
-
-        public void CloseConnection()
-        {
-            _sqliteConnection.Close();
-        }
-
-        // ~VirtualIdentificationContextMock()
-        // {
-        //     _sqliteConnection.Close();
-        // }
     }
 }

@@ -6,23 +6,22 @@ using FluentAssertions;
 
 using NUnit.Framework;
 
-using Prosolve.Services.Identification.Users.Specifications;
+using Prosolve.Services.Identification.Users;
 
 using Sharpdev.SDK.Testing;
 
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
-    [TestFixture]
-    [Category(nameof(UserService))]
     [Category(Constant.Positive)]
-    [Parallelizable(ParallelScope.All)]
+    [Category(nameof(IUserAggregate))]
     internal class WhenFindUserPositive: UserServiceTestBase
     {
         [Test]
         public async Task WhenFindUser_ByPublicId_CountShouldBeOne()
         {
             // Act:
-            var specification = new UserPublicIdSpecification(IdentificationContext.Users.First().PublicId);
+            var userAggregatePublicId = IdentificationContext.Users.First().PublicId;
+            var specification = Prepare.UserPublicIdSpecification(userAggregatePublicId).PorFavor;
 
             // Arrange:
             var foundUsers = await UserService.FindAsync(specification);
@@ -35,7 +34,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public async Task WhenFindUser_ByPublicId_FoundUsersShouldBeZero()
         {
             // Act:
-            var specification = new UserPublicIdSpecification(Guid.NewGuid());
+            var unknownUserAggregatePublicId = Guid.Empty;
+            var specification = Prepare.UserPublicIdSpecification(unknownUserAggregatePublicId).PorFavor;
 
             // Arrange:
             var foundUsers = await UserService.FindAsync(specification);

@@ -8,13 +8,9 @@ using NUnit.Framework;
 
 using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.Factories;
-using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 
 using Sharpdev.SDK.DataSources.Databases;
-using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
-using Sharpdev.SDK.Types.EmailAddresses;
-using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {

@@ -1,9 +1,13 @@
-﻿using Prosolve.Services.Identification.Users;
+﻿using System;
+
+using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.Factories;
+using Prosolve.Services.Identification.Users.Specifications;
 using Prosolve.Services.Identity.UnitTest.Users.Mocks;
 using Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators;
 
 using Sharpdev.SDK.Domain.Entities;
+using Sharpdev.SDK.Domain.Specifications;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Testing.Mocks;
@@ -74,11 +78,28 @@ namespace Prosolve.Services.Identity.UnitTest
         ///     Создание номеров телефонов <see cref="PhoneNumber"/>.
         /// </summary>
         /// <returns>Генератор телефонных номеров.</returns>
-        internal static ITestObjectGenerator<IConfirmed<PhoneNumber>> PhoneNumber => new PhoneNumberGenerator();
+        internal static ITestObjectGenerator<IConfirmed<PhoneNumber>> PhoneNumber => new PhoneNumberMockGenerator();
 
         /// <summary>
-        ///
+        ///     Создание ФИО пользователя.
         /// </summary>
         public static ITestObjectGenerator<IFullName> FullName => new FullNameMockGenerator();
+
+        public static ITestObjectGenerator<ISpecification<IUserAggregate>> UserPublicIdSpecification(Guid publicId)
+            => new UserPublicIdSpecificationStubGenerator(publicId);
+    }
+
+    internal class UserPublicIdSpecificationStubGenerator: TestObjectGeneratorBase<ISpecification<IUserAggregate>>
+    {
+        private Guid _publicId;
+        public UserPublicIdSpecificationStubGenerator(Guid publicId)
+        {
+            _publicId = publicId;
+        }
+
+        protected override ISpecification<IUserAggregate> Allocate(int testObjectNumber)
+        {
+            return new UserPublicIdSpecification(_publicId);
+        }
     }
 }

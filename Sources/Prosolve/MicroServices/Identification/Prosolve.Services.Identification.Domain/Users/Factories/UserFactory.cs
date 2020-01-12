@@ -19,13 +19,10 @@ namespace Prosolve.Services.Identification.Users.Factories
         /// <param name="userEntity">Сущность к которой будут применяться спецификации.</param>
         protected override void SetSpecifications(IUserAggregate userEntity)
         {
-            var specifications = new ISpecification<IUserAggregate>[]
+            Specifications = new ISpecification<IUserAggregate>[]
             {
-                new UserFirstNameLengthSpecification(),
-                new UserPublicIdSpecification(userEntity.Id.Public)
+                new UserFirstNameLengthSpecification(), new UserPublicIdSpecification(userEntity.Id.Public)
             };
-
-            Specifications = specifications;
         }
 
         /// <summary>

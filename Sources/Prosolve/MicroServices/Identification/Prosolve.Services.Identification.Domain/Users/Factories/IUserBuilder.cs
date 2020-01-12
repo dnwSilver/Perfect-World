@@ -15,18 +15,18 @@ namespace Prosolve.Services.Identification.Users.Factories
         ///     Установка адрес электронной почты указанный для получения обратной связи.
         /// </summary>
         /// <returns>Адрес электронной для связи с клиентом.</returns>
-        IConfirmed<EmailAddress>? ContactEmailAddress { get; }
+        IConfirmed<EmailAddress>? ContactEmailAddress { get; set; }
 
         /// <summary>
         ///     Установка номера телефона указанного для получения обратной связи.
         /// </summary>
         /// <returns>Номер телефона для связи с клиентом.</returns>
-        IConfirmed<PhoneNumber>? ContactPhoneNumber { get; }
+        IConfirmed<PhoneNumber>? ContactPhoneNumber { get; set; }
 
         /// <summary>
         ///     Установка фамилии имени и отчества пользователя.
         /// </summary>
         /// <returns>Фамилия имя и отчество пользователя.</returns>
-        IFullName FullName { get; }
+        IFullName FullName { get; set; }
     }
 }

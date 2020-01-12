@@ -6,28 +6,23 @@ using FluentAssertions;
 using NUnit.Framework;
 
 using Prosolve.Services.Identification.Users;
+using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.Testing;
-using Sharpdev.SDK.Types.FullNames;
 
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
 {
-    [TestFixture]
-    [Category(nameof(IUserAggregate))]
     [Category(Constant.Positive)]
-    [Parallelizable(ParallelScope.All)]
+    [Category(nameof(IUserAggregate))]
     internal class WhenCreateUserPositive: UserServiceTestBase
     {
         [Test]
         public void WhenCreateUser_WithNotExistsEmailAddress_ExecuteWithoutThrow()
         {
             // Act:
-            var emailAddress = Prepare.EmailAddress.PorFavor;
-            var fullName = Prepare.FullName.PorFavor;
             var newUserBuilder = Prepare.UserBuilder
-                                      // .SetFullName(fullName)
-                                      // .SetContactEmailAddress(emailAddress)
-                                       .PorFavor;
+                                        .With(nameof(IUserAggregate.ContactEmail), Prepare.EmailAddress.PorFavor)
+                                        .PorFavor;
 
             // Arrange:
             Func<Task> function = async () => await UserService.CreateAsync(newUserBuilder);
@@ -40,18 +35,14 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithNotExistsPhoneNumber_ExecuteWithoutThrow()
         { 
             // Act:
-            var phoneNumber = Prepare.PhoneNumber.PorFavor;
-            var fullName = new FullName("Петров", "Александр", "Андреевич");
             var newUserBuilder = Prepare.UserBuilder
-                                       // .With(fullName)
-                                       // .With(phoneNumber)
+                                        .With(nameof(IUserBuilder), Prepare.PhoneNumber.PorFavor)
                                         .PorFavor;
 
             // Arrange:
             Func<Task> function = async () => await UserService.CreateAsync(newUserBuilder);
 
             // Assert:
-
             function.Should().NotThrowAsync();
         }
     }

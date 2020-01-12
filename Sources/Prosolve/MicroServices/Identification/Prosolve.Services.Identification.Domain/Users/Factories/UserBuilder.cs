@@ -6,6 +6,9 @@ using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Users.Factories
 {
+    /// <summary>
+    ///     Строитель для объекта <see cref="IUserAggregate" />.
+    /// </summary>
     public class UserBuilder : EntityBuilderBase<IUserAggregate>, IUserBuilder
     {
         /// <summary>

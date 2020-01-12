@@ -10,6 +10,11 @@ namespace Prosolve.Services.Identification.Users.Events
     /// </summary>
     internal class ToSendMailIntegrationEvent : IIntegrationEvent
     {
+        /// <summary>
+        /// Создание события отправки эл. письма.
+        /// </summary>
+        /// <param name="id">Уникальный идентификатор события.</param>
+        /// <param name="creationDate">Время создания события.</param>
         public ToSendMailIntegrationEvent(Guid id, DateTime creationDate)
         {
             Id = id;

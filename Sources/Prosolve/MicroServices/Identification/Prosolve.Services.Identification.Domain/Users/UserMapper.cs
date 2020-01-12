@@ -8,6 +8,8 @@ using Prosolve.Services.Identification.Users.Factories;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Kernel;
 using Sharpdev.SDK.Types.EmailAddresses;
+using Sharpdev.SDK.Types.FullNames;
+using Sharpdev.SDK.Types.PhoneNumbers;
 
 namespace Prosolve.Services.Identification.Users
 {
@@ -38,7 +40,9 @@ namespace Prosolve.Services.Identification.Users
 
             CreateMap<UserDataModel, IUserBuilder>()
                    .ForMember(d => d.Identifier, o => o.MapFrom(s => Identifier(s.PrivateId, s.PublicId)))
-                   .ForMember(d => d.ContactEmailAddress, o => o.MapFrom(s => new ConfirmedBase<EmailAddress>(s.EmailAddress, s.EmailAddressConfirmDate)))
+                   .ForMember(d => d.ContactEmailAddress, o => o.MapFrom(s => new Confirmed<EmailAddress>(s.EmailAddress, s.EmailAddressConfirmDate)))
+                   .ForMember(d => d.ContactPhoneNumber, o => o.MapFrom(s => new Confirmed<PhoneNumber>(s.PhoneNumber, s.PhoneNumberConfirmDate)))
+                   .ForMember(d => d.FullName, o => o.MapFrom(s => new FullName(s.Surname, s.FirstName, s.MiddleName)))
                    .ReverseMap()
                    .ForAllOtherMembers(x => x.Ignore());
         }

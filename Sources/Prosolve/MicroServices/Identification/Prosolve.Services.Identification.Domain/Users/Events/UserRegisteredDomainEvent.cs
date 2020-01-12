@@ -8,7 +8,7 @@ namespace Prosolve.Services.Identification.Users.Events
     ///     Событие предметной области, реакция на  событие.
     ///     Регистрация нового пользователя.
     /// </summary>
-    internal class UserRegisteredDomainEvent:DomainEventBase<IUserAggregate>
+    internal class UserRegisteredDomainEvent: DomainEventBase<IUserAggregate>
     {
         /// <summary>
         ///     Инициализация нового события предметной области.

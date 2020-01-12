@@ -8,7 +8,7 @@ namespace Sharpdev.SDK.Testing
     /// <summary>
     ///     Генератор для идентификатора <see cref="IConfirmed{PhoneNumber}" />.
     /// </summary>
-    public sealed class PhoneNumberGenerator : TestObjectGeneratorBase<IConfirmed<PhoneNumber>>
+    public sealed class PhoneNumberMockGenerator : TestObjectGeneratorBase<IConfirmed<PhoneNumber>>
     {
         /// <summary>
         ///     Заглушка для номера телефона.
