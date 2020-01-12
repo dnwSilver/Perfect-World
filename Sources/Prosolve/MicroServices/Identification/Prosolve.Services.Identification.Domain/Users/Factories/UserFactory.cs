@@ -21,7 +21,7 @@ namespace Prosolve.Services.Identification.Users.Factories
         {
             var specifications = new ISpecification<IUserAggregate>[]
             {
-                new UserNameLengthSpecification(),
+                new UserFirstNameLengthSpecification(),
                 new UserPublicIdSpecification(userEntity.Id.Public)
             };
 

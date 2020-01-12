@@ -11,24 +11,29 @@ namespace Prosolve.Services.Identification.Users.Specifications
     internal sealed class UserPublicIdSpecification: SpecificationBase<IUserAggregate>
     {
         /// <summary>
+        /// Публичный уникальный идентификатор пользователя.
+        /// </summary>
+        private readonly Guid _publicIdentifier;
+
+        /// <summary>
         ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}" />.
         /// </summary>
         /// <param name="publicIdentifier">Публичный идентификатор.</param>
         public UserPublicIdSpecification(Guid publicIdentifier)
-                : base(Criteria(publicIdentifier), FailureMessage(publicIdentifier))
         {
+            _publicIdentifier = publicIdentifier;
         }
 
         /// <summary>
         ///     Сообщение в случае не соответствия спецификации.
         /// </summary>
-        private static string FailureMessage(Guid publicIdentifier)
-            => string.Format(UserResources.UserPublicIdSpecificationMessage, nameof(IUserAggregate), publicIdentifier);
+        protected override string FailureMessage
+            => string.Format(UserResources.UserPublicIdSpecificationMessage, nameof(IUserAggregate), _publicIdentifier);
 
         /// <summary>
         ///     Проверка соответствия идентификатору.
         /// </summary>
-        private static Expression<Func<IUserAggregate, bool>> Criteria(Guid publicIdentifier)
-            => x => x.Id.Public == publicIdentifier;
+        public override Expression<Func<IUserAggregate, bool>> Criteria
+            => x => x.Id.Public == _publicIdentifier;
     }
 }

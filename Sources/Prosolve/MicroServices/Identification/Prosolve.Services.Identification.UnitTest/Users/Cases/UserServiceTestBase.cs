@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using NUnit.Framework;
 
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.DataSources;
 using Prosolve.Services.Identification.Users.Factories;
+using Prosolve.Services.Identity.UnitTest.Users.Mocks;
 
 using Sharpdev.SDK.DataSources.Databases;
 
@@ -23,6 +26,16 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         ///     Данные находящиеся в виртуальном хранилище.
         /// </summary>
         protected IEnumerable<UserDataModel> UserDataModels;
+        
+        public UserServiceTestBase()
+        {
+            var services = new ServiceCollection();
+            services.AddDbContext<IdentificationContext>();
+            
+            // var serviceProvider = services.BuildServiceProvider();
+            //
+            // matchRepository = serviceProvider.GetService<IMatchRepository>();
+        }
 
         /// <summary>
         ///     Подготовка сервиса для тестирования. Создание всех необходимых объектов и заполнение

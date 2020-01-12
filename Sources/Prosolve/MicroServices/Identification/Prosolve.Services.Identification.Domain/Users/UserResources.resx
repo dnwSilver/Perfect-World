@@ -18,8 +18,8 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="UserNameLengthSpecificationMessage" xml:space="preserve">
-        <value>Наименование процесса превышает максимальное значение длины ({0} символов).</value>
+    <data name="UserFirstNameLengthSpecificationMessage" xml:space="preserve">
+        <value>Фамилия превышает максимальное значение длины ({0} символов).</value>
     </data>
     <data name="UserPublicIdSpecificationMessage" xml:space="preserve">
         <value>Объект {0} с идентификатором {0} не найден.</value>

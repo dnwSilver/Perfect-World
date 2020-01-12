@@ -1,18 +1,29 @@
-﻿using Sharpdev.SDK.Domain.Specifications;
+﻿using System;
+using System.Linq.Expressions;
+
+using Sharpdev.SDK.Domain.Specifications;
 
 namespace Prosolve.Services.Identification.Users.Specifications
 {
     /// <summary>
     ///     Проверка адреса электронной почты на привязку к пользователю.
     /// </summary>
-    internal class EmailAlreadyInUse : SpecificationBase<IUserAggregate>
+    internal sealed class EmailAlreadyInUse : SpecificationBase<IUserAggregate>
     {
-        public EmailAlreadyInUse(IUserAggregate candidate)
-            : base(x => x.ContactEmail != null &&
-                        candidate.ContactEmail != null &&
-                        x.ContactEmail.Value == candidate.ContactEmail,
-                   "Что-то не так")
+        private readonly IUserAggregate _userAggregate;
+        public EmailAlreadyInUse(IUserAggregate userAggregate)
         {
+            userAggregate = _userAggregate;
         }
+
+        /// <summary>
+        ///     Сообщение в случае не соответствия спецификации.
+        /// </summary>
+        protected override string FailureMessage => "Что-то не так";
+
+        public override Expression<Func<IUserAggregate, bool>> Criteria
+            => x => x.ContactEmail != null &&
+                    _userAggregate.ContactEmail != null &&
+                    x.ContactEmail.Value == _userAggregate.ContactEmail;
     }
 }

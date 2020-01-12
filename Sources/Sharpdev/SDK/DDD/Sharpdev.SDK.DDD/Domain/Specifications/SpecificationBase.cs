@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 
 using Sharpdev.SDK.Domain.Entities;
@@ -18,29 +17,15 @@ namespace Sharpdev.SDK.Domain.Specifications
         /// <summary>
         ///     Сообщение в случае не соответствия спецификации.
         /// </summary>
-        private readonly string _failureMessage;
+        protected abstract string FailureMessage { get; }
 
         /// <summary>
         ///     Формирование функции для проведения проверки пригодности объекта для удовлетворения
         ///     потребности или достижения цели.
         /// </summary>
         /// <returns> Функция для проверки. </returns>
-        public Expression<Func<TEntity, bool>> Criteria { get; }
-
-        /// <summary>
-        ///     Конструктор для инициализации объекта <see cref="SpecificationBase{TEntity}"/>.
-        /// </summary>
-        /// <param name="criteria"> Функция для проведения проверки. </param>
-        /// <param name="failureMessage"> Сообщение в случае не соответствия спецификации. </param>
-        protected SpecificationBase(Expression<Func<TEntity, bool>> criteria, string failureMessage)
-        {
-            if (criteria.ReturnFailure())
-                throw new ArgumentNullException(nameof(criteria));
-
-            Criteria = criteria;
-            _failureMessage = failureMessage;
-        }
-
+        public abstract Expression<Func<TEntity, bool>> Criteria { get; }
+        
         /// <summary>
         ///     Проверка пригодности объекта для удовлетворения потребности или достижения цели.
         /// </summary>
@@ -57,8 +42,8 @@ namespace Sharpdev.SDK.Domain.Specifications
                 throw new ArgumentNullException(nameof(candidate));
 
             //todo Надо проверить всё то и написать тесты. Возможно есть способы написать красивее.
-            if(candidate.Yield().AsQueryable().Where(Criteria).Empty())
-                throw new SpecificationSatisfiesException(_failureMessage);
+            if(!Criteria.Compile().Invoke(candidate))
+                throw new SpecificationSatisfiesException(FailureMessage);
         }
     }
 }

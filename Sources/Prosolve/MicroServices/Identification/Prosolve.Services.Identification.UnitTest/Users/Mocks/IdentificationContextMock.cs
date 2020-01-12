@@ -13,7 +13,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
     /// <summary>
     ///     Виртуальный контекст для базы данных. Данные будем хранить в памяти.
     /// </summary>
-    internal class VirtualIdentificationContextMock : TestObjectGeneratorBase<IdentificationContext>
+    internal class IdentificationContextMock : TestObjectGeneratorBase<IdentificationContext>
     {
         private readonly IdentificationContext _identificationContext;
 
@@ -22,7 +22,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// <summary>
         ///     Инициализация контекста данных хранимого в памяти.
         /// </summary>
-        public VirtualIdentificationContextMock()
+        public IdentificationContextMock()
         {
             _sqliteConnection = new SqliteConnection("DataSource=:memory:");
             _sqliteConnection.Open();
@@ -61,7 +61,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         /// </summary>
         /// <param name="userDataModels">Список новых пользователей.</param>
         /// <returns>Строитель для контекста данных.</returns>
-        public VirtualIdentificationContextMock With(IEnumerable<UserDataModel> userDataModels)
+        public IdentificationContextMock With(IEnumerable<UserDataModel> userDataModels)
         {
             foreach(var userDataModel in userDataModels)
                 With(userDataModel);
@@ -73,6 +73,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Mocks
         {
             _sqliteConnection.Close();
         }
+
         // ~VirtualIdentificationContextMock()
         // {
         //     _sqliteConnection.Close();

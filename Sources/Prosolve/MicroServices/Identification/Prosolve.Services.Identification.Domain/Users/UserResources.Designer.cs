@@ -46,9 +46,9 @@ namespace Prosolve.Services.Identification.Users {
             }
         }
         
-        internal static string UserNameLengthSpecificationMessage {
+        internal static string UserFirstNameLengthSpecificationMessage {
             get {
-                return ResourceManager.GetString("UserNameLengthSpecificationMessage", resourceCulture);
+                return ResourceManager.GetString("UserFirstNameLengthSpecificationMessage", resourceCulture);
             }
         }
         

@@ -5,7 +5,6 @@
         string Surname { get; }
         string FirstName { get; }
         string Patronymic { get; }
-        int Length { get; }
     }
     /// <summary>
     ///     Фамилия имя и отчество человека.
@@ -46,11 +45,6 @@
         /// <returns> Текстовое значение ошибки, если оно есть. </returns>
         public override string ToString()
             => $"{Surname} {FirstName} {Patronymic}";
-
-        /// <summary>
-        /// Количество символов в ФИО.
-        /// </summary>
-        public int Length => ToString().Length;
 
         /// <summary>
         ///     Сравнение двух объектов по основным полям.

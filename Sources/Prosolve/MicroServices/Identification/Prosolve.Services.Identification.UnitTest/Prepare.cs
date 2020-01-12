@@ -44,7 +44,7 @@ namespace Prosolve.Services.Identity.UnitTest
         /// <summary>
         ///     Создание контекста для сервиса идентификации.
         /// </summary>
-        internal static VirtualIdentificationContextMock IdentificationContext => new VirtualIdentificationContextMock();
+        internal static IdentificationContextMock IdentificationContext => new IdentificationContextMock();
 
         /// <summary>
         ///     Создание эмуляции интеграционной шины.

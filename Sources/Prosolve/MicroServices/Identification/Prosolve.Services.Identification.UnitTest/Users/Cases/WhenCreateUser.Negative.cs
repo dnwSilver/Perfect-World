@@ -10,7 +10,6 @@ using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.Factories;
 
 using Sharpdev.SDK.DataSources.Databases;
-using Sharpdev.SDK.Extensions;
 using Sharpdev.SDK.Testing;
 using Sharpdev.SDK.Types.FullNames;
 
