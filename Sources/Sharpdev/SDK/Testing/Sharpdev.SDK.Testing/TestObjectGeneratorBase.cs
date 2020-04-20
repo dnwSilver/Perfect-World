@@ -26,6 +26,7 @@ namespace Sharpdev.SDK.Testing
         /// <param name="testObjectNumber">Порядковый номер создаваемого объекта.</param>
         /// <returns>Созданный объект, размещённый в куче.</returns>
         protected abstract TTestObjectType Allocate(int testObjectNumber);
+        //todo Впаять тут параметром Action чтобы можно было изи обновлять
 
         /// <summary>
         ///     Построение заглушки <see cref="TTestObjectType" />.

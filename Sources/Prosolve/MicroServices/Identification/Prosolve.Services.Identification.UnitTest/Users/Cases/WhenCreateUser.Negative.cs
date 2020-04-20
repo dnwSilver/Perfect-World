@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using FluentAssertions;
-
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
 using Prosolve.Services.Identification.Users;
@@ -22,7 +22,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithExistsEmailAddress_ResultShouldBeFailure()
         {
             // Act:
-            var emailAddressAlreadyInUse = IdentificationContext.Users.First().EmailAddress;
+            var emailAddressAlreadyInUse = IdentificationContext.Users.Include(x=>x.ContactModels).First()
+            .ContactModels.First().EmailAddress;
 
             var newUserBuilder = Prepare.UserBuilder
                                         .With(nameof(IUserBuilder.ContactEmailAddress), emailAddressAlreadyInUse)
@@ -41,7 +42,7 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
         public void WhenCreateUser_WithExistsPhoneNumber_ResultShouldBeFailure()
         {
             // Act:
-            var phoneNumberAlreadyInUse = UserDataModels.First().PhoneNumber;
+            var phoneNumberAlreadyInUse = UserDataModels.First().ContactModels.First().PhoneNumber;
             var newUserBuilder = Prepare.UserBuilder
                                         .With(nameof(IUserBuilder.ContactPhoneNumber), phoneNumberAlreadyInUse)
                                         .PorFavor;

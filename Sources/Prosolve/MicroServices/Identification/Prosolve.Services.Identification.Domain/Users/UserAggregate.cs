@@ -17,12 +17,12 @@ namespace Prosolve.Services.Identification.Users
         /// <summary>
         ///     Адрес электронной почты указанный для получения обратной связи.
         /// </summary>
-        public IConfirmed<EmailAddress>? ContactEmail { get; }
+        public IConfirmed<EmailAddress> ContactEmail { get; }
 
         /// <summary>
         ///     Контактный телефон.
         /// </summary>
-        public IConfirmed<PhoneNumber>? ContactPhoneNumber { get; }
+        public IConfirmed<PhoneNumber> ContactPhoneNumber { get; }
 
         /// <summary>
         ///     Фио пользователя.

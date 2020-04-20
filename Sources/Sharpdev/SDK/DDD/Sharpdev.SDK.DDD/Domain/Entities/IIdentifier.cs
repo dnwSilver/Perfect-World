@@ -36,7 +36,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// <summary>
         ///     Приватный идентификатор. Генерируется внутри сервиса.
         /// </summary>
-        int Private { get; }
+        long Private { get; }
 
         /// <summary>
         ///     Набор внешних идентификаторов. Генерируются во внешнем сервисе.

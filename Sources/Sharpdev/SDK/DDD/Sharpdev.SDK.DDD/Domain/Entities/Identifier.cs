@@ -23,7 +23,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// </summary>
         /// <param name="privateId"> Приватный идентификатор. </param>
         /// <param name="publicId"> Публичный идентификатор. </param>
-        public Identifier(int privateId, Guid publicId)
+        public Identifier(long privateId, Guid publicId)
         {
             Public = publicId;
             Private = privateId;
@@ -35,7 +35,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// <param name="privateId"> Приватный идентификатор. </param>
         /// <param name="publicId"> Публичный идентификатор. </param>
         /// <param name="externalIds"> Набор внешних идентификаторов. </param>
-        public Identifier(int privateId, Guid publicId, ExternalIdentifiers? externalIds)
+        public Identifier(long privateId, Guid publicId, ExternalIdentifiers? externalIds)
         {
             Public = publicId;
             Private = privateId;
@@ -55,7 +55,7 @@ namespace Sharpdev.SDK.Domain.Entities
         /// <summary>
         ///     Приватный идентификатор. Генерируется внутри сервиса.
         /// </summary>
-        public int Private { get; }
+        public long Private { get; }
 
         /// <summary>
         ///     Указывает, равен ли текущий объект другому объекту того же типа.
@@ -111,7 +111,7 @@ namespace Sharpdev.SDK.Domain.Entities
             {
                 var hashCode = Externals != null? Externals.GetHashCode(): 0;
                 hashCode = (hashCode * 397) ^ Public.GetHashCode();
-                hashCode = (hashCode * 397) ^ Private;
+                hashCode = (hashCode * 397) ^ Private.GetHashCode();
 
                 return hashCode;
             }

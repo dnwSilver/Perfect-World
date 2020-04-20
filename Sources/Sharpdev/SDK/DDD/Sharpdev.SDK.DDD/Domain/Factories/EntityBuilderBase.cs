@@ -10,8 +10,7 @@ namespace Sharpdev.SDK.Domain.Factories
     ///     Отделяет  конструирование сложного объекта от его представления так, что  в  результате
     ///     одного и того  же  процесса  конструирования  могут  получаться  разные  представления.
     /// </remarks>
-    public abstract class
-        EntityBuilderBase<TEntity> : IEntityBuilder<TEntity>
+    public abstract class EntityBuilderBase<TEntity> : IEntityBuilder<TEntity>
         where TEntity : class, IEntity<TEntity>
     {
         /// <summary>

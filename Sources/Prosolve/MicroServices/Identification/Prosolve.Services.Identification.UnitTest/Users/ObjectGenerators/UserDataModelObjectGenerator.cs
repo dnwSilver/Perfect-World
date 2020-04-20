@@ -20,15 +20,15 @@ namespace Prosolve.Services.Identity.UnitTest.Users.ObjectGenerators
         {
             //Нельзя задавать уникальные приватные идентификаторы, их выдаёт база данных.
             var userDataModel = new UserDataModel();
-            userDataModel.PublicId = Guid.NewGuid();
+            userDataModel.PublicId = new Guid("DD7B81BA-97DA-429E-BF2D-6495175F778E");
             userDataModel.FirstName = "Иван";
             userDataModel.MiddleName = "Иванович";
             userDataModel.Surname = "Иванов";
             userDataModel.Version = 1;
-            userDataModel.EmailAddress = $"user{testObjectNumber}@mail.ru";
-            userDataModel.EmailAddressConfirmDate = DateTime.UtcNow;
-            userDataModel.PhoneNumber = $"+7{testObjectNumber:D10}";
-            userDataModel.PhoneNumberConfirmDate = DateTime.UtcNow;
+            // userDataModel.EmailAddress = $"user{testObjectNumber}@mail.ru";
+            // userDataModel.EmailAddressConfirmDate = DateTime.UtcNow;
+            // userDataModel.PhoneNumber = $"+7{testObjectNumber:D10}";
+            // userDataModel.PhoneNumberConfirmDate = DateTime.UtcNow;
             
             return userDataModel;
         }

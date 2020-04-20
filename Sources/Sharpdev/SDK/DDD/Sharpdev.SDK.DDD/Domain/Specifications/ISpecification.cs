@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-
 using Sharpdev.SDK.Domain.Entities;
 
 namespace Sharpdev.SDK.Domain.Specifications

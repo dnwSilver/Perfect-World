@@ -22,20 +22,6 @@ namespace Sharpdev.SDK.Extensions
         }
 
         /// <summary>
-        ///     Определяет существование и заполнение перечисления.
-        /// </summary>
-        /// <param name="data">Проверяемое перечисление.</param>
-        /// <typeparam name="T">Тип объектов которые находятся в перечислении.</typeparam>
-        /// <returns>
-        ///     true - если перечисление отсутствует либо в нём нет элементов.
-        ///     false - если в перечислении есть хотя бы один элемент.
-        /// </returns>
-        public static bool NullOrEmpty<T>(this IEnumerable<T> data)
-        {
-            return data == null || data.Empty();
-        }
-
-        /// <summary>
         ///     Определяет заполнение перечисления.
         /// </summary>
         /// <param name="data">Проверяемое перечисление.</param>
@@ -47,20 +33,6 @@ namespace Sharpdev.SDK.Extensions
         public static bool Empty<T>(this IEnumerable<T> data)
         {
             return !data.Any();
-        }
-
-        /// <summary>
-        ///     Определяет существование перечисления.
-        /// </summary>
-        /// <param name="data">Проверяемое перечисление.</param>
-        /// <typeparam name="T">Тип объектов которые находятся в перечислении.</typeparam>
-        /// <returns>
-        ///     true - если перечисление отсутствует.
-        ///     false - если в перечислении существуют.
-        /// </returns>
-        public static bool Null<T>(this IEnumerable<T> data)
-        {
-            return data == null;
         }
     }
 }

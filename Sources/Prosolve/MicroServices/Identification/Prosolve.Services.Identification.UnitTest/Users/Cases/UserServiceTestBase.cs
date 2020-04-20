@@ -1,12 +1,9 @@
 using System.Collections.Generic;
-
 using NUnit.Framework;
-
 using Prosolve.Services.Identification;
 using Prosolve.Services.Identification.Users;
 using Prosolve.Services.Identification.Users.DataSources;
 using Prosolve.Services.Identification.Users.Factories;
-
 using Sharpdev.SDK.DataSources.Databases;
 
 namespace Prosolve.Services.Identity.UnitTest.Users.Cases
@@ -42,7 +39,8 @@ namespace Prosolve.Services.Identity.UnitTest.Users.Cases
             IdentificationContext = Prepare.IdentificationContext.With(UserDataModels).PorFavor;
             var unitOfWork = new DatabaseUnitOfWork<IdentificationContext>(IdentificationContext);
             var userFactory = new UserFactory();
-            var userRepository = new UserFrameworkRepository(userFactory, IdentificationConfiguration.Mapper, IdentificationContext);
+            var userRepository =
+                new UserFrameworkRepository(IdentificationConfiguration.Mapper, userFactory, IdentificationContext);
             UserService = new UserService(unitOfWork, integrationBus, userFactory, userRepository);
         }
     }
