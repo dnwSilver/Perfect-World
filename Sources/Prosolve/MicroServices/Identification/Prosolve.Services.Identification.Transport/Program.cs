@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
-namespace Prosolve.Services.Identification.GrpcService
+namespace Prosolve.Services.Identification.Transport
 {
     public class Program
     {

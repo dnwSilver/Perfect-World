@@ -50,7 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataSources", "DataSources"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpdev.SDK.DataSources.Databases", "Sources\Sharpdev\SDK\Sharpdev.SDK.DataSources.Databases\Sharpdev.SDK.DataSources.Databases.csproj", "{29D21CBF-5AD0-426D-8B0E-778B02975467}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Services.Identification.Grpc", "Sources\Prosolve\MicroServices\Identification\Prosolve.Services.Identification.Grpc\Prosolve.Services.Identification.Grpc.csproj", "{C84A46A3-4959-4003-B6AF-931FC19B37E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prosolve.Services.Identification.Transport", "Sources\Prosolve\MicroServices\Identification\Prosolve.Services.Identification.Transport\Prosolve.Services.Identification.Transport.csproj", "{C84A46A3-4959-4003-B6AF-931FC19B37E9}"
 EndProject
 
 Global

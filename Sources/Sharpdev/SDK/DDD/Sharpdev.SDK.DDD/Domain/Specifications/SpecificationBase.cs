@@ -17,7 +17,7 @@ namespace Sharpdev.SDK.Domain.Specifications
         /// <summary>
         ///     Сообщение в случае не соответствия спецификации.
         /// </summary>
-        protected abstract string FailureMessage { get; }
+        public abstract string FailureMessage { get; }
 
         /// <summary>
         ///     Формирование функции для проведения проверки пригодности объекта для удовлетворения
@@ -36,14 +36,9 @@ namespace Sharpdev.SDK.Domain.Specifications
         /// </returns>
         /// <exception cref="SpecificationSatisfiesException" />
         /// <exception cref="ArgumentException" />
-        public void Satisfies(TEntity candidate)
+        public bool Satisfies(TEntity candidate)
         {
-            if (candidate.ReturnFailure())
-                throw new ArgumentNullException(nameof(candidate));
-
-            //todo Надо проверить всё то и написать тесты. Возможно есть способы написать красивее.
-            if(!Criteria.Compile().Invoke(candidate))
-                throw new SpecificationSatisfiesException(FailureMessage);
+            return !candidate.ReturnFailure() && Criteria.Compile().Invoke(candidate);
         }
     }
 }

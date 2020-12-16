@@ -2,8 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <AssemblyName>Prosolve.Services.Identification.Grpc</AssemblyName>
-        <RootNamespace>Prosolve.Services.Identification.Grpc</RootNamespace>
+        <RootNamespace>Prosolve.Services.Identification.Transport</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

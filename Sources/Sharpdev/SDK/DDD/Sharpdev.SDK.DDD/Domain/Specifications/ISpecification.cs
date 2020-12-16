@@ -29,7 +29,7 @@ namespace Sharpdev.SDK.Domain.Specifications
         ///     <see langword="true" /> - Объект <see cref="TEntity"/> прошёл проверку.
         ///     <see langword="false" /> - Объект <see cref="TEntity"/> не прошёл проверку.
         /// </returns>
-        void Satisfies(TEntity candidate);
+        bool Satisfies(TEntity candidate);
 
         /// <summary>
         ///     Формирование функции для проведения проверки пригодности объекта для удовлетворения
@@ -37,5 +37,10 @@ namespace Sharpdev.SDK.Domain.Specifications
         /// </summary>
         /// <returns>Функция для проверки.</returns>
         Expression<Func<TEntity, bool>> Criteria { get; }
+
+        /// <summary>
+        ///     Сообщение в случае не соответствия спецификации.
+        /// </summary>
+        string FailureMessage { get; }
     }
 }

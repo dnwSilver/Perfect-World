@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using System.Linq;
 using Sharpdev.SDK.Domain.Entities;
 using Sharpdev.SDK.Domain.Specifications;
 
@@ -16,7 +16,7 @@ namespace Sharpdev.SDK.Domain.Factories
         ///     Набор проверок для создания и восстановления объекта.
         /// </summary>
         protected IEnumerable<ISpecification<TEntity>> Specifications { private get; set; } =
-            new ISpecification<TEntity>[]{};
+            new ISpecification<TEntity>[] { };
 
         /// <summary>
         ///     Создание нового объекта.
@@ -44,10 +44,16 @@ namespace Sharpdev.SDK.Domain.Factories
             var entity = AllocateEntity(entityToRecovery);
             SetSpecifications(entity);
 
-            foreach(var specification in Specifications)
-                specification.Satisfies(entity);
+            var failureSpecifications =
+                Specifications.Where(specification => specification.Satisfies(entity)).ToArray();
 
-            return entity;
+            if (!failureSpecifications.Any())
+                return entity;
+
+            var messages = failureSpecifications.Select(failureSpecification =>
+                failureSpecification.FailureMessage);
+            throw new SpecificationSatisfiesException(messages);
+
         }
 
         /// <summary>
